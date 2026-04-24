@@ -1,0 +1,19 @@
+{
+  "name": "personal-assistant-listener",
+  "version": "1.0.0",
+  "description": "Personal Assistant Stage 1: MTProto listener + SQLite + forward to channel.",
+  "type": "module",
+  "private": true,
+  "engines": {
+    "node": ">=20"
+  },
+  "scripts": {
+    "start": "node listener.mjs",
+    "auth": "node auth.mjs"
+  },
+  "dependencies": {
+    "better-sqlite3": "^11.3.0",
+    "dotenv": "^16.4.5",
+    "telegram": "^2.26.22"
+  }
+}

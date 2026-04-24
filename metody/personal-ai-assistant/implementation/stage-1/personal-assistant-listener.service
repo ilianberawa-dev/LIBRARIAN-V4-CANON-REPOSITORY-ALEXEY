@@ -1,0 +1,36 @@
+[Unit]
+Description=Personal Assistant - MTProto listener (Stage 1)
+Documentation=https://github.com/ilianberawa-dev/LIBRARIAN-V4-CANON-REPOSITORY-ALEXEY
+After=network-online.target
+Wants=network-online.target
+
+[Service]
+Type=simple
+User=personal-assistant
+Group=personal-assistant
+WorkingDirectory=/opt/personal-assistant
+EnvironmentFile=/opt/personal-assistant/.env
+ExecStart=/usr/bin/node /opt/personal-assistant/listener.mjs
+Restart=always
+RestartSec=5
+StartLimitIntervalSec=300
+StartLimitBurst=10
+
+# Architectural privilege isolation (Canon #11).
+# The listener can only touch its own directory and its own DB.
+NoNewPrivileges=true
+PrivateTmp=true
+ProtectSystem=strict
+ProtectHome=true
+ReadWritePaths=/opt/personal-assistant
+ProtectKernelTunables=true
+ProtectKernelModules=true
+ProtectControlGroups=true
+RestrictSUIDSGID=true
+LockPersonality=true
+MemoryMax=300M
+
+# stdout/stderr go to journald. View with: journalctl -u personal-assistant-listener -f
+
+[Install]
+WantedBy=multi-user.target
