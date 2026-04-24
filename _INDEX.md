@@ -14,7 +14,7 @@
 |----------|---------|-------|--------|
 | `metody/` | МЕТОДЫ разработки | 📘 | ✅ 1 тема |
 | `rukovodstva/` | РУКОВОДСТВА по компонентам | 📚 | ✅ 1 тема |
-| `kanon/` | КАНОН (принципы) | 📜 | 🚧 Пусто |
+| `kanon/` | КАНОН (принципы) | 📜 | ✅ 1 принцип |
 | `navyki/` | НАВЫКИ (skills) | 🛠️ | 🚧 Пусто |
 | `spravochniki/` | СПРАВОЧНИКИ | 📖 | 🚧 Пусто |
 | `troubleshoot/` | РЕШЕНИЕ ПРОБЛЕМ | 🔧 | 🚧 Пусто |
@@ -203,6 +203,32 @@ Read C:\Users\97152\Documents\claude-library\metody\personal-ai-assistant\v1.0-m
 
 ---
 
+### 3. КАНОН / simplicity-first-principle
+
+**Полное название:** Принцип "Простота Прежде Всего"  
+**Путь:** `kanon/simplicity-first-principle.md`  
+**Версия:** v1.0  
+**Размер:** 605 строк, ~28KB
+
+**О чём:**
+- Обязательный чеклист перед ответом AI
+- Decision tree простых решений
+- Anti-patterns overengineering
+- "Бабушка-тест" (объяснить за 30 сек)
+- Реальный кейс: 2 часа → 5 минут (git push)
+
+**Как читать:**
+```
+Read C:\Users\97152\Documents\claude-library\kanon\simplicity-first-principle.md
+```
+
+**Или из GitHub:**
+```
+Read kanon/simplicity-first-principle.md из репозитория ilianberawa-dev/LIBRARIAN-V4-CANON-REPOSITORY-ALEXEY
+```
+
+---
+
 ## 📋 Roadmap
 
 ### Ближайшее (планируется):
@@ -225,11 +251,11 @@ Read C:\Users\97152\Documents\claude-library\metody\personal-ai-assistant\v1.0-m
 
 ## 📊 Статистика
 
-**Всего файлов:** 11  
-**Всего строк:** 1793+  
-**Категорий:** 6 (2 активные, 4 готовы к заполнению)  
-**Тем:** 2 (personal-ai-assistant, self-learning-memory)  
-**Версий:** 2 (обе v1.0)
+**Всего файлов:** 12  
+**Всего строк:** 2398+  
+**Категорий:** 6 (3 активные, 3 готовы к заполнению)  
+**Тем:** 3 (personal-ai-assistant, self-learning-memory, simplicity-first-principle)  
+**Версий:** 3 (все v1.0)
 
 ---
 
