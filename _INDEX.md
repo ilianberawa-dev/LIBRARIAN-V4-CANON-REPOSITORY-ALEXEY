@@ -18,7 +18,7 @@
 | `kanon/` | КАНОН (принципы) | 📜 | ✅ 2 документа |
 | `navyki/` | НАВЫКИ (skills) | 🛠️ | ✅ 1 паттерн |
 | `spravochniki/` | СПРАВОЧНИКИ | 📖 | ✅ 1 гайд |
-| `troubleshoot/` | РЕШЕНИЕ ПРОБЛЕМ | 🔧 | 🚧 Пусто |
+| `troubleshoot/` | РЕШЕНИЕ ПРОБЛЕМ | 🔧 | ✅ 1 гайд |
 
 ---
 
@@ -55,8 +55,9 @@ claude-library/
   │   ├── README.md
   │   └── heartbeat-telegram-pattern.md (proven pattern)
   │
-  └── troubleshoot/        ← ПРОБЛЕМЫ (roadmap)
-      └── README.md
+  └── troubleshoot/        ← ПРОБЛЕМЫ ✨ ОБНОВЛЕНО
+      ├── README.md
+      └── telegram-parser-recreation.md (полный гайд воссоздания)
 ```
 
 ---
@@ -343,5 +344,81 @@ Read C:\Users\97152\Documents\claude-library\metody\personal-ai-assistant\v1.0-m
 **Как читать:**
 ```
 Read C:\Users\97152\Documents\claude-library\navyki\heartbeat-telegram-pattern.md
+```
+
+
+---
+
+### 7. TROUBLESHOOTING / telegram-parser-recreation ✨ НОВОЕ
+
+**Полное название:** Telegram Parser — Recreation Guide  
+**Файл:** `troubleshoot/telegram-parser-recreation.md`  
+**Размер:** 1300+ строк, ~150KB
+
+**О чём:**
+- Полная архитектура Telegram парсера (7 компонентов)
+- sync_channel.mjs: детект новых постов + классификация (HIGH_CODE/SALES/MED/LOW)
+- download.mjs: приоритетное скачивание P1-P4 + human pacing (anti-ban)
+- transcribe.sh: Grok STT транскрибация + chunking для больших файлов
+- heartbeat.sh: watchdog с auto-restart + log rotation
+- notify.sh: Telegram уведомления каждые 2ч
+- verify.sh: health checks
+- enumerate_p4.mjs: приоритизация постов
+
+**Proven metrics (Aeza production):**
+- 7 дней uptime без ручного вмешательства
+- 48 файлов скачано (P1: 27, P2: 7, P3: 16)
+- 15 транскриптов (7.18ч аудио)
+- Стоимость Grok STT: $0.72
+- 3 auto-restarts (все корректные)
+- 0 false positives
+
+**3 варианта воссоздания:**
+1. **Quick Clone** (10 минут) — copy с Aeza + setup
+2. **Claude Desktop Integration** (30 минут) — управление через skills
+3. **Full Recreation** (1 час) — с нуля, адаптация под свой канал
+
+**Как читать:**
+```
+Read C:\Users\97152\Documents\claude-library\troubleshoot\telegram-parser-recreation.md
+```
+
+---
+
+### 8. НАВЫКИ / claude-bot-parser-control ✨ НОВОЕ
+
+**Полное название:** Claude Desktop — Parser Control  
+**Файл:** `navyki/claude-bot-parser-control.md`  
+**Размер:** 600+ строк, ~80KB
+
+**О чём:**
+- Управление Telegram парсером через Claude Desktop чат
+- 5 bash skills: status/sync/download/logs/transcribe
+- Open in Terminal workflow
+- 5 диалогов использования (примеры)
+- MCP skill definition
+- Setup за 5 минут
+
+**Workflow:**
+```
+User: "Скачай все скрипты из канала Алексея"
+Claude: [runs download.sh 0 1 1, opens Terminal, monitors progress]
+```
+
+**Skills created:**
+- `~/.claude/skills/telegram-parser/status.sh` — показать _status.json
+- `~/.claude/skills/telegram-parser/sync.sh` — detect new posts
+- `~/.claude/skills/telegram-parser/download.sh` — start download
+- `~/.claude/skills/telegram-parser/logs.sh` — show logs
+- `~/.claude/skills/telegram-parser/transcribe.sh` — start transcribe
+
+**Применение:**
+- AI Assistant content parsing
+- Автоматизация скачивания материалов канала
+- Мониторинг через чат вместо SSH
+
+**Как читать:**
+```
+Read C:\Users\97152\Documents\claude-library\navyki\claude-bot-parser-control.md
 ```
 
