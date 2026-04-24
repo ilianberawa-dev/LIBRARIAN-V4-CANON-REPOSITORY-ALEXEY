@@ -1,0 +1,234 @@
+{
+  "task": "Проверка доступа к библиотеке знаний и оценка структуры",
+  "created_by": "librarian-v4",
+  "timestamp": "2026-04-24T18:30:00+08:00",
+  "purpose": "Верификация что claude-library доступна другим Claude чатам вне песочницы",
+
+  "paths_to_check": {
+    "claude_library": {
+      "description": "Новая универсальная библиотека с translit именами + русские README",
+      "path": "C:\\Users\\97152\\Documents\\claude-library",
+      "structure": {
+        "_INDEX.md": "Главный каталог с маппингом translit → русский",
+        "metody/": "МЕТОДЫ разработки (Methods)",
+        "rukovodstva/": "РУКОВОДСТВА по компонентам (Guides)",
+        "kanon/": "КАНОН принципов (Canon) - пока пустая",
+        "navyki/": "НАВЫКИ практические (Skills) - пока пустая",
+        "spravochniki/": "СПРАВОЧНИКИ технические (Reference) - пока пустая",
+        "troubleshoot/": "Решение проблем (Troubleshooting) - пока пустая"
+      },
+      "content_ready": {
+        "metody/personal-ai-assistant/": {
+          "v1.0-mvp-to-sales.md": "767 lines - методология разработки AI ассистента",
+          "README.md": "Описание на русском: Личный AI Ассистент",
+          "CHANGELOG.md": "История версий"
+        },
+        "rukovodstva/self-learning-memory/": {
+          "v1.0-lightrag.md": "620 lines - RAG память с LightRAG",
+          "README.md": "Описание на русском: Самообучающаяся Память",
+          "CHANGELOG.md": "История версий"
+        }
+      }
+    },
+
+    "alexey_reference": {
+      "description": "Исходные материалы от Алексея (Telegram канал экспорт)",
+      "path": "C:\\work\\realty-portal\\docs\\alexey-reference",
+      "structure": {
+        "INDEX.md": "Общий индекс материалов",
+        "export-2026-04-20/transcripts/": "3 транскрипта (164, 165, 170)",
+        "export-2026-04-20/media/": "Медиа файлы (PDF, ZIP, аудио)",
+        "guides/skills-a-to-ya.md": "108 KB - полный гайд по скиллам",
+        "guides/skills-a-to-ya.pdf": "617 KB - PDF версия"
+      },
+      "transcripts_available": [
+        "164_Аудио_запись_встречи_06.03.26.wav.transcript.txt",
+        "165_Встреча_в_Télемосте_05_04_26_18_02_36___запись.mp4.transcript.txt",
+        "170_video.mp4.transcript.txt"
+      ]
+    }
+  },
+
+  "verification_steps": [
+    {
+      "step": 1,
+      "action": "Read _INDEX.md",
+      "path": "C:\\Users\\97152\\Documents\\claude-library\\_INDEX.md",
+      "expected": "Увидишь таблицу с маппингом translit → Russian и описание структуры",
+      "evaluate": [
+        "Понятно ли какие категории есть?",
+        "Очевидно ли значение translit названий (metody, rukovodstva)?",
+        "Есть ли quick start инструкции для новых Claude чатов?"
+      ]
+    },
+    {
+      "step": 2,
+      "action": "Read metody/personal-ai-assistant/README.md",
+      "path": "C:\\Users\\97152\\Documents\\claude-library\\metody\\personal-ai-assistant\\README.md",
+      "expected": "Русское описание темы 'Личный AI Ассистент'",
+      "evaluate": [
+        "Понятно ли ЧТО это за методология?",
+        "Понятно ли какие версии доступны?",
+        "Есть ли инструкция как начать использовать?"
+      ]
+    },
+    {
+      "step": 3,
+      "action": "Read metody/personal-ai-assistant/v1.0-mvp-to-sales.md (first 100 lines)",
+      "path": "C:\\Users\\97152\\Documents\\claude-library\\metody\\personal-ai-assistant\\v1.0-mvp-to-sales.md",
+      "offset": 0,
+      "limit": 100,
+      "expected": "Методология из 4 фаз: MVP → Self-Use → Parser/Content → Client Sales",
+      "evaluate": [
+        "Читабельно ли содержимое?",
+        "Очевидна ли структура документа?",
+        "Можно ли быстро понять о чем материал?"
+      ]
+    },
+    {
+      "step": 4,
+      "action": "Check alexey-reference access",
+      "path": "C:\\work\\realty-portal\\docs\\alexey-reference\\INDEX.md",
+      "expected": "Индекс материалов Алексея",
+      "evaluate": [
+        "Доступен ли путь?",
+        "Можно ли прочитать файлы?"
+      ]
+    },
+    {
+      "step": 5,
+      "action": "Read one transcript",
+      "path": "C:\\work\\realty-portal\\docs\\alexey-reference\\export-2026-04-20\\transcripts\\170_video.mp4.transcript.txt",
+      "limit": 50,
+      "expected": "Транскрипт видео от Алексея",
+      "evaluate": [
+        "Читабелен ли транскрипт?",
+        "Можно ли извлечь полезную информацию?"
+      ]
+    },
+    {
+      "step": 6,
+      "action": "Read skills guide",
+      "path": "C:\\work\\realty-portal\\docs\\alexey-reference\\guides\\skills-a-to-ya.md",
+      "limit": 100,
+      "expected": "Полный гайд по скиллам (108 KB, 53+ страницы)",
+      "evaluate": [
+        "Доступен ли большой файл?",
+        "Структурирован ли контент?"
+      ]
+    }
+  ],
+
+  "evaluation_criteria": {
+    "accessibility": {
+      "question": "Можешь ли ты прочитать ВСЕ указанные файлы без ошибок 'file not found' или 'permission denied'?",
+      "importance": "Critical - если нет доступа, библиотека бесполезна"
+    },
+    "nomenclature": {
+      "question": "Понятны ли названия папок БЕЗ чтения README? (metody, rukovodstva, kanon)",
+      "importance": "Medium - translit должен быть угадываемым для русскоязычных"
+    },
+    "navigation": {
+      "question": "Можешь ли быстро найти нужную тему через _INDEX.md?",
+      "importance": "High - индекс должен быть эффективным навигатором"
+    },
+    "readability": {
+      "question": "README файлы на русском достаточно информативны?",
+      "importance": "High - они компенсируют translit названия"
+    },
+    "content_quality": {
+      "question": "Материалы (md файлы) содержат полезную информацию для создания AI ассистента?",
+      "importance": "Critical - это основная ценность библиотеки"
+    },
+    "version_clarity": {
+      "question": "Понятна ли система версий (v1.0, v1.1, v2.0) и CHANGELOG?",
+      "importance": "Medium - для отслеживания эволюции материалов"
+    }
+  },
+
+  "output_format": {
+    "instruction": "После проверки всех 6 шагов, верни JSON с результатами:",
+    "template": {
+      "verification_results": {
+        "step_1": {"success": true/false, "notes": "..."},
+        "step_2": {"success": true/false, "notes": "..."},
+        "step_3": {"success": true/false, "notes": "..."},
+        "step_4": {"success": true/false, "notes": "..."},
+        "step_5": {"success": true/false, "notes": "..."},
+        "step_6": {"success": true/false, "notes": "..."}
+      },
+      "evaluation_scores": {
+        "accessibility": "pass/fail + explanation",
+        "nomenclature": "1-5 rating + notes",
+        "navigation": "1-5 rating + notes",
+        "readability": "1-5 rating + notes",
+        "content_quality": "1-5 rating + notes",
+        "version_clarity": "1-5 rating + notes"
+      },
+      "overall_verdict": "Can you use this library to build an AI assistant? YES/NO/PARTIALLY",
+      "improvements_needed": ["list", "of", "suggestions"],
+      "verdict_for_librarian": "Short summary for librarian-v4 about access and usability"
+    }
+  },
+
+  "local_environment_setup": {
+    "description": "Настройка локального окружения для постоянного доступа к библиотеке",
+    "working_directories": [
+      "C:\\Users\\97152\\Documents",
+      "C:\\work\\realty-portal\\docs\\school\\methods",
+      "C:\\Users\\97152\\Documents\\claude-library\\methods"
+    ],
+    "primary_library_path": "C:\\Users\\97152\\Documents\\claude-library",
+    "alexey_materials_path": "C:\\work\\realty-portal\\docs\\alexey-reference",
+    "instructions": {
+      "step_0": {
+        "action": "Update working directories in your Claude Code settings",
+        "note": "Если ты Claude Code session, добавь эти пути в additionalDirectories через settings",
+        "paths_to_add": [
+          "C:\\Users\\97152\\Documents",
+          "C:\\work\\realty-portal\\docs\\school\\methods",
+          "C:\\c\\Users\\97152\\Documents\\claude-library\\methods"
+        ],
+        "how": "User должен добавить в .claude/settings.json: { \"permissions\": { \"additionalDirectories\": [\"C:\\\\Users\\\\97152\\\\Documents\"] } }"
+      },
+      "step_1": {
+        "action": "Bookmark key entry points",
+        "files_to_remember": {
+          "main_index": "C:\\Users\\97152\\Documents\\claude-library\\_INDEX.md",
+          "methods_ai_assistant": "C:\\Users\\97152\\Documents\\claude-library\\metody\\personal-ai-assistant\\v1.0-mvp-to-sales.md",
+          "guides_memory": "C:\\Users\\97152\\Documents\\claude-library\\rukovodstva\\self-learning-memory\\v1.0-lightrag.md",
+          "alexey_skills": "C:\\work\\realty-portal\\docs\\alexey-reference\\guides\\skills-a-to-ya.md",
+          "alexey_transcripts": "C:\\work\\realty-portal\\docs\\alexey-reference\\export-2026-04-20\\transcripts\\"
+        }
+      },
+      "step_2": {
+        "action": "Save to memory (if using auto memory feature)",
+        "what_to_save": {
+          "type": "reference",
+          "name": "claude_library_location",
+          "description": "Universal knowledge library for AI assistant development - accessible outside sandbox",
+          "paths": {
+            "library": "C:\\Users\\97152\\Documents\\claude-library",
+            "alexey_reference": "C:\\work\\realty-portal\\docs\\alexey-reference"
+          },
+          "usage": "Read _INDEX.md first for navigation, then dive into specific topics via README files"
+        }
+      },
+      "step_3": {
+        "action": "Test read access immediately",
+        "command": "Read the _INDEX.md to confirm access and understand structure"
+      }
+    },
+    "alternative_for_gui_chats": {
+      "note": "Если ты GUI chat (claude.ai в браузере) - у тебя НЕТ доступа к локальной файловой системе",
+      "workaround": "User должен скопировать нужные файлы в твой контекст вручную или использовать Claude Desktop/Code"
+    }
+  },
+
+  "context": {
+    "why_this_test": "Проверка что claude-library действительно вне песочницы и доступна любому Claude чату (не только текущей teleport session)",
+    "expected_outcome": "Полный доступ ко всем файлам + понятная навигация через _INDEX.md и README файлы",
+    "if_fails": "librarian-v4 должен будет переместить файлы или изменить структуру",
+    "created_during": "librarian-v4 teleport session after bootstrap complete"
+  }
+}

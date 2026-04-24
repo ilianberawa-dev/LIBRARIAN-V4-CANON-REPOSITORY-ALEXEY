@@ -1,0 +1,620 @@
+# AI Assistant — RAG Memory System
+
+**Дополнение к:** ai-assistant-development-method.md  
+**Компонент:** Self-Learning Memory (Самообучающаяся память)  
+**Canon version:** 1.0
+
+---
+
+## Проблема текущей системы
+
+**Memory без векторного поиска:**
+```
+Вопрос: "Кто предлагал использовать LightRAG для канона?"
+Grep поиск: grep "LightRAG" memory/*.md
+Результат: Находит только ТОЧНЫЕ совпадения
+Не находит: "Алексей рекомендовал граф знаний", "knowledge graph proposal"
+```
+
+❌ **Не умеет:**
+- Semantic search (поиск по смыслу)
+- Attribution (кто, когда, в каком контексте)
+- Cross-reference (связи между идеями)
+- Learning (запоминать и улучшаться)
+
+---
+
+## Решение: RAG (Retrieval Augmented Generation)
+
+```
+┌─────────────────────────────────────────┐
+│         USER INPUT                      │
+│  "Кто предлагал правила продуктивности?"│
+└──────────────┬──────────────────────────┘
+               │
+        ┌──────▼──────┐
+        │  Embedding  │ ← Vectorize question
+        └──────┬──────┘
+               │
+        ┌──────▼──────┐
+        │ Vector DB   │ ← Semantic search
+        │ (LightRAG)  │
+        └──────┬──────┘
+               │
+        ┌──────▼──────────────────────┐
+        │ Top-K relevant chunks       │
+        │ with attribution:           │
+        │                             │
+        │ 1. "Алексей, 2026-04-15:   │
+        │    Waymen 10 правил..."     │
+        │                             │
+        │ 2. "Илья, 2026-04-18:      │
+        │    Применил правило #3..."  │
+        └──────┬──────────────────────┘
+               │
+        ┌──────▼──────┐
+        │ LLM + RAG   │ ← Generate answer
+        │  context    │    with sources
+        └──────┬──────┘
+               │
+        ┌──────▼──────────────────────┐
+        │ ANSWER:                     │
+        │ "Алексей предложил Waymen   │
+        │ 10 правил (15 апр 2026).    │
+        │ Илья применил правило #3    │
+        │ в парсере (18 апр 2026)"    │
+        └─────────────────────────────┘
+```
+
+---
+
+## Архитектура RAG Memory
+
+### Компоненты:
+
+1. **Document Chunker** — разбивает документы на chunk'и
+2. **Embedding Model** — векторизует chunk'и (Ollama на Aeza)
+3. **Vector Database** — хранит векторы + metadata (LightRAG)
+4. **Retriever** — semantic search по векторам
+5. **Attribution Tracker** — кто, когда, где написал
+6. **LLM + Context** — генерирует ответ с source'ами
+
+---
+
+## Chunking Strategy
+
+**Принцип:** Сохранять контекст + attribution
+
+```python
+# Chunk structure
+{
+  "id": "chunk-uuid",
+  "text": "...содержимое chunk'а...",
+  "metadata": {
+    "source": "alexey-transcript-msg-147.txt",
+    "author": "Alexey",
+    "date": "2026-04-15",
+    "topic": "productivity-rules",
+    "chunk_type": "concept" | "example" | "code" | "decision",
+    "parent_doc": "paperclip-private-detail",
+    "position": 3,  # 3-й chunk из документа
+    "total_chunks": 15
+  },
+  "embedding": [0.123, -0.456, ...],  # 768-dim vector
+  "related_chunks": ["chunk-uuid-2", "chunk-uuid-5"]  # graph links
+}
+```
+
+**Стратегия разбиения:**
+
+| Тип документа | Chunk size | Overlap | Стратегия |
+|---------------|------------|---------|-----------|
+| Transcript (Alexey video) | 500 tokens | 100 | По временным меткам + semantic breaks |
+| Email thread | 300 tokens | 50 | По сообщениям в треде |
+| Code file | 200 tokens | 30 | По функциям/классам |
+| Canon doc (YAML/MD) | 400 tokens | 80 | По разделам + YAML blocks |
+| Chat history | 250 tokens | 50 | По turns (user+assistant pair) |
+
+**Overlap нужен** чтобы не терять контекст на границах chunk'ов.
+
+---
+
+## Embedding Model
+
+**Stack:**
+
+```
+Ollama (на Aeza сервере) → mxbai-embed-large (335M params)
+- 768-dimensional embeddings
+- Multilingual (EN/RU/ID)
+- Fast inference (~50ms per chunk)
+- Free (self-hosted)
+```
+
+**Fallback:** OpenAI text-embedding-3-small (если Ollama down)
+
+**Endpoint:**
+```bash
+curl http://100.97.148.4:11434/api/embeddings -d '{
+  "model": "mxbai-embed-large",
+  "prompt": "Waymen 10 правил продуктивности"
+}'
+
+# Returns: {"embedding": [0.123, -0.456, ...]}
+```
+
+---
+
+## Vector Database: LightRAG
+
+**Почему LightRAG:**
+✅ Graph-based (не просто vectors, а knowledge graph)
+✅ Entity extraction (понимает "Алексей", "Waymen", "правило #3")
+✅ Relationship mapping (связи между концепциями)
+✅ Self-hosted (уже работает на Aeza port 9621)
+✅ Integration с Claude Code
+
+**Уже установлен:**
+```bash
+Docker container: realty_lightrag
+Port: 100.97.148.4:9621
+Storage: /opt/realty-portal/lightrag/
+```
+
+**LightRAG API:**
+
+```python
+import requests
+
+# 1. Insert document with chunking
+response = requests.post("http://100.97.148.4:9621/insert", json={
+  "text": "Алексей предложил Waymen 10 правил продуктивности...",
+  "metadata": {
+    "author": "Alexey",
+    "date": "2026-04-15",
+    "source": "transcript-147"
+  }
+})
+
+# 2. Query with attribution
+response = requests.post("http://100.97.148.4:9621/query", json={
+  "query": "Кто предлагал правила продуктивности?",
+  "mode": "hybrid",  # local + global search
+  "top_k": 5,
+  "include_attribution": true
+})
+
+# Returns:
+{
+  "results": [
+    {
+      "text": "Waymen 10 правил: 1) Фокус на одной задаче...",
+      "score": 0.92,
+      "metadata": {
+        "author": "Alexey",
+        "date": "2026-04-15",
+        "source": "transcript-147",
+        "entities": ["Alexey", "Waymen", "правила"],
+        "relationships": [
+          {"from": "Alexey", "rel": "proposed", "to": "Waymen rules"}
+        ]
+      }
+    },
+    ...
+  ]
+}
+```
+
+---
+
+## Attribution System
+
+**Отслеживаем:**
+
+1. **WHO** — кто автор (Alexey, Ilya, School-v4, Parser-v3)
+2. **WHEN** — дата/время (ISO 8601)
+3. **WHERE** — источник (transcript, email, chat, canon doc)
+4. **WHAT** — тип информации (decision, proposal, question, example, bug)
+5. **WHY** — контекст (solving what problem, related to what)
+
+**Формат attribution:**
+
+```json
+{
+  "attribution": {
+    "author": "Alexey",
+    "role": "canon-keeper",
+    "timestamp": "2026-04-15T14:30:00+08:00",
+    "source": {
+      "type": "telegram-video",
+      "id": "msg-147",
+      "title": "Paperclip Private Detail",
+      "url": "/opt/tg-export/transcripts/147_paperclip_private_detail_гот.mp4"
+    },
+    "context": {
+      "topic": "productivity-methodology",
+      "related_to": ["canon-v0.3", "waymen-framework"],
+      "problem_solving": "Как избежать context switching"
+    },
+    "confidence": 0.95,
+    "verified_by": "librarian-v4",
+    "verified_at": "2026-04-24T16:00:00+08:00"
+  }
+}
+```
+
+---
+
+## Learning Loop (Self-Learning)
+
+**Концепция:** AI Assistant запоминает каждое взаимодействие и улучшается.
+
+```
+┌─────────────────────────────────────────┐
+│  USER: "Проверь почту про Waymen"      │
+└──────────────┬──────────────────────────┘
+               │
+        ┌──────▼──────┐
+        │ 1. RETRIEVE │ ← RAG: Find "Waymen" context
+        │   from RAG  │   (previous emails, canon docs)
+        └──────┬──────┘
+               │
+        ┌──────▼──────┐
+        │ 2. EXECUTE  │ ← Check Gmail with context
+        │   task      │
+        └──────┬──────┘
+               │
+        ┌──────▼──────────────────────┐
+        │ 3. STORE NEW KNOWLEDGE      │
+        │                             │
+        │ "Илья получил email от      │
+        │ Waymen team про integration.│
+        │ Ответил положительно."      │
+        │                             │
+        │ → Chunk → Embed → LightRAG  │
+        └──────┬──────────────────────┘
+               │
+        ┌──────▼──────┐
+        │ 4. UPDATE   │ ← Graph links
+        │   GRAPH     │   Email ↔ Waymen ↔ Integration
+        └──────┬──────┘
+               │
+        ┌──────▼──────┐
+        │ 5. LEARN    │ ← Pattern recognition
+        │  PATTERNS   │   "Waymen emails → priority high"
+        └─────────────┘
+```
+
+**После каждой сессии:**
+
+```python
+def learning_loop(session_id):
+    # 1. Extract key information from session
+    session = read_session_transcript(session_id)
+    
+    insights = {
+        "decisions": [],      # Решения принятые
+        "learnings": [],      # Что узнали нового
+        "patterns": [],       # Паттерны поведения
+        "corrections": [],    # Ошибки и исправления
+        "preferences": []     # Обновлённые предпочтения
+    }
+    
+    # 2. Chunk and embed
+    for insight in insights:
+        chunk = create_chunk(
+            text=insight.text,
+            metadata={
+                "type": insight.type,
+                "session_id": session_id,
+                "timestamp": now(),
+                "importance": calculate_importance(insight)
+            }
+        )
+        
+        embedding = get_embedding(chunk.text)
+        
+        # 3. Store in LightRAG
+        lightrag.insert(chunk, embedding)
+    
+    # 4. Update knowledge graph
+    lightrag.update_graph(
+        entities=extract_entities(session),
+        relationships=extract_relationships(session)
+    )
+    
+    # 5. Update preferences
+    update_user_profile(insights.preferences)
+```
+
+---
+
+## Proactive Recall
+
+**Assistant сам вспоминает релевантное:**
+
+```python
+def proactive_recall(current_context):
+    """
+    Перед тем как ответить, проверяет:
+    - Было ли что-то похожее раньше?
+    - Кто что говорил по этому поводу?
+    - Какие решения принимались?
+    """
+    
+    # Extract key entities from current context
+    entities = extract_entities(current_context)
+    
+    # Query RAG for each entity
+    relevant_history = []
+    for entity in entities:
+        results = lightrag.query(
+            query=f"История упоминаний {entity}",
+            mode="global",  # Cross-document search
+            top_k=3
+        )
+        relevant_history.extend(results)
+    
+    # Sort by relevance + recency
+    relevant_history.sort(
+        key=lambda x: x.score * recency_weight(x.date),
+        reverse=True
+    )
+    
+    return relevant_history[:5]  # Top 5 most relevant
+
+
+# Example usage in assistant
+user_message = "Как настроить LightRAG?"
+
+# 1. Proactive recall
+history = proactive_recall(user_message)
+
+# 2. Add to context
+context = f"""
+Релевантная история:
+
+{format_history(history)}
+
+Текущий вопрос: {user_message}
+"""
+
+# 3. Generate answer with attribution
+answer = llm.generate(context)
+
+# → "По поводу LightRAG: Алексей рекомендовал использовать
+#    graph mode (transcript-147, 15 апр 2026). Librarian-v3
+#    настроил на порту 9621 (handoff, 21 апр 2026). Попробуй..."
+```
+
+---
+
+## Integration в AI Assistant
+
+### Setup (добавить к Phase 1 MVP):
+
+1. **LightRAG уже работает** ✅
+   ```bash
+   docker ps | grep lightrag
+   # → realty_lightrag Up 3+ hours
+   ```
+
+2. **Создать memory ingestion pipeline**
+   ```bash
+   # Skill: ingest-to-rag
+   
+   # Источники для ingestion:
+   - Gmail threads (через Gmail MCP)
+   - Calendar events (через Calendar MCP)
+   - Telegram messages (через Telegram MCP)
+   - Transcripts Алексея (уже на Aeza)
+   - Canon docs (docs/school/)
+   - Chat history (Claude Code transcripts)
+   ```
+
+3. **Первая загрузка (one-time):**
+   ```python
+   # Инжект всей existing knowledge
+   
+   sources = [
+       "/opt/tg-export/transcripts/*.txt",  # 15 видео Алексея
+       "docs/school/canon_training.yaml",
+       "docs/school/handoff/*.md",
+       "~/.claude/memory/**/*.md"
+   ]
+   
+   for source in sources:
+       ingest_document_to_lightrag(
+           path=source,
+           chunk_size=500,
+           overlap=100,
+           extract_entities=True
+       )
+   ```
+
+4. **Continuous ingestion (ongoing):**
+   ```yaml
+   # Cron job: hourly
+   schedule: "0 * * * *"
+   skill: ingest-new-content
+   
+   logic:
+     - Check new emails (Gmail MCP)
+     - Check new Telegram messages
+     - Check new calendar events
+     - Chunk → Embed → LightRAG
+   ```
+
+5. **Query interface в assistant:**
+   ```
+   User: "Что Алексей говорил про OpenClaw?"
+   
+   Assistant:
+   1. Векторизует вопрос
+   2. Query LightRAG (hybrid mode)
+   3. Получает top-5 chunks с attribution
+   4. Генерирует ответ с sources:
+   
+   "Алексей рекомендовал OpenClaw для scraping
+   (видео msg-136, 21 апр 2026). Установку делать
+   под отдельным пользователем openclaw, порты
+   не открывать во внешний мир (видео msg-137).
+   
+   Librarian-v3 настроил OpenClaw на Aeza
+   (container realty_openclaw, port 18789)."
+   ```
+
+---
+
+## Use Cases
+
+### 1. "Кто предлагал использовать X?"
+
+```
+Query: "Кто предлагал Waymen правила?"
+
+RAG results:
+- Alexey, transcript-147, 2026-04-15: "Waymen 10 правил..."
+- Ilya, chat, 2026-04-18: "Применил правило #3 к парсеру"
+- School-v4, mailbox, 2026-04-20: "Добавить Waymen в canon"
+
+Answer: "Алексей предложил (15 апр), Илья применил (18 апр),
+         School рекомендовал добавить в канон (20 апр)."
+```
+
+### 2. "Что я забыл сделать по теме X?"
+
+```
+Query: "Что я забыл по OpenClaw?"
+
+RAG results:
+- Task incomplete: "Настроить автообновление OpenClaw"
+- Email unread: "OpenClaw v2.0 release notes"
+- Alexey recommendation: "Добавить мониторинг OpenClaw в cron"
+
+Answer: "Ты забыл: 1) настроить автообновление,
+         2) прочитать release notes v2.0 (email от 22 апр),
+         3) добавить мониторинг (рекомендация Алексея)."
+```
+
+### 3. "Покажи эволюцию идеи X"
+
+```
+Query: "Эволюция идеи парсера недвижимости"
+
+RAG timeline:
+2026-04-15: Алексей предложил OpenClaw для парсинга
+2026-04-18: Илья создал parser-rumah123-v1
+2026-04-20: School добавил в canon архитектуру парсера
+2026-04-22: Parser-v3 запущен на Aeza
+2026-04-24: Librarian-v4 мониторит парсер автоматически
+
+Answer: "15 апр: идея от Алексея → 18 апр: первая версия →
+         20 апр: канонизация → 22 апр: production → 24 апр: мониторинг"
+```
+
+---
+
+## Метрики качества RAG
+
+### Precision (точность):
+```
+Из 10 retrieved chunks, сколько релевантны?
+Target: >80%
+```
+
+### Recall (полнота):
+```
+Из всех релевантных chunks, сколько нашли?
+Target: >70%
+```
+
+### Attribution accuracy:
+```
+Правильно ли определён автор/дата/источник?
+Target: >95%
+```
+
+### Response latency:
+```
+Сколько времени от вопроса до ответа?
+Target: <2 sec (embedding + retrieval + LLM)
+```
+
+---
+
+## Troubleshooting
+
+### "RAG возвращает нерелевантные результаты"
+
+**Причины:**
+1. Плохой chunking (слишком большие/маленькие chunk'и)
+2. Плохая embedding model (не понимает контекст)
+3. Query недостаточно специфичный
+
+**Решение:**
+```python
+# Улучшить query через rewriting
+original_query = "правила продуктивности"
+
+rewritten_queries = [
+    "Waymen 10 правил продуктивности",
+    "Алексей рекомендации productivity",
+    "методология эффективной работы"
+]
+
+# Query каждый вариант, merge results
+all_results = []
+for q in rewritten_queries:
+    results = lightrag.query(q, top_k=3)
+    all_results.extend(results)
+
+# Deduplicate + re-rank
+final_results = deduplicate_and_rerank(all_results)
+```
+
+### "Attribution неправильный"
+
+**Проверка:**
+```python
+# Verify attribution in source document
+chunk = lightrag.get_chunk(chunk_id)
+source_doc = read_file(chunk.metadata.source)
+
+# Check if chunk.text exists in source_doc
+if chunk.text not in source_doc:
+    flag_for_manual_review(chunk_id)
+```
+
+### "LightRAG slow"
+
+**Оптимизация:**
+```yaml
+# LightRAG config
+index_type: "HNSW"  # Faster than flat index
+ef_construction: 200
+ef_search: 50
+max_connections: 16
+
+# Caching
+enable_query_cache: true
+cache_ttl: 3600  # 1 hour
+```
+
+---
+
+## Next Steps
+
+1. **Добавить RAG в Phase 1 MVP** (после базовых MCP integrations)
+2. **Ingest existing knowledge** (transcripts, canon, memory)
+3. **Test semantic search** ("Найди правила Алексея")
+4. **Iterate chunking strategy** (optimize precision/recall)
+5. **Add to proactive thinking** (assistant сам вспоминает релевантное)
+
+---
+
+**Готово! RAG система описана. Теперь assistant будет:**
+✅ Запоминать всё с attribution  
+✅ Находить по смыслу, не только точным совпадениям  
+✅ Предлагать релевантный контекст из прошлого  
+✅ Самообучаться с каждой сессией
