@@ -1,0 +1,557 @@
+{
+  "mission_id": "parser-restoration-2026-04-24",
+  "agent_role": "Parser Infrastructure Control Agent",
+  "briefing": "Взять под полный контроль работающий Telegram парсер на Aeza VPS, разобраться в структуре 1900+ файлов, управлять 17 Docker контейнерами, восстановить runtime и обеспечить непрерывную работу",
+
+  "critical_context": {
+    "status": "PARSER РАБОТАЕТ 7+ ДНЕЙ БЕЗ СБОЕВ",
+    "warning": "НЕ ЛОМАЙ ЧТО РАБОТАЕТ. Сначала изучи, потом действуй",
+    "principle_0": "Simplicity-First: есть ли простое решение БЕЗ перезапуска всего?"
+  },
+
+  "infrastructure_map": {
+    "aeza_server": {
+      "host": "root@193.233.128.21",
+      "access": "SSH ключ уже настроен на локалке C:/Users/97152/.ssh/",
+      "resources": {
+        "ram": "7.8GB total (3.8GB free)",
+        "disk": "59GB total (23GB free)",
+        "location": "Aeza VPS, EU datacenter"
+      },
+      "uptime_proven": "7+ дней непрерывной работы парсера"
+    },
+
+    "parser_location": {
+      "path": "/opt/tg-export",
+      "total_files": 1902,
+      "core_components": 7,
+      "description": "Полностью работающий Telegram parser с auto-restart, notifications, transcription"
+    },
+
+    "docker_infrastructure": {
+      "total_containers": 17,
+      "uptime": "9-13 часов с последнего restart",
+      "stack": [
+        {
+          "name": "realty_lightrag",
+          "purpose": "RAG memory для AI Assistant",
+          "port": 8020,
+          "status": "Up 9 hours",
+          "usage": "Query endpoint http://193.233.128.21:8020/query"
+        },
+        {
+          "name": "realty_litellm",
+          "purpose": "LLM API proxy (unified interface)",
+          "status": "Up 9 hours"
+        },
+        {
+          "name": "realty_openclaw",
+          "purpose": "Agent runtime",
+          "status": "Up 13 hours (healthy)",
+          "critical": true
+        },
+        {
+          "name": "realty_ollama",
+          "purpose": "Local embeddings for LightRAG",
+          "status": "Up 13 hours"
+        },
+        {
+          "name": "supabase-*",
+          "count": 13,
+          "purpose": "Full Supabase stack (DB, Auth, Storage, Realtime, API, Studio)",
+          "status": "All healthy, Up 13 hours",
+          "note": "Полный production-ready backend"
+        }
+      ],
+      "commands": {
+        "status": "docker ps --format 'table {{.Names}}\\t{{.Status}}\\t{{.Ports}}'",
+        "logs": "docker logs -f <container_name>",
+        "restart": "docker restart <container_name>",
+        "full_restart": "cd /opt/realty-portal && docker compose restart"
+      }
+    }
+  },
+
+  "parser_architecture": {
+    "proven_metrics": {
+      "uptime": "7 дней без ручного вмешательства",
+      "posts_indexed": 152,
+      "media_downloaded": 52,
+      "transcripts_created": 15,
+      "audio_hours_processed": 7.18,
+      "grok_stt_cost": "$0.72",
+      "auto_restarts": 3,
+      "false_positives": 0,
+      "success_rate": "100%"
+    },
+
+    "core_components": [
+      {
+        "file": "sync_channel.mjs",
+        "size": "~6KB",
+        "purpose": "Detect new posts in Telegram channel 'Алексей Колесов | Private'",
+        "output": "library_index.json (152 posts)",
+        "classification": "HIGH_CODE / SALES_FOCUS / MED_VALUE / LOW_PRIORITY",
+        "keywords": {
+          "CODE_KW": ["скрипт", "команд", "код", "CLI", "API", "webhook", "bash", "node", "docker"],
+          "SALES_KW": ["продаж", "клиент", "MVP", "SaaS", "revenue", "pricing"]
+        },
+        "how_it_works": "Читает канал через Telegram API → классифицирует по keywords → сохраняет в JSON с приоритетами P1-P4"
+      },
+      {
+        "file": "download.mjs",
+        "size": "~10KB",
+        "purpose": "Priority download медиа файлов (P1→P2→P3→P4)",
+        "args": "[limit] [minPrio] [maxPrio]",
+        "example": "node download.mjs 0 1 3  # скачать все P1-P3",
+        "output": "media/ directory (52 files, 65MB)",
+        "anti_ban": {
+          "human_pacing": true,
+          "SHORT_PAUSE": "2-5 sec between files",
+          "BURST_BREAK": "30 sec after 5 files",
+          "LONG_BREAK": "2 min after 20 files",
+          "proven": "7 дней работы, 0 банов"
+        },
+        "how_it_works": "Читает library_index.json → сортирует по priority → скачивает с паузами → логирует в download.log"
+      },
+      {
+        "file": "transcribe.sh",
+        "size": "~3KB",
+        "purpose": "Grok STT transcription аудио/видео файлов",
+        "api": "https://api.x.ai/v1/stt (НЕ Whisper!)",
+        "cost": "$0.10/hour audio",
+        "output": "transcripts/ directory (31 files: .json + .txt pairs)",
+        "chunking": "Автоматический split для файлов >25MB",
+        "proven_cost": "$0.72 за 7.18 часов аудио",
+        "how_it_works": "Читает media/ → отправляет в Grok STT → сохраняет JSON (words+timestamps) + TXT (plain text)"
+      },
+      {
+        "file": "heartbeat.sh",
+        "size": "~4KB",
+        "purpose": "Self-healing watchdog для download.mjs",
+        "schedule": "Каждые 10 минут (cron: */10 * * * *)",
+        "checks": [
+          "download.mjs процесс жив?",
+          "download.log обновлялся последние 15 минут?",
+          "Если idle >15 min → kill + restart",
+          "Log rotation если >50MB"
+        ],
+        "output": "_status.json (state snapshot)",
+        "proven": "3 auto-restarts за 7 дней (все корректные)",
+        "how_it_works": "pgrep download.mjs → check log mtime → auto-restart if stuck → write _status.json"
+      },
+      {
+        "file": "notify.sh",
+        "size": "~3KB",
+        "purpose": "Telegram push notifications каждые 2 часа",
+        "schedule": "Каждые 2 часа (cron: 0 */2 * * *)",
+        "sends_to": "Telegram bot (@BotFather)",
+        "format": "HTML message с статусом + cost tracking",
+        "proven": "84 уведомления за 7 дней (все доставлены)",
+        "how_it_works": "Читает _status.json → calc cost → format HTML → POST to Telegram Bot API"
+      },
+      {
+        "file": "verify.sh",
+        "size": "~2KB",
+        "purpose": "Health checks (process, files, connectivity)",
+        "used_by": "heartbeat.sh для проверок",
+        "checks": ["Process alive", "Files readable", "Telegram API reachable", "Disk space"]
+      },
+      {
+        "file": "enumerate_p4.mjs",
+        "size": "~2KB",
+        "purpose": "Приоритизация постов в P4 категории",
+        "output": "Статистика по постам LOW_PRIORITY"
+      }
+    ],
+
+    "data_storage": {
+      "library_index.json": {
+        "size": "273KB",
+        "posts": 152,
+        "structure": {
+          "channel": "Алексей Колесов | Private",
+          "channel_id": 2653037830,
+          "generated": "ISO timestamp",
+          "total_posts": 152,
+          "posts": [
+            {
+              "msg_id": "int",
+              "date": "ISO timestamp",
+              "title": "string",
+              "type": "text | media",
+              "url": "t.me link",
+              "topics": ["array"],
+              "category": "HIGH_CODE | SALES_FOCUS | MED_VALUE | LOW_PRIORITY",
+              "code_score": "int (0-100)",
+              "sales_score": "int (0-100)",
+              "filename": "string (if media)",
+              "size_mb": "float",
+              "priority": "null | 1 | 2 | 3 | 4",
+              "text_full": "full text",
+              "text_preview": "first 300 chars"
+            }
+          ]
+        },
+        "last_updated": "2026-04-21T12:15:04.876Z"
+      },
+
+      "_status.json": {
+        "size": "295 bytes",
+        "purpose": "Runtime state snapshot",
+        "updated_by": "heartbeat.sh каждые 10 минут",
+        "structure": {
+          "updated": "ISO timestamp",
+          "download": {
+            "status": "running | stopped | restarted",
+            "pid": "process ID or null",
+            "idle_sec": "seconds since last log update"
+          },
+          "transcribe": {
+            "status": "running | stopped",
+            "pending": "count of files to transcribe"
+          },
+          "media_files": "count",
+          "media_bytes": "total size",
+          "transcripts_count": "count"
+        }
+      },
+
+      "media/": {
+        "files": 52,
+        "size": "65MB",
+        "types": [".mp4", ".wav", ".mp3", "images"],
+        "naming": "{msg_id}_{title}.{ext}",
+        "source": "Downloaded by download.mjs from Telegram"
+      },
+
+      "transcripts/": {
+        "files": 31,
+        "size": "4.5MB",
+        "pairs": 15,
+        "format": [
+          "{msg_id}_{title}.{ext}.transcript.json (words + timestamps)",
+          "{msg_id}_{title}.{ext}.transcript.txt (plain text)"
+        ],
+        "largest": "164_Аудио_запись_встречи_06.03.26.wav.transcript.json (1.3MB)",
+        "source": "Created by transcribe.sh via Grok STT"
+      }
+    },
+
+    "credentials": {
+      "location": "/opt/tg-export/.env",
+      "required_vars": [
+        "TG_API_ID=<from https://my.telegram.org>",
+        "TG_API_HASH=<from https://my.telegram.org>",
+        "TG_SESSION_STRING=<from telegram CLI auth>",
+        "XAI_API_KEY=xai-<from https://console.x.ai>",
+        "BOT_TOKEN=<from @BotFather>",
+        "CHAT_ID=<your Telegram user ID>"
+      ],
+      "security": "НИКОГДА НЕ КОММИТЬ .env В GIT",
+      "backup": "Credentials есть у пользователя Ильи"
+    },
+
+    "cron_schedule": {
+      "location": "crontab -l на сервере",
+      "jobs": [
+        {
+          "schedule": "*/10 * * * *",
+          "command": "bash /opt/tg-export/heartbeat.sh",
+          "purpose": "Watchdog проверка каждые 10 минут"
+        },
+        {
+          "schedule": "0 */2 * * *",
+          "command": "bash /opt/tg-export/notify.sh",
+          "purpose": "Telegram уведомления каждые 2 часа"
+        }
+      ],
+      "check_command": "ssh root@193.233.128.21 'crontab -l'"
+    }
+  },
+
+  "reference_documentation": {
+    "local_backup": "C:/Users/97152/Documents/claude-library/",
+    "github": "https://github.com/ilianberawa-dev/LIBRARIAN-V4-CANON-REPOSITORY-ALEXEY",
+
+    "key_files": [
+      {
+        "file": "OLD-PARSER-STRUCTURE/README.md",
+        "purpose": "Comprehensive guide по архиве старого парсера",
+        "location_main": "Только в main ветке (коммит 2f384b0)",
+        "note": "На текущей teleport ветке этой папки НЕТ"
+      },
+      {
+        "file": "troubleshoot/telegram-parser-recreation.md",
+        "size": "~18KB",
+        "purpose": "Полная архитектура 7 компонентов + 3 варианта воссоздания",
+        "proven_metrics": "Все metrics из продакшна задокументированы"
+      },
+      {
+        "file": "navyki/claude-bot-parser-control.md",
+        "size": "~16KB",
+        "purpose": "Управление парсером через Claude Desktop",
+        "skills": "5 bash skills готовы к использованию"
+      },
+      {
+        "file": "navyki/heartbeat-telegram-pattern.md",
+        "size": "~9KB",
+        "purpose": "Self-healing pattern с Telegram notifications",
+        "universal": "Применим для любых long-running процессов"
+      },
+      {
+        "file": "kanon/simplicity-first-principle.md",
+        "size": "605 lines",
+        "purpose": "ОБЯЗАТЕЛЬНЫЙ принцип #0 - проверяй простые решения ПЕРВЫМИ",
+        "critical": "Читать ПЕРЕД любыми действиями"
+      },
+      {
+        "file": "HANDOFF-TELEPORT-SESSION.json",
+        "purpose": "Handoff от предыдущей teleport сессии",
+        "contains": "7 core skills + infrastructure map + proven patterns"
+      }
+    ]
+  },
+
+  "your_mission_steps": {
+    "phase_1_reconnaissance": {
+      "title": "РАЗВЕДКА (НЕ трогай ничего, только смотри)",
+      "duration": "10-15 минут",
+      "critical": "НЕ ЛОМАЙ ЧТО РАБОТАЕТ",
+
+      "tasks": [
+        {
+          "step": 1,
+          "action": "Проверь доступ к серверу",
+          "command": "ssh root@193.233.128.21 'hostname && uptime && free -h'",
+          "expected": "Должен подключиться без пароля, показать uptime >7 дней"
+        },
+        {
+          "step": 2,
+          "action": "Проверь статус парсера",
+          "command": "ssh root@193.233.128.21 'cd /opt/tg-export && cat _status.json'",
+          "expected": "JSON с download.status, transcribe.pending, media_files, transcripts_count"
+        },
+        {
+          "step": 3,
+          "action": "Проверь процессы",
+          "command": "ssh root@193.233.128.21 'pgrep -fa \"node download.mjs\"'",
+          "expected": "Процесс запущен или не запущен (оба варианта OK если heartbeat работает)"
+        },
+        {
+          "step": 4,
+          "action": "Проверь cron",
+          "command": "ssh root@193.233.128.21 'crontab -l'",
+          "expected": "2 строки: heartbeat каждые 10 минут, notify каждые 2 часа"
+        },
+        {
+          "step": 5,
+          "action": "Проверь Docker",
+          "command": "ssh root@193.233.128.21 'docker ps --format \"table {{.Names}}\\t{{.Status}}\"'",
+          "expected": "17 контейнеров, все Up X hours"
+        },
+        {
+          "step": 6,
+          "action": "Проверь диск",
+          "command": "ssh root@193.233.128.21 'df -h / && du -sh /opt/tg-export /opt/realty-portal'",
+          "expected": "23GB свободно из 59GB, tg-export ~70MB, realty-portal ~500MB+"
+        },
+        {
+          "step": 7,
+          "action": "Посчитай объекты",
+          "command": "ssh root@193.233.128.21 'cd /opt/tg-export && find media -type f | wc -l && find transcripts -type f | wc -l && grep -c \"msg_id\" library_index.json'",
+          "expected": "52 media, 31 transcripts, 152 posts"
+        }
+      ],
+
+      "deliverable": "Доклад пользователю: 'Парсер работает, 152 поста, 52 медиа, 15 транскриптов, Docker здоров, cron активен, диск OK'"
+    },
+
+    "phase_2_control": {
+      "title": "УПРАВЛЕНИЕ (Взять парсер под контроль через Claude Desktop)",
+      "duration": "10-15 минут",
+      "requires": "Phase 1 завершена успешно",
+
+      "tasks": [
+        {
+          "step": 1,
+          "action": "Установи parser-control skills на локалку",
+          "command": "bash C:/Users/97152/Documents/claude-library/navyki/claude-bot-parser-control/install.sh",
+          "expected": "5 skills скопированы в ~/.claude/skills/telegram-parser/",
+          "note": "Installer на текущей teleport ветке (коммит 4651451)"
+        },
+        {
+          "step": 2,
+          "action": "Скопируй парсер на локалку (если нужно локальное управление)",
+          "command": "scp -r root@193.233.128.21:/opt/tg-export ~/tg-export",
+          "optional": true,
+          "note": "Только если хочешь управлять локально, иначе skills будут работать через SSH"
+        },
+        {
+          "step": 3,
+          "action": "Протестируй skill status",
+          "command": "bash ~/.claude/skills/telegram-parser/status.sh",
+          "expected": "Показать статус парсера (из _status.json через SSH или локально)"
+        },
+        {
+          "step": 4,
+          "action": "Протестируй skill через Claude Desktop чат",
+          "user_message": "Покажи статус парсера",
+          "expected": "Claude запустит status.sh → кнопка 'Open in Terminal' → вывод статуса"
+        }
+      ],
+
+      "deliverable": "Управление парсером через Claude Desktop работает, skills установлены"
+    },
+
+    "phase_3_runtime_restoration": {
+      "title": "ВОССТАНОВЛЕНИЕ RUNTIME (если что-то сломано)",
+      "duration": "Только если нужно",
+      "trigger": "Парсер не работает ИЛИ нужна полная переустановка",
+
+      "decision_tree": {
+        "question": "Что сломано?",
+        "options": [
+          {
+            "case": "download.mjs не запускается",
+            "fix": [
+              "ssh root@193.233.128.21 'cd /opt/tg-export && node download.mjs 0 1 1'",
+              "Если ошибка dependencies → npm install",
+              "Если ошибка .env → проверь credentials"
+            ]
+          },
+          {
+            "case": "heartbeat.sh не работает",
+            "fix": [
+              "ssh root@193.233.128.21 'crontab -l'",
+              "Если нет cron jobs → добавь: crontab -e",
+              "*/10 * * * * bash /opt/tg-export/heartbeat.sh",
+              "0 */2 * * * bash /opt/tg-export/notify.sh"
+            ]
+          },
+          {
+            "case": "Telegram notifications не приходят",
+            "fix": [
+              "ssh root@193.233.128.21 'cd /opt/tg-export && cat .env | grep BOT_TOKEN'",
+              "Проверь BOT_TOKEN и CHAT_ID",
+              "Тест: curl -X POST https://api.telegram.org/bot<TOKEN>/sendMessage -d chat_id=<CHAT_ID> -d text=Test"
+            ]
+          },
+          {
+            "case": "Docker контейнеры down",
+            "fix": [
+              "ssh root@193.233.128.21 'cd /opt/realty-portal && docker compose up -d'",
+              "Проверь логи: docker logs <container_name>"
+            ]
+          },
+          {
+            "case": "Всё сломано, нужна полная переустановка",
+            "fix": "Читай troubleshoot/telegram-parser-recreation.md → вариант 'Full Recreation'"
+          }
+        ]
+      },
+
+      "deliverable": "Runtime восстановлен, все процессы работают"
+    },
+
+    "phase_4_monitoring": {
+      "title": "МОНИТОРИНГ (Постоянный контроль)",
+      "duration": "Ongoing",
+
+      "checks": [
+        {
+          "what": "Parser uptime",
+          "how": "Проверяй _status.json каждые 10 минут (автоматом через heartbeat)",
+          "alert": "Если download.idle_sec >900 (15 минут) → heartbeat auto-restart"
+        },
+        {
+          "what": "Disk space",
+          "how": "df -h / каждый день",
+          "alert": "Если <10GB свободно → чистить старые media/transcripts"
+        },
+        {
+          "what": "Docker health",
+          "how": "docker ps каждый день",
+          "alert": "Если контейнер не (healthy) → docker logs + restart"
+        },
+        {
+          "what": "Telegram notifications",
+          "how": "Должны приходить каждые 2 часа",
+          "alert": "Если не пришло 3+ часа → проверь notify.sh + BOT_TOKEN"
+        },
+        {
+          "what": "Cost tracking",
+          "how": "Читай notify.sh сообщения",
+          "expected": "$0.10/час аудио, ~$0.10/день при текущем темпе"
+        }
+      ],
+
+      "deliverable": "Dashboard в Claude Desktop чате с live статусом"
+    }
+  },
+
+  "critical_warnings": {
+    "DO_NOT": [
+      "❌ НЕ удаляй library_index.json (273KB данных, 152 поста)",
+      "❌ НЕ останавливай Docker без причины (там production LightRAG + Supabase)",
+      "❌ НЕ коммить .env в Git (credentials)",
+      "❌ НЕ запускай download.mjs без параметров (скачает всё подряд)",
+      "❌ НЕ меняй cron без backup (парсер потеряет auto-restart)",
+      "❌ НЕ чисти media/ или transcripts/ без проверки что уже в backup"
+    ],
+
+    "ALWAYS": [
+      "✅ СНАЧАЛА проверь Simplicity-First Principle (kanon/simplicity-first-principle.md)",
+      "✅ ПЕРЕД изменениями: git commit текущего состояния",
+      "✅ BACKUP .env перед изменениями: cp .env .env.backup",
+      "✅ ТЕСТИРУЙ на 1-2 файлах, потом масштабируй",
+      "✅ ЛОГИРУЙ всё что делаешь: echo \"action\" >> ~/parser-control.log",
+      "✅ ДОВЕРЯЙ НО ПРОВЕРЯЙ: показывай raw output команд, не пересказ"
+    ]
+  },
+
+  "success_criteria": {
+    "phase_1": "✅ Доклад: парсер работает, все цифры совпадают с proven metrics",
+    "phase_2": "✅ Claude Desktop управляет парсером через skills",
+    "phase_3": "✅ Runtime восстановлен (если было сломано)",
+    "phase_4": "✅ Live мониторинг через чат, alerts настроены",
+    "final": "✅ Пользователь управляет парсером через чат БЕЗ SSH"
+  },
+
+  "tools_available": {
+    "local_machine": {
+      "os": "Windows 11 (Git Bash + PowerShell)",
+      "claude_code": "Active, teleport session",
+      "ssh": "Configured, ключ в ~/.ssh/",
+      "skills": "5 parser-control skills + MCP servers"
+    },
+
+    "mcp_servers": {
+      "available": [
+        "GitHub MCP (для Git операций)",
+        "Gmail MCP (для email alerts)",
+        "Google Drive MCP (для backup)",
+        "Google Calendar MCP (для scheduling)"
+      ],
+      "note": "Telegram MCP отключен (disconnected в текущей сессии)"
+    },
+
+    "bash_tools": [
+      "ssh (remote control)",
+      "scp (file transfer)",
+      "git (version control)",
+      "curl (API calls)",
+      "jq (JSON parsing - НА СЕРВЕРЕ, не локально)"
+    ]
+  },
+
+  "next_action": {
+    "immediate": "START Phase 1 Reconnaissance → доложи статус парсера",
+    "format": "Используй Bash tool для команд, Read tool для документации",
+    "report_to_user": "После каждой фазы: короткий доклад с цифрами (не пересказ, RAW output)"
+  },
+
+  "handoff_from": "teleport session librarian-v4, 2026-04-24",
+  "handoff_to": "NEW AGENT - Parser Infrastructure Control",
+  "mission_start": "2026-04-24T20:00:00Z"
+}
