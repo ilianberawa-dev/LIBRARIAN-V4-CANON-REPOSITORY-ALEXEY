@@ -1,6 +1,7 @@
 # Claude Library — Persistent Knowledge Base
 
 **Локация:** `C:\Users\97152\Documents\claude-library\`  
+**GitHub:** https://github.com/ilianberawa-dev/LIBRARIAN-V4-CANON-REPOSITORY-ALEXEY  
 **Назначение:** Доступ из ЛЮБОГО Claude чата на этой машине  
 **Создано:** 2026-04-24  
 **Создатель:** librarian-v4  
@@ -14,9 +15,9 @@
 |----------|---------|-------|--------|
 | `metody/` | МЕТОДЫ разработки | 📘 | ✅ 1 тема |
 | `rukovodstva/` | РУКОВОДСТВА по компонентам | 📚 | ✅ 1 тема |
-| `kanon/` | КАНОН (принципы) | 📜 | ✅ 1 принцип |
+| `kanon/` | КАНОН (принципы) | 📜 | ✅ 2 документа |
 | `navyki/` | НАВЫКИ (skills) | 🛠️ | 🚧 Пусто |
-| `spravochniki/` | СПРАВОЧНИКИ | 📖 | 🚧 Пусто |
+| `spravochniki/` | СПРАВОЧНИКИ | 📖 | ✅ 1 гайд |
 | `troubleshoot/` | РЕШЕНИЕ ПРОБЛЕМ | 🔧 | 🚧 Пусто |
 
 ---
@@ -28,26 +29,32 @@ claude-library/
   ├── _INDEX.md (этот файл)
   │
   ├── metody/              ← МЕТОДЫ
-  │   ├── README.md        (описание категории на русском)
+  │   ├── README.md
   │   └── personal-ai-assistant/
-  │       ├── README.md    ("Личный AI Ассистент" на русском)
-  │       ├── v1.0-mvp-to-sales.md
-  │       └── CHANGELOG.md (на русском)
+  │       ├── README.md
+  │       ├── v1.0-mvp-to-sales.md (767 lines)
+  │       └── CHANGELOG.md
   │
   ├── rukovodstva/         ← РУКОВОДСТВА
   │   ├── README.md
   │   └── self-learning-memory/
-  │       ├── README.md    ("Самообучающаяся Память" на русском)
-  │       ├── v1.0-lightrag.md
-  │       └── CHANGELOG.md (на русском)
+  │       ├── README.md
+  │       ├── v1.0-lightrag.md (620 lines)
+  │       └── CHANGELOG.md
   │
-  ├── kanon/               ← КАНОН (готово к заполнению)
+  ├── kanon/               ← КАНОН ✨ ОБНОВЛЕНО
+  │   ├── README.md
+  │   ├── alexey-11-principles.md (12 принципов)
+  │   └── simplicity-first-principle.md (605 lines)
+  │
+  ├── spravochniki/        ← СПРАВОЧНИКИ ✨ ОБНОВЛЕНО
+  │   ├── README.md
+  │   └── skills-a-to-ya.md (108KB полный гайд)
+  │
+  ├── navyki/              ← НАВЫКИ (roadmap)
   │   └── README.md
-  ├── navyki/              ← НАВЫКИ
-  │   └── README.md
-  ├── spravochniki/        ← СПРАВОЧНИКИ
-  │   └── README.md
-  └── troubleshoot/        ← ПРОБЛЕМЫ
+  │
+  └── troubleshoot/        ← ПРОБЛЕМЫ (roadmap)
       └── README.md
 ```
 
@@ -77,8 +84,7 @@ claude-library/
 ### 1. МЕТОДЫ / personal-ai-assistant
 
 **Полное название:** Личный AI Ассистент  
-**Путь:** `metody/personal-ai-assistant/`  
-**Версия:** v1.0-mvp-to-sales.md  
+**Файл:** `metody/personal-ai-assistant/v1.0-mvp-to-sales.md`  
 **Размер:** 767 строк, ~27KB
 
 **О чём:**
@@ -88,55 +94,70 @@ claude-library/
 - Roadmap 20+ недель
 - Pricing $49-299/month
 
-**Как читать:**
-
-1. **Краткое описание:**
-   ```
-   Read C:\Users\97152\Documents\claude-library\metody\personal-ai-assistant\README.md
-   ```
-
-2. **Полная методология:**
-   ```
-   Read C:\Users\97152\Documents\claude-library\metody\personal-ai-assistant\v1.0-mvp-to-sales.md
-   ```
-
-3. **История версий:**
-   ```
-   Read C:\Users\97152\Documents\claude-library\metody\personal-ai-assistant\CHANGELOG.md
-   ```
-
 ---
 
 ### 2. РУКОВОДСТВА / self-learning-memory
 
 **Полное название:** Самообучающаяся Память (RAG)  
-**Путь:** `rukovodstva/self-learning-memory/`  
-**Версия:** v1.0-lightrag.md  
+**Файл:** `rukovodstva/self-learning-memory/v1.0-lightrag.md`  
 **Размер:** 620 строк, ~20KB
 
 **О чём:**
 - RAG архитектура
-- LightRAG integration (уже на Aeza)
-- Attribution (КТО/КОГДА/ГДЕ)
+- LightRAG integration
+- Attribution (WHO/WHEN/WHERE)
 - Learning loop
 - Use cases
 
+---
+
+### 3. КАНОН / alexey-11-principles ✨ НОВОЕ
+
+**Полное название:** 12 Принципов Алексея для AI-систем  
+**Файл:** `kanon/alexey-11-principles.md`  
+**Размер:** ~5KB
+
+**О чём:**
+- Принцип #0: Simplicity First (P0)
+- Принципы #1-11: Portability → Architectural Privilege Isolation
+- Для каждого: правило, почему, деньги, примеры
+- Extracted from canon_training.yaml v0.5
+
 **Как читать:**
+```
+Read C:\Users\97152\Documents\claude-library\kanon\alexey-11-principles.md
+```
 
-1. **Краткое описание:**
-   ```
-   Read C:\Users\97152\Documents\claude-library\rukovodstva\self-learning-memory\README.md
-   ```
+---
 
-2. **Полное руководство:**
-   ```
-   Read C:\Users\97152\Documents\claude-library\rukovodstva\self-learning-memory\v1.0-lightrag.md
-   ```
+### 4. КАНОН / simplicity-first-principle
 
-3. **История версий:**
-   ```
-   Read C:\Users\97152\Documents\claude-library\rukovodstva\self-learning-memory\CHANGELOG.md
-   ```
+**Полное название:** Принцип "Простота Прежде Всего"  
+**Файл:** `kanon/simplicity-first-principle.md`  
+**Размер:** 605 строк, ~28KB
+
+**О чём:**
+- Обязательный чеклист перед ответом AI
+- Decision tree простых решений
+- Anti-patterns overengineering
+- "Бабушка-тест" (объяснить за 30 сек)
+- Реальный кейс: 2 часа → 5 минут
+
+**Применение:** ОБЯЗАТЕЛЬНО для всех AI перед ответом
+
+---
+
+### 5. СПРАВОЧНИКИ / skills-a-to-ya ✨ НОВОЕ
+
+**Полное название:** Skills от A до Я  
+**Файл:** `spravochniki/skills-a-to-ya.md`  
+**Размер:** 108KB
+
+**О чём:**
+- Полный справочник по AI Skills
+- От базовых до продвинутых
+- Примеры использования
+- Best practices
 
 ---
 
@@ -149,17 +170,12 @@ claude-library/
 Read C:\Users\97152\Documents\claude-library\_INDEX.md
 ```
 
-**Шаг 2 - Посмотри категорию:**
+**Шаг 2 - Загрузи обязательный канон:**
 ```
-Read C:\Users\97152\Documents\claude-library\metody\README.md
-```
-
-**Шаг 3 - Выбери тему:**
-```
-Read C:\Users\97152\Documents\claude-library\metody\personal-ai-assistant\README.md
+Read C:\Users\97152\Documents\claude-library\kanon\simplicity-first-principle.md
 ```
 
-**Шаг 4 - Читай контент:**
+**Шаг 3 - Выбери нужную тему:**
 ```
 Read C:\Users\97152\Documents\claude-library\metody\personal-ai-assistant\v1.0-mvp-to-sales.md
 ```
@@ -170,101 +186,47 @@ Read C:\Users\97152\Documents\claude-library\metody\personal-ai-assistant\v1.0-m
 
 ### Добавить новую версию:
 
-1. Создай файл:
-   ```bash
-   cp v1.0-old.md v1.1-new-feature.md
-   ```
-
-2. Обнови CHANGELOG.md (на русском)
-
-3. Обнови README.md темы (строка "Версия:")
-
-4. Обнови этот _INDEX.md если нужно
-
-### Добавить новую тему:
-
-1. Создай папку:
-   ```bash
-   mkdir -p kanon/alexey-11-principles/
-   ```
-
-2. Создай файлы:
-   ```bash
-   touch kanon/alexey-11-principles/README.md
-   touch kanon/alexey-11-principles/v1.0-initial.md
-   touch kanon/alexey-11-principles/CHANGELOG.md
-   ```
-
-3. Заполни README.md (на русском)
-
+1. Создай файл: `cp v1.0-old.md v1.1-new-feature.md`
+2. Обнови CHANGELOG.md
+3. Обнови README.md темы
 4. Обнови _INDEX.md
-
-5. Обнови README.md категории
-
----
-
-### 3. КАНОН / simplicity-first-principle
-
-**Полное название:** Принцип "Простота Прежде Всего"  
-**Путь:** `kanon/simplicity-first-principle.md`  
-**Версия:** v1.0  
-**Размер:** 605 строк, ~28KB
-
-**О чём:**
-- Обязательный чеклист перед ответом AI
-- Decision tree простых решений
-- Anti-patterns overengineering
-- "Бабушка-тест" (объяснить за 30 сек)
-- Реальный кейс: 2 часа → 5 минут (git push)
-
-**Как читать:**
-```
-Read C:\Users\97152\Documents\claude-library\kanon\simplicity-first-principle.md
-```
-
-**Или из GitHub:**
-```
-Read kanon/simplicity-first-principle.md из репозитория ilianberawa-dev/LIBRARIAN-V4-CANON-REPOSITORY-ALEXEY
-```
+5. `git add . && git commit && git push`
 
 ---
 
 ## 📋 Roadmap
 
-### Ближайшее (планируется):
-
-**Канон:**
-- [ ] `kanon/alexey-11-principles/` - 11 принципов с примерами
-- [ ] `kanon/waymen-10-rules/` - Waymen правила продуктивности
+### Ближайшее:
 
 **Навыки:**
-- [ ] `navyki/gmail-check/` - Проверка почты (skill)
-- [ ] `navyki/proactive-think/` - Проактивное мышление
+- [ ] `navyki/proactive-think/` - Проактивное мышление pattern
+- [ ] `navyki/gmail-check/` - Проверка почты skill
 
 **Справочники:**
-- [ ] `spravochniki/mcp-servers-setup/` - Настройка всех MCP
+- [ ] `spravochniki/mcp-servers-setup/` - Настройка MCP серверов
+- [ ] `spravochniki/lightrag-api-reference/` - LightRAG API
 
 **Troubleshooting:**
 - [ ] `troubleshoot/lightrag-slow-queries/` - Оптимизация LightRAG
+- [ ] `troubleshoot/cf-blocks-parser/` - Обход Cloudflare блокировок
 
 ---
 
 ## 📊 Статистика
 
-**Всего файлов:** 12  
-**Всего строк:** 2398+  
-**Категорий:** 6 (3 активные, 3 готовы к заполнению)  
-**Тем:** 3 (personal-ai-assistant, self-learning-memory, simplicity-first-principle)  
-**Версий:** 3 (все v1.0)
+**Всего файлов:** 18  
+**Всего строк:** 3500+  
+**Категорий:** 6 (4 активные, 2 в roadmap)  
+**Тем:** 5 (personal-ai-assistant, self-learning-memory, alexey-principles, simplicity-first, skills-a-to-ya)  
+**Размер репо:** ~180KB
 
 ---
 
 ## 🔒 Доступ и безопасность
 
-**Доступ:** Только локальная машина (Windows)  
-**Permissions:** User files (C:\Users\97152\)  
+**Доступ:** Только локальная машина + GitHub (private/public по выбору)  
 **Git:** ✅ Git-friendly (транслит латиницей)  
-**Backup:** Рекомендуется периодический backup в cloud
+**Backup:** GitHub auto-backup при каждом push
 
 ---
 
