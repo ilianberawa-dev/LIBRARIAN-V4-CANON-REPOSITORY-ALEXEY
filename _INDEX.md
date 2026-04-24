@@ -19,6 +19,8 @@
 | `navyki/` | НАВЫКИ (skills) | 🛠️ | ✅ 1 паттерн |
 | `spravochniki/` | СПРАВОЧНИКИ | 📖 | ✅ 1 гайд |
 | `troubleshoot/` | РЕШЕНИЕ ПРОБЛЕМ | 🔧 | ✅ 1 гайд |
+| `MISSIONS/` | МИССИИ для агентов | 🎯 | ✅ 1 briefing |
+| `ARCHIVES/` | АРХИВЫ (reference only) | 📦 | ✅ 1 архив |
 
 ---
 
@@ -57,7 +59,8 @@ claude-library/
   │
   └── troubleshoot/        ← ПРОБЛЕМЫ ✨ ОБНОВЛЕНО
       ├── README.md
-      └── telegram-parser-recreation.md (полный гайд воссоздания)
+      ├── telegram-parser-recreation.md (полный гайд воссоздания)
+      └── aeza-server-tree-map.md (карта всего Aeza VPS)
 ```
 
 ---
@@ -381,6 +384,32 @@ Read C:\Users\97152\Documents\claude-library\navyki\heartbeat-telegram-pattern.m
 **Как читать:**
 ```
 Read C:\Users\97152\Documents\claude-library\troubleshoot\telegram-parser-recreation.md
+```
+
+---
+
+### 7.1 TROUBLESHOOTING / aeza-server-tree-map ✨ НОВОЕ
+
+**Полное название:** Aeza Server — Complete Tree Map  
+**Файл:** `troubleshoot/aeza-server-tree-map.md`  
+**Размер:** ~800 строк
+
+**О чём:**
+- Полная карта всех папок на Aeza VPS (root@193.233.128.21)
+- 4 основных директории: `/opt/tg-export` (104MB), `/opt/realty-portal` (293MB), `/opt/mcp_agent_mail` (340MB), `/opt/containerd` (12KB)
+- 17 Docker контейнеров (Supabase stack, LightRAG, LiteLLM, Ollama, OpenClaw)
+- Детальное описание каждой папки + файлов + proven metrics
+- Системные ресурсы: 2 vCPU, 8GB RAM, 59GB disk (36GB used)
+- Quick reference для SSH команд
+
+**Применение:**
+- Быстрая ориентация при SSH на сервер
+- Понимание что где находится
+- Reference для новых AI агентов
+
+**Как читать:**
+```
+Read C:\Users\97152\Documents\claude-library\troubleshoot\aeza-server-tree-map.md
 ```
 
 ---
