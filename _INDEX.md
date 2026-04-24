@@ -464,3 +464,81 @@ curl -fsSL https://raw.githubusercontent.com/ilianberawa-dev/LIBRARIAN-V4-CANON-
 Скопирует 5 скриптов + SKILL.md в `~/.claude/skills/telegram-parser/`.
 Детали — `navyki/claude-skills/telegram-parser/README.md`.
 
+---
+
+## 🎯 МИССИИ для агентов
+
+### PARSER-RESTORATION-MISSION.json ✨ НОВОЕ
+
+**Полное название:** Parser Infrastructure Control Mission  
+**Файл:** `PARSER-RESTORATION-MISSION.json`  
+**Размер:** 557 строк, comprehensive briefing
+
+**О чём:**
+- Полный briefing для агента который берёт под контроль Telegram парсер на Aeza VPS
+- 4 фазы: Reconnaissance → Control → Runtime Restoration → Monitoring
+- Инвентаризация: 1902 файла, 152 поста, 52 медиа, 15 транскриптов, 17 Docker контейнеров
+- Proven metrics: 7 дней uptime, $0.72 cost, 0 сбоев
+- Пошаговые команды (copy-paste ready)
+- Decision tree для troubleshooting
+- Critical warnings + success criteria
+
+**Использование:**
+```
+Прочитай briefing и выполни mission:
+C:/Users/97152/Documents/claude-library/PARSER-RESTORATION-MISSION.json
+
+Начни с Phase 1 Reconnaissance.
+```
+
+**Роль библиотекаря:**
+- Старый технарь = reference expert, НЕ исполнитель
+- Другие агенты выполняют миссии, библиотекарь даёт советы
+
+**Как читать:**
+```
+Read C:\Users\97152\Documents\claude-library\PARSER-RESTORATION-MISSION.json
+```
+
+---
+
+## 📦 АРХИВЫ (reference only)
+
+### OLD-PARSER-STRUCTURE/ ✨ НОВОЕ
+
+**Полное название:** Archive of Working Parser from Aeza Production  
+**Папка:** `OLD-PARSER-STRUCTURE/`  
+**Размер:** 15 файлов, ~306KB (без media/logs)
+
+**Содержимое:**
+- `README.md` — comprehensive guide по использованию архива
+- `scripts/` — 7 рабочих скриптов (sync, download, transcribe, heartbeat, notify, verify, enumerate)
+- `docs/` — 3 документа (полная архитектура + Claude Desktop integration + heartbeat pattern)
+- `data/` — 2 JSON файла (library_index.json 273KB + _status.json)
+- `configs/` — резерв для конфигов
+
+**Proven metrics из продакшна:**
+- 7 дней uptime без ручного вмешательства
+- 48 файлов скачано, 15 транскриптов (7.18ч audio)
+- Стоимость: $0.72 (Grok STT)
+- 3 auto-restarts (все корректные), 0 false positives
+
+**Назначение:**
+- Reference для воссоздания парсера
+- Working code patterns
+- Proven anti-ban logic (human pacing)
+- Grok STT integration examples
+
+**Как читать:**
+```
+Read C:\Users\97152\Documents\claude-library\OLD-PARSER-STRUCTURE\README.md
+```
+
+**Source:** root@193.233.128.21:/opt/tg-export  
+**Archived:** 2026-04-24
+
+---
+
+**Последнее обновление:** 2026-04-24 (добавлены MISSIONS + ARCHIVES)  
+**Всего категорий:** 8 (6 оригинальных + 2 новые)
+
