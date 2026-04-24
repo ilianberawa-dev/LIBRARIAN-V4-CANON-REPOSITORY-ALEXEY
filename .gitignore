@@ -11,5 +11,14 @@ credentials.json
 *.pid
 .DS_Store
 
+# macOS мусор
+__MACOSX/
+.DS_Store
+._*
+
+# Runtime артефакты
+*.pid
+*.lock
+
 # Embedded git repositories
 _mcp_mail_eval/
