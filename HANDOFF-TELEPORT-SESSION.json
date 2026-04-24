@@ -1,0 +1,327 @@
+{
+  "session_id": "teleport-2026-04-24",
+  "from_agent": "Claude Sonnet 4.5 (teleport session)",
+  "to_agent": "NEW_AGENT (преемник)",
+  "handoff_date": "2026-04-24T19:00:00Z",
+  "context_status": "60% использовано, передаю знания до переполнения",
+
+  "mission": {
+    "primary": "Умная лазалка в проекте Realty Portal + AI Assistant development",
+    "role": "Full-stack explorer: файловая система, архитектура, паттерны, интеграции",
+    "user": "Илья (брокер, первый SaaS, vibe-coder по канону Алексея)"
+  },
+
+  "what_i_learned": {
+    "file_system_mastery": {
+      "skill": "Глубокое понимание структуры проекта через Glob/Grep/Read",
+      "pattern": "Сначала ls/glob для overview, потом grep для поиска, потом read конкретных файлов",
+      "locations_mapped": [
+        "C:\\Users\\97152\\Documents\\claude-library (библиотека знаний)",
+        "C:\\work\\realty-portal\\docs\\school (canon + coordination)",
+        "C:\\work\\realty-portal\\docs\\alexey-reference (материалы Алексея)",
+        "root@193.233.128.21:/opt/tg-export (Aeza parser в продакшне)",
+        "root@193.233.128.21:/opt/realty-portal (backend + LightRAG)"
+      ],
+      "key_insight": "Не читай всё подряд. Используй grep/glob для карты, потом read только нужное. Экономия токенов."
+    },
+
+    "pattern_extraction": {
+      "skill": "Копирование working patterns из продакшна в reusable templates",
+      "examples": [
+        {
+          "source": "/opt/tg-export/heartbeat.sh (Aeza)",
+          "extracted_to": "navyki/heartbeat-telegram.sh (template)",
+          "adaptation": "Заменил tg-export специфику на переменные $BASE_DIR, добавил комментарии"
+        },
+        {
+          "source": "/opt/tg-export/download.mjs + sync_channel.mjs",
+          "extracted_to": "troubleshoot/telegram-parser-recreation.md (полная архитектура)",
+          "proven_metrics": "7 дней uptime, $0.72 cost, 0 false positives"
+        },
+        {
+          "source": "canon_training.yaml principles",
+          "extracted_to": "kanon/alexey-11-principles.md + simplicity-first-principle.md",
+          "application": "Применял при каждом ответе (Simplicity-First Principle #0)"
+        }
+      ],
+      "key_insight": "Proven in production > теория. Копируй что работает, адаптируй под новые нужды."
+    },
+
+    "file_operations_without_token_waste": {
+      "skill": "Массовое копирование файлов БЕЗ чтения каждого",
+      "methods": [
+        "cp -r для локальных директорий",
+        "scp -r для удалённых",
+        "ssh + tar для больших архивов (exclude videos)",
+        "rsync когда доступен (на Windows его нет)"
+      ],
+      "example": "565 файлов скопированы в библиотеку за ~5 команд, не прочитав ни одного",
+      "key_insight": "File operations != file reads. Используй shell команды для bulk operations."
+    },
+
+    "simplicity_first_principle": {
+      "skill": "ОБЯЗАТЕЛЬНЫЙ чеклист перед ответом",
+      "checklist": [
+        "1. Определи реальную цель пользователя (не что спросил, а что НУЖНО)",
+        "2. Как ОБЫЧНЫЕ ЛЮДИ решают это БЕЗ AI? (copy-paste → GitHub → cloud → settings)",
+        "3. Проверь на overengineering (>3 шагов? → упрости)",
+        "4. Предложи САМОЕ простое ПЕРВЫМ"
+      ],
+      "real_case": "2 часа на permissions/settings → решение за 5 минут через git push",
+      "location": "kanon/simplicity-first-principle.md (605 строк)",
+      "key_insight": "Бабушка-тест: можешь объяснить за 30 сек? Если НЕТ → ищи проще."
+    },
+
+    "git_workflow": {
+      "skill": "Профессиональная работа с Git",
+      "pattern": [
+        "1. git status --short (что изменилось)",
+        "2. git diff (проверить изменения)",
+        "3. git add конкретные_файлы (не -A если не уверен)",
+        "4. git commit с HEREDOC (multiline messages в bash)",
+        "5. git push",
+        "6. git log -1 --oneline (verify)"
+      ],
+      "commits_made": "~20 коммитов в библиотеку, все с Co-Authored-By",
+      "key_insight": "Читай git status ПЕРЕД add. Проверяй что коммитишь. NEVER skip hooks."
+    },
+
+    "ssh_server_operations": {
+      "skill": "Работа с Aeza VPS без лишних подключений",
+      "pattern": "ssh root@193.233.128.21 'команда' — одна строка, один результат",
+      "advanced": "ssh + tar pipeline для копирования без промежуточных файлов",
+      "docker_check": "docker ps --format 'table {{.Names}}\\t{{.Status}}'",
+      "key_insight": "Minimize SSH connections. Одна команда = один ssh call."
+    },
+
+    "documentation_creation": {
+      "skill": "Создание production-ready документации",
+      "pattern": [
+        "1. Proven metrics в начале (7 days uptime, $0.72 cost)",
+        "2. Архитектура с ASCII диаграммами",
+        "3. Готовые команды для копипасты",
+        "4. Troubleshooting секция",
+        "5. Canon references (links to principles)"
+      ],
+      "created": [
+        "telegram-parser-recreation.md (1300 строк)",
+        "claude-bot-parser-control.md (600 строк)",
+        "heartbeat-telegram-pattern.md (334 строки)",
+        "QUICKSTART.md (275 строк)"
+      ],
+      "key_insight": "Пользователь хочет copy-paste команды, не читать теорию. Давай работающий код."
+    }
+  },
+
+  "library_knowledge": {
+    "location": "C:\\Users\\97152\\Documents\\claude-library\\",
+    "github": "https://github.com/ilianberawa-dev/LIBRARIAN-V4-CANON-REPOSITORY-ALEXEY",
+    "structure": {
+      "kanon/": "12 принципов Алексея + Simplicity-First (ОБЯЗАТЕЛЬНО читать перед работой)",
+      "metody/": "AI Assistant методология (MVP → Sales)",
+      "rukovodstva/": "LightRAG self-learning memory",
+      "spravochniki/": "Skills от А до Я (108KB)",
+      "navyki/": "Heartbeat pattern + Claude bot control + parser skills",
+      "troubleshoot/": "Telegram parser recreation guide",
+      "alexey-materials/": "22 файла (transcripts, PDFs, metadata)",
+      "aeza-archive/": "85 файлов (working parser code + scripts)",
+      "school-materials/": "31 файл (canon, handoffs, coordination)"
+    },
+    "total_files": 160,
+    "total_size": "42MB",
+    "entry_point": "_INDEX.md (прочитай ПЕРВЫМ)"
+  },
+
+  "infrastructure_map": {
+    "aeza_server": {
+      "host": "root@193.233.128.21",
+      "ram": "7.8GB (3.8GB free)",
+      "disk": "59GB (23GB free)",
+      "docker_containers": [
+        "realty_lightrag (RAG memory)",
+        "realty_litellm (API proxy)",
+        "realty_openclaw (agent)",
+        "realty_ollama (embeddings)",
+        "supabase-* (15 containers - full stack)"
+      ],
+      "services": {
+        "/opt/tg-export/": "Telegram parser (proven, 7 days uptime)",
+        "/opt/realty-portal/": "Backend + LightRAG data",
+        "/opt/mcp_agent_mail/": "MCP mail server"
+      }
+    },
+    "local_machine": {
+      "os": "Windows 11 (Git Bash + PowerShell)",
+      "claude_library": "C:\\Users\\97152\\Documents\\claude-library",
+      "realty_portal": "C:\\work\\realty-portal",
+      "shell": "bash (use Unix syntax even on Windows)"
+    }
+  },
+
+  "proven_patterns": {
+    "heartbeat_watchdog": {
+      "what": "Self-healing watchdog для long-running процессов",
+      "files": [
+        "navyki/heartbeat-telegram.sh (executable template)",
+        "navyki/heartbeat-notify.sh (Telegram notifications)",
+        "navyki/heartbeat-telegram-pattern.md (documentation)"
+      ],
+      "proven": "7 days uptime, 3 auto-restarts (all correct), 0 false positives",
+      "usage": "Copy template → adapt check_custom_process → add to cron"
+    },
+    "telegram_parser": {
+      "what": "Полный парсер Telegram канала с приоритизацией",
+      "components": [
+        "sync_channel.mjs (detect new posts + classify)",
+        "download.mjs (priority download P1-P4 + human pacing)",
+        "transcribe.sh (Grok STT transcription)",
+        "heartbeat.sh (watchdog)",
+        "notify.sh (Telegram push)"
+      ],
+      "files": "aeza-archive/*.{mjs,sh} (working code)",
+      "docs": "troubleshoot/telegram-parser-recreation.md",
+      "proven": "142 posts indexed, 48 files downloaded, 15 transcripts, $0.72 cost"
+    },
+    "claude_bot_control": {
+      "what": "Управление парсером через Claude Desktop",
+      "files": [
+        "navyki/claude-bot-parser-control.md (full guide)",
+        "5 bash skills (status/sync/download/logs/transcribe)"
+      ],
+      "workflow": "User в чате → Claude runs skill → Open in Terminal → monitoring",
+      "setup_time": "5 minutes"
+    }
+  },
+
+  "technologies": {
+    "telegram_api": {
+      "library": "telegram (npm)",
+      "endpoint": "Алексей Колесов | Private channel",
+      "credentials": "TG_API_ID + TG_API_HASH + TG_SESSION_STRING (в .env)"
+    },
+    "grok_stt": {
+      "provider": "xAI (не Whisper)",
+      "endpoint": "https://api.x.ai/v1/stt",
+      "cost": "$0.10/hour audio",
+      "proven_usage": "7.18h transcribed, $0.72 spent",
+      "output": "JSON (words + timestamps) + TXT (plain text)"
+    },
+    "lightrag": {
+      "location": "docker container realty_lightrag on Aeza",
+      "endpoint": "http://193.233.128.21:8020/query",
+      "purpose": "RAG memory для AI Assistant",
+      "docs": "rukovodstva/self-learning-memory/v1.0-lightrag.md"
+    },
+    "mcp_servers": {
+      "available": [
+        "GitHub MCP (active)",
+        "Gmail MCP (via mcp__claude_ai_Gmail__*)",
+        "Google Drive MCP",
+        "Google Calendar MCP",
+        "Telegram MCP (plugin:telegram)"
+      ]
+    }
+  },
+
+  "canon_principles": {
+    "location": "kanon/alexey-11-principles.md",
+    "must_apply": [
+      {
+        "id": 0,
+        "name": "Simplicity First",
+        "rule": "ПЕРЕД ответом: Как обычные люди решают? Есть ли простое стандартное решение?",
+        "file": "kanon/simplicity-first-principle.md",
+        "critical": "ОБЯЗАТЕЛЬНО применять ПЕРЕД каждым ответом"
+      },
+      {
+        "id": 1,
+        "name": "Portability",
+        "rule": "Только официальные Docker-образы. docker compose up = всё работает",
+        "why": "Катастрофоустойчивость + дёшево переехать"
+      },
+      {
+        "id": 2,
+        "name": "Minimal Integration Code",
+        "rule": "Вместо кастомного кода — n8n ноды + Skills + MCP. Логика в конфигах.",
+        "why": "Меньше кода → меньше багов → быстрее меняешь"
+      },
+      {
+        "id": 4,
+        "name": "Skills Over Agents",
+        "rule": "Skill > Agent > Hardcoded prompt. Логика в SKILL.md.",
+        "why": "Скиллы версионируются, переиспользуются, тестируются"
+      }
+    ]
+  },
+
+  "key_learnings": [
+    "Не читай файлы без необходимости. Grep/Glob для карты, Read только нужное.",
+    "Proven patterns > теория. Копируй что работает в продакшне.",
+    "Simplicity-First ОБЯЗАТЕЛЬНО. Бабушка-тест: 30 сек объяснения или проще.",
+    "File operations (cp/scp/tar) != file reads. 565 файлов без чтения контента.",
+    "Git: status → diff → add конкретные → commit HEREDOC → push → verify.",
+    "SSH: minimize connections. Одна команда = один ssh call.",
+    "Documentation: proven metrics → architecture → copy-paste commands → troubleshooting.",
+    "Canon references в каждом документе. Всё связано с принципами Алексея.",
+    "Доверяй но проверяй (Принцип #0). ssh показать вывод, не пересказ."
+  ],
+
+  "current_state": {
+    "tokens_used": "~120K из 200K (60%)",
+    "tokens_remaining": "~80K (достаточно для продолжения)",
+    "library_files_created": 10,
+    "library_size": "42MB, 160 files",
+    "git_commits": 20,
+    "proven_patterns_extracted": 3,
+    "documentation_pages": 4
+  },
+
+  "immediate_next_steps": [
+    {
+      "priority": 1,
+      "task": "Прочитай библиотеку",
+      "commands": [
+        "Read C:\\Users\\97152\\Documents\\claude-library\\_INDEX.md",
+        "Read C:\\Users\\97152\\Documents\\claude-library\\kanon\\simplicity-first-principle.md",
+        "Read C:\\Users\\97152\\Documents\\claude-library\\kanon\\alexey-11-principles.md"
+      ],
+      "why": "Это база. Без канона будешь делать overengineering."
+    },
+    {
+      "priority": 2,
+      "task": "Изучи архитектуру проекта",
+      "commands": [
+        "Read C:\\Users\\97152\\Documents\\claude-library\\troubleshoot\\telegram-parser-recreation.md",
+        "Read C:\\Users\\97152\\Documents\\claude-library\\metody\\personal-ai-assistant\\v1.0-mvp-to-sales.md"
+      ],
+      "why": "Поймёшь что уже есть и как это работает."
+    },
+    {
+      "priority": 3,
+      "task": "Проверь инфраструктуру",
+      "commands": [
+        "ssh root@193.233.128.21 'free -h && df -h /'",
+        "ssh root@193.233.128.21 'docker ps --format \"table {{.Names}}\\t{{.Status}}\"'",
+        "ssh root@193.233.128.21 'cat /opt/tg-export/_status.json'"
+      ],
+      "why": "Узнаешь состояние сервера и парсера."
+    },
+    {
+      "priority": 4,
+      "task": "Если нужна вторая интеграция",
+      "action": "Read navyki/claude-bot-parser-control.md → follow setup (5 min)",
+      "why": "Всё готово для Claude Desktop управления парсером."
+    }
+  ],
+
+  "handoff_complete": {
+    "library_ready": true,
+    "github_synced": true,
+    "documentation_complete": true,
+    "proven_patterns_extracted": true,
+    "canon_applied": true,
+    "context_preserved": true
+  },
+
+  "final_message_to_successor": "Читай библиотеку ПЕРВЫМ. Применяй Simplicity-First ВСЕГДА. Копируй proven patterns, не изобретай велосипед. Grep/Glob для карты, Read только нужное. Git Bash работает как Unix даже на Windows. Доверяй но проверяй - показывай raw output команд. Все знания в C:\\Users\\97152\\Documents\\claude-library\\. Успехов, преемник. - teleport session, 2026-04-24"
+}
