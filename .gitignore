@@ -1,0 +1,15 @@
+# Secrets и credentials
+.env
+.env.*
+*.key
+*.pem
+credentials.json
+
+# Временные файлы
+*.tmp
+*.log
+*.pid
+.DS_Store
+
+# Embedded git repositories
+_mcp_mail_eval/

@@ -212,13 +212,13 @@ Read C:\Users\97152\Documents\claude-library\metody\personal-ai-assistant\v1.0-m
 
 ---
 
-## 📊 Статистика
+## 📊 Статистика (оригинальные категории)
 
-**Всего файлов:** 18  
+**Основных файлов:** 13 (metody, rukovodstva, kanon, spravochniki)  
 **Всего строк:** 3500+  
 **Категорий:** 6 (4 активные, 2 в roadmap)  
 **Тем:** 5 (personal-ai-assistant, self-learning-memory, alexey-principles, simplicity-first, skills-a-to-ya)  
-**Размер репо:** ~180KB
+**Размер core контента:** ~180KB
 
 ---
 
@@ -288,8 +288,8 @@ Read C:\Users\97152\Documents\claude-library\metody\personal-ai-assistant\v1.0-m
 
 ## 📊 ФИНАЛЬНАЯ СТАТИСТИКА
 
-**Всего файлов:** 565+  
-**Общий размер:** 54MB  
+**Всего файлов в Git:** 175  
+**Общий размер:** 51MB  
 **Категорий:** 9 (6 оригинальных + 3 архива)  
 **Активного контента:** 7 категорий
 
@@ -298,11 +298,15 @@ Read C:\Users\97152\Documents\claude-library\metody\personal-ai-assistant\v1.0-m
 - Методы: 4 файла
 - Руководства: 4 файла
 - Справочники: 2 файла (включая 108KB skills guide)
-- Материалы Алексея: 21 файл
-- Aeza архив: 420 файлов
-- School материалы: 30 файлов
+- Материалы Алексея: 22 файла
+- Aeza архив: 103 файла
+- School материалы: 31 файл
 - Навыки: roadmap
 - Troubleshooting: roadmap
+
+**Исключено из Git (безопасность):**
+- aeza-archive/.env (credentials)
+- aeza-archive/_mcp_mail_eval (embedded repository)
 
 ---
 
