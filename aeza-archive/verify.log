@@ -1,0 +1,36 @@
+[2026-04-21T05:37:13Z] === VERIFY START ===
+
+=== SUMMARY ===
+manifest files: 56
+on-disk media: 51
+transcripts (json+txt pairs): 8
+issues found: 0
+ALL CLEAN ✓
+[2026-04-21T05:37:13Z] === VERIFY END (rc=0) ===
+[2026-04-22T02:30:01Z] === VERIFY START ===
+
+=== SUMMARY ===
+manifest files: 62
+on-disk media: 50
+transcripts (json+txt pairs): 15
+issues found: 1
+  1. MISSING: /opt/tg-export/media/136_готовый_Private_openclaw_install.mp4 (expected 672270400 bytes, no transcript)
+[2026-04-22T02:30:01Z] === VERIFY END (rc=0) ===
+[2026-04-23T02:30:01Z] === VERIFY START ===
+
+=== SUMMARY ===
+manifest files: 62
+on-disk media: 50
+transcripts (json+txt pairs): 15
+issues found: 1
+  1. MISSING: /opt/tg-export/media/136_готовый_Private_openclaw_install.mp4 (expected 672270400 bytes, no transcript)
+[2026-04-23T02:30:01Z] === VERIFY END (rc=0) ===
+[2026-04-24T02:30:01Z] === VERIFY START ===
+
+=== SUMMARY ===
+manifest files: 62
+on-disk media: 50
+transcripts (json+txt pairs): 15
+issues found: 1
+  1. MISSING: /opt/tg-export/media/136_готовый_Private_openclaw_install.mp4 (expected 672270400 bytes, no transcript)
+[2026-04-24T02:30:01Z] === VERIFY END (rc=0) ===

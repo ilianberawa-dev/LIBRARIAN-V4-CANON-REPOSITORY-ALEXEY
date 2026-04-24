@@ -1,0 +1,609 @@
+{
+  "name": "supabase_update_stocks",
+  "nodes": [
+    {
+      "parameters": {
+        "mode": "insert",
+        "tableName": {
+          "__rl": true,
+          "value": "stocks_sup_vector",
+          "mode": "list",
+          "cachedResultName": "stocks_sup_vector"
+        },
+        "options": {
+          "queryName": "match_stocks_sup"
+        }
+      },
+      "type": "@n8n/n8n-nodes-langchain.vectorStoreSupabase",
+      "typeVersion": 1.1,
+      "position": [
+        0,
+        0
+      ],
+      "id": "54b67839-2986-48ce-a2ce-e431d48e1d27",
+      "name": "Supabase Vector Store2"
+    },
+    {
+      "parameters": {
+        "jsonMode": "expressionData",
+        "jsonData": "={{ $json.content }}",
+        "options": {
+          "metadata": {
+            "metadataValues": [
+              {
+                "name": "type",
+                "value": "stock"
+              },
+              {
+                "name": "stock_id",
+                "value": "={{ $json.id }}"
+              }
+            ]
+          }
+        }
+      },
+      "type": "@n8n/n8n-nodes-langchain.documentDefaultDataLoader",
+      "typeVersion": 1,
+      "position": [
+        160,
+        160
+      ],
+      "id": "55f13c8a-da14-4c42-83bf-8b3a39edbc19",
+      "name": "Default Data Loader2"
+    },
+    {
+      "parameters": {
+        "chunkSize": 100000
+      },
+      "type": "@n8n/n8n-nodes-langchain.textSplitterCharacterTextSplitter",
+      "typeVersion": 1,
+      "position": [
+        160,
+        320
+      ],
+      "id": "c9129d8f-0adc-4844-aafa-892ca5d21d4c",
+      "name": "Character Text Splitter1"
+    },
+    {
+      "parameters": {
+        "options": {}
+      },
+      "type": "@n8n/n8n-nodes-langchain.embeddingsOpenAi",
+      "typeVersion": 1.2,
+      "position": [
+        0,
+        240
+      ],
+      "id": "4cabae7d-5d66-444c-afe1-cfd4b6938019",
+      "name": "Embeddings OpenAI2"
+    },
+    {
+      "parameters": {
+        "httpMethod": "POST",
+        "path": "stocks_update",
+        "authentication": "headerAuth",
+        "options": {}
+      },
+      "type": "n8n-nodes-base.webhook",
+      "typeVersion": 2,
+      "position": [
+        -800,
+        400
+      ],
+      "id": "53583357-ff73-4b56-80e3-c6a29ef86228",
+      "name": "Webhook",
+      "webhookId": "a08e6c59-5f2a-4e43-8e78-ea801b7460ac"
+    },
+    {
+      "parameters": {
+        "rules": {
+          "values": [
+            {
+              "conditions": {
+                "options": {
+                  "caseSensitive": true,
+                  "leftValue": "",
+                  "typeValidation": "strict",
+                  "version": 2
+                },
+                "conditions": [
+                  {
+                    "leftValue": "={{ $json.body.type }}",
+                    "rightValue": "INSERT",
+                    "operator": {
+                      "type": "string",
+                      "operation": "equals"
+                    },
+                    "id": "27ad6e6d-dd29-4b19-b669-2df7c52cc95c"
+                  }
+                ],
+                "combinator": "and"
+              },
+              "renameOutput": true,
+              "outputKey": "INSERT"
+            },
+            {
+              "conditions": {
+                "options": {
+                  "caseSensitive": true,
+                  "leftValue": "",
+                  "typeValidation": "strict",
+                  "version": 2
+                },
+                "conditions": [
+                  {
+                    "id": "38c827dd-a5a1-4623-a962-87c0a27b1fe3",
+                    "leftValue": "={{ $json.body.type }}",
+                    "rightValue": "UPDATE",
+                    "operator": {
+                      "type": "string",
+                      "operation": "equals",
+                      "name": "filter.operator.equals"
+                    }
+                  }
+                ],
+                "combinator": "and"
+              },
+              "renameOutput": true,
+              "outputKey": "UPDATE"
+            }
+          ]
+        },
+        "options": {}
+      },
+      "type": "n8n-nodes-base.switch",
+      "typeVersion": 3.2,
+      "position": [
+        -560,
+        400
+      ],
+      "id": "a588d4d9-2e18-4c9d-a60f-7f1423b737d5",
+      "name": "Switch"
+    },
+    {
+      "parameters": {
+        "assignments": {
+          "assignments": [
+            {
+              "id": "ff349930-29aa-411c-bb25-4ffefb012088",
+              "name": "content",
+              "value": "=id:{{ $json.body.record.id }}, name:{{ $json.body.record.name }}, description:{{ $json.body.record.description }}, category:{{ $json.body.record.category }}, price:{{ $json.body.record.price }}, in_stock:{{ $json.body.record.in_stock }}, rating:{{ $json.body.record.rating }}, review_count:{{ $json.body.record.review_count }}, sku:{{ $json.body.record.sku }}, manufacturer:{{ $json.body.record.manufacturer }}, country:{{ $json.body.record.country }}",
+              "type": "string"
+            }
+          ]
+        },
+        "includeOtherFields": true,
+        "include": "selected",
+        "includeFields": "body.record.id",
+        "options": {}
+      },
+      "type": "n8n-nodes-base.set",
+      "typeVersion": 3.4,
+      "position": [
+        -240,
+        140
+      ],
+      "id": "5bab6150-9f73-46b7-a08a-7268ab8e8b89",
+      "name": "Edit Fields"
+    },
+    {
+      "parameters": {
+        "assignments": {
+          "assignments": [
+            {
+              "id": "ff349930-29aa-411c-bb25-4ffefb012088",
+              "name": "content",
+              "value": "=id:{{ $json.body.record.id }}, name:{{ $json.body.record.name }}, description:{{ $json.body.record.description }}, category:{{ $json.body.record.category }}, price:{{ $json.body.record.price }}, in_stock:{{ $json.body.record.in_stock }}, rating:{{ $json.body.record.rating }}, review_count:{{ $json.body.record.review_count }}, sku:{{ $json.body.record.sku }}, manufacturer:{{ $json.body.record.manufacturer }}, country:{{ $json.body.record.country }}",
+              "type": "string"
+            }
+          ]
+        },
+        "includeOtherFields": true,
+        "include": "selected",
+        "includeFields": "body.record.id",
+        "options": {}
+      },
+      "type": "n8n-nodes-base.set",
+      "typeVersion": 3.4,
+      "position": [
+        -380,
+        560
+      ],
+      "id": "a78cb001-be9b-4d69-83d5-74db2ddb8790",
+      "name": "Edit Fields1"
+    },
+    {
+      "parameters": {
+        "operation": "getAll",
+        "tableId": "stocks_sup_vector",
+        "limit": 1,
+        "filterType": "string",
+        "filterString": "=metadata->>stock_id=eq.{{ $('Edit Fields').item.json.id }}"
+      },
+      "type": "n8n-nodes-base.supabase",
+      "typeVersion": 1,
+      "position": [
+        460,
+        0
+      ],
+      "id": "d5d2a84a-4cac-4921-980a-f10881bdc126",
+      "name": "Supabase"
+    },
+    {
+      "parameters": {
+        "operation": "update",
+        "tableId": "stocks_sup",
+        "filters": {
+          "conditions": [
+            {
+              "keyName": "id",
+              "condition": "eq",
+              "keyValue": "={{ $('Edit Fields').item.json.id }}"
+            }
+          ]
+        },
+        "fieldsUi": {
+          "fieldValues": [
+            {
+              "fieldId": "vector_id",
+              "fieldValue": "={{ $json.id }}"
+            }
+          ]
+        }
+      },
+      "type": "n8n-nodes-base.supabase",
+      "typeVersion": 1,
+      "position": [
+        680,
+        0
+      ],
+      "id": "f3b87934-4dcb-44be-a874-c0d30e99573e",
+      "name": "Supabase1"
+    },
+    {
+      "parameters": {
+        "operation": "delete",
+        "tableId": "stocks_sup_vector",
+        "filters": {
+          "conditions": [
+            {
+              "keyName": "id",
+              "condition": "eq",
+              "keyValue": "={{ $('Switch').item.json.body.record.vector_id }}"
+            }
+          ]
+        }
+      },
+      "type": "n8n-nodes-base.supabase",
+      "typeVersion": 1,
+      "position": [
+        -160,
+        560
+      ],
+      "id": "84d2e032-3235-4603-9090-95d556862add",
+      "name": "Supabase2"
+    },
+    {
+      "parameters": {
+        "mode": "insert",
+        "tableName": {
+          "__rl": true,
+          "value": "stocks_sup_vector",
+          "mode": "list",
+          "cachedResultName": "stocks_sup_vector"
+        },
+        "options": {
+          "queryName": "match_stocks_sup"
+        }
+      },
+      "type": "@n8n/n8n-nodes-langchain.vectorStoreSupabase",
+      "typeVersion": 1.1,
+      "position": [
+        20,
+        560
+      ],
+      "id": "aceaec3f-e46a-49c3-862b-92635a6a835e",
+      "name": "Supabase Vector Store"
+    },
+    {
+      "parameters": {
+        "jsonMode": "expressionData",
+        "jsonData": "={{ $('Edit Fields1').item.json.content }}",
+        "options": {
+          "metadata": {
+            "metadataValues": [
+              {
+                "name": "type",
+                "value": "stock"
+              },
+              {
+                "name": "stock_id",
+                "value": "={{ $('Edit Fields1').item.json.id }}"
+              }
+            ]
+          }
+        }
+      },
+      "type": "@n8n/n8n-nodes-langchain.documentDefaultDataLoader",
+      "typeVersion": 1,
+      "position": [
+        200,
+        760
+      ],
+      "id": "eed047a4-b35b-4c87-9dbb-4e7b34bebc67",
+      "name": "Default Data Loader"
+    },
+    {
+      "parameters": {
+        "chunkSize": 100000
+      },
+      "type": "@n8n/n8n-nodes-langchain.textSplitterCharacterTextSplitter",
+      "typeVersion": 1,
+      "position": [
+        180,
+        900
+      ],
+      "id": "ba5f9334-dd0d-4f56-b80d-b724bd9120d5",
+      "name": "Character Text Splitter"
+    },
+    {
+      "parameters": {
+        "options": {}
+      },
+      "type": "@n8n/n8n-nodes-langchain.embeddingsOpenAi",
+      "typeVersion": 1.2,
+      "position": [
+        0,
+        760
+      ],
+      "id": "3f81ed3d-8b13-4e07-b995-b693cf488d8b",
+      "name": "Embeddings OpenAI"
+    },
+    {
+      "parameters": {
+        "operation": "getAll",
+        "tableId": "stocks_sup_vector",
+        "limit": 1,
+        "filterType": "string",
+        "filterString": "=metadata->>stock_id=eq.{{ $('Edit Fields1').item.json.id }}"
+      },
+      "type": "n8n-nodes-base.supabase",
+      "typeVersion": 1,
+      "position": [
+        460,
+        560
+      ],
+      "id": "8f42e43a-b800-4135-9cce-9296d6ee0b73",
+      "name": "Supabase3"
+    },
+    {
+      "parameters": {
+        "operation": "update",
+        "tableId": "stocks_sup",
+        "filters": {
+          "conditions": [
+            {
+              "keyName": "id",
+              "condition": "eq",
+              "keyValue": "={{ $('Edit Fields1').item.json.id }}"
+            }
+          ]
+        },
+        "fieldsUi": {
+          "fieldValues": [
+            {
+              "fieldId": "vector_id",
+              "fieldValue": "={{ $json.id }}"
+            }
+          ]
+        }
+      },
+      "type": "n8n-nodes-base.supabase",
+      "typeVersion": 1,
+      "position": [
+        700,
+        560
+      ],
+      "id": "6f29f902-71ec-4ecb-ab05-9fb0cd330bde",
+      "name": "Supabase4"
+    }
+  ],
+  "pinData": {},
+  "connections": {
+    "Default Data Loader2": {
+      "ai_document": [
+        [
+          {
+            "node": "Supabase Vector Store2",
+            "type": "ai_document",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Character Text Splitter1": {
+      "ai_textSplitter": [
+        [
+          {
+            "node": "Default Data Loader2",
+            "type": "ai_textSplitter",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Embeddings OpenAI2": {
+      "ai_embedding": [
+        [
+          {
+            "node": "Supabase Vector Store2",
+            "type": "ai_embedding",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Webhook": {
+      "main": [
+        [
+          {
+            "node": "Switch",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Switch": {
+      "main": [
+        [
+          {
+            "node": "Edit Fields",
+            "type": "main",
+            "index": 0
+          }
+        ],
+        [
+          {
+            "node": "Edit Fields1",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Edit Fields": {
+      "main": [
+        [
+          {
+            "node": "Supabase Vector Store2",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Supabase Vector Store2": {
+      "main": [
+        [
+          {
+            "node": "Supabase",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Supabase": {
+      "main": [
+        [
+          {
+            "node": "Supabase1",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Edit Fields1": {
+      "main": [
+        [
+          {
+            "node": "Supabase2",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Supabase2": {
+      "main": [
+        [
+          {
+            "node": "Supabase Vector Store",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Supabase Vector Store": {
+      "main": [
+        [
+          {
+            "node": "Supabase3",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Default Data Loader": {
+      "ai_document": [
+        [
+          {
+            "node": "Supabase Vector Store",
+            "type": "ai_document",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Character Text Splitter": {
+      "ai_textSplitter": [
+        [
+          {
+            "node": "Default Data Loader",
+            "type": "ai_textSplitter",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Embeddings OpenAI": {
+      "ai_embedding": [
+        [
+          {
+            "node": "Supabase Vector Store",
+            "type": "ai_embedding",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Supabase3": {
+      "main": [
+        [
+          {
+            "node": "Supabase4",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    }
+  },
+  "active": false,
+  "settings": {
+    "executionOrder": "v1"
+  },
+  "versionId": "f07c31a4-765d-412d-bc2f-34202b09f73f",
+  "meta": {
+    "instanceId": "69765f75295b17b4de659b260c6399cb27379370149ca5d0a58384842b36223a"
+  },
+  "id": "fmO5xrl9xUaNfsIZ",
+  "tags": [
+    {
+      "createdAt": "2025-04-18T12:11:08.258Z",
+      "updatedAt": "2025-04-18T12:11:08.258Z",
+      "id": "mE4OCNW8YdKCOjsf",
+      "name": "Алексей Колесов"
+    },
+    {
+      "createdAt": "2025-04-18T12:12:38.072Z",
+      "updatedAt": "2025-04-18T12:12:38.072Z",
+      "id": "1vZ2NmaMooE2YD2o",
+      "name": "supabase"
+    }
+  ]
+}

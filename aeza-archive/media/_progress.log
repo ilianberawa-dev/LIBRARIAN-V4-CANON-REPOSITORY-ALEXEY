@@ -1,0 +1,157 @@
+[2026-04-20T15:08:23.093Z] [+] Channel: Алексей Колесов | Private id=2653037830 [HOST: aeza] [PRIO 1..3]
+[2026-04-20T15:08:24.440Z] [takeout] session id=7065628202128679348
+[2026-04-20T15:08:24.441Z] [scan] enumerating media...
+[2026-04-20T15:08:25.923Z] [scan] found 114 media in 154 msgs
+[2026-04-20T15:08:25.924Z] [queue] filtered 50 files: P1=27 P2=7 P3=16 P4=0
+[2026-04-20T15:08:28.874Z] [ok P1] 10 nginx-proxy.zip (1077 bytes)
+[2026-04-20T15:09:45.062Z] [ok P1] 54 baserow.zip (1886 bytes)
+[2026-04-20T15:13:44.031Z] [ok P1] 12 n8n.zip (3329 bytes)
+[2026-04-20T15:15:23.263Z] [ok P1] 96 sup_mcp_docs.zip (6395 bytes)
+[2026-04-20T15:15:23.266Z] [break] ~6min
+[2026-04-20T15:30:34.678Z] [ok P1] 14 supabase.zip (8339 bytes)
+[2026-04-20T15:32:10.476Z] [ok P1] 30 supabase_add_docs_to_db.json (8573 bytes)
+[2026-04-20T15:33:38.492Z] [skip P1] 177 telegram.zip
+[2026-04-20T15:33:38.989Z] [ok P1] 74 claude_prompt.md (11917 bytes)
+[2026-04-20T15:38:02.386Z] [ok P1] 26 google_drive_add_docs_to_db.json (13686 bytes)
+[2026-04-20T15:38:02.386Z] [break] ~7min
+[2026-04-20T15:53:23.556Z] [ok P1] 28 google_drive_update_docs_to_db.json (14404 bytes)
+[2026-04-20T15:55:59.888Z] [ok P1] 32 supabase_update_stocks.json (14934 bytes)
+[2026-04-20T16:00:45.919Z] [ok P1] 146 Paperclip_install.zip (14951 bytes)
+[2026-04-20T16:00:45.919Z] [break] ~18min
+[2026-04-20T16:15:16.020Z] [ok P1] 27 google_drive_ai_consultant_with_memory.json (18534 bytes)
+[2026-04-20T16:17:28.843Z] [ok P1] 31 supabase_ai_consultant_with_memory.json (18553 bytes)
+[2026-04-20T16:19:26.443Z] [ok P1] 81 video_settings.zip (21958 bytes)
+[2026-04-20T16:23:13.410Z] [skip P1] 166 INSTRUCTION_CONNECT_MCP.md
+[2026-04-20T16:23:13.410Z] [skip P1] 159 lightrag.zip
+[2026-04-20T16:23:14.122Z] [ok P1] 75 prompts.zip (36854 bytes)
+[2026-04-20T16:23:14.122Z] [break] ~11min
+[2026-04-20T16:33:55.348Z] [ok P1] 52 prompts_schemas.zip (41436 bytes)
+[2026-04-20T16:37:18.855Z] [ok P1] 134 configs_instructions.zip (69767 bytes)
+[2026-04-20T16:38:47.043Z] [ok P1] 67 agent_template.zip (351664 bytes)
+[2026-04-20T16:38:47.043Z] [break] ~7min
+[2026-04-20T16:46:56.962Z] [ok P1] 90 devops_team.zip (357516 bytes)
+[2026-04-20T16:46:56.962Z] [long-break] ~72min
+[2026-04-20T17:17:06.946Z] [+] Channel: Алексей Колесов | Private id=2653037830 [HOST: aeza] [PRIO 1..3]
+[2026-04-20T17:17:07.414Z] [takeout] session id=3779889799763175796
+[2026-04-20T17:17:07.415Z] [scan] enumerating media...
+[2026-04-20T17:17:08.903Z] [scan] found 114 media in 154 msgs
+[2026-04-20T17:17:08.904Z] [queue] filtered 50 files: P1=27 P2=7 P3=16 P4=0
+[2026-04-20T17:17:08.905Z] [skip P1] 10 nginx-proxy.zip
+[2026-04-20T17:17:08.905Z] [skip P1] 54 baserow.zip
+[2026-04-20T17:17:08.906Z] [skip P1] 12 n8n.zip
+[2026-04-20T17:17:08.906Z] [skip P1] 96 sup_mcp_docs.zip
+[2026-04-20T17:17:08.906Z] [skip P1] 14 supabase.zip
+[2026-04-20T17:17:08.906Z] [skip P1] 30 supabase_add_docs_to_db.json
+[2026-04-20T17:17:08.906Z] [skip P1] 177 telegram.zip
+[2026-04-20T17:17:08.906Z] [skip P1] 74 claude_prompt.md
+[2026-04-20T17:17:08.906Z] [skip P1] 26 google_drive_add_docs_to_db.json
+[2026-04-20T17:17:08.906Z] [skip P1] 28 google_drive_update_docs_to_db.json
+[2026-04-20T17:17:08.906Z] [skip P1] 32 supabase_update_stocks.json
+[2026-04-20T17:17:08.907Z] [skip P1] 146 Paperclip_install.zip
+[2026-04-20T17:17:08.907Z] [skip P1] 27 google_drive_ai_consultant_with_memory.json
+[2026-04-20T17:17:08.907Z] [skip P1] 31 supabase_ai_consultant_with_memory.json
+[2026-04-20T17:17:08.907Z] [skip P1] 81 video_settings.zip
+[2026-04-20T17:17:08.907Z] [skip P1] 166 INSTRUCTION_CONNECT_MCP.md
+[2026-04-20T17:17:08.907Z] [skip P1] 159 lightrag.zip
+[2026-04-20T17:17:08.907Z] [skip P1] 75 prompts.zip
+[2026-04-20T17:17:08.907Z] [skip P1] 52 prompts_schemas.zip
+[2026-04-20T17:17:08.907Z] [skip P1] 134 configs_instructions.zip
+[2026-04-20T17:17:08.908Z] [skip P1] 67 agent_template.zip
+[2026-04-20T17:17:08.908Z] [skip P1] 90 devops_team.zip
+[2026-04-20T17:17:12.707Z] [ok P1] 16 ai_seller_rag.zip (470537 bytes)
+[2026-04-20T17:20:01.420Z] [ok P1] 102 content_zavod_tg.zip (2108226 bytes)
+[2026-04-20T17:21:15.587Z] [ok P1] 40 leshiy_v2.zip (8690448 bytes)
+[2026-04-20T17:24:34.011Z] [ok P1] 65 all_workflows.zip (9400446 bytes)
+[2026-04-20T17:24:34.015Z] [break] ~14min
+[2026-04-20T17:38:43.826Z] [ok P1] 113 девчонки_мальчишки_читайте_книжки.zip (34091706 bytes)
+[2026-04-20T17:43:41.020Z] [ok P2] 17 sql_query.txt (9310 bytes)
+[2026-04-20T17:44:57.928Z] [ok P2] 29 prompts.txt (18731 bytes)
+[2026-04-20T17:48:03.254Z] [ok P2] 34 bz_metodichka.pdf (347416 bytes)
+[2026-04-20T17:51:39.351Z] [skip P2] 174 Skills от А до Я.pdf
+[2026-04-20T17:51:41.428Z] [ok P2] 110 Исследование_приоритетных_B2B_сегментов_для_лидогенерации_в_России.pdf (891398 bytes)
+[2026-04-20T17:51:41.428Z] [break] ~7min
+[2026-04-20T18:00:20.571Z] [ok P2] 35 bz_stock.csv (2502133 bytes)
+[2026-04-20T18:02:31.529Z] [skip P2] 168 Мультиагентные AI-системы.pdf
+[2026-04-20T18:02:33.237Z] [ok P3] 11 photo_11.jpg (57953 bytes)
+[2026-04-20T18:06:27.469Z] [ok P3] 56 photo_56.jpg (52542 bytes)
+[2026-04-20T18:06:27.470Z] [break] ~6min
+[2026-04-20T18:20:06.410Z] [+] Channel: Алексей Колесов | Private id=2653037830 [HOST: aeza] [PRIO 1..3]
+[2026-04-20T18:20:06.819Z] [takeout] session id=4584700517359056105
+[2026-04-20T18:20:06.820Z] [scan] enumerating media...
+[2026-04-20T18:20:08.511Z] [scan] found 114 media in 154 msgs
+[2026-04-20T18:20:08.511Z] [queue] filtered 50 files: P1=27 P2=7 P3=16 P4=0
+[2026-04-20T18:20:08.511Z] [skip P1] 10 nginx-proxy.zip
+[2026-04-20T18:20:08.512Z] [skip P1] 54 baserow.zip
+[2026-04-20T18:20:08.512Z] [skip P1] 12 n8n.zip
+[2026-04-20T18:20:08.512Z] [skip P1] 96 sup_mcp_docs.zip
+[2026-04-20T18:20:08.512Z] [skip P1] 14 supabase.zip
+[2026-04-20T18:20:08.512Z] [skip P1] 30 supabase_add_docs_to_db.json
+[2026-04-20T18:20:08.513Z] [skip P1] 177 telegram.zip
+[2026-04-20T18:20:08.513Z] [skip P1] 74 claude_prompt.md
+[2026-04-20T18:20:08.513Z] [skip P1] 26 google_drive_add_docs_to_db.json
+[2026-04-20T18:20:08.513Z] [skip P1] 28 google_drive_update_docs_to_db.json
+[2026-04-20T18:20:08.513Z] [skip P1] 32 supabase_update_stocks.json
+[2026-04-20T18:20:08.513Z] [skip P1] 146 Paperclip_install.zip
+[2026-04-20T18:20:08.513Z] [skip P1] 27 google_drive_ai_consultant_with_memory.json
+[2026-04-20T18:20:08.514Z] [skip P1] 31 supabase_ai_consultant_with_memory.json
+[2026-04-20T18:20:08.514Z] [skip P1] 81 video_settings.zip
+[2026-04-20T18:20:08.514Z] [skip P1] 166 INSTRUCTION_CONNECT_MCP.md
+[2026-04-20T18:20:08.514Z] [skip P1] 159 lightrag.zip
+[2026-04-20T18:20:08.514Z] [skip P1] 75 prompts.zip
+[2026-04-20T18:20:08.514Z] [skip P1] 52 prompts_schemas.zip
+[2026-04-20T18:20:08.514Z] [skip P1] 134 configs_instructions.zip
+[2026-04-20T18:20:08.514Z] [skip P1] 67 agent_template.zip
+[2026-04-20T18:20:08.514Z] [skip P1] 90 devops_team.zip
+[2026-04-20T18:20:08.514Z] [skip P1] 16 ai_seller_rag.zip
+[2026-04-20T18:20:08.514Z] [skip P1] 102 content_zavod_tg.zip
+[2026-04-20T18:20:08.514Z] [skip P1] 40 leshiy_v2.zip
+[2026-04-20T18:20:08.514Z] [skip P1] 65 all_workflows.zip
+[2026-04-20T18:20:08.514Z] [skip P1] 113 девчонки_мальчишки_читайте_книжки.zip
+[2026-04-20T18:20:08.514Z] [skip P2] 17 sql_query.txt
+[2026-04-20T18:20:08.514Z] [skip P2] 29 prompts.txt
+[2026-04-20T18:20:08.514Z] [skip P2] 34 bz_metodichka.pdf
+[2026-04-20T18:20:08.514Z] [skip P2] 174 Skills от А до Я.pdf
+[2026-04-20T18:20:08.514Z] [skip P2] 110 Исследование_приоритетных_B2B_сегментов_для_лидогенерации_в_России.pdf
+[2026-04-20T18:20:08.514Z] [skip P2] 35 bz_stock.csv
+[2026-04-20T18:20:08.514Z] [skip P2] 168 Мультиагентные AI-системы.pdf
+[2026-04-20T18:20:08.514Z] [skip P3] 11 photo_11.jpg
+[2026-04-20T18:20:08.514Z] [skip P3] 56 photo_56.jpg
+[2026-04-20T18:20:10.776Z] [ok P3] 59 photo_59.jpg (62030 bytes)
+[2026-04-20T18:22:12.906Z] [skip P3] 175 photo_175.jpg
+[2026-04-20T18:22:13.090Z] [ok P3] 112 photo_112.jpg (70338 bytes)
+[2026-04-20T18:26:19.912Z] [skip P3] 167 photo_167.jpg
+[2026-04-20T18:26:20.084Z] [ok P3] 95 photo_95.jpg (54435 bytes)
+[2026-04-20T18:26:20.084Z] [break] ~19min
+[2026-04-20T18:43:32.737Z] [skip P3] 172 photo_172.jpg
+[2026-04-20T18:43:32.907Z] [ok P3] 91 photo_91.jpg (84517 bytes)
+[2026-04-20T18:47:53.491Z] [ok P3] 133 photo_133.jpg (91026 bytes)
+[2026-04-20T18:51:35.773Z] [ok P3] 143 photo_143.jpg (104079 bytes)
+[2026-04-20T18:53:13.397Z] [ok P3] 101 photo_101.jpg (101981 bytes)
+[2026-04-20T18:53:13.397Z] [break] ~15min
+[2026-04-20T19:01:22.731Z] [ok P3] 111 photo_111.jpg (115510 bytes)
+[2026-04-20T19:05:26.754Z] [ok P3] 158 photo_158.jpg (129434 bytes)
+[2026-04-20T19:08:59.568Z] [ok P3] 132 photo_132.jpg (149929 bytes)
+[2026-04-20T19:13:01.133Z] [ok P3] 41 photo_41.jpg (316940 bytes)
+[2026-04-20T19:14:45.021Z] [done] scanned=154 queued=50 downloaded=11 skipped=39 errors=0
+[2026-04-21T05:04:07.587Z] [+] Channel: Алексей Колесов | Private id=2653037830 [HOST: aeza] [PRIO 4..4]
+[2026-04-21T05:04:08.817Z] [takeout] session id=5415984581676359752
+[2026-04-21T05:04:08.817Z] [scan] enumerating media...
+[2026-04-21T05:04:10.227Z] [scan] found 114 media in 154 msgs
+[2026-04-21T05:04:10.227Z] [whitelist] filter 64 -> 16 (from 16 whitelisted ids)
+[2026-04-21T05:04:10.228Z] [queue] filtered 16 files: P1=0 P2=0 P3=0 P4=16
+[2026-04-21T05:05:01.748Z] [ok P4] 57 Gemini_full.mp4 (227361752 bytes)
+[2026-04-21T05:08:22.735Z] [ok P4] 55 Baserow.mp4 (285958693 bytes)
+[2026-04-21T05:12:27.562Z] [ok P4] 64 ч2.mp4 (377362668 bytes)
+[2026-04-21T05:12:27.563Z] [break] ~9min
+[2026-04-21T05:21:53.916Z] [ok P4] 71 установка_n8n_mcp.mp4 (456506614 bytes)
+[2026-04-21T05:25:24.719Z] [ok P4] 144 paperclip_private_install_гот.mp4 (467572921 bytes)
+[2026-04-21T05:31:51.565Z] [ok P4] 13 установка n8n.mp4 (556501117 bytes)
+[2026-04-21T05:31:51.567Z] [break] ~18min
+[2026-04-21T05:49:39.398Z] [ok P4] 63 ч1.mp4 (667854043 bytes)
+[2026-04-21T05:55:37.095Z] [ok P4] 136 готовый_Private_openclaw_install.mp4 (672270400 bytes)
+[2026-04-21T06:02:21.300Z] [ok P4] 137 Private_safe_гот.mp4 (908275092 bytes)
+[2026-04-21T06:02:21.300Z] [break] ~7min
+[2026-04-21T06:17:59.126Z] [ok P4] 53 Actions.mp4 (1108536510 bytes)
+[2026-04-21T06:26:29.381Z] [ok P4] 147 paperclip_private_detail_гот.mp4 (1299493872 bytes)
+[2026-04-21T06:33:10.417Z] [ok P4] 15 Установка supabase.mp4 (1666757364 bytes)
+[2026-04-21T06:33:10.427Z] [break] ~19min

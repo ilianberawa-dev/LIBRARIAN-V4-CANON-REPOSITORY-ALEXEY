@@ -1,0 +1,1156 @@
+[2026-04-20T17:32:51Z] [tick]
+[2026-04-20T17:35:51Z] notify: BOT_TOKEN or CHAT_ID not set — skipping
+[2026-04-20T17:40:01Z] [tick]
+[2026-04-20T17:46:22Z] notify: BOT_TOKEN or CHAT_ID not set — skipping
+[2026-04-20T17:47:25Z] notify: sent OK
+[2026-04-20T17:50:01Z] [tick]
+[2026-04-20T18:00:01Z] [tick]
+[2026-04-20T18:00:01Z] notify: sent OK
+[2026-04-20T18:10:01Z] [tick]
+[2026-04-20T18:20:01Z] [tick]
+[2026-04-20T18:20:02Z] [stuck] download idle=814s > max=660s (expected break 6min) — killing+restarting
+[2026-04-20T18:20:05Z] [restarted] download new PID=1437521
+[2026-04-20T18:30:01Z] [tick]
+[2026-04-20T18:40:01Z] [tick]
+[2026-04-20T18:50:01Z] [tick]
+[2026-04-20T19:00:01Z] [tick]
+[2026-04-20T19:10:01Z] [tick]
+[2026-04-20T19:20:01Z] [tick]
+[2026-04-20T19:20:01Z] [done] download completed cleanly
+[2026-04-20T19:30:01Z] [tick]
+[2026-04-20T19:30:01Z] [done] download completed cleanly
+[2026-04-20T19:40:01Z] [tick]
+[2026-04-20T19:40:02Z] [done] download completed cleanly
+[2026-04-20T19:50:01Z] [tick]
+[2026-04-20T19:50:01Z] [done] download completed cleanly
+[2026-04-20T20:00:01Z] [tick]
+[2026-04-20T20:00:01Z] [done] download completed cleanly
+[2026-04-20T20:00:01Z] notify: sent OK
+[2026-04-20T20:10:01Z] [tick]
+[2026-04-20T20:10:01Z] [done] download completed cleanly
+[2026-04-20T20:20:01Z] [tick]
+[2026-04-20T20:20:01Z] [done] download completed cleanly
+[2026-04-20T20:30:01Z] [tick]
+[2026-04-20T20:30:01Z] [done] download completed cleanly
+[2026-04-20T20:40:01Z] [tick]
+[2026-04-20T20:40:01Z] [done] download completed cleanly
+[2026-04-20T20:50:02Z] [tick]
+[2026-04-20T20:50:02Z] [done] download completed cleanly
+[2026-04-20T21:00:01Z] [tick]
+[2026-04-20T21:00:01Z] [done] download completed cleanly
+[2026-04-20T21:10:01Z] [tick]
+[2026-04-20T21:10:01Z] [done] download completed cleanly
+[2026-04-20T21:20:01Z] [tick]
+[2026-04-20T21:20:01Z] [done] download completed cleanly
+[2026-04-20T21:30:01Z] [tick]
+[2026-04-20T21:30:01Z] [done] download completed cleanly
+[2026-04-20T21:40:01Z] [tick]
+[2026-04-20T21:40:01Z] [done] download completed cleanly
+[2026-04-20T21:50:01Z] [tick]
+[2026-04-20T21:50:01Z] [done] download completed cleanly
+[2026-04-20T22:00:01Z] [tick]
+[2026-04-20T22:00:01Z] [done] download completed cleanly
+[2026-04-20T22:00:01Z] notify: sent OK
+[2026-04-20T22:10:01Z] [tick]
+[2026-04-20T22:10:01Z] [done] download completed cleanly
+[2026-04-20T22:20:01Z] [tick]
+[2026-04-20T22:20:01Z] [done] download completed cleanly
+[2026-04-20T22:30:01Z] [tick]
+[2026-04-20T22:30:01Z] [done] download completed cleanly
+[2026-04-20T22:40:01Z] [tick]
+[2026-04-20T22:40:01Z] [done] download completed cleanly
+[2026-04-20T22:50:01Z] [tick]
+[2026-04-20T22:50:01Z] [done] download completed cleanly
+[2026-04-20T23:00:01Z] [tick]
+[2026-04-20T23:00:01Z] [done] download completed cleanly
+[2026-04-20T23:10:01Z] [tick]
+[2026-04-20T23:10:01Z] [done] download completed cleanly
+[2026-04-20T23:20:01Z] [tick]
+[2026-04-20T23:20:01Z] [done] download completed cleanly
+[2026-04-20T23:30:01Z] [tick]
+[2026-04-20T23:30:01Z] [done] download completed cleanly
+[2026-04-20T23:40:01Z] [tick]
+[2026-04-20T23:40:01Z] [done] download completed cleanly
+[2026-04-20T23:50:01Z] [tick]
+[2026-04-20T23:50:01Z] [done] download completed cleanly
+[2026-04-21T00:00:02Z] [tick]
+[2026-04-21T00:00:02Z] [done] download completed cleanly
+[2026-04-21T00:00:02Z] notify: sent OK
+[2026-04-21T00:10:01Z] [tick]
+[2026-04-21T00:10:01Z] [done] download completed cleanly
+[2026-04-21T00:20:01Z] [tick]
+[2026-04-21T00:20:01Z] [done] download completed cleanly
+[2026-04-21T00:30:01Z] [tick]
+[2026-04-21T00:30:01Z] [done] download completed cleanly
+[2026-04-21T00:40:01Z] [tick]
+[2026-04-21T00:40:01Z] [done] download completed cleanly
+[2026-04-21T00:50:01Z] [tick]
+[2026-04-21T00:50:01Z] [done] download completed cleanly
+[2026-04-21T01:00:01Z] [tick]
+[2026-04-21T01:00:01Z] [done] download completed cleanly
+[2026-04-21T01:10:01Z] [tick]
+[2026-04-21T01:10:01Z] [done] download completed cleanly
+[2026-04-21T01:20:01Z] [tick]
+[2026-04-21T01:20:01Z] [done] download completed cleanly
+[2026-04-21T01:30:01Z] [tick]
+[2026-04-21T01:30:01Z] [done] download completed cleanly
+[2026-04-21T01:40:01Z] [tick]
+[2026-04-21T01:40:01Z] [done] download completed cleanly
+[2026-04-21T01:50:01Z] [tick]
+[2026-04-21T01:50:01Z] [done] download completed cleanly
+[2026-04-21T02:00:01Z] [tick]
+[2026-04-21T02:00:01Z] [done] download completed cleanly
+[2026-04-21T02:00:01Z] notify: sent OK
+[2026-04-21T02:10:01Z] [tick]
+[2026-04-21T02:10:01Z] [done] download completed cleanly
+[2026-04-21T02:20:01Z] [tick]
+[2026-04-21T02:20:01Z] [done] download completed cleanly
+[2026-04-21T02:30:01Z] [tick]
+[2026-04-21T02:30:01Z] [done] download completed cleanly
+[2026-04-21T02:40:01Z] [tick]
+[2026-04-21T02:40:01Z] [done] download completed cleanly
+[2026-04-21T02:50:01Z] [tick]
+[2026-04-21T02:50:01Z] [done] download completed cleanly
+[2026-04-21T03:00:01Z] [tick]
+[2026-04-21T03:00:01Z] [done] download completed cleanly
+[2026-04-21T03:10:01Z] [tick]
+[2026-04-21T03:10:01Z] [done] download completed cleanly
+[2026-04-21T03:20:01Z] [tick]
+[2026-04-21T03:20:01Z] [done] download completed cleanly
+[2026-04-21T03:30:01Z] [tick]
+[2026-04-21T03:30:01Z] [done] download completed cleanly
+[2026-04-21T03:40:01Z] [tick]
+[2026-04-21T03:40:01Z] [done] download completed cleanly
+[2026-04-21T03:50:01Z] [tick]
+[2026-04-21T03:50:01Z] [done] download completed cleanly
+[2026-04-21T04:00:01Z] [tick]
+[2026-04-21T04:00:01Z] [done] download completed cleanly
+[2026-04-21T04:00:01Z] notify: sent OK
+[2026-04-21T04:10:01Z] [tick]
+[2026-04-21T04:10:01Z] [done] download completed cleanly
+[2026-04-21T04:20:01Z] [tick]
+[2026-04-21T04:20:01Z] [done] download completed cleanly
+[2026-04-21T04:30:01Z] [tick]
+[2026-04-21T04:30:02Z] [done] download completed cleanly
+[2026-04-21T04:40:01Z] [tick]
+[2026-04-21T04:40:01Z] [done] download completed cleanly
+[2026-04-21T04:50:01Z] [tick]
+[2026-04-21T04:50:01Z] [done] download completed cleanly
+[2026-04-21T05:00:01Z] [tick]
+[2026-04-21T05:00:01Z] [done] download completed cleanly
+[2026-04-21T05:10:01Z] [tick]
+[2026-04-21T05:10:01Z] [new-media] 2 untranscribed — launching transcribe.sh
+[2026-04-21T05:10:01Z] [started] transcribe PID=3153438
+[2026-04-21T05:20:01Z] [tick]
+[2026-04-21T05:20:01Z] [new-media] 1 untranscribed — launching transcribe.sh
+[2026-04-21T05:20:01Z] [started] transcribe PID=3180069
+[2026-04-21T05:30:01Z] [tick]
+[2026-04-21T05:30:01Z] [new-media] 2 untranscribed — launching transcribe.sh
+[2026-04-21T05:30:01Z] [started] transcribe PID=3206687
+[2026-04-21T05:40:01Z] [tick]
+[2026-04-21T05:40:01Z] [new-media] 1 untranscribed — launching transcribe.sh
+[2026-04-21T05:40:01Z] [started] transcribe PID=3233457
+[2026-04-21T05:50:01Z] [tick]
+[2026-04-21T05:50:01Z] [new-media] 1 untranscribed — launching transcribe.sh
+[2026-04-21T05:50:01Z] [started] transcribe PID=3259819
+[2026-04-21T06:00:01Z] [tick]
+[2026-04-21T06:00:01Z] [new-media] 1 untranscribed — launching transcribe.sh
+[2026-04-21T06:00:01Z] [started] transcribe PID=3286554
+[2026-04-21T06:00:02Z] notify: sent OK
+[2026-04-21T06:10:01Z] [tick]
+[2026-04-21T06:10:01Z] [new-media] 1 untranscribed — launching transcribe.sh
+[2026-04-21T06:10:01Z] [started] transcribe PID=3313030
+[2026-04-21T06:20:01Z] [tick]
+[2026-04-21T06:20:01Z] [new-media] 1 untranscribed — launching transcribe.sh
+[2026-04-21T06:20:01Z] [started] transcribe PID=3339500
+[2026-04-21T06:30:01Z] [tick]
+[2026-04-21T06:30:02Z] [new-media] 1 untranscribed — launching transcribe.sh
+[2026-04-21T06:30:02Z] [started] transcribe PID=3365834
+[2026-04-21T06:40:01Z] [tick]
+[2026-04-21T06:40:01Z] [new-media] 1 untranscribed — launching transcribe.sh
+[2026-04-21T06:40:01Z] [started] transcribe PID=3391727
+[2026-04-21T06:50:01Z] [tick]
+[2026-04-21T06:50:01Z] [new-media] 1 untranscribed — launching transcribe.sh
+[2026-04-21T06:50:01Z] [started] transcribe PID=3417532
+[2026-04-21T07:00:01Z] [tick]
+[2026-04-21T07:00:01Z] [done] download completed cleanly
+[2026-04-21T07:00:01Z] [new-media] 1 untranscribed — launching transcribe.sh
+[2026-04-21T07:00:01Z] [started] transcribe PID=3443807
+[2026-04-21T07:10:02Z] [tick]
+[2026-04-21T07:10:02Z] [done] download completed cleanly
+[2026-04-21T07:10:02Z] [new-media] 1 untranscribed — launching transcribe.sh
+[2026-04-21T07:10:02Z] [started] transcribe PID=3470177
+[2026-04-21T07:20:01Z] [tick]
+[2026-04-21T07:20:01Z] [done] download completed cleanly
+[2026-04-21T07:20:01Z] [new-media] 1 untranscribed — launching transcribe.sh
+[2026-04-21T07:20:01Z] [started] transcribe PID=3496583
+[2026-04-21T07:30:01Z] [tick]
+[2026-04-21T07:30:01Z] [done] download completed cleanly
+[2026-04-21T07:30:01Z] [new-media] 1 untranscribed — launching transcribe.sh
+[2026-04-21T07:30:01Z] [started] transcribe PID=3522973
+[2026-04-21T07:40:01Z] [tick]
+[2026-04-21T07:40:01Z] [done] download completed cleanly
+[2026-04-21T07:40:01Z] [new-media] 1 untranscribed — launching transcribe.sh
+[2026-04-21T07:40:01Z] [started] transcribe PID=3549535
+[2026-04-21T07:50:01Z] [tick]
+[2026-04-21T07:50:01Z] [done] download completed cleanly
+[2026-04-21T07:50:01Z] [new-media] 1 untranscribed — launching transcribe.sh
+[2026-04-21T07:50:01Z] [started] transcribe PID=3576035
+[2026-04-21T08:00:01Z] [tick]
+[2026-04-21T08:00:01Z] [done] download completed cleanly
+[2026-04-21T08:00:01Z] [new-media] 1 untranscribed — launching transcribe.sh
+[2026-04-21T08:00:01Z] [started] transcribe PID=3602495
+[2026-04-21T08:00:02Z] notify: sent OK
+[2026-04-21T08:10:01Z] [tick]
+[2026-04-21T08:10:01Z] [done] download completed cleanly
+[2026-04-21T08:10:01Z] [new-media] 1 untranscribed — launching transcribe.sh
+[2026-04-21T08:10:01Z] [started] transcribe PID=3628972
+[2026-04-21T08:20:01Z] [tick]
+[2026-04-21T08:20:01Z] [done] download completed cleanly
+[2026-04-21T08:20:01Z] [new-media] 1 untranscribed — launching transcribe.sh
+[2026-04-21T08:20:01Z] [started] transcribe PID=3655451
+[2026-04-21T08:30:01Z] [tick]
+[2026-04-21T08:30:01Z] [done] download completed cleanly
+[2026-04-21T08:30:01Z] [new-media] 1 untranscribed — launching transcribe.sh
+[2026-04-21T08:30:01Z] [started] transcribe PID=3681922
+[2026-04-21T08:40:01Z] [tick]
+[2026-04-21T08:40:01Z] [done] download completed cleanly
+[2026-04-21T08:40:01Z] [new-media] 1 untranscribed — launching transcribe.sh
+[2026-04-21T08:40:01Z] [started] transcribe PID=3708273
+[2026-04-21T08:50:01Z] [tick]
+[2026-04-21T08:50:01Z] [done] download completed cleanly
+[2026-04-21T08:50:01Z] [new-media] 1 untranscribed — launching transcribe.sh
+[2026-04-21T08:50:01Z] [started] transcribe PID=3734569
+[2026-04-21T09:00:01Z] [tick]
+[2026-04-21T09:00:01Z] [done] download completed cleanly
+[2026-04-21T09:00:01Z] [new-media] 1 untranscribed — launching transcribe.sh
+[2026-04-21T09:00:01Z] [started] transcribe PID=3760873
+[2026-04-21T09:10:01Z] [tick]
+[2026-04-21T09:10:01Z] [done] download completed cleanly
+[2026-04-21T09:10:01Z] [new-media] 1 untranscribed — launching transcribe.sh
+[2026-04-21T09:10:01Z] [started] transcribe PID=3787232
+[2026-04-21T09:20:01Z] [tick]
+[2026-04-21T09:20:01Z] [done] download completed cleanly
+[2026-04-21T09:20:01Z] [new-media] 1 untranscribed — launching transcribe.sh
+[2026-04-21T09:20:01Z] [started] transcribe PID=3813795
+[2026-04-21T09:30:01Z] [tick]
+[2026-04-21T09:30:01Z] [done] download completed cleanly
+[2026-04-21T09:30:01Z] [new-media] 1 untranscribed — launching transcribe.sh
+[2026-04-21T09:30:01Z] [started] transcribe PID=3840647
+[2026-04-21T09:40:01Z] [tick]
+[2026-04-21T09:40:01Z] [done] download completed cleanly
+[2026-04-21T09:40:01Z] [new-media] 1 untranscribed — launching transcribe.sh
+[2026-04-21T09:40:01Z] [started] transcribe PID=3867121
+[2026-04-21T09:50:01Z] [tick]
+[2026-04-21T09:50:01Z] [done] download completed cleanly
+[2026-04-21T09:50:01Z] [new-media] 1 untranscribed — launching transcribe.sh
+[2026-04-21T09:50:01Z] [started] transcribe PID=3893636
+[2026-04-21T10:00:01Z] [tick]
+[2026-04-21T10:00:01Z] [done] download completed cleanly
+[2026-04-21T10:00:01Z] [new-media] 1 untranscribed — launching transcribe.sh
+[2026-04-21T10:00:01Z] [started] transcribe PID=3920810
+[2026-04-21T10:00:02Z] notify: sent OK
+[2026-04-21T10:10:01Z] [tick]
+[2026-04-21T10:10:01Z] [done] download completed cleanly
+[2026-04-21T10:10:01Z] [new-media] 1 untranscribed — launching transcribe.sh
+[2026-04-21T10:10:01Z] [started] transcribe PID=3947907
+[2026-04-21T10:20:01Z] [tick]
+[2026-04-21T10:20:01Z] [done] download completed cleanly
+[2026-04-21T10:20:01Z] [new-media] 1 untranscribed — launching transcribe.sh
+[2026-04-21T10:20:01Z] [started] transcribe PID=3974807
+[2026-04-21T10:30:01Z] [tick]
+[2026-04-21T10:30:01Z] [done] download completed cleanly
+[2026-04-21T10:30:01Z] [new-media] 1 untranscribed — launching transcribe.sh
+[2026-04-21T10:30:01Z] [started] transcribe PID=4001265
+[2026-04-21T10:40:01Z] [tick]
+[2026-04-21T10:40:01Z] [done] download completed cleanly
+[2026-04-21T10:40:01Z] [new-media] 1 untranscribed — launching transcribe.sh
+[2026-04-21T10:40:01Z] [started] transcribe PID=4027754
+[2026-04-21T10:50:01Z] [tick]
+[2026-04-21T10:50:01Z] [done] download completed cleanly
+[2026-04-21T10:50:01Z] [new-media] 1 untranscribed — launching transcribe.sh
+[2026-04-21T10:50:01Z] [started] transcribe PID=4054100
+[2026-04-21T11:00:01Z] [tick]
+[2026-04-21T11:00:01Z] [done] download completed cleanly
+[2026-04-21T11:00:01Z] [new-media] 1 untranscribed — launching transcribe.sh
+[2026-04-21T11:00:01Z] [started] transcribe PID=4080862
+[2026-04-21T11:10:01Z] [tick]
+[2026-04-21T11:10:01Z] [done] download completed cleanly
+[2026-04-21T11:10:02Z] [new-media] 1 untranscribed — launching transcribe.sh
+[2026-04-21T11:10:02Z] [started] transcribe PID=4107681
+[2026-04-21T11:20:01Z] [tick]
+[2026-04-21T11:20:01Z] [done] download completed cleanly
+[2026-04-21T11:20:01Z] [new-media] 1 untranscribed — launching transcribe.sh
+[2026-04-21T11:20:01Z] [started] transcribe PID=4134159
+[2026-04-21T11:30:01Z] [tick]
+[2026-04-21T11:30:01Z] [done] download completed cleanly
+[2026-04-21T11:30:01Z] [new-media] 1 untranscribed — launching transcribe.sh
+[2026-04-21T11:30:01Z] [started] transcribe PID=4160825
+[2026-04-21T11:40:01Z] [tick]
+[2026-04-21T11:40:01Z] [done] download completed cleanly
+[2026-04-21T11:40:01Z] [new-media] 1 untranscribed — launching transcribe.sh
+[2026-04-21T11:40:01Z] [started] transcribe PID=4187950
+[2026-04-21T11:50:01Z] [tick]
+[2026-04-21T11:50:01Z] [done] download completed cleanly
+[2026-04-21T11:50:01Z] [new-media] 1 untranscribed — launching transcribe.sh
+[2026-04-21T11:50:01Z] [started] transcribe PID=21178
+[2026-04-21T12:00:01Z] [tick]
+[2026-04-21T12:00:01Z] [done] download completed cleanly
+[2026-04-21T12:00:01Z] [new-media] 1 untranscribed — launching transcribe.sh
+[2026-04-21T12:00:01Z] [started] transcribe PID=48299
+[2026-04-21T12:00:02Z] notify: sent OK
+[2026-04-21T12:10:01Z] [tick]
+[2026-04-21T12:10:01Z] [done] download completed cleanly
+[2026-04-21T12:10:01Z] [new-media] 1 untranscribed — launching transcribe.sh
+[2026-04-21T12:10:01Z] [started] transcribe PID=75175
+[2026-04-21T12:20:01Z] [tick]
+[2026-04-21T12:20:01Z] [done] download completed cleanly
+[2026-04-21T12:20:01Z] [new-media] 1 untranscribed — launching transcribe.sh
+[2026-04-21T12:20:01Z] [started] transcribe PID=101638
+[2026-04-21T12:30:01Z] [tick]
+[2026-04-21T12:30:01Z] [done] download completed cleanly
+[2026-04-21T12:30:01Z] [new-media] 1 untranscribed — launching transcribe.sh
+[2026-04-21T12:30:01Z] [started] transcribe PID=128018
+[2026-04-21T12:40:01Z] [tick]
+[2026-04-21T12:40:01Z] [done] download completed cleanly
+[2026-04-21T12:40:01Z] [new-media] 1 untranscribed — launching transcribe.sh
+[2026-04-21T12:40:01Z] [started] transcribe PID=154368
+[2026-04-21T12:50:02Z] [tick]
+[2026-04-21T12:50:02Z] [done] download completed cleanly
+[2026-04-21T12:50:02Z] [new-media] 1 untranscribed — launching transcribe.sh
+[2026-04-21T12:50:02Z] [started] transcribe PID=180530
+[2026-04-21T13:00:01Z] [tick]
+[2026-04-21T13:00:01Z] [done] download completed cleanly
+[2026-04-21T13:00:01Z] [new-media] 1 untranscribed — launching transcribe.sh
+[2026-04-21T13:00:01Z] [started] transcribe PID=206854
+[2026-04-21T13:10:01Z] [tick]
+[2026-04-21T13:10:01Z] [done] download completed cleanly
+[2026-04-21T13:10:01Z] [new-media] 1 untranscribed — launching transcribe.sh
+[2026-04-21T13:10:01Z] [started] transcribe PID=233070
+[2026-04-21T13:20:01Z] [tick]
+[2026-04-21T13:20:01Z] [done] download completed cleanly
+[2026-04-21T13:20:01Z] [new-media] 1 untranscribed — launching transcribe.sh
+[2026-04-21T13:20:01Z] [started] transcribe PID=259379
+[2026-04-21T13:30:01Z] [tick]
+[2026-04-21T13:30:01Z] [done] download completed cleanly
+[2026-04-21T13:30:01Z] [new-media] 1 untranscribed — launching transcribe.sh
+[2026-04-21T13:30:01Z] [started] transcribe PID=285784
+[2026-04-21T13:40:01Z] [tick]
+[2026-04-21T13:40:01Z] [done] download completed cleanly
+[2026-04-21T13:40:01Z] [new-media] 1 untranscribed — launching transcribe.sh
+[2026-04-21T13:40:01Z] [started] transcribe PID=312241
+[2026-04-21T13:50:01Z] [tick]
+[2026-04-21T13:50:01Z] [done] download completed cleanly
+[2026-04-21T13:50:01Z] [new-media] 1 untranscribed — launching transcribe.sh
+[2026-04-21T13:50:01Z] [started] transcribe PID=338601
+[2026-04-21T14:00:01Z] [tick]
+[2026-04-21T14:00:01Z] [done] download completed cleanly
+[2026-04-21T14:00:01Z] [new-media] 1 untranscribed — launching transcribe.sh
+[2026-04-21T14:00:01Z] [started] transcribe PID=364916
+[2026-04-21T14:00:02Z] notify: sent OK
+[2026-04-21T14:10:01Z] [tick]
+[2026-04-21T14:10:01Z] [done] download completed cleanly
+[2026-04-21T14:10:01Z] [new-media] 1 untranscribed — launching transcribe.sh
+[2026-04-21T14:10:01Z] [started] transcribe PID=392064
+[2026-04-21T14:20:01Z] [tick]
+[2026-04-21T14:20:01Z] [done] download completed cleanly
+[2026-04-21T14:20:01Z] [new-media] 1 untranscribed — launching transcribe.sh
+[2026-04-21T14:20:01Z] [started] transcribe PID=418515
+[2026-04-21T14:30:01Z] [tick]
+[2026-04-21T14:30:01Z] [done] download completed cleanly
+[2026-04-21T14:30:01Z] [new-media] 1 untranscribed — launching transcribe.sh
+[2026-04-21T14:30:01Z] [started] transcribe PID=444952
+[2026-04-21T14:40:01Z] [tick]
+[2026-04-21T14:40:01Z] [done] download completed cleanly
+[2026-04-21T14:40:01Z] [new-media] 1 untranscribed — launching transcribe.sh
+[2026-04-21T14:40:01Z] [started] transcribe PID=471514
+[2026-04-21T14:50:01Z] [tick]
+[2026-04-21T14:50:01Z] [done] download completed cleanly
+[2026-04-21T14:50:01Z] [new-media] 1 untranscribed — launching transcribe.sh
+[2026-04-21T14:50:01Z] [started] transcribe PID=497941
+[2026-04-21T15:00:01Z] [tick]
+[2026-04-21T15:00:01Z] [done] download completed cleanly
+[2026-04-21T15:00:01Z] [new-media] 1 untranscribed — launching transcribe.sh
+[2026-04-21T15:00:01Z] [started] transcribe PID=524345
+[2026-04-21T15:10:01Z] [tick]
+[2026-04-21T15:10:01Z] [done] download completed cleanly
+[2026-04-21T15:10:02Z] [new-media] 1 untranscribed — launching transcribe.sh
+[2026-04-21T15:10:02Z] [started] transcribe PID=551140
+[2026-04-21T15:20:01Z] [tick]
+[2026-04-21T15:20:01Z] [done] download completed cleanly
+[2026-04-21T15:20:01Z] [new-media] 1 untranscribed — launching transcribe.sh
+[2026-04-21T15:20:01Z] [started] transcribe PID=577516
+[2026-04-21T15:30:01Z] [tick]
+[2026-04-21T15:30:01Z] [done] download completed cleanly
+[2026-04-21T15:30:01Z] [new-media] 1 untranscribed — launching transcribe.sh
+[2026-04-21T15:30:01Z] [started] transcribe PID=603979
+[2026-04-21T15:40:01Z] [tick]
+[2026-04-21T15:40:01Z] [done] download completed cleanly
+[2026-04-21T15:40:01Z] [new-media] 1 untranscribed — launching transcribe.sh
+[2026-04-21T15:40:01Z] [started] transcribe PID=630797
+[2026-04-21T15:50:01Z] [tick]
+[2026-04-21T15:50:01Z] [done] download completed cleanly
+[2026-04-21T15:50:01Z] [new-media] 1 untranscribed — launching transcribe.sh
+[2026-04-21T15:50:01Z] [started] transcribe PID=657993
+[2026-04-21T16:00:01Z] [tick]
+[2026-04-21T16:00:01Z] [done] download completed cleanly
+[2026-04-21T16:00:01Z] [new-media] 1 untranscribed — launching transcribe.sh
+[2026-04-21T16:00:01Z] [started] transcribe PID=684465
+[2026-04-21T16:00:02Z] notify: sent OK
+[2026-04-21T16:10:01Z] [tick]
+[2026-04-21T16:10:01Z] [done] download completed cleanly
+[2026-04-21T16:10:01Z] [new-media] 1 untranscribed — launching transcribe.sh
+[2026-04-21T16:10:01Z] [started] transcribe PID=710847
+[2026-04-21T16:20:01Z] [tick]
+[2026-04-21T16:20:01Z] [done] download completed cleanly
+[2026-04-21T16:20:01Z] [new-media] 1 untranscribed — launching transcribe.sh
+[2026-04-21T16:20:01Z] [started] transcribe PID=737188
+[2026-04-21T16:30:01Z] [tick]
+[2026-04-21T16:30:01Z] [done] download completed cleanly
+[2026-04-21T16:30:01Z] [new-media] 1 untranscribed — launching transcribe.sh
+[2026-04-21T16:30:01Z] [started] transcribe PID=763563
+[2026-04-21T16:40:01Z] [tick]
+[2026-04-21T16:40:01Z] [done] download completed cleanly
+[2026-04-21T16:40:01Z] [new-media] 1 untranscribed — launching transcribe.sh
+[2026-04-21T16:40:01Z] [started] transcribe PID=789880
+[2026-04-21T16:50:01Z] [tick]
+[2026-04-21T16:50:01Z] [done] download completed cleanly
+[2026-04-21T16:50:01Z] [new-media] 1 untranscribed — launching transcribe.sh
+[2026-04-21T16:50:01Z] [started] transcribe PID=816197
+[2026-04-21T17:00:01Z] [tick]
+[2026-04-21T17:00:01Z] [done] download completed cleanly
+[2026-04-21T17:00:01Z] [new-media] 1 untranscribed — launching transcribe.sh
+[2026-04-21T17:00:01Z] [started] transcribe PID=842560
+[2026-04-21T17:10:01Z] [tick]
+[2026-04-21T17:10:01Z] [done] download completed cleanly
+[2026-04-21T17:10:01Z] [new-media] 1 untranscribed — launching transcribe.sh
+[2026-04-21T17:10:01Z] [started] transcribe PID=868742
+[2026-04-21T17:20:01Z] [tick]
+[2026-04-21T17:20:01Z] [done] download completed cleanly
+[2026-04-21T17:20:01Z] [new-media] 1 untranscribed — launching transcribe.sh
+[2026-04-21T17:20:01Z] [started] transcribe PID=895041
+[2026-04-21T17:30:01Z] [tick]
+[2026-04-21T17:30:01Z] [done] download completed cleanly
+[2026-04-21T17:30:01Z] [new-media] 1 untranscribed — launching transcribe.sh
+[2026-04-21T17:30:01Z] [started] transcribe PID=921229
+[2026-04-21T17:40:01Z] [tick]
+[2026-04-21T17:40:01Z] [done] download completed cleanly
+[2026-04-21T17:40:01Z] [new-media] 1 untranscribed — launching transcribe.sh
+[2026-04-21T17:40:01Z] [started] transcribe PID=947624
+[2026-04-21T17:50:01Z] [tick]
+[2026-04-21T17:50:01Z] [done] download completed cleanly
+[2026-04-21T17:50:01Z] [new-media] 1 untranscribed — launching transcribe.sh
+[2026-04-21T17:50:01Z] [started] transcribe PID=973910
+[2026-04-21T18:00:01Z] [tick]
+[2026-04-21T18:00:01Z] [done] download completed cleanly
+[2026-04-21T18:00:01Z] [new-media] 1 untranscribed — launching transcribe.sh
+[2026-04-21T18:00:01Z] [started] transcribe PID=1000260
+[2026-04-21T18:00:01Z] notify: sent OK
+[2026-04-21T18:50:01Z] [tick]
+[2026-04-21T18:50:01Z] [done] download completed cleanly
+[2026-04-21T18:50:01Z] [new-media] 1 untranscribed — launching transcribe.sh
+[2026-04-21T18:50:01Z] [started] transcribe PID=28080
+[2026-04-21T19:00:01Z] [tick]
+[2026-04-21T19:00:01Z] [done] download completed cleanly
+[2026-04-21T19:00:01Z] [new-media] 1 untranscribed — launching transcribe.sh
+[2026-04-21T19:00:01Z] [started] transcribe PID=54315
+[2026-04-21T19:10:01Z] [tick]
+[2026-04-21T19:10:01Z] [done] download completed cleanly
+[2026-04-21T19:10:01Z] [new-media] 1 untranscribed — launching transcribe.sh
+[2026-04-21T19:10:01Z] [started] transcribe PID=80665
+[2026-04-21T19:20:01Z] [tick]
+[2026-04-21T19:20:01Z] [done] download completed cleanly
+[2026-04-21T19:30:01Z] [tick]
+[2026-04-21T19:30:01Z] [done] download completed cleanly
+[2026-04-21T19:40:01Z] [tick]
+[2026-04-21T19:40:01Z] [done] download completed cleanly
+[2026-04-21T19:50:01Z] [tick]
+[2026-04-21T19:50:01Z] [done] download completed cleanly
+[2026-04-21T20:00:01Z] [tick]
+[2026-04-21T20:00:01Z] [done] download completed cleanly
+[2026-04-21T20:00:02Z] notify: sent OK
+[2026-04-21T20:10:01Z] [tick]
+[2026-04-21T20:10:01Z] [done] download completed cleanly
+[2026-04-21T20:20:01Z] [tick]
+[2026-04-21T20:20:01Z] [done] download completed cleanly
+[2026-04-21T20:30:01Z] [tick]
+[2026-04-21T20:30:01Z] [done] download completed cleanly
+[2026-04-21T20:40:01Z] [tick]
+[2026-04-21T20:40:01Z] [done] download completed cleanly
+[2026-04-21T20:50:01Z] [tick]
+[2026-04-21T20:50:01Z] [done] download completed cleanly
+[2026-04-21T21:00:01Z] [tick]
+[2026-04-21T21:00:01Z] [done] download completed cleanly
+[2026-04-21T21:10:01Z] [tick]
+[2026-04-21T21:10:01Z] [done] download completed cleanly
+[2026-04-21T21:20:01Z] [tick]
+[2026-04-21T21:20:01Z] [done] download completed cleanly
+[2026-04-21T21:30:01Z] [tick]
+[2026-04-21T21:30:01Z] [done] download completed cleanly
+[2026-04-21T21:40:01Z] [tick]
+[2026-04-21T21:40:01Z] [done] download completed cleanly
+[2026-04-21T21:50:02Z] [tick]
+[2026-04-21T21:50:02Z] [done] download completed cleanly
+[2026-04-21T22:00:01Z] [tick]
+[2026-04-21T22:00:01Z] [done] download completed cleanly
+[2026-04-21T22:00:01Z] notify: sent OK
+[2026-04-21T22:10:01Z] [tick]
+[2026-04-21T22:10:01Z] [done] download completed cleanly
+[2026-04-21T22:20:01Z] [tick]
+[2026-04-21T22:20:01Z] [done] download completed cleanly
+[2026-04-21T22:30:01Z] [tick]
+[2026-04-21T22:30:01Z] [done] download completed cleanly
+[2026-04-21T22:40:01Z] [tick]
+[2026-04-21T22:40:01Z] [done] download completed cleanly
+[2026-04-21T22:50:01Z] [tick]
+[2026-04-21T22:50:01Z] [done] download completed cleanly
+[2026-04-21T23:00:01Z] [tick]
+[2026-04-21T23:00:01Z] [done] download completed cleanly
+[2026-04-21T23:10:01Z] [tick]
+[2026-04-21T23:10:01Z] [done] download completed cleanly
+[2026-04-21T23:20:01Z] [tick]
+[2026-04-21T23:20:01Z] [done] download completed cleanly
+[2026-04-21T23:30:01Z] [tick]
+[2026-04-21T23:30:01Z] [done] download completed cleanly
+[2026-04-21T23:40:01Z] [tick]
+[2026-04-21T23:40:01Z] [done] download completed cleanly
+[2026-04-21T23:50:01Z] [tick]
+[2026-04-21T23:50:01Z] [done] download completed cleanly
+[2026-04-22T00:00:01Z] [tick]
+[2026-04-22T00:00:01Z] [done] download completed cleanly
+[2026-04-22T00:00:01Z] notify: sent OK
+[2026-04-22T00:10:01Z] [tick]
+[2026-04-22T00:10:01Z] [done] download completed cleanly
+[2026-04-22T00:20:01Z] [tick]
+[2026-04-22T00:20:01Z] [done] download completed cleanly
+[2026-04-22T00:30:01Z] [tick]
+[2026-04-22T00:30:01Z] [done] download completed cleanly
+[2026-04-22T00:40:01Z] [tick]
+[2026-04-22T00:40:01Z] [done] download completed cleanly
+[2026-04-22T00:50:01Z] [tick]
+[2026-04-22T00:50:01Z] [done] download completed cleanly
+[2026-04-22T01:00:01Z] [tick]
+[2026-04-22T01:00:01Z] [done] download completed cleanly
+[2026-04-22T01:10:01Z] [tick]
+[2026-04-22T01:10:01Z] [done] download completed cleanly
+[2026-04-22T01:20:01Z] [tick]
+[2026-04-22T01:20:01Z] [done] download completed cleanly
+[2026-04-22T01:30:01Z] [tick]
+[2026-04-22T01:30:01Z] [done] download completed cleanly
+[2026-04-22T01:40:01Z] [tick]
+[2026-04-22T01:40:02Z] [done] download completed cleanly
+[2026-04-22T01:50:01Z] [tick]
+[2026-04-22T01:50:01Z] [done] download completed cleanly
+[2026-04-22T02:00:01Z] [tick]
+[2026-04-22T02:00:01Z] [done] download completed cleanly
+[2026-04-22T02:00:01Z] notify: sent OK
+[2026-04-22T02:10:01Z] [tick]
+[2026-04-22T02:10:01Z] [done] download completed cleanly
+[2026-04-22T02:20:01Z] [tick]
+[2026-04-22T02:20:01Z] [done] download completed cleanly
+[2026-04-22T02:30:01Z] [tick]
+[2026-04-22T02:30:01Z] [done] download completed cleanly
+[2026-04-22T02:40:01Z] [tick]
+[2026-04-22T02:40:01Z] [done] download completed cleanly
+[2026-04-22T02:50:01Z] [tick]
+[2026-04-22T02:50:01Z] [done] download completed cleanly
+[2026-04-22T03:00:01Z] [tick]
+[2026-04-22T03:00:01Z] [done] download completed cleanly
+[2026-04-22T03:10:01Z] [tick]
+[2026-04-22T03:10:01Z] [done] download completed cleanly
+[2026-04-22T03:20:01Z] [tick]
+[2026-04-22T03:20:01Z] [done] download completed cleanly
+[2026-04-22T03:30:01Z] [tick]
+[2026-04-22T03:30:01Z] [done] download completed cleanly
+[2026-04-22T03:40:01Z] [tick]
+[2026-04-22T03:40:01Z] [done] download completed cleanly
+[2026-04-22T03:50:01Z] [tick]
+[2026-04-22T03:50:01Z] [done] download completed cleanly
+[2026-04-22T04:00:01Z] [tick]
+[2026-04-22T04:00:01Z] [done] download completed cleanly
+[2026-04-22T04:00:01Z] notify: sent OK
+[2026-04-22T04:10:01Z] [tick]
+[2026-04-22T04:10:01Z] [done] download completed cleanly
+[2026-04-22T04:20:01Z] [tick]
+[2026-04-22T04:20:01Z] [done] download completed cleanly
+[2026-04-22T04:30:01Z] [tick]
+[2026-04-22T04:30:01Z] [done] download completed cleanly
+[2026-04-22T04:40:01Z] [tick]
+[2026-04-22T04:40:01Z] [done] download completed cleanly
+[2026-04-22T04:50:01Z] [tick]
+[2026-04-22T04:50:01Z] [done] download completed cleanly
+[2026-04-22T05:00:01Z] [tick]
+[2026-04-22T05:00:01Z] [done] download completed cleanly
+[2026-04-22T05:10:01Z] [tick]
+[2026-04-22T05:10:01Z] [done] download completed cleanly
+[2026-04-22T05:20:01Z] [tick]
+[2026-04-22T05:20:01Z] [done] download completed cleanly
+[2026-04-22T05:30:01Z] [tick]
+[2026-04-22T05:30:01Z] [done] download completed cleanly
+[2026-04-22T05:40:01Z] [tick]
+[2026-04-22T05:40:01Z] [done] download completed cleanly
+[2026-04-22T05:50:01Z] [tick]
+[2026-04-22T05:50:01Z] [done] download completed cleanly
+[2026-04-22T06:00:01Z] [tick]
+[2026-04-22T06:00:01Z] [done] download completed cleanly
+[2026-04-22T06:00:01Z] notify: sent OK
+[2026-04-22T06:10:01Z] [tick]
+[2026-04-22T06:10:01Z] [done] download completed cleanly
+[2026-04-22T06:20:01Z] [tick]
+[2026-04-22T06:20:01Z] [done] download completed cleanly
+[2026-04-22T06:30:01Z] [tick]
+[2026-04-22T06:30:01Z] [done] download completed cleanly
+[2026-04-22T06:40:01Z] [tick]
+[2026-04-22T06:40:01Z] [done] download completed cleanly
+[2026-04-22T06:50:01Z] [tick]
+[2026-04-22T06:50:01Z] [done] download completed cleanly
+[2026-04-22T07:00:01Z] [tick]
+[2026-04-22T07:00:01Z] [done] download completed cleanly
+[2026-04-22T07:10:01Z] [tick]
+[2026-04-22T07:10:01Z] [done] download completed cleanly
+[2026-04-22T07:20:01Z] [tick]
+[2026-04-22T07:20:01Z] [done] download completed cleanly
+[2026-04-22T07:30:01Z] [tick]
+[2026-04-22T07:30:01Z] [done] download completed cleanly
+[2026-04-22T07:40:01Z] [tick]
+[2026-04-22T07:40:01Z] [done] download completed cleanly
+[2026-04-22T07:50:01Z] [tick]
+[2026-04-22T07:50:01Z] [done] download completed cleanly
+[2026-04-22T08:00:01Z] [tick]
+[2026-04-22T08:00:01Z] [done] download completed cleanly
+[2026-04-22T08:00:01Z] notify: sent OK
+[2026-04-22T08:10:01Z] [tick]
+[2026-04-22T08:10:01Z] [done] download completed cleanly
+[2026-04-22T08:20:01Z] [tick]
+[2026-04-22T08:20:01Z] [done] download completed cleanly
+[2026-04-22T08:30:01Z] [tick]
+[2026-04-22T08:30:01Z] [done] download completed cleanly
+[2026-04-22T08:40:01Z] [tick]
+[2026-04-22T08:40:01Z] [done] download completed cleanly
+[2026-04-22T08:50:01Z] [tick]
+[2026-04-22T08:50:01Z] [done] download completed cleanly
+[2026-04-22T09:00:01Z] [tick]
+[2026-04-22T09:00:01Z] [done] download completed cleanly
+[2026-04-22T09:10:01Z] [tick]
+[2026-04-22T09:10:01Z] [done] download completed cleanly
+[2026-04-22T09:20:01Z] [tick]
+[2026-04-22T09:20:01Z] [done] download completed cleanly
+[2026-04-22T09:30:01Z] [tick]
+[2026-04-22T09:30:01Z] [done] download completed cleanly
+[2026-04-22T09:40:01Z] [tick]
+[2026-04-22T09:40:01Z] [done] download completed cleanly
+[2026-04-22T09:50:01Z] [tick]
+[2026-04-22T09:50:01Z] [done] download completed cleanly
+[2026-04-22T10:00:01Z] [tick]
+[2026-04-22T10:00:01Z] [done] download completed cleanly
+[2026-04-22T10:00:02Z] notify: sent OK
+[2026-04-22T10:10:01Z] [tick]
+[2026-04-22T10:10:01Z] [done] download completed cleanly
+[2026-04-22T10:20:01Z] [tick]
+[2026-04-22T10:20:01Z] [done] download completed cleanly
+[2026-04-22T10:30:01Z] [tick]
+[2026-04-22T10:30:01Z] [done] download completed cleanly
+[2026-04-22T10:40:01Z] [tick]
+[2026-04-22T10:40:01Z] [done] download completed cleanly
+[2026-04-22T10:50:01Z] [tick]
+[2026-04-22T10:50:01Z] [done] download completed cleanly
+[2026-04-22T11:00:01Z] [tick]
+[2026-04-22T11:00:01Z] [done] download completed cleanly
+[2026-04-22T11:10:01Z] [tick]
+[2026-04-22T11:10:01Z] [done] download completed cleanly
+[2026-04-22T11:20:01Z] [tick]
+[2026-04-22T11:20:01Z] [done] download completed cleanly
+[2026-04-22T11:30:01Z] [tick]
+[2026-04-22T11:30:01Z] [done] download completed cleanly
+[2026-04-22T11:40:01Z] [tick]
+[2026-04-22T11:40:01Z] [done] download completed cleanly
+[2026-04-22T11:50:01Z] [tick]
+[2026-04-22T11:50:01Z] [done] download completed cleanly
+[2026-04-22T12:00:01Z] [tick]
+[2026-04-22T12:00:01Z] [done] download completed cleanly
+[2026-04-22T12:00:02Z] notify: sent OK
+[2026-04-22T12:10:01Z] [tick]
+[2026-04-22T12:10:01Z] [done] download completed cleanly
+[2026-04-22T12:20:01Z] [tick]
+[2026-04-22T12:20:01Z] [done] download completed cleanly
+[2026-04-22T12:30:01Z] [tick]
+[2026-04-22T12:30:01Z] [done] download completed cleanly
+[2026-04-22T12:40:01Z] [tick]
+[2026-04-22T12:40:01Z] [done] download completed cleanly
+[2026-04-22T12:50:01Z] [tick]
+[2026-04-22T12:50:01Z] [done] download completed cleanly
+[2026-04-22T13:00:01Z] [tick]
+[2026-04-22T13:00:01Z] [done] download completed cleanly
+[2026-04-22T13:10:01Z] [tick]
+[2026-04-22T13:10:01Z] [done] download completed cleanly
+[2026-04-22T13:20:01Z] [tick]
+[2026-04-22T13:20:01Z] [done] download completed cleanly
+[2026-04-22T13:30:01Z] [tick]
+[2026-04-22T13:30:01Z] [done] download completed cleanly
+[2026-04-22T13:40:01Z] [tick]
+[2026-04-22T13:40:01Z] [done] download completed cleanly
+[2026-04-22T13:50:01Z] [tick]
+[2026-04-22T13:50:01Z] [done] download completed cleanly
+[2026-04-22T14:00:01Z] [tick]
+[2026-04-22T14:00:01Z] [done] download completed cleanly
+[2026-04-22T14:00:01Z] notify: sent OK
+[2026-04-22T14:10:01Z] [tick]
+[2026-04-22T14:10:01Z] [done] download completed cleanly
+[2026-04-22T14:20:01Z] [tick]
+[2026-04-22T14:20:01Z] [done] download completed cleanly
+[2026-04-22T14:30:01Z] [tick]
+[2026-04-22T14:30:01Z] [done] download completed cleanly
+[2026-04-22T14:40:01Z] [tick]
+[2026-04-22T14:40:01Z] [done] download completed cleanly
+[2026-04-22T14:50:01Z] [tick]
+[2026-04-22T14:50:01Z] [done] download completed cleanly
+[2026-04-22T15:00:01Z] [tick]
+[2026-04-22T15:00:01Z] [done] download completed cleanly
+[2026-04-22T15:10:02Z] [tick]
+[2026-04-22T15:10:02Z] [done] download completed cleanly
+[2026-04-22T15:20:01Z] [tick]
+[2026-04-22T15:20:01Z] [done] download completed cleanly
+[2026-04-22T15:30:01Z] [tick]
+[2026-04-22T15:30:01Z] [done] download completed cleanly
+[2026-04-22T15:40:01Z] [tick]
+[2026-04-22T15:40:01Z] [done] download completed cleanly
+[2026-04-22T15:50:01Z] [tick]
+[2026-04-22T15:50:01Z] [done] download completed cleanly
+[2026-04-22T16:00:01Z] [tick]
+[2026-04-22T16:00:01Z] [done] download completed cleanly
+[2026-04-22T16:00:01Z] notify: sent OK
+[2026-04-22T16:10:01Z] [tick]
+[2026-04-22T16:10:01Z] [done] download completed cleanly
+[2026-04-22T16:20:01Z] [tick]
+[2026-04-22T16:20:01Z] [done] download completed cleanly
+[2026-04-22T16:30:01Z] [tick]
+[2026-04-22T16:30:01Z] [done] download completed cleanly
+[2026-04-22T16:40:01Z] [tick]
+[2026-04-22T16:40:01Z] [done] download completed cleanly
+[2026-04-22T16:50:01Z] [tick]
+[2026-04-22T16:50:01Z] [done] download completed cleanly
+[2026-04-22T17:00:01Z] [tick]
+[2026-04-22T17:00:01Z] [done] download completed cleanly
+[2026-04-22T17:10:01Z] [tick]
+[2026-04-22T17:10:01Z] [done] download completed cleanly
+[2026-04-22T17:20:01Z] [tick]
+[2026-04-22T17:20:01Z] [done] download completed cleanly
+[2026-04-22T17:30:01Z] [tick]
+[2026-04-22T17:30:01Z] [done] download completed cleanly
+[2026-04-22T17:40:01Z] [tick]
+[2026-04-22T17:40:01Z] [done] download completed cleanly
+[2026-04-22T17:50:01Z] [tick]
+[2026-04-22T17:50:01Z] [done] download completed cleanly
+[2026-04-22T18:00:01Z] [tick]
+[2026-04-22T18:00:01Z] [done] download completed cleanly
+[2026-04-22T18:00:02Z] notify: sent OK
+[2026-04-22T18:10:01Z] [tick]
+[2026-04-22T18:10:01Z] [done] download completed cleanly
+[2026-04-22T18:20:01Z] [tick]
+[2026-04-22T18:20:01Z] [done] download completed cleanly
+[2026-04-22T18:30:01Z] [tick]
+[2026-04-22T18:30:01Z] [done] download completed cleanly
+[2026-04-22T18:40:01Z] [tick]
+[2026-04-22T18:40:01Z] [done] download completed cleanly
+[2026-04-22T18:50:01Z] [tick]
+[2026-04-22T18:50:01Z] [done] download completed cleanly
+[2026-04-22T19:00:01Z] [tick]
+[2026-04-22T19:00:01Z] [done] download completed cleanly
+[2026-04-22T19:10:01Z] [tick]
+[2026-04-22T19:10:01Z] [done] download completed cleanly
+[2026-04-22T19:20:01Z] [tick]
+[2026-04-22T19:20:01Z] [done] download completed cleanly
+[2026-04-22T19:30:01Z] [tick]
+[2026-04-22T19:30:01Z] [done] download completed cleanly
+[2026-04-22T19:40:01Z] [tick]
+[2026-04-22T19:40:02Z] [done] download completed cleanly
+[2026-04-22T19:50:01Z] [tick]
+[2026-04-22T19:50:01Z] [done] download completed cleanly
+[2026-04-22T20:00:01Z] [tick]
+[2026-04-22T20:00:01Z] [done] download completed cleanly
+[2026-04-22T20:00:01Z] notify: sent OK
+[2026-04-22T20:10:01Z] [tick]
+[2026-04-22T20:10:01Z] [done] download completed cleanly
+[2026-04-22T20:20:01Z] [tick]
+[2026-04-22T20:20:01Z] [done] download completed cleanly
+[2026-04-22T20:30:01Z] [tick]
+[2026-04-22T20:30:01Z] [done] download completed cleanly
+[2026-04-22T20:40:01Z] [tick]
+[2026-04-22T20:40:01Z] [done] download completed cleanly
+[2026-04-22T20:50:02Z] [tick]
+[2026-04-22T20:50:02Z] [done] download completed cleanly
+[2026-04-22T21:00:01Z] [tick]
+[2026-04-22T21:00:01Z] [done] download completed cleanly
+[2026-04-22T21:10:01Z] [tick]
+[2026-04-22T21:10:01Z] [done] download completed cleanly
+[2026-04-22T21:20:01Z] [tick]
+[2026-04-22T21:20:01Z] [done] download completed cleanly
+[2026-04-22T21:30:01Z] [tick]
+[2026-04-22T21:30:01Z] [done] download completed cleanly
+[2026-04-22T21:40:01Z] [tick]
+[2026-04-22T21:40:01Z] [done] download completed cleanly
+[2026-04-22T21:50:01Z] [tick]
+[2026-04-22T21:50:01Z] [done] download completed cleanly
+[2026-04-22T22:00:01Z] [tick]
+[2026-04-22T22:00:01Z] [done] download completed cleanly
+[2026-04-22T22:00:01Z] notify: sent OK
+[2026-04-22T22:10:01Z] [tick]
+[2026-04-22T22:10:02Z] [done] download completed cleanly
+[2026-04-22T22:20:01Z] [tick]
+[2026-04-22T22:20:01Z] [done] download completed cleanly
+[2026-04-22T22:30:01Z] [tick]
+[2026-04-22T22:30:01Z] [done] download completed cleanly
+[2026-04-22T22:40:01Z] [tick]
+[2026-04-22T22:40:01Z] [done] download completed cleanly
+[2026-04-22T22:50:01Z] [tick]
+[2026-04-22T22:50:01Z] [done] download completed cleanly
+[2026-04-22T23:00:01Z] [tick]
+[2026-04-22T23:00:01Z] [done] download completed cleanly
+[2026-04-22T23:10:01Z] [tick]
+[2026-04-22T23:10:01Z] [done] download completed cleanly
+[2026-04-22T23:20:01Z] [tick]
+[2026-04-22T23:20:01Z] [done] download completed cleanly
+[2026-04-22T23:30:01Z] [tick]
+[2026-04-22T23:30:01Z] [done] download completed cleanly
+[2026-04-22T23:40:01Z] [tick]
+[2026-04-22T23:40:01Z] [done] download completed cleanly
+[2026-04-22T23:50:01Z] [tick]
+[2026-04-22T23:50:01Z] [done] download completed cleanly
+[2026-04-23T00:00:01Z] [tick]
+[2026-04-23T00:00:01Z] [done] download completed cleanly
+[2026-04-23T00:00:02Z] notify: sent OK
+[2026-04-23T00:10:01Z] [tick]
+[2026-04-23T00:10:01Z] [done] download completed cleanly
+[2026-04-23T00:20:01Z] [tick]
+[2026-04-23T00:20:01Z] [done] download completed cleanly
+[2026-04-23T00:30:01Z] [tick]
+[2026-04-23T00:30:01Z] [done] download completed cleanly
+[2026-04-23T00:40:01Z] [tick]
+[2026-04-23T00:40:01Z] [done] download completed cleanly
+[2026-04-23T00:50:01Z] [tick]
+[2026-04-23T00:50:01Z] [done] download completed cleanly
+[2026-04-23T01:00:01Z] [tick]
+[2026-04-23T01:00:01Z] [done] download completed cleanly
+[2026-04-23T01:10:01Z] [tick]
+[2026-04-23T01:10:01Z] [done] download completed cleanly
+[2026-04-23T01:20:01Z] [tick]
+[2026-04-23T01:20:01Z] [done] download completed cleanly
+[2026-04-23T01:30:01Z] [tick]
+[2026-04-23T01:30:01Z] [done] download completed cleanly
+[2026-04-23T01:40:01Z] [tick]
+[2026-04-23T01:40:01Z] [done] download completed cleanly
+[2026-04-23T01:50:01Z] [tick]
+[2026-04-23T01:50:01Z] [done] download completed cleanly
+[2026-04-23T02:00:01Z] [tick]
+[2026-04-23T02:00:01Z] [done] download completed cleanly
+[2026-04-23T02:00:02Z] notify: sent OK
+[2026-04-23T02:10:01Z] [tick]
+[2026-04-23T02:10:01Z] [done] download completed cleanly
+[2026-04-23T02:20:01Z] [tick]
+[2026-04-23T02:20:01Z] [done] download completed cleanly
+[2026-04-23T02:30:01Z] [tick]
+[2026-04-23T02:30:01Z] [done] download completed cleanly
+[2026-04-23T02:40:01Z] [tick]
+[2026-04-23T02:40:01Z] [done] download completed cleanly
+[2026-04-23T02:50:01Z] [tick]
+[2026-04-23T02:50:01Z] [done] download completed cleanly
+[2026-04-23T03:00:01Z] [tick]
+[2026-04-23T03:00:01Z] [done] download completed cleanly
+[2026-04-23T03:10:01Z] [tick]
+[2026-04-23T03:10:01Z] [done] download completed cleanly
+[2026-04-23T03:20:01Z] [tick]
+[2026-04-23T03:20:01Z] [done] download completed cleanly
+[2026-04-23T03:30:01Z] [tick]
+[2026-04-23T03:30:01Z] [done] download completed cleanly
+[2026-04-23T03:40:01Z] [tick]
+[2026-04-23T03:40:01Z] [done] download completed cleanly
+[2026-04-23T03:50:01Z] [tick]
+[2026-04-23T03:50:01Z] [done] download completed cleanly
+[2026-04-23T04:00:01Z] [tick]
+[2026-04-23T04:00:02Z] [done] download completed cleanly
+[2026-04-23T04:00:02Z] notify: sent OK
+[2026-04-23T04:10:01Z] [tick]
+[2026-04-23T04:10:01Z] [done] download completed cleanly
+[2026-04-23T04:20:01Z] [tick]
+[2026-04-23T04:20:01Z] [done] download completed cleanly
+[2026-04-23T04:30:01Z] [tick]
+[2026-04-23T04:30:01Z] [done] download completed cleanly
+[2026-04-23T04:40:01Z] [tick]
+[2026-04-23T04:40:01Z] [done] download completed cleanly
+[2026-04-23T04:50:01Z] [tick]
+[2026-04-23T04:50:01Z] [done] download completed cleanly
+[2026-04-23T05:00:01Z] [tick]
+[2026-04-23T05:00:01Z] [done] download completed cleanly
+[2026-04-23T05:10:01Z] [tick]
+[2026-04-23T05:10:01Z] [done] download completed cleanly
+[2026-04-23T05:20:01Z] [tick]
+[2026-04-23T05:20:01Z] [done] download completed cleanly
+[2026-04-23T05:30:01Z] [tick]
+[2026-04-23T05:30:01Z] [done] download completed cleanly
+[2026-04-23T05:40:01Z] [tick]
+[2026-04-23T05:40:01Z] [done] download completed cleanly
+[2026-04-23T05:50:01Z] [tick]
+[2026-04-23T05:50:01Z] [done] download completed cleanly
+[2026-04-23T06:00:01Z] [tick]
+[2026-04-23T06:00:01Z] [done] download completed cleanly
+[2026-04-23T06:00:01Z] notify: sent OK
+[2026-04-23T06:10:01Z] [tick]
+[2026-04-23T06:10:01Z] [done] download completed cleanly
+[2026-04-23T06:20:01Z] [tick]
+[2026-04-23T06:20:01Z] [done] download completed cleanly
+[2026-04-23T06:30:01Z] [tick]
+[2026-04-23T06:30:01Z] [done] download completed cleanly
+[2026-04-23T06:40:01Z] [tick]
+[2026-04-23T06:40:01Z] [done] download completed cleanly
+[2026-04-23T06:50:01Z] [tick]
+[2026-04-23T06:50:01Z] [done] download completed cleanly
+[2026-04-23T07:00:01Z] [tick]
+[2026-04-23T07:00:01Z] [done] download completed cleanly
+[2026-04-23T07:10:01Z] [tick]
+[2026-04-23T07:10:01Z] [done] download completed cleanly
+[2026-04-23T07:20:02Z] [tick]
+[2026-04-23T07:20:02Z] [done] download completed cleanly
+[2026-04-23T07:30:01Z] [tick]
+[2026-04-23T07:30:01Z] [done] download completed cleanly
+[2026-04-23T07:40:01Z] [tick]
+[2026-04-23T07:40:01Z] [done] download completed cleanly
+[2026-04-23T07:50:01Z] [tick]
+[2026-04-23T07:50:01Z] [done] download completed cleanly
+[2026-04-23T08:00:01Z] [tick]
+[2026-04-23T08:00:01Z] [done] download completed cleanly
+[2026-04-23T08:00:01Z] notify: sent OK
+[2026-04-23T08:10:01Z] [tick]
+[2026-04-23T08:10:01Z] [done] download completed cleanly
+[2026-04-23T08:20:01Z] [tick]
+[2026-04-23T08:20:01Z] [done] download completed cleanly
+[2026-04-23T08:30:01Z] [tick]
+[2026-04-23T08:30:01Z] [done] download completed cleanly
+[2026-04-23T08:40:01Z] [tick]
+[2026-04-23T08:40:01Z] [done] download completed cleanly
+[2026-04-23T08:50:01Z] [tick]
+[2026-04-23T08:50:01Z] [done] download completed cleanly
+[2026-04-23T09:00:01Z] [tick]
+[2026-04-23T09:00:01Z] [done] download completed cleanly
+[2026-04-23T09:10:01Z] [tick]
+[2026-04-23T09:10:01Z] [done] download completed cleanly
+[2026-04-23T09:20:01Z] [tick]
+[2026-04-23T09:20:01Z] [done] download completed cleanly
+[2026-04-23T09:30:01Z] [tick]
+[2026-04-23T09:30:01Z] [done] download completed cleanly
+[2026-04-23T09:40:01Z] [tick]
+[2026-04-23T09:40:01Z] [done] download completed cleanly
+[2026-04-23T09:50:01Z] [tick]
+[2026-04-23T09:50:01Z] [done] download completed cleanly
+[2026-04-23T10:00:01Z] [tick]
+[2026-04-23T10:00:01Z] [done] download completed cleanly
+[2026-04-23T10:00:01Z] notify: sent OK
+[2026-04-23T10:10:01Z] [tick]
+[2026-04-23T10:10:01Z] [done] download completed cleanly
+[2026-04-23T10:20:01Z] [tick]
+[2026-04-23T10:20:01Z] [done] download completed cleanly
+[2026-04-23T10:30:01Z] [tick]
+[2026-04-23T10:30:01Z] [done] download completed cleanly
+[2026-04-23T10:40:01Z] [tick]
+[2026-04-23T10:40:01Z] [done] download completed cleanly
+[2026-04-23T10:50:01Z] [tick]
+[2026-04-23T10:50:01Z] [done] download completed cleanly
+[2026-04-23T11:00:01Z] [tick]
+[2026-04-23T11:00:01Z] [done] download completed cleanly
+[2026-04-23T11:10:01Z] [tick]
+[2026-04-23T11:10:01Z] [done] download completed cleanly
+[2026-04-23T11:20:01Z] [tick]
+[2026-04-23T11:20:01Z] [done] download completed cleanly
+[2026-04-23T11:30:01Z] [tick]
+[2026-04-23T11:30:01Z] [done] download completed cleanly
+[2026-04-23T11:40:01Z] [tick]
+[2026-04-23T11:40:01Z] [done] download completed cleanly
+[2026-04-23T11:50:01Z] [tick]
+[2026-04-23T11:50:01Z] [done] download completed cleanly
+[2026-04-23T12:00:01Z] [tick]
+[2026-04-23T12:00:01Z] [done] download completed cleanly
+[2026-04-23T12:00:01Z] notify: sent OK
+[2026-04-23T12:10:01Z] [tick]
+[2026-04-23T12:10:01Z] [done] download completed cleanly
+[2026-04-23T12:20:01Z] [tick]
+[2026-04-23T12:20:01Z] [done] download completed cleanly
+[2026-04-23T12:30:01Z] [tick]
+[2026-04-23T12:30:01Z] [done] download completed cleanly
+[2026-04-23T12:40:01Z] [tick]
+[2026-04-23T12:40:01Z] [done] download completed cleanly
+[2026-04-23T12:50:01Z] [tick]
+[2026-04-23T12:50:01Z] [done] download completed cleanly
+[2026-04-23T13:00:01Z] [tick]
+[2026-04-23T13:00:01Z] [done] download completed cleanly
+[2026-04-23T13:10:01Z] [tick]
+[2026-04-23T13:10:01Z] [done] download completed cleanly
+[2026-04-23T13:20:01Z] [tick]
+[2026-04-23T13:20:01Z] [done] download completed cleanly
+[2026-04-23T13:30:01Z] [tick]
+[2026-04-23T13:30:01Z] [done] download completed cleanly
+[2026-04-23T13:40:01Z] [tick]
+[2026-04-23T13:40:01Z] [done] download completed cleanly
+[2026-04-23T13:50:01Z] [tick]
+[2026-04-23T13:50:01Z] [done] download completed cleanly
+[2026-04-23T14:00:01Z] [tick]
+[2026-04-23T14:00:01Z] [done] download completed cleanly
+[2026-04-23T14:00:01Z] notify: sent OK
+[2026-04-23T14:10:01Z] [tick]
+[2026-04-23T14:10:01Z] [done] download completed cleanly
+[2026-04-23T14:20:01Z] [tick]
+[2026-04-23T14:20:02Z] [done] download completed cleanly
+[2026-04-23T14:30:01Z] [tick]
+[2026-04-23T14:30:01Z] [done] download completed cleanly
+[2026-04-23T14:40:01Z] [tick]
+[2026-04-23T14:40:01Z] [done] download completed cleanly
+[2026-04-23T14:50:01Z] [tick]
+[2026-04-23T14:50:01Z] [done] download completed cleanly
+[2026-04-23T15:00:01Z] [tick]
+[2026-04-23T15:00:01Z] [done] download completed cleanly
+[2026-04-23T15:10:01Z] [tick]
+[2026-04-23T15:10:01Z] [done] download completed cleanly
+[2026-04-23T15:20:01Z] [tick]
+[2026-04-23T15:20:01Z] [done] download completed cleanly
+[2026-04-23T15:30:01Z] [tick]
+[2026-04-23T15:30:01Z] [done] download completed cleanly
+[2026-04-23T15:40:01Z] [tick]
+[2026-04-23T15:40:01Z] [done] download completed cleanly
+[2026-04-23T15:50:01Z] [tick]
+[2026-04-23T15:50:01Z] [done] download completed cleanly
+[2026-04-23T16:00:01Z] [tick]
+[2026-04-23T16:00:01Z] [done] download completed cleanly
+[2026-04-23T16:00:02Z] notify: sent OK
+[2026-04-23T16:10:01Z] [tick]
+[2026-04-23T16:10:01Z] [done] download completed cleanly
+[2026-04-23T16:20:01Z] [tick]
+[2026-04-23T16:20:01Z] [done] download completed cleanly
+[2026-04-23T16:30:01Z] [tick]
+[2026-04-23T16:30:01Z] [done] download completed cleanly
+[2026-04-23T23:40:01Z] [tick]
+[2026-04-23T23:40:01Z] [done] download completed cleanly
+[2026-04-23T23:50:01Z] [tick]
+[2026-04-23T23:50:01Z] [done] download completed cleanly
+[2026-04-24T00:00:01Z] [tick]
+[2026-04-24T00:00:01Z] [done] download completed cleanly
+[2026-04-24T00:00:01Z] notify: sent OK
+[2026-04-24T00:10:01Z] [tick]
+[2026-04-24T00:10:01Z] [done] download completed cleanly
+[2026-04-24T00:20:01Z] [tick]
+[2026-04-24T00:20:01Z] [done] download completed cleanly
+[2026-04-24T00:30:01Z] [tick]
+[2026-04-24T00:30:01Z] [done] download completed cleanly
+[2026-04-24T00:40:01Z] [tick]
+[2026-04-24T00:40:01Z] [done] download completed cleanly
+[2026-04-24T00:50:01Z] [tick]
+[2026-04-24T00:50:01Z] [done] download completed cleanly
+[2026-04-24T01:00:01Z] [tick]
+[2026-04-24T01:00:01Z] [done] download completed cleanly
+[2026-04-24T01:10:01Z] [tick]
+[2026-04-24T01:10:01Z] [done] download completed cleanly
+[2026-04-24T01:20:01Z] [tick]
+[2026-04-24T01:20:01Z] [done] download completed cleanly
+[2026-04-24T01:30:01Z] [tick]
+[2026-04-24T01:30:02Z] [done] download completed cleanly
+[2026-04-24T01:40:01Z] [tick]
+[2026-04-24T01:40:01Z] [done] download completed cleanly
+[2026-04-24T01:50:01Z] [tick]
+[2026-04-24T01:50:01Z] [done] download completed cleanly
+[2026-04-24T02:00:01Z] [tick]
+[2026-04-24T02:00:01Z] [done] download completed cleanly
+[2026-04-24T02:00:01Z] notify: sent OK
+[2026-04-24T02:10:01Z] [tick]
+[2026-04-24T02:10:01Z] [done] download completed cleanly
+[2026-04-24T02:20:01Z] [tick]
+[2026-04-24T02:20:01Z] [done] download completed cleanly
+[2026-04-24T02:30:01Z] [tick]
+[2026-04-24T02:30:01Z] [done] download completed cleanly
+[2026-04-24T02:40:01Z] [tick]
+[2026-04-24T02:40:01Z] [done] download completed cleanly
+[2026-04-24T02:50:01Z] [tick]
+[2026-04-24T02:50:01Z] [done] download completed cleanly
+[2026-04-24T03:00:01Z] [tick]
+[2026-04-24T03:00:01Z] [done] download completed cleanly
+[2026-04-24T03:10:01Z] [tick]
+[2026-04-24T03:10:01Z] [done] download completed cleanly
+[2026-04-24T03:20:01Z] [tick]
+[2026-04-24T03:20:01Z] [done] download completed cleanly
+[2026-04-24T03:30:01Z] [tick]
+[2026-04-24T03:30:01Z] [done] download completed cleanly
+[2026-04-24T03:40:01Z] [tick]
+[2026-04-24T03:40:01Z] [done] download completed cleanly
+[2026-04-24T03:50:01Z] [tick]
+[2026-04-24T03:50:01Z] [done] download completed cleanly
+[2026-04-24T04:00:01Z] [tick]
+[2026-04-24T04:00:01Z] [done] download completed cleanly
+[2026-04-24T04:00:01Z] notify: sent OK
+[2026-04-24T04:10:01Z] [tick]
+[2026-04-24T04:10:01Z] [done] download completed cleanly
+[2026-04-24T04:20:01Z] [tick]
+[2026-04-24T04:20:01Z] [done] download completed cleanly
+[2026-04-24T04:30:01Z] [tick]
+[2026-04-24T04:30:01Z] [done] download completed cleanly
+[2026-04-24T04:40:01Z] [tick]
+[2026-04-24T04:40:01Z] [done] download completed cleanly
+[2026-04-24T04:50:01Z] [tick]
+[2026-04-24T04:50:01Z] [done] download completed cleanly
+[2026-04-24T05:00:01Z] [tick]
+[2026-04-24T05:00:01Z] [done] download completed cleanly
+[2026-04-24T05:10:01Z] [tick]
+[2026-04-24T05:10:01Z] [done] download completed cleanly
+[2026-04-24T05:20:01Z] [tick]
+[2026-04-24T05:20:01Z] [done] download completed cleanly
+[2026-04-24T05:30:01Z] [tick]
+[2026-04-24T05:30:01Z] [done] download completed cleanly
+[2026-04-24T05:40:01Z] [tick]
+[2026-04-24T05:40:01Z] [done] download completed cleanly
+[2026-04-24T05:50:01Z] [tick]
+[2026-04-24T05:50:01Z] [done] download completed cleanly
+[2026-04-24T06:00:01Z] [tick]
+[2026-04-24T06:00:01Z] [done] download completed cleanly
+[2026-04-24T06:00:01Z] notify: sent OK
+[2026-04-24T06:10:01Z] [tick]
+[2026-04-24T06:10:01Z] [done] download completed cleanly
+[2026-04-24T06:20:01Z] [tick]
+[2026-04-24T06:20:01Z] [done] download completed cleanly
+[2026-04-24T06:30:01Z] [tick]
+[2026-04-24T06:30:01Z] [done] download completed cleanly
+[2026-04-24T06:40:01Z] [tick]
+[2026-04-24T06:40:01Z] [done] download completed cleanly
+[2026-04-24T06:50:01Z] [tick]
+[2026-04-24T06:50:01Z] [done] download completed cleanly
+[2026-04-24T07:00:01Z] [tick]
+[2026-04-24T07:00:01Z] [done] download completed cleanly
+[2026-04-24T07:10:01Z] [tick]
+[2026-04-24T07:10:01Z] [done] download completed cleanly
+[2026-04-24T07:20:01Z] [tick]
+[2026-04-24T07:20:02Z] [done] download completed cleanly
+[2026-04-24T07:30:01Z] [tick]
+[2026-04-24T07:30:01Z] [done] download completed cleanly
+[2026-04-24T07:40:01Z] [tick]
+[2026-04-24T07:40:01Z] [done] download completed cleanly
+[2026-04-24T07:50:01Z] [tick]
+[2026-04-24T07:50:01Z] [done] download completed cleanly
+[2026-04-24T08:00:01Z] [tick]
+[2026-04-24T08:00:01Z] [done] download completed cleanly
+[2026-04-24T08:00:01Z] notify: sent OK
+[2026-04-24T08:10:01Z] [tick]
+[2026-04-24T08:10:01Z] [done] download completed cleanly
+[2026-04-24T08:20:01Z] [tick]
+[2026-04-24T08:20:01Z] [done] download completed cleanly
+[2026-04-24T08:30:01Z] [tick]
+[2026-04-24T08:30:01Z] [done] download completed cleanly
+[2026-04-24T08:40:01Z] [tick]
+[2026-04-24T08:40:01Z] [done] download completed cleanly
+[2026-04-24T08:50:01Z] [tick]
+[2026-04-24T08:50:01Z] [done] download completed cleanly
+[2026-04-24T09:00:01Z] [tick]
+[2026-04-24T09:00:02Z] [done] download completed cleanly
+[2026-04-24T09:10:01Z] [tick]
+[2026-04-24T09:10:01Z] [done] download completed cleanly
+[2026-04-24T09:20:01Z] [tick]
+[2026-04-24T09:20:01Z] [done] download completed cleanly
+[2026-04-24T09:30:01Z] [tick]
+[2026-04-24T09:30:01Z] [done] download completed cleanly
+[2026-04-24T09:40:01Z] [tick]
+[2026-04-24T09:40:01Z] [done] download completed cleanly
+[2026-04-24T09:50:01Z] [tick]
+[2026-04-24T09:50:01Z] [done] download completed cleanly

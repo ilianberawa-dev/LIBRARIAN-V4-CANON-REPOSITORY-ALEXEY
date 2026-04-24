@@ -1,0 +1,511 @@
+{
+  "channel": "Алексей Колесов | Private",
+  "started": "2026-04-20T15:08:22.171Z",
+  "files": [
+    {
+      "msg_id": 10,
+      "date": "2025-03-25T09:00:17.000Z",
+      "filename": "nginx-proxy.zip",
+      "size": 1077,
+      "path": "/opt/tg-export/media/10_nginx-proxy.zip",
+      "priority": 1
+    },
+    {
+      "msg_id": 54,
+      "date": "2025-06-20T13:20:29.000Z",
+      "filename": "baserow.zip",
+      "size": 1886,
+      "path": "/opt/tg-export/media/54_baserow.zip",
+      "priority": 1
+    },
+    {
+      "msg_id": 12,
+      "date": "2025-03-25T09:02:04.000Z",
+      "filename": "n8n.zip",
+      "size": 3329,
+      "path": "/opt/tg-export/media/12_n8n.zip",
+      "priority": 1
+    },
+    {
+      "msg_id": 96,
+      "date": "2025-10-28T15:57:31.000Z",
+      "filename": "sup_mcp_docs.zip",
+      "size": 6395,
+      "path": "/opt/tg-export/media/96_sup_mcp_docs.zip",
+      "priority": 1
+    },
+    {
+      "msg_id": 14,
+      "date": "2025-04-14T09:28:33.000Z",
+      "filename": "supabase.zip",
+      "size": 8339,
+      "path": "/opt/tg-export/media/14_supabase.zip",
+      "priority": 1
+    },
+    {
+      "msg_id": 30,
+      "date": "2025-04-24T05:12:39.000Z",
+      "filename": "supabase_add_docs_to_db.json",
+      "size": 8573,
+      "path": "/opt/tg-export/media/30_supabase_add_docs_to_db.json",
+      "priority": 1
+    },
+    {
+      "msg_id": 177,
+      "date": "2026-04-20T11:18:24.000Z",
+      "filename": "telegram.zip",
+      "size": 10050,
+      "path": "/opt/tg-export/media/177_telegram.zip",
+      "priority": 1
+    },
+    {
+      "msg_id": 74,
+      "date": "2025-07-26T09:49:40.000Z",
+      "filename": "claude_prompt.md",
+      "size": 11917,
+      "path": "/opt/tg-export/media/74_claude_prompt.md",
+      "priority": 1
+    },
+    {
+      "msg_id": 26,
+      "date": "2025-04-24T05:12:39.000Z",
+      "filename": "google_drive_add_docs_to_db.json",
+      "size": 13686,
+      "path": "/opt/tg-export/media/26_google_drive_add_docs_to_db.json",
+      "priority": 1
+    },
+    {
+      "msg_id": 28,
+      "date": "2025-04-24T05:12:39.000Z",
+      "filename": "google_drive_update_docs_to_db.json",
+      "size": 14404,
+      "path": "/opt/tg-export/media/28_google_drive_update_docs_to_db.json",
+      "priority": 1
+    },
+    {
+      "msg_id": 32,
+      "date": "2025-04-24T05:12:40.000Z",
+      "filename": "supabase_update_stocks.json",
+      "size": 14934,
+      "path": "/opt/tg-export/media/32_supabase_update_stocks.json",
+      "priority": 1
+    },
+    {
+      "msg_id": 146,
+      "date": "2026-03-19T14:04:01.000Z",
+      "filename": "Paperclip_install.zip",
+      "size": 14951,
+      "path": "/opt/tg-export/media/146_Paperclip_install.zip",
+      "priority": 1
+    },
+    {
+      "msg_id": 27,
+      "date": "2025-04-24T05:12:39.000Z",
+      "filename": "google_drive_ai_consultant_with_memory.json",
+      "size": 18534,
+      "path": "/opt/tg-export/media/27_google_drive_ai_consultant_with_memory.json",
+      "priority": 1
+    },
+    {
+      "msg_id": 31,
+      "date": "2025-04-24T05:12:39.000Z",
+      "filename": "supabase_ai_consultant_with_memory.json",
+      "size": 18553,
+      "path": "/opt/tg-export/media/31_supabase_ai_consultant_with_memory.json",
+      "priority": 1
+    },
+    {
+      "msg_id": 81,
+      "date": "2025-08-29T17:39:11.000Z",
+      "filename": "video_settings.zip",
+      "size": 21958,
+      "path": "/opt/tg-export/media/81_video_settings.zip",
+      "priority": 1
+    },
+    {
+      "msg_id": 166,
+      "date": "2026-04-06T08:19:32.000Z",
+      "filename": "INSTRUCTION_CONNECT_MCP.md",
+      "size": 26382,
+      "path": "/opt/tg-export/media/166_INSTRUCTION_CONNECT_MCP.md",
+      "priority": 1
+    },
+    {
+      "msg_id": 159,
+      "date": "2026-04-03T13:29:23.000Z",
+      "filename": "lightrag.zip",
+      "size": 36389,
+      "path": "/opt/tg-export/media/159_lightrag.zip",
+      "priority": 1
+    },
+    {
+      "msg_id": 75,
+      "date": "2025-07-28T09:01:07.000Z",
+      "filename": "prompts.zip",
+      "size": 36854,
+      "path": "/opt/tg-export/media/75_prompts.zip",
+      "priority": 1
+    },
+    {
+      "msg_id": 52,
+      "date": "2025-06-17T08:55:59.000Z",
+      "filename": "prompts_schemas.zip",
+      "size": 41436,
+      "path": "/opt/tg-export/media/52_prompts_schemas.zip",
+      "priority": 1
+    },
+    {
+      "msg_id": 134,
+      "date": "2026-03-03T12:01:09.000Z",
+      "filename": "configs_instructions.zip",
+      "size": 69767,
+      "path": "/opt/tg-export/media/134_configs_instructions.zip",
+      "priority": 1
+    },
+    {
+      "msg_id": 67,
+      "date": "2025-07-12T16:15:55.000Z",
+      "filename": "agent_template.zip",
+      "size": 351664,
+      "path": "/opt/tg-export/media/67_agent_template.zip",
+      "priority": 1
+    },
+    {
+      "msg_id": 90,
+      "date": "2025-08-30T10:29:58.000Z",
+      "filename": "devops_team.zip",
+      "size": 357516,
+      "path": "/opt/tg-export/media/90_devops_team.zip",
+      "priority": 1
+    },
+    {
+      "msg_id": 16,
+      "date": "2025-04-22T10:31:19.000Z",
+      "filename": "ai_seller_rag.zip",
+      "size": 470537,
+      "path": "/opt/tg-export/media/16_ai_seller_rag.zip",
+      "priority": 1
+    },
+    {
+      "msg_id": 102,
+      "date": "2025-11-18T14:18:55.000Z",
+      "filename": "content_zavod_tg.zip",
+      "size": 2108226,
+      "path": "/opt/tg-export/media/102_content_zavod_tg.zip",
+      "priority": 1
+    },
+    {
+      "msg_id": 40,
+      "date": "2025-05-22T17:06:38.000Z",
+      "filename": "leshiy_v2.zip",
+      "size": 8690448,
+      "path": "/opt/tg-export/media/40_leshiy_v2.zip",
+      "priority": 1
+    },
+    {
+      "msg_id": 65,
+      "date": "2025-07-11T09:42:31.000Z",
+      "filename": "all_workflows.zip",
+      "size": 9400446,
+      "path": "/opt/tg-export/media/65_all_workflows.zip",
+      "priority": 1
+    },
+    {
+      "msg_id": 113,
+      "date": "2025-11-25T08:28:58.000Z",
+      "filename": "девчонки_мальчишки_читайте_книжки.zip",
+      "size": 34091706,
+      "path": "/opt/tg-export/media/113_девчонки_мальчишки_читайте_книжки.zip",
+      "priority": 1
+    },
+    {
+      "msg_id": 17,
+      "date": "2025-04-22T10:32:51.000Z",
+      "filename": "sql_query.txt",
+      "size": 9310,
+      "path": "/opt/tg-export/media/17_sql_query.txt",
+      "priority": 2
+    },
+    {
+      "msg_id": 29,
+      "date": "2025-04-24T05:12:39.000Z",
+      "filename": "prompts.txt",
+      "size": 18731,
+      "path": "/opt/tg-export/media/29_prompts.txt",
+      "priority": 2
+    },
+    {
+      "msg_id": 34,
+      "date": "2025-04-24T05:14:22.000Z",
+      "filename": "bz_metodichka.pdf",
+      "size": 347416,
+      "path": "/opt/tg-export/media/34_bz_metodichka.pdf",
+      "priority": 2
+    },
+    {
+      "msg_id": 174,
+      "date": "2026-04-16T06:29:44.000Z",
+      "filename": "Skills от А до Я.pdf",
+      "size": 631526,
+      "path": "/opt/tg-export/media/174_Skills от А до Я.pdf",
+      "priority": 2
+    },
+    {
+      "msg_id": 110,
+      "date": "2025-11-22T15:40:21.000Z",
+      "filename": "Исследование_приоритетных_B2B_сегментов_для_лидогенерации_в_России.pdf",
+      "size": 891398,
+      "path": "/opt/tg-export/media/110_Исследование_приоритетных_B2B_сегментов_для_лидогенерации_в_России.pdf",
+      "priority": 2
+    },
+    {
+      "msg_id": 35,
+      "date": "2025-04-24T05:14:22.000Z",
+      "filename": "bz_stock.csv",
+      "size": 2502133,
+      "path": "/opt/tg-export/media/35_bz_stock.csv",
+      "priority": 2
+    },
+    {
+      "msg_id": 168,
+      "date": "2026-04-10T10:15:52.000Z",
+      "filename": "Мультиагентные AI-системы.pdf",
+      "size": 5350153,
+      "path": "/opt/tg-export/media/168_Мультиагентные AI-системы.pdf",
+      "priority": 2
+    },
+    {
+      "msg_id": 11,
+      "date": "2025-03-25T09:00:53.000Z",
+      "filename": "photo_11.jpg",
+      "size": 57953,
+      "path": "/opt/tg-export/media/11_photo_11.jpg",
+      "priority": 3
+    },
+    {
+      "msg_id": 56,
+      "date": "2025-06-25T16:04:32.000Z",
+      "filename": "photo_56.jpg",
+      "size": 52542,
+      "path": "/opt/tg-export/media/56_photo_56.jpg",
+      "priority": 3
+    },
+    {
+      "msg_id": 59,
+      "date": "2025-06-27T07:36:26.000Z",
+      "filename": "photo_59.jpg",
+      "size": 62030,
+      "path": "/opt/tg-export/media/59_photo_59.jpg",
+      "priority": 3
+    },
+    {
+      "msg_id": 175,
+      "date": "2026-04-16T06:30:34.000Z",
+      "filename": "photo_175.jpg",
+      "size": 68334,
+      "path": "/opt/tg-export/media/175_photo_175.jpg",
+      "priority": 3
+    },
+    {
+      "msg_id": 112,
+      "date": "2025-11-24T12:27:40.000Z",
+      "filename": "photo_112.jpg",
+      "size": 70338,
+      "path": "/opt/tg-export/media/112_photo_112.jpg",
+      "priority": 3
+    },
+    {
+      "msg_id": 167,
+      "date": "2026-04-08T05:36:56.000Z",
+      "filename": "photo_167.jpg",
+      "size": 67171,
+      "path": "/opt/tg-export/media/167_photo_167.jpg",
+      "priority": 3
+    },
+    {
+      "msg_id": 95,
+      "date": "2025-10-28T15:56:30.000Z",
+      "filename": "photo_95.jpg",
+      "size": 54435,
+      "path": "/opt/tg-export/media/95_photo_95.jpg",
+      "priority": 3
+    },
+    {
+      "msg_id": 172,
+      "date": "2026-04-13T09:24:54.000Z",
+      "filename": "photo_172.jpg",
+      "size": 57568,
+      "path": "/opt/tg-export/media/172_photo_172.jpg",
+      "priority": 3
+    },
+    {
+      "msg_id": 91,
+      "date": "2025-08-30T10:32:16.000Z",
+      "filename": "photo_91.jpg",
+      "size": 84517,
+      "path": "/opt/tg-export/media/91_photo_91.jpg",
+      "priority": 3
+    },
+    {
+      "msg_id": 133,
+      "date": "2026-03-03T12:00:17.000Z",
+      "filename": "photo_133.jpg",
+      "size": 91026,
+      "path": "/opt/tg-export/media/133_photo_133.jpg",
+      "priority": 3
+    },
+    {
+      "msg_id": 143,
+      "date": "2026-03-19T14:02:47.000Z",
+      "filename": "photo_143.jpg",
+      "size": 104079,
+      "path": "/opt/tg-export/media/143_photo_143.jpg",
+      "priority": 3
+    },
+    {
+      "msg_id": 101,
+      "date": "2025-11-18T14:17:38.000Z",
+      "filename": "photo_101.jpg",
+      "size": 101981,
+      "path": "/opt/tg-export/media/101_photo_101.jpg",
+      "priority": 3
+    },
+    {
+      "msg_id": 111,
+      "date": "2025-11-24T12:27:40.000Z",
+      "filename": "photo_111.jpg",
+      "size": 115510,
+      "path": "/opt/tg-export/media/111_photo_111.jpg",
+      "priority": 3
+    },
+    {
+      "msg_id": 158,
+      "date": "2026-04-03T13:27:10.000Z",
+      "filename": "photo_158.jpg",
+      "size": 129434,
+      "path": "/opt/tg-export/media/158_photo_158.jpg",
+      "priority": 3
+    },
+    {
+      "msg_id": 132,
+      "date": "2025-12-31T10:20:25.000Z",
+      "filename": "photo_132.jpg",
+      "size": 149929,
+      "path": "/opt/tg-export/media/132_photo_132.jpg",
+      "priority": 3
+    },
+    {
+      "msg_id": 41,
+      "date": "2025-05-22T17:08:55.000Z",
+      "filename": "photo_41.jpg",
+      "size": 316940,
+      "path": "/opt/tg-export/media/41_photo_41.jpg",
+      "priority": 3
+    },
+    {
+      "msg_id": 57,
+      "date": "2025-06-26T12:05:26.000Z",
+      "filename": "Gemini_full.mp4",
+      "size": 227361752,
+      "path": "/opt/tg-export/media/57_Gemini_full.mp4",
+      "priority": 4
+    },
+    {
+      "msg_id": 55,
+      "date": "2025-06-20T13:25:28.000Z",
+      "filename": "Baserow.mp4",
+      "size": 285958693,
+      "path": "/opt/tg-export/media/55_Baserow.mp4",
+      "priority": 4
+    },
+    {
+      "msg_id": 64,
+      "date": "2025-07-03T09:31:09.000Z",
+      "filename": "ч2.mp4",
+      "size": 377362668,
+      "path": "/opt/tg-export/media/64_ч2.mp4",
+      "priority": 4
+    },
+    {
+      "msg_id": 71,
+      "date": "2025-07-26T08:47:27.000Z",
+      "filename": "установка_n8n_mcp.mp4",
+      "size": 456506614,
+      "path": "/opt/tg-export/media/71_установка_n8n_mcp.mp4",
+      "priority": 4
+    },
+    {
+      "msg_id": 144,
+      "date": "2026-03-19T14:03:21.000Z",
+      "filename": "paperclip_private_install_гот.mp4",
+      "size": 467572921,
+      "path": "/opt/tg-export/media/144_paperclip_private_install_гот.mp4",
+      "priority": 4
+    },
+    {
+      "msg_id": 13,
+      "date": "2025-03-25T09:02:22.000Z",
+      "filename": "установка n8n.mp4",
+      "size": 556501117,
+      "path": "/opt/tg-export/media/13_установка n8n.mp4",
+      "priority": 4
+    },
+    {
+      "msg_id": 63,
+      "date": "2025-07-03T09:31:09.000Z",
+      "filename": "ч1.mp4",
+      "size": 667854043,
+      "path": "/opt/tg-export/media/63_ч1.mp4",
+      "priority": 4
+    },
+    {
+      "msg_id": 136,
+      "date": "2026-03-03T12:03:45.000Z",
+      "filename": "готовый_Private_openclaw_install.mp4",
+      "size": 672270400,
+      "path": "/opt/tg-export/media/136_готовый_Private_openclaw_install.mp4",
+      "priority": 4
+    },
+    {
+      "msg_id": 137,
+      "date": "2026-03-03T12:09:01.000Z",
+      "filename": "Private_safe_гот.mp4",
+      "size": 908275092,
+      "path": "/opt/tg-export/media/137_Private_safe_гот.mp4",
+      "priority": 4
+    },
+    {
+      "msg_id": 53,
+      "date": "2025-06-17T08:59:28.000Z",
+      "filename": "Actions.mp4",
+      "size": 1108536510,
+      "path": "/opt/tg-export/media/53_Actions.mp4",
+      "priority": 4
+    },
+    {
+      "msg_id": 147,
+      "date": "2026-03-19T14:04:56.000Z",
+      "filename": "paperclip_private_detail_гот.mp4",
+      "size": 1299493872,
+      "path": "/opt/tg-export/media/147_paperclip_private_detail_гот.mp4",
+      "priority": 4
+    },
+    {
+      "msg_id": 15,
+      "date": "2025-04-14T09:43:13.000Z",
+      "filename": "Установка supabase.mp4",
+      "size": 1666757364,
+      "path": "/opt/tg-export/media/15_Установка supabase.mp4",
+      "priority": 4
+    }
+  ],
+  "updated": "2026-04-21T06:33:10.407Z",
+  "finished": "2026-04-20T19:14:45.020Z",
+  "summary": {
+    "scanned": 154,
+    "queued": 50,
+    "downloaded": 11,
+    "skipped": 39,
+    "errors": 0
+  }
+}

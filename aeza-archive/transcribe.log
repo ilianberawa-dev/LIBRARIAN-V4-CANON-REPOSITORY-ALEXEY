@@ -1,0 +1,719 @@
+[2026-04-20T15:33:31Z] [START] transcribe.sh
+[2026-04-20T15:33:31Z] [start] 165_Встреча_в_Телемосте_05_04_26_18_02_36_—_запись.mp4
+[2026-04-20T15:33:33Z] [extract] 165_Встреча_в_Телемосте_05_04_26_18_02_36_—_запись.mp4 -> mp3 64kbps mono 16kHz
+[2026-04-20T15:34:20Z] [ready] 165_Встреча_в_Телемосте_05_04_26_18_02_36___запись.mp4.mp3 size=66026740B duration=8253.288000s
+[2026-04-20T15:34:20Z] [split] audio > 20MB, splitting into 600s chunks
+[2026-04-20T15:34:25Z] [chunk] 165_Встреча_в_Телемосте_05_04_26_18_02_36___запись.mp4_part000 offset=0s
+[2026-04-20T15:34:28Z] [ok] 165_Встреча_в_Телемосте_05_04_26_18_02_36___запись.mp4_part000 dur=600.01s text=7564ch
+[2026-04-20T15:34:30Z] [chunk] 165_Встреча_в_Телемосте_05_04_26_18_02_36___запись.mp4_part001 offset=600.01s
+[2026-04-20T15:34:32Z] [ok] 165_Встреча_в_Телемосте_05_04_26_18_02_36___запись.mp4_part001 dur=600.01s text=7962ch
+[2026-04-20T15:34:34Z] [chunk] 165_Встреча_в_Телемосте_05_04_26_18_02_36___запись.mp4_part002 offset=1200.02s
+[2026-04-20T15:34:36Z] [ok] 165_Встреча_в_Телемосте_05_04_26_18_02_36___запись.mp4_part002 dur=599.98s text=7808ch
+/opt/tg-export/transcribe.sh: line 114: /usr/bin/jq: Argument list too long
+[2026-04-20T15:34:38Z] [chunk] 165_Встреча_в_Телемосте_05_04_26_18_02_36___запись.mp4_part003 offset=1800.00s
+[2026-04-20T15:34:41Z] [ok] 165_Встреча_в_Телемосте_05_04_26_18_02_36___запись.mp4_part003 dur=600.01s text=7918ch
+jq: invalid JSON text passed to --argjson
+Use jq --help for help with command-line options,
+or see the jq manpage, or online docs  at https://jqlang.github.io/jq
+[2026-04-20T15:34:44Z] [chunk] 165_Встреча_в_Телемосте_05_04_26_18_02_36___запись.mp4_part004 offset=2400.01s
+[2026-04-20T15:34:46Z] [ok] 165_Встреча_в_Телемосте_05_04_26_18_02_36___запись.mp4_part004 dur=600.01s text=7553ch
+jq: invalid JSON text passed to --argjson
+Use jq --help for help with command-line options,
+or see the jq manpage, or online docs  at https://jqlang.github.io/jq
+[2026-04-20T15:34:48Z] [chunk] 165_Встреча_в_Телемосте_05_04_26_18_02_36___запись.mp4_part005 offset=3000.02s
+[2026-04-20T15:34:51Z] [ok] 165_Встреча_в_Телемосте_05_04_26_18_02_36___запись.mp4_part005 dur=599.98s text=7984ch
+jq: invalid JSON text passed to --argjson
+Use jq --help for help with command-line options,
+or see the jq manpage, or online docs  at https://jqlang.github.io/jq
+[2026-04-20T15:34:53Z] [chunk] 165_Встреча_в_Телемосте_05_04_26_18_02_36___запись.mp4_part006 offset=3600.00s
+[2026-04-20T15:34:55Z] [ok] 165_Встреча_в_Телемосте_05_04_26_18_02_36___запись.mp4_part006 dur=600.01s text=7861ch
+jq: invalid JSON text passed to --argjson
+Use jq --help for help with command-line options,
+or see the jq manpage, or online docs  at https://jqlang.github.io/jq
+[2026-04-20T15:34:57Z] [chunk] 165_Встреча_в_Телемосте_05_04_26_18_02_36___запись.mp4_part007 offset=4200.01s
+[2026-04-20T15:35:00Z] [ok] 165_Встреча_в_Телемосте_05_04_26_18_02_36___запись.mp4_part007 dur=600.01s text=7964ch
+jq: invalid JSON text passed to --argjson
+Use jq --help for help with command-line options,
+or see the jq manpage, or online docs  at https://jqlang.github.io/jq
+[2026-04-20T15:35:02Z] [chunk] 165_Встреча_в_Телемосте_05_04_26_18_02_36___запись.mp4_part008 offset=4800.02s
+[2026-04-20T15:35:05Z] [ok] 165_Встреча_в_Телемосте_05_04_26_18_02_36___запись.mp4_part008 dur=599.98s text=8009ch
+jq: invalid JSON text passed to --argjson
+Use jq --help for help with command-line options,
+or see the jq manpage, or online docs  at https://jqlang.github.io/jq
+[2026-04-20T15:35:07Z] [chunk] 165_Встреча_в_Телемосте_05_04_26_18_02_36___запись.mp4_part009 offset=5400.00s
+[2026-04-20T15:35:09Z] [ok] 165_Встреча_в_Телемосте_05_04_26_18_02_36___запись.mp4_part009 dur=600.01s text=7546ch
+jq: invalid JSON text passed to --argjson
+Use jq --help for help with command-line options,
+or see the jq manpage, or online docs  at https://jqlang.github.io/jq
+[2026-04-20T15:35:11Z] [chunk] 165_Встреча_в_Телемосте_05_04_26_18_02_36___запись.mp4_part010 offset=6000.01s
+[2026-04-20T15:35:14Z] [ok] 165_Встреча_в_Телемосте_05_04_26_18_02_36___запись.mp4_part010 dur=600.01s text=8091ch
+jq: invalid JSON text passed to --argjson
+Use jq --help for help with command-line options,
+or see the jq manpage, or online docs  at https://jqlang.github.io/jq
+[2026-04-20T15:35:16Z] [chunk] 165_Встреча_в_Телемосте_05_04_26_18_02_36___запись.mp4_part011 offset=6600.02s
+[2026-04-20T15:35:18Z] [ok] 165_Встреча_в_Телемосте_05_04_26_18_02_36___запись.mp4_part011 dur=599.98s text=8064ch
+jq: invalid JSON text passed to --argjson
+Use jq --help for help with command-line options,
+or see the jq manpage, or online docs  at https://jqlang.github.io/jq
+[2026-04-20T15:35:20Z] [chunk] 165_Встреча_в_Телемосте_05_04_26_18_02_36___запись.mp4_part012 offset=7200.00s
+[2026-04-20T15:35:22Z] [ok] 165_Встреча_в_Телемосте_05_04_26_18_02_36___запись.mp4_part012 dur=600.01s text=7367ch
+jq: invalid JSON text passed to --argjson
+Use jq --help for help with command-line options,
+or see the jq manpage, or online docs  at https://jqlang.github.io/jq
+[2026-04-20T15:35:25Z] [chunk] 165_Встреча_в_Телемосте_05_04_26_18_02_36___запись.mp4_part013 offset=7800.01s
+[2026-04-20T15:35:27Z] [ok] 165_Встреча_в_Телемосте_05_04_26_18_02_36___запись.mp4_part013 dur=453.28s text=5541ch
+jq: invalid JSON text passed to --argjson
+Use jq --help for help with command-line options,
+or see the jq manpage, or online docs  at https://jqlang.github.io/jq
+/opt/tg-export/transcribe.sh: line 121: /usr/bin/jq: Argument list too long
+[2026-04-20T15:35:29Z] [merged] 165_Встреча_в_Телемосте_05_04_26_18_02_36___запись.mp4 total_dur=8253.29s
+[2026-04-20T15:35:29Z] [start] 170_video.mp4
+[2026-04-20T15:35:29Z] [extract] 170_video.mp4 -> mp3 64kbps mono 16kHz
+[2026-04-20T15:35:29Z] [ready] 170_video.mp4.mp3 size=473326B duration=59.112000s
+[2026-04-20T15:35:31Z] [ok] 170_video.mp4 dur=59.11s text=741ch
+[2026-04-20T15:35:31Z] [start] 164_Аудио запись встречи 06.03.26.wav
+[2026-04-20T15:35:31Z] [convert] 164_Аудио запись встречи 06.03.26.wav -> mp3 64kbps mono 16kHz (from audio)
+[2026-04-20T15:35:54Z] [ready] 164_Аудио_запись_встречи_06.03.26.wav.mp3 size=66026637B duration=8253.288000s
+[2026-04-20T15:35:54Z] [split] audio > 20MB, splitting into 600s chunks
+[2026-04-20T15:35:59Z] [chunk] 164_Аудио_запись_встречи_06.03.26.wav_part000 offset=0s
+[2026-04-20T15:36:01Z] [ok] 164_Аудио_запись_встречи_06.03.26.wav_part000 dur=600.01s text=8212ch
+[2026-04-20T15:36:03Z] [chunk] 164_Аудио_запись_встречи_06.03.26.wav_part001 offset=600.01s
+[2026-04-20T15:36:06Z] [ok] 164_Аудио_запись_встречи_06.03.26.wav_part001 dur=600.01s text=8113ch
+[2026-04-20T15:36:08Z] [chunk] 164_Аудио_запись_встречи_06.03.26.wav_part002 offset=1200.02s
+[2026-04-20T15:36:10Z] [ok] 164_Аудио_запись_встречи_06.03.26.wav_part002 dur=599.98s text=7337ch
+/opt/tg-export/transcribe.sh: line 114: /usr/bin/jq: Argument list too long
+[2026-04-20T15:36:12Z] [chunk] 164_Аудио_запись_встречи_06.03.26.wav_part003 offset=1800.00s
+[2026-04-20T15:36:14Z] [ok] 164_Аудио_запись_встречи_06.03.26.wav_part003 dur=600.01s text=7588ch
+jq: invalid JSON text passed to --argjson
+Use jq --help for help with command-line options,
+or see the jq manpage, or online docs  at https://jqlang.github.io/jq
+[2026-04-20T15:36:17Z] [chunk] 164_Аудио_запись_встречи_06.03.26.wav_part004 offset=2400.01s
+[2026-04-20T15:36:22Z] [ok] 164_Аудио_запись_встречи_06.03.26.wav_part004 dur=600.01s text=7833ch
+jq: invalid JSON text passed to --argjson
+Use jq --help for help with command-line options,
+or see the jq manpage, or online docs  at https://jqlang.github.io/jq
+[2026-04-20T15:36:24Z] [chunk] 164_Аудио_запись_встречи_06.03.26.wav_part005 offset=3000.02s
+[2026-04-20T15:36:26Z] [ok] 164_Аудио_запись_встречи_06.03.26.wav_part005 dur=599.98s text=7664ch
+jq: invalid JSON text passed to --argjson
+Use jq --help for help with command-line options,
+or see the jq manpage, or online docs  at https://jqlang.github.io/jq
+[2026-04-20T15:36:28Z] [chunk] 164_Аудио_запись_встречи_06.03.26.wav_part006 offset=3600.00s
+[2026-04-20T15:36:31Z] [ok] 164_Аудио_запись_встречи_06.03.26.wav_part006 dur=600.01s text=7768ch
+jq: invalid JSON text passed to --argjson
+Use jq --help for help with command-line options,
+or see the jq manpage, or online docs  at https://jqlang.github.io/jq
+[2026-04-20T15:36:33Z] [chunk] 164_Аудио_запись_встречи_06.03.26.wav_part007 offset=4200.01s
+[2026-04-20T15:36:35Z] [ok] 164_Аудио_запись_встречи_06.03.26.wav_part007 dur=600.01s text=8050ch
+jq: invalid JSON text passed to --argjson
+Use jq --help for help with command-line options,
+or see the jq manpage, or online docs  at https://jqlang.github.io/jq
+[2026-04-20T15:36:37Z] [chunk] 164_Аудио_запись_встречи_06.03.26.wav_part008 offset=4800.02s
+[2026-04-20T15:36:39Z] [ok] 164_Аудио_запись_встречи_06.03.26.wav_part008 dur=599.98s text=7428ch
+jq: invalid JSON text passed to --argjson
+Use jq --help for help with command-line options,
+or see the jq manpage, or online docs  at https://jqlang.github.io/jq
+[2026-04-20T15:36:41Z] [chunk] 164_Аудио_запись_встречи_06.03.26.wav_part009 offset=5400.00s
+[2026-04-20T15:36:44Z] [ok] 164_Аудио_запись_встречи_06.03.26.wav_part009 dur=600.01s text=7659ch
+jq: invalid JSON text passed to --argjson
+Use jq --help for help with command-line options,
+or see the jq manpage, or online docs  at https://jqlang.github.io/jq
+[2026-04-20T15:36:46Z] [chunk] 164_Аудио_запись_встречи_06.03.26.wav_part010 offset=6000.01s
+[2026-04-20T15:36:49Z] [ok] 164_Аудио_запись_встречи_06.03.26.wav_part010 dur=600.01s text=7544ch
+jq: invalid JSON text passed to --argjson
+Use jq --help for help with command-line options,
+or see the jq manpage, or online docs  at https://jqlang.github.io/jq
+[2026-04-20T15:36:51Z] [chunk] 164_Аудио_запись_встречи_06.03.26.wav_part011 offset=6600.02s
+[2026-04-20T15:36:53Z] [ok] 164_Аудио_запись_встречи_06.03.26.wav_part011 dur=599.98s text=7658ch
+jq: invalid JSON text passed to --argjson
+Use jq --help for help with command-line options,
+or see the jq manpage, or online docs  at https://jqlang.github.io/jq
+[2026-04-20T15:36:55Z] [chunk] 164_Аудио_запись_встречи_06.03.26.wav_part012 offset=7200.00s
+[2026-04-20T15:36:57Z] [ok] 164_Аудио_запись_встречи_06.03.26.wav_part012 dur=600.01s text=7603ch
+jq: invalid JSON text passed to --argjson
+Use jq --help for help with command-line options,
+or see the jq manpage, or online docs  at https://jqlang.github.io/jq
+[2026-04-20T15:36:59Z] [chunk] 164_Аудио_запись_встречи_06.03.26.wav_part013 offset=7800.01s
+[2026-04-20T15:37:01Z] [ok] 164_Аудио_запись_встречи_06.03.26.wav_part013 dur=453.28s text=5666ch
+jq: invalid JSON text passed to --argjson
+Use jq --help for help with command-line options,
+or see the jq manpage, or online docs  at https://jqlang.github.io/jq
+/opt/tg-export/transcribe.sh: line 121: /usr/bin/jq: Argument list too long
+[2026-04-20T15:37:04Z] [merged] 164_Аудио_запись_встречи_06.03.26.wav total_dur=8253.29s
+[2026-04-20T15:37:04Z] [END] transcribe.sh
+[2026-04-21T05:10:01Z] [START] transcribe.sh
+[2026-04-21T05:10:01Z] [start] 55_Baserow.mp4
+[2026-04-21T05:10:01Z] [extract] 55_Baserow.mp4 -> mp3 64kbps mono 16kHz
+[2026-04-21T05:10:03Z] [ready] 55_Baserow.mp4.mp3 size=3096998B duration=387.072000s
+[2026-04-21T05:10:06Z] [ok] 55_Baserow.mp4 dur=387.07s text=5094ch
+[2026-04-21T05:10:06Z] [delete-source] 55_Baserow.mp4 (transcript verified)
+[2026-04-21T05:10:06Z] [start] 57_Gemini_full.mp4
+[2026-04-21T05:10:06Z] [extract] 57_Gemini_full.mp4 -> mp3 64kbps mono 16kHz
+[2026-04-21T05:10:08Z] [ready] 57_Gemini_full.mp4.mp3 size=2784806B duration=348.048000s
+[2026-04-21T05:10:11Z] [ok] 57_Gemini_full.mp4 dur=348.05s text=4674ch
+[2026-04-21T05:10:11Z] [delete-source] 57_Gemini_full.mp4 (transcript verified)
+[2026-04-21T05:10:11Z] [END] transcribe.sh
+[2026-04-21T05:20:01Z] [START] transcribe.sh
+[2026-04-21T05:20:01Z] [start] 64_ч2.mp4
+[2026-04-21T05:20:01Z] [convert] 64_ч2.mp4 -> mp3 64kbps mono 16kHz (from audio)
+[2026-04-21T05:20:02Z] [ready] 64_ч2.mp4.mp3 size=1323494B duration=165.384000s
+[2026-04-21T05:20:03Z] [ok] 64_ч2.mp4 dur=165.38s text=1644ch
+[2026-04-21T05:20:04Z] [delete-source] 64_ч2.mp4 (transcript verified)
+[2026-04-21T05:20:04Z] [END] transcribe.sh
+[2026-04-21T05:30:01Z] [START] transcribe.sh
+[2026-04-21T05:30:01Z] [start] 144_paperclip_private_install_гот.mp4
+[2026-04-21T05:30:01Z] [extract] 144_paperclip_private_install_гот.mp4 -> mp3 64kbps mono 16kHz
+[2026-04-21T05:30:04Z] [ready] 144_paperclip_private_install_гот.mp4.mp3 size=3889286B duration=486.108000s
+[2026-04-21T05:30:06Z] [ok] 144_paperclip_private_install_гот.mp4 dur=486.11s text=6807ch
+[2026-04-21T05:30:06Z] [delete-source] 144_paperclip_private_install_гот.mp4 (transcript verified)
+[2026-04-21T05:30:06Z] [start] 71_установка_n8n_mcp.mp4
+[2026-04-21T05:30:06Z] [extract] 71_установка_n8n_mcp.mp4 -> mp3 64kbps mono 16kHz
+[2026-04-21T05:30:09Z] [ready] 71_установка_n8n_mcp.mp4.mp3 size=3642758B duration=455.292000s
+[2026-04-21T05:30:11Z] [ok] 71_установка_n8n_mcp.mp4 dur=455.29s text=5756ch
+[2026-04-21T05:30:11Z] [delete-source] 71_установка_n8n_mcp.mp4 (transcript verified)
+[2026-04-21T05:30:11Z] [END] transcribe.sh
+[2026-04-21T05:40:01Z] [START] transcribe.sh
+[2026-04-21T05:40:01Z] [start] 13_установка n8n.mp4
+[2026-04-21T05:40:01Z] [extract] 13_установка n8n.mp4 -> mp3 64kbps mono 16kHz
+[2026-04-21T05:40:07Z] [ready] 13_установка_n8n.mp4.mp3 size=8428166B duration=1053.468000s
+[2026-04-21T05:40:10Z] [ok] 13_установка_n8n.mp4 dur=1053.47s text=11945ch
+[2026-04-21T05:40:10Z] [delete-source] 13_установка n8n.mp4 (transcript verified)
+[2026-04-21T05:40:10Z] [END] transcribe.sh
+[2026-04-21T05:50:01Z] [START] transcribe.sh
+[2026-04-21T05:50:01Z] [start] 63_ч1.mp4
+[2026-04-21T05:50:02Z] [convert] 63_ч1.mp4 -> mp3 64kbps mono 16kHz (from audio)
+[2026-04-21T05:50:03Z] [ready] 63_ч1.mp4.mp3 size=2343302B duration=292.860000s
+[2026-04-21T05:50:05Z] [ok] 63_ч1.mp4 dur=292.86s text=3082ch
+[2026-04-21T05:50:05Z] [delete-source] 63_ч1.mp4 (transcript verified)
+[2026-04-21T05:50:05Z] [END] transcribe.sh
+[2026-04-21T06:00:01Z] [START] transcribe.sh
+[2026-04-21T06:00:01Z] [start] 136_готовый_Private_openclaw_install.mp4
+[2026-04-21T06:00:02Z] [extract] 136_готовый_Private_openclaw_install.mp4 -> mp3 64kbps mono 16kHz
+[2026-04-21T06:00:07Z] [ready] 136_готовыи__Private_openclaw_install.mp4.mp3 size=6652070B duration=831.456000s
+[2026-04-21T06:00:10Z] [ok] 136_готовыи__Private_openclaw_install.mp4 dur=831.46s text=10774ch
+[2026-04-21T06:00:10Z] [delete-source] 136_готовый_Private_openclaw_install.mp4 (transcript verified)
+[2026-04-21T06:00:10Z] [END] transcribe.sh
+[2026-04-21T06:10:01Z] [START] transcribe.sh
+[2026-04-21T06:10:01Z] [start] 137_Private_safe_гот.mp4
+[2026-04-21T06:10:02Z] [extract] 137_Private_safe_гот.mp4 -> mp3 64kbps mono 16kHz
+[2026-04-21T06:10:06Z] [ready] 137_Private_safe_гот.mp4.mp3 size=5943014B duration=742.824000s
+[2026-04-21T06:10:09Z] [ok] 137_Private_safe_гот.mp4 dur=742.82s text=11078ch
+[2026-04-21T06:10:09Z] [delete-source] 137_Private_safe_гот.mp4 (transcript verified)
+[2026-04-21T06:10:09Z] [END] transcribe.sh
+[2026-04-21T06:20:01Z] [START] transcribe.sh
+[2026-04-21T06:20:01Z] [start] 53_Actions.mp4
+[2026-04-21T06:20:03Z] [extract] 53_Actions.mp4 -> mp3 64kbps mono 16kHz
+[2026-04-21T06:20:11Z] [ready] 53_Actions.mp4.mp3 size=11480966B duration=1435.068000s
+[2026-04-21T06:20:16Z] [ok] 53_Actions.mp4 dur=1435.07s text=19365ch
+[2026-04-21T06:20:16Z] [delete-source] 53_Actions.mp4 (transcript verified)
+[2026-04-21T06:20:16Z] [END] transcribe.sh
+[2026-04-21T06:30:02Z] [START] transcribe.sh
+[2026-04-21T06:30:02Z] [start] 147_paperclip_private_detail_гот.mp4
+[2026-04-21T06:30:03Z] [extract] 147_paperclip_private_detail_гот.mp4 -> mp3 64kbps mono 16kHz
+[2026-04-21T06:30:12Z] [ready] 147_paperclip_private_detail_гот.mp4.mp3 size=12237254B duration=1529.604000s
+[2026-04-21T06:30:17Z] [ok] 147_paperclip_private_detail_гот.mp4 dur=1529.61s text=21515ch
+[2026-04-21T06:30:17Z] [delete-source] 147_paperclip_private_detail_гот.mp4 (transcript verified)
+[2026-04-21T06:30:17Z] [END] transcribe.sh
+[2026-04-21T06:40:01Z] [START] transcribe.sh
+[2026-04-21T06:40:01Z] [start] 15_Установка supabase.mp4
+[2026-04-21T06:40:03Z] [extract] 15_Установка supabase.mp4 -> mp3 64kbps mono 16kHz
+[2026-04-21T06:40:13Z] [ready] 15_Установка_supabase.mp4.mp3 size=12647942B duration=1580.940000s
+[2026-04-21T06:40:18Z] [err] /opt/tg-export/_chunks/15_Установка_supabase.mp4.mp3: {"error":"Transcription failed: Transcription failed: EngineCore encountered an issue. See stack trace (above) for the root cause."}
+[2026-04-21T06:40:18Z] [keep-source] 15_Установка supabase.mp4 (transcript incomplete — kept for retry)
+[2026-04-21T06:40:18Z] [END] transcribe.sh
+[2026-04-21T06:50:01Z] [START] transcribe.sh
+[2026-04-21T06:50:01Z] [start] 15_Установка supabase.mp4
+[2026-04-21T06:50:03Z] [extract] 15_Установка supabase.mp4 -> mp3 64kbps mono 16kHz
+[2026-04-21T06:50:12Z] [ready] 15_Установка_supabase.mp4.mp3 size=12647942B duration=1580.940000s
+[2026-04-21T06:50:17Z] [err] /opt/tg-export/_chunks/15_Установка_supabase.mp4.mp3: {"error":"Transcription failed: Transcription failed: EngineCore encountered an issue. See stack trace (above) for the root cause."}
+[2026-04-21T06:50:17Z] [keep-source] 15_Установка supabase.mp4 (transcript incomplete — kept for retry)
+[2026-04-21T06:50:17Z] [END] transcribe.sh
+[2026-04-21T07:00:01Z] [START] transcribe.sh
+[2026-04-21T07:00:01Z] [start] 15_Установка supabase.mp4
+[2026-04-21T07:00:03Z] [extract] 15_Установка supabase.mp4 -> mp3 64kbps mono 16kHz
+[2026-04-21T07:00:11Z] [ready] 15_Установка_supabase.mp4.mp3 size=12647942B duration=1580.940000s
+[2026-04-21T07:00:16Z] [err] /opt/tg-export/_chunks/15_Установка_supabase.mp4.mp3: {"error":"Transcription failed: Transcription failed: EngineCore encountered an issue. See stack trace (above) for the root cause."}
+[2026-04-21T07:00:16Z] [keep-source] 15_Установка supabase.mp4 (transcript incomplete — kept for retry)
+[2026-04-21T07:00:16Z] [END] transcribe.sh
+[2026-04-21T07:10:02Z] [START] transcribe.sh
+[2026-04-21T07:10:02Z] [start] 15_Установка supabase.mp4
+[2026-04-21T07:10:02Z] [extract] 15_Установка supabase.mp4 -> mp3 64kbps mono 16kHz
+[2026-04-21T07:10:10Z] [ready] 15_Установка_supabase.mp4.mp3 size=12647942B duration=1580.940000s
+[2026-04-21T07:10:20Z] [err] /opt/tg-export/_chunks/15_Установка_supabase.mp4.mp3: non-json response: upstream connect error or disconnect/reset before headers. reset reason: connection timeout
+[2026-04-21T07:10:20Z] [keep-source] 15_Установка supabase.mp4 (transcript incomplete — kept for retry)
+[2026-04-21T07:10:20Z] [END] transcribe.sh
+[2026-04-21T07:20:01Z] [START] transcribe.sh
+[2026-04-21T07:20:01Z] [start] 15_Установка supabase.mp4
+[2026-04-21T07:20:01Z] [extract] 15_Установка supabase.mp4 -> mp3 64kbps mono 16kHz
+[2026-04-21T07:20:09Z] [ready] 15_Установка_supabase.mp4.mp3 size=12647942B duration=1580.940000s
+[2026-04-21T07:20:14Z] [err] /opt/tg-export/_chunks/15_Установка_supabase.mp4.mp3: {"error":"Transcription failed: Transcription failed: EngineCore encountered an issue. See stack trace (above) for the root cause."}
+[2026-04-21T07:20:15Z] [keep-source] 15_Установка supabase.mp4 (transcript incomplete — kept for retry)
+[2026-04-21T07:20:15Z] [END] transcribe.sh
+[2026-04-21T07:30:01Z] [START] transcribe.sh
+[2026-04-21T07:30:01Z] [start] 15_Установка supabase.mp4
+[2026-04-21T07:30:01Z] [extract] 15_Установка supabase.mp4 -> mp3 64kbps mono 16kHz
+[2026-04-21T07:30:10Z] [ready] 15_Установка_supabase.mp4.mp3 size=12647942B duration=1580.940000s
+[2026-04-21T07:30:15Z] [err] /opt/tg-export/_chunks/15_Установка_supabase.mp4.mp3: {"error":"Transcription failed: Transcription failed: EngineCore encountered an issue. See stack trace (above) for the root cause."}
+[2026-04-21T07:30:15Z] [keep-source] 15_Установка supabase.mp4 (transcript incomplete — kept for retry)
+[2026-04-21T07:30:15Z] [END] transcribe.sh
+[2026-04-21T07:40:01Z] [START] transcribe.sh
+[2026-04-21T07:40:01Z] [start] 15_Установка supabase.mp4
+[2026-04-21T07:40:02Z] [extract] 15_Установка supabase.mp4 -> mp3 64kbps mono 16kHz
+[2026-04-21T07:40:10Z] [ready] 15_Установка_supabase.mp4.mp3 size=12647942B duration=1580.940000s
+[2026-04-21T07:40:14Z] [err] /opt/tg-export/_chunks/15_Установка_supabase.mp4.mp3: {"error":"Transcription failed: Transcription failed: EngineCore encountered an issue. See stack trace (above) for the root cause."}
+[2026-04-21T07:40:14Z] [keep-source] 15_Установка supabase.mp4 (transcript incomplete — kept for retry)
+[2026-04-21T07:40:14Z] [END] transcribe.sh
+[2026-04-21T07:50:01Z] [START] transcribe.sh
+[2026-04-21T07:50:01Z] [start] 15_Установка supabase.mp4
+[2026-04-21T07:50:02Z] [extract] 15_Установка supabase.mp4 -> mp3 64kbps mono 16kHz
+[2026-04-21T07:50:09Z] [ready] 15_Установка_supabase.mp4.mp3 size=12647942B duration=1580.940000s
+[2026-04-21T07:50:14Z] [err] /opt/tg-export/_chunks/15_Установка_supabase.mp4.mp3: {"error":"Transcription failed: Transcription failed: EngineCore encountered an issue. See stack trace (above) for the root cause."}
+[2026-04-21T07:50:14Z] [keep-source] 15_Установка supabase.mp4 (transcript incomplete — kept for retry)
+[2026-04-21T07:50:14Z] [END] transcribe.sh
+[2026-04-21T08:00:01Z] [START] transcribe.sh
+[2026-04-21T08:00:01Z] [start] 15_Установка supabase.mp4
+[2026-04-21T08:00:02Z] [extract] 15_Установка supabase.mp4 -> mp3 64kbps mono 16kHz
+[2026-04-21T08:00:10Z] [ready] 15_Установка_supabase.mp4.mp3 size=12647942B duration=1580.940000s
+[2026-04-21T08:00:14Z] [err] /opt/tg-export/_chunks/15_Установка_supabase.mp4.mp3: {"error":"Transcription failed: Transcription failed: EngineCore encountered an issue. See stack trace (above) for the root cause."}
+[2026-04-21T08:00:14Z] [keep-source] 15_Установка supabase.mp4 (transcript incomplete — kept for retry)
+[2026-04-21T08:00:14Z] [END] transcribe.sh
+[2026-04-21T08:10:01Z] [START] transcribe.sh
+[2026-04-21T08:10:01Z] [start] 15_Установка supabase.mp4
+[2026-04-21T08:10:01Z] [extract] 15_Установка supabase.mp4 -> mp3 64kbps mono 16kHz
+[2026-04-21T08:10:09Z] [ready] 15_Установка_supabase.mp4.mp3 size=12647942B duration=1580.940000s
+[2026-04-21T08:10:14Z] [err] /opt/tg-export/_chunks/15_Установка_supabase.mp4.mp3: {"error":"Transcription failed: Transcription failed: EngineCore encountered an issue. See stack trace (above) for the root cause."}
+[2026-04-21T08:10:14Z] [keep-source] 15_Установка supabase.mp4 (transcript incomplete — kept for retry)
+[2026-04-21T08:10:14Z] [END] transcribe.sh
+[2026-04-21T08:20:01Z] [START] transcribe.sh
+[2026-04-21T08:20:01Z] [start] 15_Установка supabase.mp4
+[2026-04-21T08:20:02Z] [extract] 15_Установка supabase.mp4 -> mp3 64kbps mono 16kHz
+[2026-04-21T08:20:10Z] [ready] 15_Установка_supabase.mp4.mp3 size=12647942B duration=1580.940000s
+[2026-04-21T08:20:15Z] [err] /opt/tg-export/_chunks/15_Установка_supabase.mp4.mp3: {"error":"Transcription failed: Transcription failed: EngineCore encountered an issue. See stack trace (above) for the root cause."}
+[2026-04-21T08:20:15Z] [keep-source] 15_Установка supabase.mp4 (transcript incomplete — kept for retry)
+[2026-04-21T08:20:15Z] [END] transcribe.sh
+[2026-04-21T08:30:01Z] [START] transcribe.sh
+[2026-04-21T08:30:01Z] [start] 15_Установка supabase.mp4
+[2026-04-21T08:30:02Z] [extract] 15_Установка supabase.mp4 -> mp3 64kbps mono 16kHz
+[2026-04-21T08:30:10Z] [ready] 15_Установка_supabase.mp4.mp3 size=12647942B duration=1580.940000s
+[2026-04-21T08:30:14Z] [err] /opt/tg-export/_chunks/15_Установка_supabase.mp4.mp3: {"error":"Transcription failed: Transcription failed: EngineCore encountered an issue. See stack trace (above) for the root cause."}
+[2026-04-21T08:30:14Z] [keep-source] 15_Установка supabase.mp4 (transcript incomplete — kept for retry)
+[2026-04-21T08:30:14Z] [END] transcribe.sh
+[2026-04-21T08:40:01Z] [START] transcribe.sh
+[2026-04-21T08:40:01Z] [start] 15_Установка supabase.mp4
+[2026-04-21T08:40:02Z] [extract] 15_Установка supabase.mp4 -> mp3 64kbps mono 16kHz
+[2026-04-21T08:40:10Z] [ready] 15_Установка_supabase.mp4.mp3 size=12647942B duration=1580.940000s
+[2026-04-21T08:40:20Z] [err] /opt/tg-export/_chunks/15_Установка_supabase.mp4.mp3: non-json response: upstream connect error or disconnect/reset before headers. reset reason: connection timeout
+[2026-04-21T08:40:20Z] [keep-source] 15_Установка supabase.mp4 (transcript incomplete — kept for retry)
+[2026-04-21T08:40:20Z] [END] transcribe.sh
+[2026-04-21T08:50:01Z] [START] transcribe.sh
+[2026-04-21T08:50:01Z] [start] 15_Установка supabase.mp4
+[2026-04-21T08:50:02Z] [extract] 15_Установка supabase.mp4 -> mp3 64kbps mono 16kHz
+[2026-04-21T08:50:10Z] [ready] 15_Установка_supabase.mp4.mp3 size=12647942B duration=1580.940000s
+[2026-04-21T08:50:15Z] [err] /opt/tg-export/_chunks/15_Установка_supabase.mp4.mp3: {"error":"Transcription failed: Transcription failed: EngineCore encountered an issue. See stack trace (above) for the root cause."}
+[2026-04-21T08:50:15Z] [keep-source] 15_Установка supabase.mp4 (transcript incomplete — kept for retry)
+[2026-04-21T08:50:15Z] [END] transcribe.sh
+[2026-04-21T09:00:02Z] [START] transcribe.sh
+[2026-04-21T09:00:02Z] [start] 15_Установка supabase.mp4
+[2026-04-21T09:00:02Z] [extract] 15_Установка supabase.mp4 -> mp3 64kbps mono 16kHz
+[2026-04-21T09:00:10Z] [ready] 15_Установка_supabase.mp4.mp3 size=12647942B duration=1580.940000s
+[2026-04-21T09:00:15Z] [err] /opt/tg-export/_chunks/15_Установка_supabase.mp4.mp3: {"error":"Transcription failed: Transcription failed: EngineCore encountered an issue. See stack trace (above) for the root cause."}
+[2026-04-21T09:00:15Z] [keep-source] 15_Установка supabase.mp4 (transcript incomplete — kept for retry)
+[2026-04-21T09:00:15Z] [END] transcribe.sh
+[2026-04-21T09:10:01Z] [START] transcribe.sh
+[2026-04-21T09:10:01Z] [start] 15_Установка supabase.mp4
+[2026-04-21T09:10:01Z] [extract] 15_Установка supabase.mp4 -> mp3 64kbps mono 16kHz
+[2026-04-21T09:10:10Z] [ready] 15_Установка_supabase.mp4.mp3 size=12647942B duration=1580.940000s
+[2026-04-21T09:10:14Z] [err] /opt/tg-export/_chunks/15_Установка_supabase.mp4.mp3: {"error":"Transcription failed: Transcription failed: EngineCore encountered an issue. See stack trace (above) for the root cause."}
+[2026-04-21T09:10:14Z] [keep-source] 15_Установка supabase.mp4 (transcript incomplete — kept for retry)
+[2026-04-21T09:10:14Z] [END] transcribe.sh
+[2026-04-21T09:20:01Z] [START] transcribe.sh
+[2026-04-21T09:20:01Z] [start] 15_Установка supabase.mp4
+[2026-04-21T09:20:01Z] [extract] 15_Установка supabase.mp4 -> mp3 64kbps mono 16kHz
+[2026-04-21T09:20:10Z] [ready] 15_Установка_supabase.mp4.mp3 size=12647942B duration=1580.940000s
+[2026-04-21T09:20:14Z] [err] /opt/tg-export/_chunks/15_Установка_supabase.mp4.mp3: {"error":"Transcription failed: Transcription failed: EngineCore encountered an issue. See stack trace (above) for the root cause."}
+[2026-04-21T09:20:14Z] [keep-source] 15_Установка supabase.mp4 (transcript incomplete — kept for retry)
+[2026-04-21T09:20:14Z] [END] transcribe.sh
+[2026-04-21T09:30:01Z] [START] transcribe.sh
+[2026-04-21T09:30:01Z] [start] 15_Установка supabase.mp4
+[2026-04-21T09:30:01Z] [extract] 15_Установка supabase.mp4 -> mp3 64kbps mono 16kHz
+[2026-04-21T09:30:09Z] [ready] 15_Установка_supabase.mp4.mp3 size=12647942B duration=1580.940000s
+[2026-04-21T09:30:14Z] [err] /opt/tg-export/_chunks/15_Установка_supabase.mp4.mp3: {"error":"Transcription failed: Transcription failed: EngineCore encountered an issue. See stack trace (above) for the root cause."}
+[2026-04-21T09:30:14Z] [keep-source] 15_Установка supabase.mp4 (transcript incomplete — kept for retry)
+[2026-04-21T09:30:14Z] [END] transcribe.sh
+[2026-04-21T09:40:01Z] [START] transcribe.sh
+[2026-04-21T09:40:01Z] [start] 15_Установка supabase.mp4
+[2026-04-21T09:40:01Z] [extract] 15_Установка supabase.mp4 -> mp3 64kbps mono 16kHz
+[2026-04-21T09:40:10Z] [ready] 15_Установка_supabase.mp4.mp3 size=12647942B duration=1580.940000s
+[2026-04-21T09:40:15Z] [err] /opt/tg-export/_chunks/15_Установка_supabase.mp4.mp3: {"error":"Transcription failed: Transcription failed: EngineCore encountered an issue. See stack trace (above) for the root cause."}
+[2026-04-21T09:40:15Z] [keep-source] 15_Установка supabase.mp4 (transcript incomplete — kept for retry)
+[2026-04-21T09:40:15Z] [END] transcribe.sh
+[2026-04-21T09:50:01Z] [START] transcribe.sh
+[2026-04-21T09:50:01Z] [start] 15_Установка supabase.mp4
+[2026-04-21T09:50:01Z] [extract] 15_Установка supabase.mp4 -> mp3 64kbps mono 16kHz
+[2026-04-21T09:50:10Z] [ready] 15_Установка_supabase.mp4.mp3 size=12647942B duration=1580.940000s
+[2026-04-21T09:50:14Z] [err] /opt/tg-export/_chunks/15_Установка_supabase.mp4.mp3: {"error":"Transcription failed: Transcription failed: EngineCore encountered an issue. See stack trace (above) for the root cause."}
+[2026-04-21T09:50:14Z] [keep-source] 15_Установка supabase.mp4 (transcript incomplete — kept for retry)
+[2026-04-21T09:50:14Z] [END] transcribe.sh
+[2026-04-21T10:00:01Z] [START] transcribe.sh
+[2026-04-21T10:00:01Z] [start] 15_Установка supabase.mp4
+[2026-04-21T10:00:02Z] [extract] 15_Установка supabase.mp4 -> mp3 64kbps mono 16kHz
+[2026-04-21T10:00:10Z] [ready] 15_Установка_supabase.mp4.mp3 size=12647942B duration=1580.940000s
+[2026-04-21T10:00:15Z] [err] /opt/tg-export/_chunks/15_Установка_supabase.mp4.mp3: {"error":"Transcription failed: Transcription failed: EngineCore encountered an issue. See stack trace (above) for the root cause."}
+[2026-04-21T10:00:15Z] [keep-source] 15_Установка supabase.mp4 (transcript incomplete — kept for retry)
+[2026-04-21T10:00:15Z] [END] transcribe.sh
+[2026-04-21T10:10:01Z] [START] transcribe.sh
+[2026-04-21T10:10:01Z] [start] 15_Установка supabase.mp4
+[2026-04-21T10:10:01Z] [extract] 15_Установка supabase.mp4 -> mp3 64kbps mono 16kHz
+[2026-04-21T10:10:09Z] [ready] 15_Установка_supabase.mp4.mp3 size=12647942B duration=1580.940000s
+[2026-04-21T10:10:14Z] [err] /opt/tg-export/_chunks/15_Установка_supabase.mp4.mp3: {"error":"Transcription failed: Transcription failed: EngineCore encountered an issue. See stack trace (above) for the root cause."}
+[2026-04-21T10:10:14Z] [keep-source] 15_Установка supabase.mp4 (transcript incomplete — kept for retry)
+[2026-04-21T10:10:14Z] [END] transcribe.sh
+[2026-04-21T10:20:01Z] [START] transcribe.sh
+[2026-04-21T10:20:01Z] [start] 15_Установка supabase.mp4
+[2026-04-21T10:20:01Z] [extract] 15_Установка supabase.mp4 -> mp3 64kbps mono 16kHz
+[2026-04-21T10:20:10Z] [ready] 15_Установка_supabase.mp4.mp3 size=12647942B duration=1580.940000s
+[2026-04-21T10:20:15Z] [err] /opt/tg-export/_chunks/15_Установка_supabase.mp4.mp3: {"error":"Transcription failed: Transcription failed: EngineCore encountered an issue. See stack trace (above) for the root cause."}
+[2026-04-21T10:20:15Z] [keep-source] 15_Установка supabase.mp4 (transcript incomplete — kept for retry)
+[2026-04-21T10:20:15Z] [END] transcribe.sh
+[2026-04-21T10:30:01Z] [START] transcribe.sh
+[2026-04-21T10:30:01Z] [start] 15_Установка supabase.mp4
+[2026-04-21T10:30:01Z] [extract] 15_Установка supabase.mp4 -> mp3 64kbps mono 16kHz
+[2026-04-21T10:30:09Z] [ready] 15_Установка_supabase.mp4.mp3 size=12647942B duration=1580.940000s
+[2026-04-21T10:30:14Z] [err] /opt/tg-export/_chunks/15_Установка_supabase.mp4.mp3: {"error":"Transcription failed: Transcription failed: EngineCore encountered an issue. See stack trace (above) for the root cause."}
+[2026-04-21T10:30:14Z] [keep-source] 15_Установка supabase.mp4 (transcript incomplete — kept for retry)
+[2026-04-21T10:30:14Z] [END] transcribe.sh
+[2026-04-21T10:40:01Z] [START] transcribe.sh
+[2026-04-21T10:40:01Z] [start] 15_Установка supabase.mp4
+[2026-04-21T10:40:02Z] [extract] 15_Установка supabase.mp4 -> mp3 64kbps mono 16kHz
+[2026-04-21T10:40:10Z] [ready] 15_Установка_supabase.mp4.mp3 size=12647942B duration=1580.940000s
+[2026-04-21T10:40:15Z] [err] /opt/tg-export/_chunks/15_Установка_supabase.mp4.mp3: {"error":"Transcription failed: Transcription failed: EngineCore encountered an issue. See stack trace (above) for the root cause."}
+[2026-04-21T10:40:15Z] [keep-source] 15_Установка supabase.mp4 (transcript incomplete — kept for retry)
+[2026-04-21T10:40:15Z] [END] transcribe.sh
+[2026-04-21T10:50:01Z] [START] transcribe.sh
+[2026-04-21T10:50:01Z] [start] 15_Установка supabase.mp4
+[2026-04-21T10:50:02Z] [extract] 15_Установка supabase.mp4 -> mp3 64kbps mono 16kHz
+[2026-04-21T10:50:09Z] [ready] 15_Установка_supabase.mp4.mp3 size=12647942B duration=1580.940000s
+[2026-04-21T10:50:14Z] [err] /opt/tg-export/_chunks/15_Установка_supabase.mp4.mp3: {"error":"Transcription failed: Transcription failed: EngineCore encountered an issue. See stack trace (above) for the root cause."}
+[2026-04-21T10:50:14Z] [keep-source] 15_Установка supabase.mp4 (transcript incomplete — kept for retry)
+[2026-04-21T10:50:14Z] [END] transcribe.sh
+[2026-04-21T11:00:01Z] [START] transcribe.sh
+[2026-04-21T11:00:01Z] [start] 15_Установка supabase.mp4
+[2026-04-21T11:00:02Z] [extract] 15_Установка supabase.mp4 -> mp3 64kbps mono 16kHz
+[2026-04-21T11:00:10Z] [ready] 15_Установка_supabase.mp4.mp3 size=12647942B duration=1580.940000s
+[2026-04-21T11:00:15Z] [err] /opt/tg-export/_chunks/15_Установка_supabase.mp4.mp3: {"error":"Transcription failed: Transcription failed: EngineCore encountered an issue. See stack trace (above) for the root cause."}
+[2026-04-21T11:00:15Z] [keep-source] 15_Установка supabase.mp4 (transcript incomplete — kept for retry)
+[2026-04-21T11:00:15Z] [END] transcribe.sh
+[2026-04-21T11:10:02Z] [START] transcribe.sh
+[2026-04-21T11:10:02Z] [start] 15_Установка supabase.mp4
+[2026-04-21T11:10:02Z] [extract] 15_Установка supabase.mp4 -> mp3 64kbps mono 16kHz
+[2026-04-21T11:10:10Z] [ready] 15_Установка_supabase.mp4.mp3 size=12647942B duration=1580.940000s
+[2026-04-21T11:10:15Z] [err] /opt/tg-export/_chunks/15_Установка_supabase.mp4.mp3: {"error":"Transcription failed: Transcription failed: EngineCore encountered an issue. See stack trace (above) for the root cause."}
+[2026-04-21T11:10:15Z] [keep-source] 15_Установка supabase.mp4 (transcript incomplete — kept for retry)
+[2026-04-21T11:10:15Z] [END] transcribe.sh
+[2026-04-21T11:20:01Z] [START] transcribe.sh
+[2026-04-21T11:20:01Z] [start] 15_Установка supabase.mp4
+[2026-04-21T11:20:01Z] [extract] 15_Установка supabase.mp4 -> mp3 64kbps mono 16kHz
+[2026-04-21T11:20:09Z] [ready] 15_Установка_supabase.mp4.mp3 size=12647942B duration=1580.940000s
+[2026-04-21T11:20:14Z] [err] /opt/tg-export/_chunks/15_Установка_supabase.mp4.mp3: {"error":"Transcription failed: Transcription failed: EngineCore encountered an issue. See stack trace (above) for the root cause."}
+[2026-04-21T11:20:14Z] [keep-source] 15_Установка supabase.mp4 (transcript incomplete — kept for retry)
+[2026-04-21T11:20:14Z] [END] transcribe.sh
+[2026-04-21T11:30:01Z] [START] transcribe.sh
+[2026-04-21T11:30:01Z] [start] 15_Установка supabase.mp4
+[2026-04-21T11:30:01Z] [extract] 15_Установка supabase.mp4 -> mp3 64kbps mono 16kHz
+[2026-04-21T11:30:09Z] [ready] 15_Установка_supabase.mp4.mp3 size=12647942B duration=1580.940000s
+[2026-04-21T11:30:14Z] [err] /opt/tg-export/_chunks/15_Установка_supabase.mp4.mp3: {"error":"Transcription failed: Transcription failed: EngineCore encountered an issue. See stack trace (above) for the root cause."}
+[2026-04-21T11:30:14Z] [keep-source] 15_Установка supabase.mp4 (transcript incomplete — kept for retry)
+[2026-04-21T11:30:14Z] [END] transcribe.sh
+[2026-04-21T11:40:01Z] [START] transcribe.sh
+[2026-04-21T11:40:01Z] [start] 15_Установка supabase.mp4
+[2026-04-21T11:40:01Z] [extract] 15_Установка supabase.mp4 -> mp3 64kbps mono 16kHz
+[2026-04-21T11:40:10Z] [ready] 15_Установка_supabase.mp4.mp3 size=12647942B duration=1580.940000s
+[2026-04-21T11:40:15Z] [err] /opt/tg-export/_chunks/15_Установка_supabase.mp4.mp3: {"error":"Transcription failed: Transcription failed: EngineCore encountered an issue. See stack trace (above) for the root cause."}
+[2026-04-21T11:40:15Z] [keep-source] 15_Установка supabase.mp4 (transcript incomplete — kept for retry)
+[2026-04-21T11:40:15Z] [END] transcribe.sh
+[2026-04-21T11:50:01Z] [START] transcribe.sh
+[2026-04-21T11:50:01Z] [start] 15_Установка supabase.mp4
+[2026-04-21T11:50:02Z] [extract] 15_Установка supabase.mp4 -> mp3 64kbps mono 16kHz
+[2026-04-21T11:50:09Z] [ready] 15_Установка_supabase.mp4.mp3 size=12647942B duration=1580.940000s
+[2026-04-21T11:50:14Z] [err] /opt/tg-export/_chunks/15_Установка_supabase.mp4.mp3: {"error":"Transcription failed: Transcription failed: EngineCore encountered an issue. See stack trace (above) for the root cause."}
+[2026-04-21T11:50:14Z] [keep-source] 15_Установка supabase.mp4 (transcript incomplete — kept for retry)
+[2026-04-21T11:50:14Z] [END] transcribe.sh
+[2026-04-21T12:00:01Z] [START] transcribe.sh
+[2026-04-21T12:00:01Z] [start] 15_Установка supabase.mp4
+[2026-04-21T12:00:02Z] [extract] 15_Установка supabase.mp4 -> mp3 64kbps mono 16kHz
+[2026-04-21T12:00:10Z] [ready] 15_Установка_supabase.mp4.mp3 size=12647942B duration=1580.940000s
+[2026-04-21T12:00:15Z] [err] /opt/tg-export/_chunks/15_Установка_supabase.mp4.mp3: {"error":"Transcription failed: Transcription failed: EngineCore encountered an issue. See stack trace (above) for the root cause."}
+[2026-04-21T12:00:15Z] [keep-source] 15_Установка supabase.mp4 (transcript incomplete — kept for retry)
+[2026-04-21T12:00:15Z] [END] transcribe.sh
+[2026-04-21T12:10:01Z] [START] transcribe.sh
+[2026-04-21T12:10:01Z] [start] 15_Установка supabase.mp4
+[2026-04-21T12:10:01Z] [extract] 15_Установка supabase.mp4 -> mp3 64kbps mono 16kHz
+[2026-04-21T12:10:09Z] [ready] 15_Установка_supabase.mp4.mp3 size=12647942B duration=1580.940000s
+[2026-04-21T12:10:14Z] [err] /opt/tg-export/_chunks/15_Установка_supabase.mp4.mp3: {"error":"Transcription failed: Transcription failed: EngineCore encountered an issue. See stack trace (above) for the root cause."}
+[2026-04-21T12:10:14Z] [keep-source] 15_Установка supabase.mp4 (transcript incomplete — kept for retry)
+[2026-04-21T12:10:14Z] [END] transcribe.sh
+[2026-04-21T12:20:01Z] [START] transcribe.sh
+[2026-04-21T12:20:01Z] [start] 15_Установка supabase.mp4
+[2026-04-21T12:20:02Z] [extract] 15_Установка supabase.mp4 -> mp3 64kbps mono 16kHz
+[2026-04-21T12:20:10Z] [ready] 15_Установка_supabase.mp4.mp3 size=12647942B duration=1580.940000s
+[2026-04-21T12:20:15Z] [err] /opt/tg-export/_chunks/15_Установка_supabase.mp4.mp3: {"error":"Transcription failed: Transcription failed: EngineCore encountered an issue. See stack trace (above) for the root cause."}
+[2026-04-21T12:20:15Z] [keep-source] 15_Установка supabase.mp4 (transcript incomplete — kept for retry)
+[2026-04-21T12:20:15Z] [END] transcribe.sh
+[2026-04-21T12:30:01Z] [START] transcribe.sh
+[2026-04-21T12:30:01Z] [start] 15_Установка supabase.mp4
+[2026-04-21T12:30:02Z] [extract] 15_Установка supabase.mp4 -> mp3 64kbps mono 16kHz
+[2026-04-21T12:30:10Z] [ready] 15_Установка_supabase.mp4.mp3 size=12647942B duration=1580.940000s
+[2026-04-21T12:30:14Z] [err] /opt/tg-export/_chunks/15_Установка_supabase.mp4.mp3: {"error":"Transcription failed: Transcription failed: EngineCore encountered an issue. See stack trace (above) for the root cause."}
+[2026-04-21T12:30:14Z] [keep-source] 15_Установка supabase.mp4 (transcript incomplete — kept for retry)
+[2026-04-21T12:30:14Z] [END] transcribe.sh
+[2026-04-21T12:40:01Z] [START] transcribe.sh
+[2026-04-21T12:40:01Z] [start] 15_Установка supabase.mp4
+[2026-04-21T12:40:02Z] [extract] 15_Установка supabase.mp4 -> mp3 64kbps mono 16kHz
+[2026-04-21T12:40:10Z] [ready] 15_Установка_supabase.mp4.mp3 size=12647942B duration=1580.940000s
+[2026-04-21T12:40:15Z] [err] /opt/tg-export/_chunks/15_Установка_supabase.mp4.mp3: {"error":"Transcription failed: Transcription failed: EngineCore encountered an issue. See stack trace (above) for the root cause."}
+[2026-04-21T12:40:15Z] [keep-source] 15_Установка supabase.mp4 (transcript incomplete — kept for retry)
+[2026-04-21T12:40:15Z] [END] transcribe.sh
+[2026-04-21T12:50:02Z] [START] transcribe.sh
+[2026-04-21T12:50:02Z] [start] 15_Установка supabase.mp4
+[2026-04-21T12:50:02Z] [extract] 15_Установка supabase.mp4 -> mp3 64kbps mono 16kHz
+[2026-04-21T12:50:10Z] [ready] 15_Установка_supabase.mp4.mp3 size=12647942B duration=1580.940000s
+[2026-04-21T12:50:14Z] [err] /opt/tg-export/_chunks/15_Установка_supabase.mp4.mp3: {"error":"Transcription failed: Transcription failed: EngineCore encountered an issue. See stack trace (above) for the root cause."}
+[2026-04-21T12:50:14Z] [keep-source] 15_Установка supabase.mp4 (transcript incomplete — kept for retry)
+[2026-04-21T12:50:14Z] [END] transcribe.sh
+[2026-04-21T13:00:01Z] [START] transcribe.sh
+[2026-04-21T13:00:01Z] [start] 15_Установка supabase.mp4
+[2026-04-21T13:00:01Z] [extract] 15_Установка supabase.mp4 -> mp3 64kbps mono 16kHz
+[2026-04-21T13:00:09Z] [ready] 15_Установка_supabase.mp4.mp3 size=12647942B duration=1580.940000s
+[2026-04-21T13:00:14Z] [err] /opt/tg-export/_chunks/15_Установка_supabase.mp4.mp3: {"error":"Transcription failed: Transcription failed: EngineCore encountered an issue. See stack trace (above) for the root cause."}
+[2026-04-21T13:00:14Z] [keep-source] 15_Установка supabase.mp4 (transcript incomplete — kept for retry)
+[2026-04-21T13:00:14Z] [END] transcribe.sh
+[2026-04-21T13:10:01Z] [START] transcribe.sh
+[2026-04-21T13:10:01Z] [start] 15_Установка supabase.mp4
+[2026-04-21T13:10:01Z] [extract] 15_Установка supabase.mp4 -> mp3 64kbps mono 16kHz
+[2026-04-21T13:10:09Z] [ready] 15_Установка_supabase.mp4.mp3 size=12647942B duration=1580.940000s
+[2026-04-21T13:10:14Z] [err] /opt/tg-export/_chunks/15_Установка_supabase.mp4.mp3: {"error":"Transcription failed: Transcription failed: EngineCore encountered an issue. See stack trace (above) for the root cause."}
+[2026-04-21T13:10:14Z] [keep-source] 15_Установка supabase.mp4 (transcript incomplete — kept for retry)
+[2026-04-21T13:10:14Z] [END] transcribe.sh
+[2026-04-21T13:20:01Z] [START] transcribe.sh
+[2026-04-21T13:20:01Z] [start] 15_Установка supabase.mp4
+[2026-04-21T13:20:01Z] [extract] 15_Установка supabase.mp4 -> mp3 64kbps mono 16kHz
+[2026-04-21T13:20:09Z] [ready] 15_Установка_supabase.mp4.mp3 size=12647942B duration=1580.940000s
+[2026-04-21T13:20:15Z] [err] /opt/tg-export/_chunks/15_Установка_supabase.mp4.mp3: {"error":"Transcription failed: Transcription failed: EngineCore encountered an issue. See stack trace (above) for the root cause."}
+[2026-04-21T13:20:15Z] [keep-source] 15_Установка supabase.mp4 (transcript incomplete — kept for retry)
+[2026-04-21T13:20:15Z] [END] transcribe.sh
+[2026-04-21T13:30:01Z] [START] transcribe.sh
+[2026-04-21T13:30:01Z] [start] 15_Установка supabase.mp4
+[2026-04-21T13:30:01Z] [extract] 15_Установка supabase.mp4 -> mp3 64kbps mono 16kHz
+[2026-04-21T13:30:10Z] [ready] 15_Установка_supabase.mp4.mp3 size=12647942B duration=1580.940000s
+[2026-04-21T13:30:15Z] [err] /opt/tg-export/_chunks/15_Установка_supabase.mp4.mp3: {"error":"Transcription failed: Transcription failed: EngineCore encountered an issue. See stack trace (above) for the root cause."}
+[2026-04-21T13:30:15Z] [keep-source] 15_Установка supabase.mp4 (transcript incomplete — kept for retry)
+[2026-04-21T13:30:15Z] [END] transcribe.sh
+[2026-04-21T13:40:01Z] [START] transcribe.sh
+[2026-04-21T13:40:01Z] [start] 15_Установка supabase.mp4
+[2026-04-21T13:40:02Z] [extract] 15_Установка supabase.mp4 -> mp3 64kbps mono 16kHz
+[2026-04-21T13:40:10Z] [ready] 15_Установка_supabase.mp4.mp3 size=12647942B duration=1580.940000s
+[2026-04-21T13:40:15Z] [err] /opt/tg-export/_chunks/15_Установка_supabase.mp4.mp3: {"error":"Transcription failed: Transcription failed: EngineCore encountered an issue. See stack trace (above) for the root cause."}
+[2026-04-21T13:40:15Z] [keep-source] 15_Установка supabase.mp4 (transcript incomplete — kept for retry)
+[2026-04-21T13:40:15Z] [END] transcribe.sh
+[2026-04-21T13:50:01Z] [START] transcribe.sh
+[2026-04-21T13:50:01Z] [start] 15_Установка supabase.mp4
+[2026-04-21T13:50:02Z] [extract] 15_Установка supabase.mp4 -> mp3 64kbps mono 16kHz
+[2026-04-21T13:50:10Z] [ready] 15_Установка_supabase.mp4.mp3 size=12647942B duration=1580.940000s
+[2026-04-21T13:50:15Z] [err] /opt/tg-export/_chunks/15_Установка_supabase.mp4.mp3: {"error":"Transcription failed: Transcription failed: EngineCore encountered an issue. See stack trace (above) for the root cause."}
+[2026-04-21T13:50:15Z] [keep-source] 15_Установка supabase.mp4 (transcript incomplete — kept for retry)
+[2026-04-21T13:50:15Z] [END] transcribe.sh
+[2026-04-21T14:00:01Z] [START] transcribe.sh
+[2026-04-21T14:00:01Z] [start] 15_Установка supabase.mp4
+[2026-04-21T14:00:02Z] [extract] 15_Установка supabase.mp4 -> mp3 64kbps mono 16kHz
+[2026-04-21T14:00:10Z] [ready] 15_Установка_supabase.mp4.mp3 size=12647942B duration=1580.940000s
+[2026-04-21T14:00:15Z] [err] /opt/tg-export/_chunks/15_Установка_supabase.mp4.mp3: {"error":"Transcription failed: Transcription failed: EngineCore encountered an issue. See stack trace (above) for the root cause."}
+[2026-04-21T14:00:15Z] [keep-source] 15_Установка supabase.mp4 (transcript incomplete — kept for retry)
+[2026-04-21T14:00:15Z] [END] transcribe.sh
+[2026-04-21T14:10:01Z] [START] transcribe.sh
+[2026-04-21T14:10:01Z] [start] 15_Установка supabase.mp4
+[2026-04-21T14:10:01Z] [extract] 15_Установка supabase.mp4 -> mp3 64kbps mono 16kHz
+[2026-04-21T14:10:10Z] [ready] 15_Установка_supabase.mp4.mp3 size=12647942B duration=1580.940000s
+[2026-04-21T14:10:15Z] [err] /opt/tg-export/_chunks/15_Установка_supabase.mp4.mp3: {"error":"Transcription failed: Transcription failed: EngineCore encountered an issue. See stack trace (above) for the root cause."}
+[2026-04-21T14:10:15Z] [keep-source] 15_Установка supabase.mp4 (transcript incomplete — kept for retry)
+[2026-04-21T14:10:15Z] [END] transcribe.sh
+[2026-04-21T14:20:01Z] [START] transcribe.sh
+[2026-04-21T14:20:01Z] [start] 15_Установка supabase.mp4
+[2026-04-21T14:20:01Z] [extract] 15_Установка supabase.mp4 -> mp3 64kbps mono 16kHz
+[2026-04-21T14:20:10Z] [ready] 15_Установка_supabase.mp4.mp3 size=12647942B duration=1580.940000s
+[2026-04-21T14:20:15Z] [err] /opt/tg-export/_chunks/15_Установка_supabase.mp4.mp3: {"error":"Transcription failed: Transcription failed: EngineCore encountered an issue. See stack trace (above) for the root cause."}
+[2026-04-21T14:20:15Z] [keep-source] 15_Установка supabase.mp4 (transcript incomplete — kept for retry)
+[2026-04-21T14:20:15Z] [END] transcribe.sh
+[2026-04-21T14:30:01Z] [START] transcribe.sh
+[2026-04-21T14:30:01Z] [start] 15_Установка supabase.mp4
+[2026-04-21T14:30:02Z] [extract] 15_Установка supabase.mp4 -> mp3 64kbps mono 16kHz
+[2026-04-21T14:30:10Z] [ready] 15_Установка_supabase.mp4.mp3 size=12647942B duration=1580.940000s
+[2026-04-21T14:30:15Z] [err] /opt/tg-export/_chunks/15_Установка_supabase.mp4.mp3: {"error":"Transcription failed: Transcription failed: EngineCore encountered an issue. See stack trace (above) for the root cause."}
+[2026-04-21T14:30:15Z] [keep-source] 15_Установка supabase.mp4 (transcript incomplete — kept for retry)
+[2026-04-21T14:30:15Z] [END] transcribe.sh
+[2026-04-21T14:40:01Z] [START] transcribe.sh
+[2026-04-21T14:40:01Z] [start] 15_Установка supabase.mp4
+[2026-04-21T14:40:02Z] [extract] 15_Установка supabase.mp4 -> mp3 64kbps mono 16kHz
+[2026-04-21T14:40:10Z] [ready] 15_Установка_supabase.mp4.mp3 size=12647942B duration=1580.940000s
+[2026-04-21T14:40:22Z] [err] /opt/tg-export/_chunks/15_Установка_supabase.mp4.mp3: {"error":"Transcription failed: Transcription failed: EngineCore encountered an issue. See stack trace (above) for the root cause."}
+[2026-04-21T14:40:22Z] [keep-source] 15_Установка supabase.mp4 (transcript incomplete — kept for retry)
+[2026-04-21T14:40:22Z] [END] transcribe.sh
+[2026-04-21T14:50:01Z] [START] transcribe.sh
+[2026-04-21T14:50:01Z] [start] 15_Установка supabase.mp4
+[2026-04-21T14:50:02Z] [extract] 15_Установка supabase.mp4 -> mp3 64kbps mono 16kHz
+[2026-04-21T14:50:10Z] [ready] 15_Установка_supabase.mp4.mp3 size=12647942B duration=1580.940000s
+[2026-04-21T14:50:15Z] [err] /opt/tg-export/_chunks/15_Установка_supabase.mp4.mp3: {"error":"Transcription failed: Transcription failed: EngineCore encountered an issue. See stack trace (above) for the root cause."}
+[2026-04-21T14:50:15Z] [keep-source] 15_Установка supabase.mp4 (transcript incomplete — kept for retry)
+[2026-04-21T14:50:15Z] [END] transcribe.sh
+[2026-04-21T15:00:01Z] [START] transcribe.sh
+[2026-04-21T15:00:01Z] [start] 15_Установка supabase.mp4
+[2026-04-21T15:00:02Z] [extract] 15_Установка supabase.mp4 -> mp3 64kbps mono 16kHz
+[2026-04-21T15:00:10Z] [ready] 15_Установка_supabase.mp4.mp3 size=12647942B duration=1580.940000s
+[2026-04-21T15:00:19Z] [err] /opt/tg-export/_chunks/15_Установка_supabase.mp4.mp3: {"error":"Transcription failed: Transcription failed: EngineCore encountered an issue. See stack trace (above) for the root cause."}
+[2026-04-21T15:00:19Z] [keep-source] 15_Установка supabase.mp4 (transcript incomplete — kept for retry)
+[2026-04-21T15:00:19Z] [END] transcribe.sh
+[2026-04-21T15:10:02Z] [START] transcribe.sh
+[2026-04-21T15:10:02Z] [start] 15_Установка supabase.mp4
+[2026-04-21T15:10:02Z] [extract] 15_Установка supabase.mp4 -> mp3 64kbps mono 16kHz
+[2026-04-21T15:10:10Z] [ready] 15_Установка_supabase.mp4.mp3 size=12647942B duration=1580.940000s
+[2026-04-21T15:10:15Z] [err] /opt/tg-export/_chunks/15_Установка_supabase.mp4.mp3: {"error":"Transcription failed: Transcription failed: EngineCore encountered an issue. See stack trace (above) for the root cause."}
+[2026-04-21T15:10:15Z] [keep-source] 15_Установка supabase.mp4 (transcript incomplete — kept for retry)
+[2026-04-21T15:10:15Z] [END] transcribe.sh
+[2026-04-21T15:20:01Z] [START] transcribe.sh
+[2026-04-21T15:20:01Z] [start] 15_Установка supabase.mp4
+[2026-04-21T15:20:01Z] [extract] 15_Установка supabase.mp4 -> mp3 64kbps mono 16kHz
+[2026-04-21T15:20:09Z] [ready] 15_Установка_supabase.mp4.mp3 size=12647942B duration=1580.940000s
+[2026-04-21T15:20:14Z] [err] /opt/tg-export/_chunks/15_Установка_supabase.mp4.mp3: {"error":"Transcription failed: Transcription failed: EngineCore encountered an issue. See stack trace (above) for the root cause."}
+[2026-04-21T15:20:14Z] [keep-source] 15_Установка supabase.mp4 (transcript incomplete — kept for retry)
+[2026-04-21T15:20:14Z] [END] transcribe.sh
+[2026-04-21T15:30:01Z] [START] transcribe.sh
+[2026-04-21T15:30:01Z] [start] 15_Установка supabase.mp4
+[2026-04-21T15:30:01Z] [extract] 15_Установка supabase.mp4 -> mp3 64kbps mono 16kHz
+[2026-04-21T15:30:09Z] [ready] 15_Установка_supabase.mp4.mp3 size=12647942B duration=1580.940000s
+[2026-04-21T15:30:14Z] [err] /opt/tg-export/_chunks/15_Установка_supabase.mp4.mp3: {"error":"Transcription failed: Transcription failed: EngineCore encountered an issue. See stack trace (above) for the root cause."}
+[2026-04-21T15:30:14Z] [keep-source] 15_Установка supabase.mp4 (transcript incomplete — kept for retry)
+[2026-04-21T15:30:14Z] [END] transcribe.sh
+[2026-04-21T15:40:01Z] [START] transcribe.sh
+[2026-04-21T15:40:01Z] [start] 15_Установка supabase.mp4
+[2026-04-21T15:40:01Z] [extract] 15_Установка supabase.mp4 -> mp3 64kbps mono 16kHz
+[2026-04-21T15:40:10Z] [ready] 15_Установка_supabase.mp4.mp3 size=12647942B duration=1580.940000s
+[2026-04-21T15:40:15Z] [err] /opt/tg-export/_chunks/15_Установка_supabase.mp4.mp3: {"error":"Transcription failed: Transcription failed: EngineCore encountered an issue. See stack trace (above) for the root cause."}
+[2026-04-21T15:40:15Z] [keep-source] 15_Установка supabase.mp4 (transcript incomplete — kept for retry)
+[2026-04-21T15:40:15Z] [END] transcribe.sh
+[2026-04-21T15:50:01Z] [START] transcribe.sh
+[2026-04-21T15:50:01Z] [start] 15_Установка supabase.mp4
+[2026-04-21T15:50:01Z] [extract] 15_Установка supabase.mp4 -> mp3 64kbps mono 16kHz
+[2026-04-21T15:50:10Z] [ready] 15_Установка_supabase.mp4.mp3 size=12647942B duration=1580.940000s
+[2026-04-21T15:50:14Z] [err] /opt/tg-export/_chunks/15_Установка_supabase.mp4.mp3: {"error":"Transcription failed: Transcription failed: EngineCore encountered an issue. See stack trace (above) for the root cause."}
+[2026-04-21T15:50:14Z] [keep-source] 15_Установка supabase.mp4 (transcript incomplete — kept for retry)
+[2026-04-21T15:50:14Z] [END] transcribe.sh
+[2026-04-21T16:00:01Z] [START] transcribe.sh
+[2026-04-21T16:00:01Z] [start] 15_Установка supabase.mp4
+[2026-04-21T16:00:02Z] [extract] 15_Установка supabase.mp4 -> mp3 64kbps mono 16kHz
+[2026-04-21T16:00:12Z] [ready] 15_Установка_supabase.mp4.mp3 size=12647942B duration=1580.940000s
+[2026-04-21T16:00:17Z] [err] /opt/tg-export/_chunks/15_Установка_supabase.mp4.mp3: {"error":"Transcription failed: Transcription failed: EngineCore encountered an issue. See stack trace (above) for the root cause."}
+[2026-04-21T16:00:17Z] [keep-source] 15_Установка supabase.mp4 (transcript incomplete — kept for retry)
+[2026-04-21T16:00:17Z] [END] transcribe.sh
+[2026-04-21T16:10:01Z] [START] transcribe.sh
+[2026-04-21T16:10:01Z] [start] 15_Установка supabase.mp4
+[2026-04-21T16:10:01Z] [extract] 15_Установка supabase.mp4 -> mp3 64kbps mono 16kHz
+[2026-04-21T16:10:10Z] [ready] 15_Установка_supabase.mp4.mp3 size=12647942B duration=1580.940000s
+[2026-04-21T16:10:15Z] [err] /opt/tg-export/_chunks/15_Установка_supabase.mp4.mp3: {"error":"Transcription failed: Transcription failed: EngineCore encountered an issue. See stack trace (above) for the root cause."}
+[2026-04-21T16:10:15Z] [keep-source] 15_Установка supabase.mp4 (transcript incomplete — kept for retry)
+[2026-04-21T16:10:15Z] [END] transcribe.sh
+[2026-04-21T16:20:01Z] [START] transcribe.sh
+[2026-04-21T16:20:01Z] [start] 15_Установка supabase.mp4
+[2026-04-21T16:20:01Z] [extract] 15_Установка supabase.mp4 -> mp3 64kbps mono 16kHz
+[2026-04-21T16:20:10Z] [ready] 15_Установка_supabase.mp4.mp3 size=12647942B duration=1580.940000s
+[2026-04-21T16:20:15Z] [err] /opt/tg-export/_chunks/15_Установка_supabase.mp4.mp3: {"error":"Transcription failed: Transcription failed: EngineCore encountered an issue. See stack trace (above) for the root cause."}
+[2026-04-21T16:20:15Z] [keep-source] 15_Установка supabase.mp4 (transcript incomplete — kept for retry)
+[2026-04-21T16:20:15Z] [END] transcribe.sh
+[2026-04-21T16:30:01Z] [START] transcribe.sh
+[2026-04-21T16:30:01Z] [start] 15_Установка supabase.mp4
+[2026-04-21T16:30:01Z] [extract] 15_Установка supabase.mp4 -> mp3 64kbps mono 16kHz
+[2026-04-21T16:30:10Z] [ready] 15_Установка_supabase.mp4.mp3 size=12647942B duration=1580.940000s
+[2026-04-21T16:30:15Z] [err] /opt/tg-export/_chunks/15_Установка_supabase.mp4.mp3: {"error":"Transcription failed: Transcription failed: EngineCore encountered an issue. See stack trace (above) for the root cause."}
+[2026-04-21T16:30:15Z] [keep-source] 15_Установка supabase.mp4 (transcript incomplete — kept for retry)
+[2026-04-21T16:30:15Z] [END] transcribe.sh
+[2026-04-21T16:40:01Z] [START] transcribe.sh
+[2026-04-21T16:40:01Z] [start] 15_Установка supabase.mp4
+[2026-04-21T16:40:01Z] [extract] 15_Установка supabase.mp4 -> mp3 64kbps mono 16kHz
+[2026-04-21T16:40:10Z] [ready] 15_Установка_supabase.mp4.mp3 size=12647942B duration=1580.940000s
+[2026-04-21T16:40:15Z] [err] /opt/tg-export/_chunks/15_Установка_supabase.mp4.mp3: {"error":"Transcription failed: Transcription failed: EngineCore encountered an issue. See stack trace (above) for the root cause."}
+[2026-04-21T16:40:15Z] [keep-source] 15_Установка supabase.mp4 (transcript incomplete — kept for retry)
+[2026-04-21T16:40:15Z] [END] transcribe.sh
+[2026-04-21T16:50:01Z] [START] transcribe.sh
+[2026-04-21T16:50:01Z] [start] 15_Установка supabase.mp4
+[2026-04-21T16:50:02Z] [extract] 15_Установка supabase.mp4 -> mp3 64kbps mono 16kHz
+[2026-04-21T16:50:10Z] [ready] 15_Установка_supabase.mp4.mp3 size=12647942B duration=1580.940000s
+[2026-04-21T16:50:14Z] [err] /opt/tg-export/_chunks/15_Установка_supabase.mp4.mp3: {"error":"Transcription failed: Transcription failed: EngineCore encountered an issue. See stack trace (above) for the root cause."}
+[2026-04-21T16:50:14Z] [keep-source] 15_Установка supabase.mp4 (transcript incomplete — kept for retry)
+[2026-04-21T16:50:14Z] [END] transcribe.sh
+[2026-04-21T17:00:01Z] [START] transcribe.sh
+[2026-04-21T17:00:01Z] [start] 15_Установка supabase.mp4
+[2026-04-21T17:00:02Z] [extract] 15_Установка supabase.mp4 -> mp3 64kbps mono 16kHz
+[2026-04-21T17:00:10Z] [ready] 15_Установка_supabase.mp4.mp3 size=12647942B duration=1580.940000s
+[2026-04-21T17:00:15Z] [err] /opt/tg-export/_chunks/15_Установка_supabase.mp4.mp3: {"error":"Transcription failed: Transcription failed: EngineCore encountered an issue. See stack trace (above) for the root cause."}
+[2026-04-21T17:00:15Z] [keep-source] 15_Установка supabase.mp4 (transcript incomplete — kept for retry)
+[2026-04-21T17:00:15Z] [END] transcribe.sh
+[2026-04-21T17:10:01Z] [START] transcribe.sh
+[2026-04-21T17:10:01Z] [start] 15_Установка supabase.mp4
+[2026-04-21T17:10:02Z] [extract] 15_Установка supabase.mp4 -> mp3 64kbps mono 16kHz
+[2026-04-21T17:10:10Z] [ready] 15_Установка_supabase.mp4.mp3 size=12647942B duration=1580.940000s
+[2026-04-21T17:10:32Z] [err] /opt/tg-export/_chunks/15_Установка_supabase.mp4.mp3: {"error":"Transcription failed: Transcription failed: EngineCore encountered an issue. See stack trace (above) for the root cause."}
+[2026-04-21T17:10:32Z] [keep-source] 15_Установка supabase.mp4 (transcript incomplete — kept for retry)
+[2026-04-21T17:10:32Z] [END] transcribe.sh
+[2026-04-21T17:20:01Z] [START] transcribe.sh
+[2026-04-21T17:20:01Z] [start] 15_Установка supabase.mp4
+[2026-04-21T17:20:02Z] [extract] 15_Установка supabase.mp4 -> mp3 64kbps mono 16kHz
+[2026-04-21T17:20:10Z] [ready] 15_Установка_supabase.mp4.mp3 size=12647942B duration=1580.940000s
+[2026-04-21T17:20:15Z] [err] /opt/tg-export/_chunks/15_Установка_supabase.mp4.mp3: {"error":"Transcription failed: Transcription failed: EngineCore encountered an issue. See stack trace (above) for the root cause."}
+[2026-04-21T17:20:15Z] [keep-source] 15_Установка supabase.mp4 (transcript incomplete — kept for retry)
+[2026-04-21T17:20:15Z] [END] transcribe.sh
+[2026-04-21T17:30:01Z] [START] transcribe.sh
+[2026-04-21T17:30:01Z] [start] 15_Установка supabase.mp4
+[2026-04-21T17:30:01Z] [extract] 15_Установка supabase.mp4 -> mp3 64kbps mono 16kHz
+[2026-04-21T17:30:10Z] [ready] 15_Установка_supabase.mp4.mp3 size=12647942B duration=1580.940000s
+[2026-04-21T17:30:14Z] [err] /opt/tg-export/_chunks/15_Установка_supabase.mp4.mp3: {"error":"Transcription failed: Transcription failed: EngineCore encountered an issue. See stack trace (above) for the root cause."}
+[2026-04-21T17:30:14Z] [keep-source] 15_Установка supabase.mp4 (transcript incomplete — kept for retry)
+[2026-04-21T17:30:14Z] [END] transcribe.sh
+[2026-04-21T17:40:01Z] [START] transcribe.sh
+[2026-04-21T17:40:01Z] [start] 15_Установка supabase.mp4
+[2026-04-21T17:40:01Z] [extract] 15_Установка supabase.mp4 -> mp3 64kbps mono 16kHz
+[2026-04-21T17:40:10Z] [ready] 15_Установка_supabase.mp4.mp3 size=12647942B duration=1580.940000s
+[2026-04-21T17:40:15Z] [err] /opt/tg-export/_chunks/15_Установка_supabase.mp4.mp3: {"error":"Transcription failed: Transcription failed: EngineCore encountered an issue. See stack trace (above) for the root cause."}
+[2026-04-21T17:40:15Z] [keep-source] 15_Установка supabase.mp4 (transcript incomplete — kept for retry)
+[2026-04-21T17:40:15Z] [END] transcribe.sh
+[2026-04-21T17:50:01Z] [START] transcribe.sh
+[2026-04-21T17:50:01Z] [start] 15_Установка supabase.mp4
+[2026-04-21T17:50:01Z] [extract] 15_Установка supabase.mp4 -> mp3 64kbps mono 16kHz
+[2026-04-21T17:50:09Z] [ready] 15_Установка_supabase.mp4.mp3 size=12647942B duration=1580.940000s
+[2026-04-21T17:50:14Z] [err] /opt/tg-export/_chunks/15_Установка_supabase.mp4.mp3: {"error":"Transcription failed: Transcription failed: EngineCore encountered an issue. See stack trace (above) for the root cause."}
+[2026-04-21T17:50:14Z] [keep-source] 15_Установка supabase.mp4 (transcript incomplete — kept for retry)
+[2026-04-21T17:50:14Z] [END] transcribe.sh
+[2026-04-21T18:00:01Z] [START] transcribe.sh
+[2026-04-21T18:00:01Z] [start] 15_Установка supabase.mp4
+[2026-04-21T18:00:01Z] [extract] 15_Установка supabase.mp4 -> mp3 64kbps mono 16kHz
+[2026-04-21T18:00:10Z] [ready] 15_Установка_supabase.mp4.mp3 size=12647942B duration=1580.940000s
+[2026-04-21T18:00:15Z] [err] /opt/tg-export/_chunks/15_Установка_supabase.mp4.mp3: {"error":"Transcription failed: Transcription failed: EngineCore encountered an issue. See stack trace (above) for the root cause."}
+[2026-04-21T18:00:15Z] [keep-source] 15_Установка supabase.mp4 (transcript incomplete — kept for retry)
+[2026-04-21T18:00:15Z] [END] transcribe.sh
+[2026-04-21T18:50:01Z] [START] transcribe.sh
+[2026-04-21T18:50:01Z] [start] 15_Установка supabase.mp4
+[2026-04-21T18:50:02Z] [extract] 15_Установка supabase.mp4 -> mp3 64kbps mono 16kHz
+[2026-04-21T18:50:09Z] [ready] 15_Установка_supabase.mp4.mp3 size=12647942B duration=1580.940000s
+[2026-04-21T18:50:14Z] [err] /opt/tg-export/_chunks/15_Установка_supabase.mp4.mp3: {"error":"Transcription failed: Transcription failed: EngineCore encountered an issue. See stack trace (above) for the root cause."}
+[2026-04-21T18:50:14Z] [keep-source] 15_Установка supabase.mp4 (transcript incomplete — kept for retry)
+[2026-04-21T18:50:14Z] [END] transcribe.sh
+[2026-04-21T19:00:01Z] [START] transcribe.sh
+[2026-04-21T19:00:01Z] [start] 15_Установка supabase.mp4
+[2026-04-21T19:00:01Z] [extract] 15_Установка supabase.mp4 -> mp3 64kbps mono 16kHz
+[2026-04-21T19:00:08Z] [ready] 15_Установка_supabase.mp4.mp3 size=12647942B duration=1580.940000s
+[2026-04-21T19:00:13Z] [err] /opt/tg-export/_chunks/15_Установка_supabase.mp4.mp3: {"error":"Transcription failed: Transcription failed: EngineCore encountered an issue. See stack trace (above) for the root cause."}
+[2026-04-21T19:00:13Z] [keep-source] 15_Установка supabase.mp4 (transcript incomplete — kept for retry)
+[2026-04-21T19:00:13Z] [END] transcribe.sh
+[2026-04-21T19:10:01Z] [START] transcribe.sh
+[2026-04-21T19:10:01Z] [start] 15_Установка supabase.mp4
+[2026-04-21T19:10:01Z] [extract] 15_Установка supabase.mp4 -> mp3 64kbps mono 16kHz
+[2026-04-21T19:10:08Z] [ready] 15_Установка_supabase.mp4.mp3 size=12647942B duration=1580.940000s
+[2026-04-21T19:10:13Z] [ok] 15_Установка_supabase.mp4 dur=1580.94s text=20537ch
+[2026-04-21T19:10:13Z] [delete-source] 15_Установка supabase.mp4 (transcript verified)
+[2026-04-21T19:10:13Z] [END] transcribe.sh

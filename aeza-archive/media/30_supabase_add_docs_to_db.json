@@ -1,0 +1,358 @@
+{
+  "name": "supabase_add_docs_to_db",
+  "nodes": [
+    {
+      "parameters": {
+        "pollTimes": {
+          "item": [
+            {
+              "mode": "everyMinute"
+            }
+          ]
+        },
+        "triggerOn": "specificFolder",
+        "folderToWatch": {
+          "__rl": true,
+          "value": "1PDvhHs4gCwmvrKB5QSTOMpJbDIKP_CPZ",
+          "mode": "list",
+          "cachedResultName": "add_to_db_info",
+          "cachedResultUrl": "https://drive.google.com/drive/folders/1PDvhHs4gCwmvrKB5QSTOMpJbDIKP_CPZ"
+        },
+        "event": "fileCreated",
+        "options": {}
+      },
+      "type": "n8n-nodes-base.googleDriveTrigger",
+      "typeVersion": 1,
+      "position": [
+        -1340,
+        340
+      ],
+      "id": "94da7e50-e8db-4c7c-97da-5e30ab2895f0",
+      "name": "Google Drive Trigger"
+    },
+    {
+      "parameters": {
+        "operation": "download",
+        "fileId": {
+          "__rl": true,
+          "value": "={{ $json.id }}",
+          "mode": "id"
+        },
+        "options": {
+          "googleFileConversion": {
+            "conversion": {
+              "docsToFormat": "application/pdf",
+              "drawingsToFormat": "application/pdf",
+              "slidesToFormat": "application/pdf"
+            }
+          }
+        }
+      },
+      "type": "n8n-nodes-base.googleDrive",
+      "typeVersion": 3,
+      "position": [
+        -1100,
+        340
+      ],
+      "id": "1b823411-3c8a-4607-937a-136d8c53da58",
+      "name": "Google Drive"
+    },
+    {
+      "parameters": {
+        "operation": "pdf",
+        "binaryPropertyName": "=data",
+        "options": {}
+      },
+      "type": "n8n-nodes-base.extractFromFile",
+      "typeVersion": 1,
+      "position": [
+        -400,
+        100
+      ],
+      "id": "39d94c3c-0d85-42f0-81fc-e482d3910339",
+      "name": "Extract from File"
+    },
+    {
+      "parameters": {
+        "mode": "insert",
+        "tableName": {
+          "__rl": true,
+          "value": "documents",
+          "mode": "list",
+          "cachedResultName": "documents"
+        },
+        "options": {
+          "queryName": "match_documents"
+        }
+      },
+      "type": "@n8n/n8n-nodes-langchain.vectorStoreSupabase",
+      "typeVersion": 1.1,
+      "position": [
+        -180,
+        100
+      ],
+      "id": "5cb8b0ce-0bf0-4f1f-a94c-65debed37123",
+      "name": "Supabase Vector Store"
+    },
+    {
+      "parameters": {
+        "options": {}
+      },
+      "type": "@n8n/n8n-nodes-langchain.embeddingsOpenAi",
+      "typeVersion": 1.2,
+      "position": [
+        -220,
+        280
+      ],
+      "id": "23cb3f04-4069-44e1-8a2c-b631a54b3176",
+      "name": "Embeddings OpenAI"
+    },
+    {
+      "parameters": {
+        "jsonMode": "expressionData",
+        "jsonData": "={{ $json.text }}",
+        "options": {
+          "metadata": {
+            "metadataValues": [
+              {
+                "name": "type",
+                "value": "=info_hub_docs"
+              },
+              {
+                "name": "file_id",
+                "value": "={{ $('Google Drive').item.json.id }}"
+              }
+            ]
+          }
+        }
+      },
+      "type": "@n8n/n8n-nodes-langchain.documentDefaultDataLoader",
+      "typeVersion": 1,
+      "position": [
+        -40,
+        260
+      ],
+      "id": "c6b8a6a4-c1b2-4c75-b5e7-5c2f51a477e7",
+      "name": "Default Data Loader"
+    },
+    {
+      "parameters": {
+        "chunkSize": 600,
+        "chunkOverlap": 150,
+        "options": {}
+      },
+      "type": "@n8n/n8n-nodes-langchain.textSplitterRecursiveCharacterTextSplitter",
+      "typeVersion": 1,
+      "position": [
+        -40,
+        420
+      ],
+      "id": "c1a0a93f-cc98-4c43-9262-fb2750b15182",
+      "name": "Recursive Character Text Splitter"
+    },
+    {
+      "parameters": {
+        "rules": {
+          "values": [
+            {
+              "conditions": {
+                "options": {
+                  "caseSensitive": true,
+                  "leftValue": "",
+                  "typeValidation": "strict",
+                  "version": 2
+                },
+                "conditions": [
+                  {
+                    "leftValue": "={{ $json.file_extension }}",
+                    "rightValue": "=pdf",
+                    "operator": {
+                      "type": "string",
+                      "operation": "equals"
+                    },
+                    "id": "c63b7ccd-f751-455b-8b39-c41916334606"
+                  }
+                ],
+                "combinator": "and"
+              },
+              "renameOutput": true,
+              "outputKey": "pdf"
+            },
+            {
+              "conditions": {
+                "options": {
+                  "caseSensitive": true,
+                  "leftValue": "",
+                  "typeValidation": "strict",
+                  "version": 2
+                },
+                "conditions": [
+                  {
+                    "id": "a5320274-a18a-4315-a9d4-727302be63de",
+                    "leftValue": "={{ $json.file_extension }}",
+                    "rightValue": "csv",
+                    "operator": {
+                      "type": "string",
+                      "operation": "equals",
+                      "name": "filter.operator.equals"
+                    }
+                  }
+                ],
+                "combinator": "and"
+              },
+              "renameOutput": true,
+              "outputKey": "csv"
+            }
+          ]
+        },
+        "options": {}
+      },
+      "type": "n8n-nodes-base.switch",
+      "typeVersion": 3.2,
+      "position": [
+        -640,
+        340
+      ],
+      "id": "14023201-db41-4322-be3d-cb90fe6c1cc4",
+      "name": "Switch"
+    },
+    {
+      "parameters": {
+        "assignments": {
+          "assignments": [
+            {
+              "id": "d5f685ff-842a-4044-8d8d-2598324a6c09",
+              "name": "file_extension",
+              "value": "={{ $binary.data.fileExtension }}",
+              "type": "string"
+            }
+          ]
+        },
+        "includeOtherFields": true,
+        "options": {}
+      },
+      "type": "n8n-nodes-base.set",
+      "typeVersion": 3.4,
+      "position": [
+        -880,
+        340
+      ],
+      "id": "7aa2f4c9-4b3f-46b2-acf7-59b2bc7a1f02",
+      "name": "Edit Fields1"
+    }
+  ],
+  "pinData": {},
+  "connections": {
+    "Google Drive Trigger": {
+      "main": [
+        [
+          {
+            "node": "Google Drive",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Google Drive": {
+      "main": [
+        [
+          {
+            "node": "Edit Fields1",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Extract from File": {
+      "main": [
+        [
+          {
+            "node": "Supabase Vector Store",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Embeddings OpenAI": {
+      "ai_embedding": [
+        [
+          {
+            "node": "Supabase Vector Store",
+            "type": "ai_embedding",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Default Data Loader": {
+      "ai_document": [
+        [
+          {
+            "node": "Supabase Vector Store",
+            "type": "ai_document",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Recursive Character Text Splitter": {
+      "ai_textSplitter": [
+        [
+          {
+            "node": "Default Data Loader",
+            "type": "ai_textSplitter",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Switch": {
+      "main": [
+        [
+          {
+            "node": "Extract from File",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Edit Fields1": {
+      "main": [
+        [
+          {
+            "node": "Switch",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    }
+  },
+  "active": false,
+  "settings": {
+    "executionOrder": "v1"
+  },
+  "versionId": "212b1226-c02e-4430-be5f-433d8c0af02b",
+  "meta": {
+    "instanceId": "69765f75295b17b4de659b260c6399cb27379370149ca5d0a58384842b36223a"
+  },
+  "id": "ahhfrKi4jfN5moUL",
+  "tags": [
+    {
+      "createdAt": "2025-04-18T12:11:08.258Z",
+      "updatedAt": "2025-04-18T12:11:08.258Z",
+      "id": "mE4OCNW8YdKCOjsf",
+      "name": "Алексей Колесов"
+    },
+    {
+      "createdAt": "2025-04-18T12:12:38.072Z",
+      "updatedAt": "2025-04-18T12:12:38.072Z",
+      "id": "1vZ2NmaMooE2YD2o",
+      "name": "supabase"
+    }
+  ]
+}
