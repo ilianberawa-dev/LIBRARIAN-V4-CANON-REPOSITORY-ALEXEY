@@ -4,7 +4,7 @@
 #
 # Requires:
 #   - Root (sudo).
-#   - Node.js >= 20 already installed (apt Node or NodeSource).
+#   - Node.js >= 18 already installed (apt Node or NodeSource).
 #
 # After install, see the printed "Next steps". One-time SMS auth is
 # a separate manual action (auth.mjs) because it needs interactive input.
@@ -23,11 +23,11 @@ require_root() {
   [[ $EUID -eq 0 ]] || die "run as root (sudo)"
 }
 
-require_node20() {
-  command -v node >/dev/null || die "node not found — install Node.js 20+ first"
+require_node18() {
+  command -v node >/dev/null || die "node not found — install Node.js 18+ first"
   local major
   major=$(node -v | sed 's/^v//; s/\..*//')
-  [[ "$major" -ge 20 ]] || die "node $(node -v) too old — need >= 20"
+  [[ "$major" -ge 18 ]] || die "node $(node -v) too old — need >= 18"
 }
 
 create_user() {
@@ -130,7 +130,7 @@ EOF
 
 main() {
   require_root
-  require_node20
+  require_node18
   create_user
   create_dirs
   copy_sources
