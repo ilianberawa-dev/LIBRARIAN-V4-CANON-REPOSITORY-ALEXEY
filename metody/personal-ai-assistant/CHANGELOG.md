@@ -61,5 +61,55 @@
 
 ---
 
-**Latest version:** v1.0  
+**Latest version:** v1.1 (simplified, post-audit)
 **Last updated:** 2026-04-24
+
+---
+
+## v1.1 — MVP Simplified (2026-04-24)
+
+**Status:** ACTIVE — replaces v1.0 for MVP self-use scope
+**Files:**
+- `v1.1-mvp-simplified.md` — main TZ (6 stages, 10-12 days)
+- `AUDIT-2026-04-24.md` — audit trail, 8 findings
+- `START-NEW-CHAT-DEV.md` — startup prompt for new chat
+
+### What changed vs v1.0
+
+**Removed from MVP (moved to Phase 2+ with trigger conditions):**
+- LiteLLM proxy → native Anthropic SDK
+- Multi-model cascade (Qwen+Sonnet) → Sonnet-only with prompt caching
+- RAG/embeddings → SQLite FTS5
+- Full 3-year history ingest → incremental + on-demand
+- Automatic learning loop → manual first 2 weeks
+- Silero TTS → Phase 2 (trigger: 5+ button uses)
+- PWA → Phase 2 (trigger: "TG screen too small")
+- 15 voice intent types → 3 core intents
+- Parser paid groups → Phase 3
+- 15 stages → 6 stages
+
+**Why (canon compliance):**
+- Before audit: 7/11 principles at risk
+- After audit: 1/11 (only #7 Offline First as conscious trade-off on Claude cloud)
+
+**Budget:**
+- Was planned: $15-25/mo with cascade
+- Now: ~$20/mo Sonnet-only with prompt caching
+- Hard cap: $22/mo
+
+**Reliability:** risk sum dropped ~70% at same MVP functionality.
+
+### Audited against
+
+- `kanon/alexey-11-principles.md` — 12 principles
+- `kanon/simplicity-first-principle.md` — Principle #0
+- `kanon/alexey-consultation-2026-04-24-agent-canon.md` — author's canon
+- Industry benchmarks: Superhuman, Shortwave, Sanebox, Gmail Smart Reply, Lindy, Mem.ai
+
+### Orchestration model
+
+- Architect (Claude chat) decomposes tasks
+- Claude Code chats execute per-stage
+- Owner provides access + reviews
+- Each stage has acceptance criteria
+- Nothing added without trigger condition (#8 Validate Before Automate)
