@@ -1,7 +1,7 @@
 # НАВЫКИ (Skills)
 
 **Категория:** Переиспользуемые паттерны и скрипты  
-**Статус:** ✅ 1 proven pattern (heartbeat-telegram)
+**Статус:** ✅ 2 proven patterns (heartbeat-telegram, claude-bot-parser-control)
 
 ---
 
@@ -67,6 +67,58 @@ cat ~/.claude/assistant/_status.json
 - `kanon/simplicity-first-principle.md` — Принцип #0 (доверяй но проверяй)
 - `kanon/alexey-11-principles.md:23` — Принцип #1 (Portability)
 - `kanon/alexey-11-principles.md:36` — Принцип #2 (Minimal Integration)
+
+---
+
+### 2. Claude Bot Parser Control ✅
+
+**Файлы:**
+- `claude-bot-parser-control.md` — документация (600+ строк, архитектура + диалоги)
+- `claude-bot-parser-control/` — 5 executable skills + SKILL.md + one-shot installer
+  - `status.sh` — показать `_status.json` парсера
+  - `sync.sh` — детект новых постов в канале
+  - `download.sh [limit] [minPrio] [maxPrio]` — скачивание по приоритетам
+  - `logs.sh [component] [lines]` — просмотр логов
+  - `transcribe.sh` — транскрибация untranscribed media через Grok STT
+  - `SKILL.md` — MCP skill definition
+  - `install.sh` — копирует все 5 скриптов в `~/.claude/skills/telegram-parser/`
+
+**Что делает:**
+- Управление Telegram парсером через Claude Desktop чат вместо SSH
+- 5 bash skills вызываются прямо из диалога
+- Open in Terminal workflow для live-мониторинга
+
+**Proven metrics (Aeza production):**
+- 142 поста проиндексировано
+- 48 медиа скачано (P1-P3)
+- 15 транскриптов (7.18ч аудио)
+- $0.72 Grok STT cost
+- 7 дней uptime
+
+**Быстрый старт (30 секунд):**
+```bash
+# 1. Склонируй библиотеку (или git pull если уже есть)
+git clone https://github.com/ilianberawa-dev/LIBRARIAN-V4-CANON-REPOSITORY-ALEXEY.git
+
+# 2. Запусти installer
+cd LIBRARIAN-V4-CANON-REPOSITORY-ALEXEY
+bash navyki/claude-bot-parser-control/install.sh
+
+# 3. Подготовь парсер (один из двух):
+#    a) clone с Aeza:     scp -r root@193.233.128.21:/opt/tg-export ~/tg-export
+#    b) из backup:        cp -r aeza-archive ~/tg-export
+cd ~/tg-export && npm install
+
+# 4. Настрой .env (TG_API_*, XAI_API_KEY, BOT_TOKEN, CHAT_ID)
+
+# 5. Тест
+bash ~/.claude/skills/telegram-parser/status.sh
+```
+
+**Canon refs:**
+- `kanon/simplicity-first-principle.md` — Принцип #0 (чат проще SSH)
+- `kanon/alexey-11-principles.md` — Принцип #4 (Skills Over Agents)
+- `troubleshoot/telegram-parser-recreation.md` — полная архитектура парсера
 
 ---
 
