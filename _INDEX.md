@@ -385,11 +385,14 @@ Read C:\Users\97152\Documents\claude-library\troubleshoot\telegram-parser-recrea
 
 ---
 
-### 8. НАВЫКИ / claude-bot-parser-control ✨ НОВОЕ
+### 8. НАВЫКИ / claude-bot-parser-control ✨ НОВОЕ (обновлено)
 
 **Полное название:** Claude Desktop — Parser Control  
-**Файл:** `navyki/claude-bot-parser-control.md`  
-**Размер:** 600+ строк, ~80KB
+**Файлы:**
+- `navyki/claude-bot-parser-control.md` — документация (600+ строк)
+- `navyki/claude-bot-parser-control/` — executable skills (status/sync/download/logs/transcribe) + SKILL.md + install.sh
+
+**Размер:** 600+ строк docs + 6 скриптов + SKILL.md
 
 **О чём:**
 - Управление Telegram парсером через Claude Desktop чат
@@ -420,5 +423,12 @@ Claude: [runs download.sh 0 1 1, opens Terminal, monitors progress]
 **Как читать:**
 ```
 Read C:\Users\97152\Documents\claude-library\navyki\claude-bot-parser-control.md
+```
+
+**Установка на локальную машину (30 сек):**
+```bash
+# Из корня библиотеки:
+bash navyki/claude-bot-parser-control/install.sh
+# → копирует 5 скриптов + SKILL.md в ~/.claude/skills/telegram-parser/
 ```
 
