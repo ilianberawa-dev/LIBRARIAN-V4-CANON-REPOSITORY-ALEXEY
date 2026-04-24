@@ -16,7 +16,7 @@
 | `metody/` | МЕТОДЫ разработки | 📘 | ✅ 1 тема |
 | `rukovodstva/` | РУКОВОДСТВА по компонентам | 📚 | ✅ 1 тема |
 | `kanon/` | КАНОН (принципы) | 📜 | ✅ 2 документа |
-| `navyki/` | НАВЫКИ (skills) | 🛠️ | 🚧 Пусто |
+| `navyki/` | НАВЫКИ (skills) | 🛠️ | ✅ 1 паттерн |
 | `spravochniki/` | СПРАВОЧНИКИ | 📖 | ✅ 1 гайд |
 | `troubleshoot/` | РЕШЕНИЕ ПРОБЛЕМ | 🔧 | 🚧 Пусто |
 
@@ -51,8 +51,9 @@ claude-library/
   │   ├── README.md
   │   └── skills-a-to-ya.md (108KB полный гайд)
   │
-  ├── navyki/              ← НАВЫКИ (roadmap)
-  │   └── README.md
+  ├── navyki/              ← НАВЫКИ ✨ ОБНОВЛЕНО
+  │   ├── README.md
+  │   └── heartbeat-telegram-pattern.md (proven pattern)
   │
   └── troubleshoot/        ← ПРОБЛЕМЫ (roadmap)
       └── README.md
@@ -298,10 +299,10 @@ Read C:\Users\97152\Documents\claude-library\metody\personal-ai-assistant\v1.0-m
 - Методы: 4 файла
 - Руководства: 4 файла
 - Справочники: 2 файла (включая 108KB skills guide)
+- Навыки: 1 файл (Heartbeat Telegram pattern)
 - Материалы Алексея: 22 файла (canonical копии)
 - Aeza архив: 85 файлов (после удаления дубликатов)
 - School материалы: 31 файл
-- Навыки: roadmap
 - Troubleshooting: roadmap
 
 **Удалено при уборке (22 файла):**
@@ -321,3 +322,26 @@ Read C:\Users\97152\Documents\claude-library\metody\personal-ai-assistant\v1.0-m
 **Последнее обновление:** 2026-04-24 (полная синхронизация)  
 **Источники:** Локальная машина + Aeza server  
 **Backup:** Полный offline доступ к материалам
+
+---
+
+### 6. НАВЫКИ / heartbeat-telegram-pattern ✨ НОВОЕ
+
+**Полное название:** Self-Healing Heartbeat через Telegram  
+**Файл:** `navyki/heartbeat-telegram-pattern.md`  
+**Размер:** 334 строки
+
+**О чём:**
+- Proven pattern из tg-export (7 дней uptime в продакшне)
+- heartbeat.sh: watchdog каждые 10 мин (auto-restart, log rotation)
+- notify.sh: Telegram push notifications каждые 2ч
+- _status.json: state snapshot
+- Адаптация для AI Assistant (memory-sync, proactive-think)
+
+**Применение:** Long-running процессы, AI Assistant monitoring
+
+**Как читать:**
+```
+Read C:\Users\97152\Documents\claude-library\navyki\heartbeat-telegram-pattern.md
+```
+
