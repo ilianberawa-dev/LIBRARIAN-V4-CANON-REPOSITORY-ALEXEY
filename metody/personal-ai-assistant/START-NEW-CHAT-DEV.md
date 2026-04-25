@@ -80,7 +80,9 @@
 
 ## 🔐 Что нужно от владельца для старта
 
-1. SSH root к Aeza (193.233.128.21)
+0. **Claude Code Max** ($100/мес — Pro $20 не хватит)
+0.5. **Sub-agents настроены** в `~/.claude/agents/` (scout-haiku, worker-sonnet, strategist-opus)
+1. SSH root к VPS (Aeza если жив, иначе новый — Linode Jakarta или Vultr Singapore по канону)
 2. Anthropic API key
 3. Telegram Bot token (@BotFather)
 4. Chat_id (curl-команда)
