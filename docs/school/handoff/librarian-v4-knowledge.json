@@ -1,0 +1,444 @@
+{
+  "metadata": {
+    "created": "2026-04-24T15:45:00+08:00",
+    "role": "librarian-v4",
+    "purpose": "Complete infrastructure knowledge for librarian-v4 role",
+    "canon_version": "0.3",
+    "last_updated_by": "teleport-bootstrap-session"
+  },
+
+  "aeza_server": {
+    "connection": {
+      "ssh_command": "ssh -i ~/.ssh/aeza_ed25519 root@193.233.128.21",
+      "tailscale_ip": "100.97.148.4",
+      "public_ip": "193.233.128.21",
+      "os": "Ubuntu 24.04.4 LTS (Noble Numbat)",
+      "python_default": "3.12.3",
+      "architecture": "x86_64"
+    },
+
+    "resources": {
+      "ram_total": "7.8G",
+      "ram_available": "4.4G",
+      "disk_total": "59G",
+      "disk_free": "22G",
+      "disk_usage": "63%"
+    },
+
+    "docker_stack": {
+      "containers": {
+        "realty_lightrag": {
+          "status": "Up 3+ hours",
+          "port": "127.0.0.1:9621->9621/tcp",
+          "purpose": "LightRAG knowledge graph for Realty Portal docs",
+          "access": "http://100.97.148.4:9621 (Tailscale)"
+        },
+        "realty_litellm": {
+          "status": "Up 3+ hours",
+          "port": "4000/tcp",
+          "purpose": "LiteLLM proxy for unified LLM access",
+          "access": "Internal only"
+        },
+        "realty_openclaw": {
+          "status": "Up 7+ hours (healthy)",
+          "port": "127.0.0.1:18789->18789/tcp",
+          "purpose": "OpenClaw scraping framework",
+          "access": "http://100.97.148.4:18789 (Tailscale)"
+        },
+        "realty_ollama": {
+          "status": "Up 7+ hours",
+          "port": "11434/tcp",
+          "purpose": "Local Ollama for embeddings",
+          "access": "Internal only"
+        },
+        "supabase-kong": {
+          "status": "Up 7+ hours (healthy)",
+          "port": "127.0.0.1:8000->8000/tcp, 127.0.0.1:8443->8443/tcp",
+          "purpose": "API Gateway for Supabase",
+          "access": "http://100.97.148.4:8000 (Tailscale)"
+        },
+        "supabase-pooler": {
+          "status": "Up 7+ hours (healthy)",
+          "port": "127.0.0.1:5432->5432/tcp, 127.0.0.1:6543->6543/tcp",
+          "purpose": "PostgreSQL connection pooler (PgBouncer)",
+          "access": "postgres://100.97.148.4:5432"
+        },
+        "supabase-storage": {
+          "status": "Up 7+ hours (healthy)",
+          "port": "5000/tcp",
+          "purpose": "S3-compatible object storage",
+          "access": "Via Kong gateway"
+        },
+        "supabase-auth": {
+          "status": "Up 7+ hours (healthy)",
+          "purpose": "GoTrue auth service",
+          "access": "Via Kong gateway"
+        },
+        "supabase-db": {
+          "status": "Up 7+ hours (healthy)",
+          "port": "5432/tcp",
+          "purpose": "PostgreSQL 15 database",
+          "access": "Via pooler"
+        },
+        "supabase-studio": {
+          "status": "Up 7+ hours (healthy)",
+          "port": "3000/tcp",
+          "purpose": "Supabase admin UI",
+          "access": "Via Kong gateway"
+        },
+        "supabase-rest": {
+          "status": "Up 7+ hours",
+          "port": "3000/tcp",
+          "purpose": "PostgREST API",
+          "access": "Via Kong gateway"
+        },
+        "supabase-realtime": {
+          "status": "Up 7+ hours (healthy)",
+          "purpose": "Realtime subscriptions",
+          "access": "Via Kong gateway"
+        }
+      },
+
+      "compose_file": "/opt/realty-portal/docker-compose.yml",
+      "management_commands": {
+        "status": "docker ps",
+        "logs": "docker logs <container>",
+        "restart": "docker restart <container>",
+        "restart_all": "cd /opt/realty-portal && docker compose restart"
+      }
+    },
+
+    "cron_jobs": {
+      "heartbeat": {
+        "schedule": "*/10 * * * *",
+        "command": "/opt/tg-export/heartbeat.sh",
+        "purpose": "Self-healing check for Telegram export process",
+        "frequency": "Every 10 minutes"
+      },
+      "notify": {
+        "schedule": "0 */2 * * *",
+        "command": "/opt/tg-export/notify.sh",
+        "purpose": "Telegram notifications every 2 hours",
+        "frequency": "Every 2 hours"
+      },
+      "sync_channel": {
+        "schedule": "15 */6 * * *",
+        "command": "cd /opt/tg-export && node sync_channel.mjs >> sync.log 2>&1",
+        "purpose": "Sync new posts from Alexey's channel",
+        "frequency": "Every 6 hours at :15"
+      },
+      "verify": {
+        "schedule": "30 2 * * *",
+        "command": "/opt/tg-export/verify.sh > /dev/null 2>&1",
+        "purpose": "Daily integrity check",
+        "frequency": "Daily at 02:30 UTC"
+      },
+      "night_monitor": {
+        "schedule": "@reboot",
+        "command": "screen -dmS night_monitor bash /opt/realty-portal/scripts/night_monitor.sh",
+        "purpose": "Background monitoring in screen session",
+        "frequency": "On server reboot"
+      },
+      "reporter_2h": {
+        "schedule": "@reboot",
+        "command": "screen -dmS reporter_2h bash /opt/realty-portal/scripts/2h_reporter.sh",
+        "purpose": "2-hour reporting in screen session",
+        "frequency": "On server reboot"
+      }
+    },
+
+    "directory_structure": {
+      "/opt/realty-portal": {
+        "purpose": "Main Realty Portal project",
+        "key_files": {
+          "docker-compose.yml": "Infrastructure stack definition",
+          ".env": "122 environment variables (secrets)",
+          ".mcp.json": "MCP server configuration",
+          "README.md": "Project documentation",
+          "RECOVERY.md": "Disaster recovery procedures"
+        },
+        "subdirectories": {
+          "backups/": "Database and config backups",
+          "docs/": "Project documentation and handoffs",
+          "docs/school/": "Multi-agent coordination hub",
+          "lightrag/": "LightRAG data storage",
+          "openclaw/": "Scraping framework configs",
+          "scrapers/": "Property scraping scripts",
+          "scripts/": "Automation scripts (night_monitor.sh, 2h_reporter.sh)",
+          "skills/": "Claude Code skills library",
+          "supabase/": "Supabase migrations and functions"
+        }
+      },
+
+      "/opt/tg-export": {
+        "purpose": "Telegram channel export and processing",
+        "key_files": {
+          "heartbeat.sh": "Self-healing monitor (runs every 10 min)",
+          "notify.sh": "Telegram notifications (every 2h)",
+          "sync_channel.mjs": "Sync Alexey's channel posts (every 6h)",
+          "verify.sh": "Daily integrity check (02:30 UTC)",
+          "heartbeat.log": "Monitor log (check with tail -20)",
+          "_status.json": "Atomic snapshot of export status"
+        },
+        "subdirectories": {
+          "transcripts/": "14 processed transcript files",
+          "media/": "_manifest.json + 14 videos",
+          "_paperclip_unpacked/": "Research artifact (Task 3.A)",
+          "_mcp_mail_eval/": "Research artifact (Task 3.B, git clone --depth 1)"
+        }
+      }
+    },
+
+    "secrets": {
+      "location": "/opt/realty-portal/.env",
+      "backup_locations": [
+        "/opt/realty-portal/.env.backup-20260424-033652",
+        "/opt/realty-portal/.env.bak.20260423"
+      ],
+      "total_vars": 122,
+      "critical_vars": [
+        "POSTGRES_PASSWORD",
+        "JWT_SECRET",
+        "ANON_KEY",
+        "SERVICE_ROLE_KEY",
+        "SECRET_KEY_BASE",
+        "VAULT_ENC_KEY",
+        "DASHBOARD_USERNAME",
+        "DASHBOARD_PASSWORD",
+        "PORTAL_HOST",
+        "SUPABASE_PUBLIC_URL",
+        "GITHUB_PAT",
+        "TELEGRAM_BOT_TOKEN"
+      ],
+      "access_method": "ssh -i ~/.ssh/aeza_ed25519 root@193.233.128.21 'cat /opt/realty-portal/.env'",
+      "security_note": "Never expose .env contents in chat logs or public files"
+    }
+  },
+
+  "windows_machine": {
+    "connection": {
+      "tailscale_ip": "100.86.239.108",
+      "hostname": "dubaiproperty1",
+      "os": "Windows 11 Home 10.0.26200",
+      "shell": "bash (Git Bash / WSL-like)"
+    },
+
+    "working_directory": "C:\\work\\realty-portal",
+
+    "mcp_config": {
+      "desktop_config": "C:\\Users\\97152\\AppData\\Roaming\\Claude\\claude_desktop_config.json",
+      "project_config": "C:\\work\\realty-portal\\.mcp.json",
+      "servers_configured": [
+        "mcp-agent-mail (http://100.97.148.4:8765/api/ - NOT INSTALLED YET)",
+        "realty-lightrag (npx lightrag-mcp@1.0.11, http://100.97.148.4:9621)",
+        "realty-supabase (npx supabase-mcp@1.5.0, http://100.97.148.4:8000)"
+      ]
+    },
+
+    "coordination_files": {
+      "librarian-v4-current.json": "C:\\work\\realty-portal\\docs\\school\\handoff\\librarian-v4-current.json",
+      "coordination_protocol": "C:\\work\\realty-portal\\docs\\school\\handoff\\COORDINATION-PROTOCOL.md",
+      "agents_registry": "C:\\work\\realty-portal\\agents.yaml"
+    }
+  },
+
+  "mesh_architecture": {
+    "coordination_method": "File-based via docs/school/handoff/*.json",
+    "mcp_agent_mail_status": "NOT_INSTALLED (blocked on user 'старт' command)",
+
+    "roles": {
+      "librarian-v4": {
+        "model": "claude-opus-4-7",
+        "lifecycle": "long-lived",
+        "responsibilities": [
+          "Infrastructure management (Docker, Aeza server)",
+          "Knowledge asset curation (reduces cost for all BUs)",
+          "Creating and spawning new roles",
+          "MCP Agent Mail deployment (when approved)",
+          "Secrets and env var management",
+          "Disaster recovery procedures"
+        ],
+        "status_file": "docs/school/handoff/librarian-v4-current.json",
+        "bootstrap_sequence": [
+          "Read canon_training.yaml (check version drift)",
+          "Read mailbox/dispatch_queue.md",
+          "Read mailbox/consensus_workshop.md",
+          "Read mailbox/outbox_to_librarian.md",
+          "Read librarian_v3.md handoff",
+          "Read mailbox/inbox_from_librarian.md",
+          "Register presence in coordination system",
+          "ACK bootstrap complete"
+        ]
+      },
+
+      "school-v4": {
+        "model": "claude-opus-4-7",
+        "lifecycle": "long-lived",
+        "responsibilities": [
+          "Canon keeper (canon_training.yaml)",
+          "Orchestrator and task dispatcher",
+          "Quality control for handoffs",
+          "Consensus workshop facilitation",
+          "Warm start brief generation"
+        ],
+        "status_file": "docs/school/handoff/school-v4-current.json",
+        "communication_channels": [
+          "mailbox/outbox_to_librarian.md",
+          "mailbox/inbox_from_school.md",
+          "mailbox/dispatch_queue.md"
+        ]
+      },
+
+      "parser-rumah123-v4": {
+        "model": "claude-sonnet-4-6",
+        "lifecycle": "short-lived",
+        "responsibilities": [
+          "Scraping Rumah123.com property listings",
+          "Data extraction and normalization",
+          "Rate limit management (1 req/2s)",
+          "Pagination handling"
+        ],
+        "status_file": "docs/school/handoff/parser-v4-current.json",
+        "working_directory": "C:\\work\\realty-portal\\scrapers"
+      },
+
+      "ai-helper-v3": {
+        "model": "claude-sonnet-4-6",
+        "lifecycle": "long-lived",
+        "responsibilities": [
+          "Generic task execution",
+          "Telegram bot responses",
+          "Fallback for unassigned work"
+        ],
+        "status_file": "docs/school/handoff/ai-helper-v3-current.json"
+      }
+    }
+  },
+
+  "canon_knowledge": {
+    "version": "0.3",
+    "location": "C:\\work\\realty-portal\\docs\\school\\canon_training.yaml",
+    "last_update": "2026-04-21T20:30+08:00",
+
+    "key_concepts": {
+      "handoff_protocol": {
+        "trigger": "50% context threshold",
+        "type": "organized (preferred) or emergency_draft",
+        "includes": "context template, current task, blockers, next actions",
+        "verification": "Read-on-start sequence mandatory"
+      },
+
+      "context_measurement": {
+        "rule": "Self-report % at handoff write",
+        "threshold": "50% triggers organized handoff",
+        "estimation": "conservative, not optimistic"
+      },
+
+      "mailbox_system": {
+        "inbox": "docs/school/mailbox/inbox_from_<role>.md",
+        "outbox": "docs/school/mailbox/outbox_to_<role>.md",
+        "dispatch_queue": "docs/school/mailbox/dispatch_queue.md",
+        "consensus_workshop": "docs/school/mailbox/consensus_workshop.md",
+        "format": "Timestamped blocks with emoji headers"
+      },
+
+      "warm_start_brief": {
+        "owner": "school",
+        "length": "300-500 words",
+        "location": "docs/school/warmstart/<role>_v<N>_brief.md",
+        "purpose": "Quick onboarding for new version"
+      },
+
+      "gap_mitigations": {
+        "I-8": "canon_version_check_on_turn_start (check drift)",
+        "role_inbox_exit_closure": "📤 Выход block in inbox before handoff"
+      }
+    },
+
+    "mcp_agent_mail_poc": {
+      "status": "BLOCKED on user 'старт' command",
+      "architecture": "SSH tunnel localhost:8765, zero public surface",
+      "installation_time": "35-40 min (10 steps)",
+      "access": "ssh -L 8765:127.0.0.1:8765 root@193.233.128.21",
+      "test_suite": "T1-T10 acceptance criteria",
+      "location_when_installed": "/opt/mcp_agent_mail/"
+    }
+  },
+
+  "business_processes": {
+    "telegram_export": {
+      "channel": "Alexey's technical channel",
+      "sync_frequency": "Every 6 hours (15 */6 * * *)",
+      "transcripts_ready": 14,
+      "media_files": 14,
+      "heartbeat": "Every 10 minutes (self-healing)",
+      "verification": "Daily at 02:30 UTC"
+    },
+
+    "property_scraping": {
+      "target": "Rumah123.com",
+      "rate_limit": "1 request per 2 seconds",
+      "last_status": "280 properties parsed (from handoff)",
+      "selector_change": "article.card → div.property-item",
+      "working_branch": "parser/fix-pagination (80% done per handoff)"
+    },
+
+    "monitoring": {
+      "night_monitor": "Screen session @reboot, monitors overnight",
+      "2h_reporter": "Screen session @reboot, reports every 2h",
+      "heartbeat_log": "/opt/tg-export/heartbeat.log"
+    }
+  },
+
+  "next_actions_for_librarian": [
+    {
+      "priority": "P0",
+      "action": "Complete bootstrap sequence",
+      "details": [
+        "Read full docs/school/canon_training.yaml",
+        "Read all mailbox files (dispatch_queue, consensus_workshop, outbox_to_librarian, inbox_from_librarian)",
+        "Read full docs/school/handoff/librarian_v3.md (608 lines)",
+        "Update librarian-v4-current.json status to 'ready'"
+      ]
+    },
+    {
+      "priority": "P1",
+      "action": "Connect to existing business processes",
+      "details": [
+        "Monitor Docker stack health (all containers Up)",
+        "Check cron job execution (tail /opt/tg-export/heartbeat.log)",
+        "Verify Telegram export running (check _status.json)",
+        "Monitor disk usage (currently 63%, warn if >80%)"
+      ]
+    },
+    {
+      "priority": "P2",
+      "action": "Coordinate with other roles",
+      "details": [
+        "Wait for school-v4 bootstrap (read school-v4-current.json when available)",
+        "Wait for parser-v4 bootstrap",
+        "Wait for ai-helper-v3 bootstrap",
+        "Establish presence heartbeat (update JSON every 15-30 min)"
+      ]
+    },
+    {
+      "priority": "P3",
+      "action": "MCP Agent Mail deployment (awaiting user approval)",
+      "details": [
+        "10-step installation plan ready in librarian_v3.md",
+        "SSH tunnel approach: ssh -L 8765:127.0.0.1:8765 root@193.233.128.21",
+        "Bearer token generation: openssl rand -hex 32",
+        "Test suite T1-T10 ready for validation"
+      ]
+    }
+  ],
+
+  "troubleshooting": {
+    "docker_containers_down": "cd /opt/realty-portal && docker compose up -d",
+    "cron_not_running": "crontab -l | check schedule, systemctl status cron",
+    "disk_full": "Check backups/, lightrag/, docker volumes",
+    "secrets_rotation": "Backup .env first, update docker-compose environment",
+    "tailscale_down": "systemctl status tailscaled, tailscale up",
+    "postgres_connection": "Check supabase-pooler container, port 5432/6543"
+  }
+}

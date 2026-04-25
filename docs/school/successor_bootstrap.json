@@ -1,0 +1,265 @@
+{
+  "bootstrap_version": "1.0",
+  "created": "2026-04-23",
+  "created_by": "school-v3",
+  "purpose": "Полный контекст realty-portal mesh для нового CC чата в новом репо",
+
+  "first_actions": [
+    "1. Прочитай этот JSON полностью",
+    "2. Убедись что SSH tunnel up: curl http://localhost:8765/mail/health",
+    "3. Прочитай canon: scp -i ~/.ssh/aeza_ed25519 root@193.233.128.21:/opt/realty-portal/docs/school/canon_training.yaml ./canon_training.yaml",
+    "4. Зарегистрируй себя в MCP как school-v4 (см. mcp_bootstrap_sequence ниже)",
+    "5. fetch_inbox — обработай pending"
+  ],
+
+  "mcp_infrastructure": {
+    "server_host": "root@193.233.128.21",
+    "server_port": 8765,
+    "bind": "127.0.0.1",
+    "service": "mcp-agent-mail.service (systemd, running)",
+    "db": "/opt/mcp_agent_mail/storage.sqlite3",
+    "ssh_key": "C:/Users/97152/.ssh/aeza_ed25519",
+    "tunnel_cmd": "ssh -L 8765:127.0.0.1:8765 root@193.233.128.21",
+    "bearer_env": "MCP_AGENT_MAIL_BEARER",
+    "bearer_source": "claude-session.ps1 тянет с /opt/realty-portal/.env",
+    "api_base_url": "http://localhost:8765/api/",
+    "project_key": "/opt/realty-portal/docs/school",
+    "project_id": 1,
+    "warning": "project_key ВСЕГДА Linux-absolute path. Windows path = ошибка NEW-10"
+  },
+
+  "agents": [
+    {
+      "name": "librarian-v3",
+      "id": 1,
+      "status": "active",
+      "token": "1xBOIgp0mk9G3xO46Pn1IEQXMT4cVScfBnHBI9TUoec",
+      "session_uuid": "6865a62f-a051-4b63-938e-3c753efb96fc"
+    },
+    {
+      "name": "school-v2",
+      "id": 2,
+      "status": "retired",
+      "token": "j_zoG7J2OdO9eOwbSlWxMojPUJV4aiIUfoTPzeriifg"
+    },
+    {
+      "name": "librarian-v2",
+      "id": 3,
+      "status": "archived",
+      "token": "Qd7CYgKKmXqZ6r36enCzZ8TlMNiO7OlkOO5hY4uxwOw"
+    },
+    {
+      "name": "school-v3",
+      "id": 6,
+      "status": "retired",
+      "token": "KIRWJsREShmSLV-Q85zUecAYrFKulnr0WHK0c7D4Av8",
+      "session_uuid": "2a112b93-7547-4c9f-8588-463e7f4e5c5c"
+    },
+    {
+      "name": "parser-rumah123-v3",
+      "id": 7,
+      "status": "active",
+      "token": "P69OgMh8v1C1RPxHIxX84AAcCWqvxZM-f9lyiAPf1Qo"
+    },
+    {
+      "name": "ai-helper-v2",
+      "id": 8,
+      "status": "active",
+      "token": "FI9WCYl8CUcyBigZBnM9clD3eJBMH2pvJOpHRAXdrwQ"
+    }
+  ],
+
+  "contacts_approved": {
+    "bidirectional_expires_20260522": [
+      "librarian-v3 <-> school-v2",
+      "librarian-v3 <-> librarian-v2",
+      "librarian-v3 <-> parser-rumah123-v3",
+      "librarian-v3 <-> ai-helper-v2",
+      "parser-rumah123-v3 <-> school-v3",
+      "ai-helper-v2 <-> school-v3"
+    ],
+    "pending": [
+      "school-v3 -> librarian-v3",
+      "parser-rumah123-v3 -> librarian-v3",
+      "ai-helper-v2 -> librarian-v3"
+    ]
+  },
+
+  "threads": [
+    { "id": "presence",                  "last_msg_id": 28 },
+    { "id": "canon-updates",             "last_msg_id": 19 },
+    { "id": "librarian-v3-to-school",    "last_msg_id": 6  },
+    { "id": "librarian-v2-to-successor", "last_msg_id": 5  },
+    { "id": "librarian-to-parser",       "last_msg_id": 25 },
+    { "id": "parser-v3-to-school",       "last_msg_id": 22 },
+    { "id": "school-to-parser",          "last_msg_id": 24 },
+    { "id": "librarian-to-ai-helper",    "last_msg_id": 31 },
+    { "id": "ai-helper-to-school",       "last_msg_id": 29 },
+    { "id": "school-to-ai-helper",       "last_msg_id": 30 }
+  ],
+
+  "mcp_api_gotchas": {
+    "ensure_project":    "param = human_key (NOT project_key)",
+    "fetch_inbox":       "results in structuredContent.result[] (NOT .messages[])",
+    "mark_message_read": "single int message_id (NOT array, NOT mark_read)",
+    "register_agent":    "params: program + model + name (NOT agent_name)",
+    "registration_token":"required in EVERY call: send/fetch/mark/whois",
+    "contacts":          "request_contact + respond_contact both sides BEFORE send_message",
+    "contact_policy":    "default = open (AP-7). Sensitive roles: call set_contact_policy restricted right after register"
+  },
+
+  "errors_and_deadends": [
+    {
+      "id": "AP-7",
+      "title": "register_agent default contact_policy = open",
+      "detail": "Any agent can send messages immediately after registration. Secretary and client-facing roles MUST call set_contact_policy restricted before any work.",
+      "status": "FINDING, v0.5 candidate"
+    },
+    {
+      "id": "mark_read_bug",
+      "title": "mark_message_read does not persist between fetch calls",
+      "detail": "read_at is set but next fetch_inbox shows messages as unread again. Hypothesis: WAL checkpoint race or lazy sync. Investigate: sqlite3 .schema messages + SELECT id,read_at FROM messages WHERE read_at IS NOT NULL.",
+      "status": "P0 open, librarian-v4 to investigate"
+    },
+    {
+      "id": "SSH_heredoc_fstring",
+      "title": "SSH heredoc + Python f-string = SyntaxError",
+      "detail": "Triple escaping through heredoc breaks Python f-strings on Aeza. Fix: write script to local file, scp to server, then execute. No multiline Python via SSH heredoc.",
+      "status": "KNOWN, skills/mcp-agent-mail-setup.md fix pending"
+    },
+    {
+      "id": "ANTHROPIC_KEY_bypass",
+      "title": "Claude Code picks up wrong ANTHROPIC_API_KEY from env",
+      "detail": "If ANTHROPIC_API_KEY exists in env from another role, CC uses it. Before launching role with custom key: Remove-Item Env:ANTHROPIC_API_KEY in PowerShell.",
+      "status": "KNOWN workaround, launcher_mcp_bootstrap_v2 candidate"
+    },
+    {
+      "id": "SSH_tunnel_fragility",
+      "title": "SSH -L tunnel drops more than 10 times per session",
+      "detail": "Each drop = MCP tools unavailable for all CC chats. Current mitigation: manual reconnect. Solution: Tailscale migration pending Ilya approval.",
+      "status": "P0, architecture decision pending"
+    },
+    {
+      "id": "MCP_tools_not_registered",
+      "title": "MCP tools do not appear if session opened before tunnel up",
+      "detail": "CC registers MCP client at session start. If tunnel came up later, tools will not appear. Only fresh CC session after tunnel up resolves this.",
+      "status": "KNOWN, launcher preflight probe = v0.5 candidate"
+    }
+  ],
+
+  "canon": {
+    "version": "0.4",
+    "last_updated": "2026-04-22T12:30+08:00",
+    "file_on_aeza": "/opt/realty-portal/docs/school/canon_training.yaml",
+    "lines": 743,
+    "key_invariants": [
+      "launcher_mcp_bootstrap",
+      "mcp_session_start_sequence",
+      "mcp_api_usage",
+      "role_inbox_exit_closure",
+      "canon_version_check_on_turn_start",
+      "mailbox_reliability_invariants I-1..I-10",
+      "ilya_overseer_bypass",
+      "context_measurement_rule: never self-estimate, only Ilya UI"
+    ],
+    "v05_candidates": [
+      "rotation_protocol: exit_closure at >80% context, autolauncher reanimates",
+      "launcher_mcp_bootstrap_v2: step 0 preflight + Remove-Item Env:ANTHROPIC_API_KEY",
+      "AP-6 fix: MCP silent degradation fallback",
+      "AP-7 fix: set_contact_policy explicit for sensitive roles",
+      "orchestrator_protocol: ACK files + status_log + watcher.ps1 contract"
+    ]
+  },
+
+  "architecture_decisions": {
+    "mcp_transport": "localhost:8765 + SSH tunnel + bearer. No Caddy, no domain.",
+    "tailscale_status": "PENDING Ilya approval. Replaces SSH -L tunnel. Cost $0 free tier.",
+    "scale_up_stages": {
+      "stage0": "FancyZones visual layout (done)",
+      "stage1": "autolauncher + Windows Terminal tabs + Tailscale (next session)",
+      "stage2": "auto-rotation + canon v0.5 + dashboard",
+      "stage3": "role groups + batch ops = 20-agent mesh"
+    },
+    "design_doc_git": "018c95c branch claude/parser-v3-launcher-bootstrap-DKNwr"
+  },
+
+  "aeza_key_paths": {
+    "mcp_mail":      "/opt/mcp_agent_mail/",
+    "mcp_db":        "/opt/mcp_agent_mail/storage.sqlite3",
+    "project_root":  "/opt/realty-portal/",
+    "env_file":      "/opt/realty-portal/.env",
+    "tg_export":     "/opt/tg-export/",
+    "library_index": "/opt/tg-export/library_index.json",
+    "transcripts":   "/opt/tg-export/transcripts/",
+    "heartbeat_log": "/opt/tg-export/heartbeat.log",
+    "litellm_cfg":   "/opt/realty-portal/lightrag/litellm_config.yaml"
+  },
+
+  "windows_key_paths": {
+    "ssh_key":       "C:/Users/97152/.ssh/aeza_ed25519",
+    "global_memory": "C:/Users/97152/.claude/memory/",
+    "session_script":"C:/work/realty-portal/scripts/claude-session.ps1",
+    "mcp_config":    "C:/work/realty-portal/.mcp.json"
+  },
+
+  "env_vars": [
+    { "name": "MCP_AGENT_MAIL_BEARER",  "opens": "MCP Agent Mail Windows client auth" },
+    { "name": "HTTP_BEARER_TOKEN",      "opens": "MCP Agent Mail server side" },
+    { "name": "ANTHROPIC_API_KEY",      "opens": "Claude API via LiteLLM" },
+    { "name": "LITELLM_MASTER_KEY",     "opens": "LiteLLM proxy admin + all consumers" },
+    { "name": "POSTGRES_PASSWORD",      "opens": "Supabase DB 172.18.0.13:5432" },
+    { "name": "REALTY_DB_DSN",          "opens": "Full Postgres DSN for host Python scripts" },
+    { "name": "TELEGRAM_BOT_TOKEN",     "opens": "@PROPERTYEVALUATOR_bot" },
+    { "name": "TELEGRAM_ADMIN_CHAT_ID", "opens": "Admin chat for bot push" },
+    { "name": "XAI_API_KEY",            "opens": "Grok STT + Grok models in LiteLLM" },
+    { "name": "GROQ_API_KEY",           "opens": "Groq Kimi K2 + Llama in LiteLLM" },
+    { "name": "DASHSCOPE_API_KEY",      "opens": "Qwen in LiteLLM" },
+    { "name": "OPENAI_API_KEY",         "opens": "gpt-4o-mini in LiteLLM" },
+    { "name": "GEMINI_API_KEY",         "opens": "Gemini Flash in LiteLLM" },
+    { "name": "DEEPSEEK_API_KEY",       "opens": "DeepSeek V3 in LiteLLM" },
+    { "name": "GITHUB_PAT",             "opens": "GitHub API (rotation pending, was leaked in stdout)" }
+  ],
+
+  "skills_inventory": [
+    { "file": "skills/mcp-agent-mail-setup.md",       "size": "40KB 1013 lines", "desc": "SKILL v1.1: full MCP install config API guide" },
+    { "file": "skills/autolauncher-architecture.md",  "size": "24KB 607 lines",  "desc": "Stage 1-4 spec: Tailscale + mesh-boot.ps1 + watcher + dashboard" },
+    { "file": "skills/heartbeat-parser.md",           "size": "16KB 245 lines",  "desc": "A1 heartbeat design draft awaiting school review 4 questions" },
+    { "file": "skills/heartbeat-librarian-reference.sh", "size": "7KB 183 lines","desc": "heartbeat.sh v1.0 reference sha256 38c1b30a" },
+    { "file": "skills/heartbeat-common.md",           "size": "NOT FOUND",       "desc": "P0 blocker: unified heartbeat for parser + ai-helper" }
+  ],
+
+  "p0_tasks_for_successor": [
+    "register_agent school-v4 + request_contact librarian-v3 + presence + fetch_inbox",
+    "canon v0.5 RFC: process all FINDINGs from canon_backlog.md",
+    "librarian-v3: approve pending contacts school-v3 + parser-v3 + ai-helper-v2",
+    "heartbeat-common.md: write unified skill (librarian P0, parser + ai-helper blocked on it)",
+    "mark_message_read bug: investigate SQLite schema on Aeza",
+    "Tailscale migration: get Ilya approval then install Aeza + Windows"
+  ],
+
+  "mcp_bootstrap_sequence_for_school_v4": [
+    "health_check: GET http://localhost:8765/mail/health",
+    "ensure_project: human_key = /opt/realty-portal/docs/school",
+    "register_agent: name=school-v4 program=claude-code model=claude-sonnet-4-6",
+    "SAVE the registration_token returned — required in all subsequent calls",
+    "request_contact: to=librarian-v3 registration_token=YOUR_TOKEN",
+    "send_message: to=librarian-v3 thread_id=presence subject=[PRESENCE] school-v4 online",
+    "fetch_inbox: agent_name=school-v4 registration_token=YOUR_TOKEN limit=50",
+    "Write bootstrap ACK block to docs/school/mailbox/inbox_from_school.md"
+  ],
+
+  "resume_sessions": {
+    "librarian_v3": "claude --resume 6865a62f-a051-4b63-938e-3c753efb96fc",
+    "school_v3":    "claude --resume 2a112b93-7547-4c9f-8588-463e7f4e5c5c",
+    "note": "Run from C:/work/realty-portal/ or new repo root"
+  },
+
+  "hybrid_memory_vault": {
+    "note": "Separate FS from Windows. Ask Ilya for scp or git sync.",
+    "backup": "backup-20260422-095137-realty-portal-mesh-complete-20260422.md 15KB",
+    "digest": "memory-digest-20260422-095142.md 17KB 294 lines",
+    "compact": "memory-compact-20260422-095142.md 11KB",
+    "git_commit": "4a7051b",
+    "git_branch": "claude/parser-v3-launcher-bootstrap-DKNwr"
+  }
+}

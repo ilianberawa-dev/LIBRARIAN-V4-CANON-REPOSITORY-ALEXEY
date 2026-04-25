@@ -1,0 +1,15 @@
+{
+  "_comment": "MCP Agent Mail client template for Claude Code (Windows + SSH tunnel)",
+  "_ssh_tunnel": "ssh -N -L 8765:127.0.0.1:8765 root@193.233.128.21",
+  "_token_source": "MCP_AGENT_MAIL_BEARER env var (set by claude-session.ps1 from /opt/realty-portal/.env)",
+  "_project_key": "/opt/realty-portal/docs/school",
+  "mcpServers": {
+    "mcp-agent-mail": {
+      "type": "http",
+      "url": "http://localhost:8765/api/",
+      "headers": {
+        "Authorization": "Bearer ${MCP_AGENT_MAIL_BEARER}"
+      }
+    }
+  }
+}

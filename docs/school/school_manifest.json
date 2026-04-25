@@ -1,0 +1,561 @@
+{
+  "school_name": "Vibe Coder School (canon Алексея)",
+  "version": "1.0",
+  "generated": "2026-04-21",
+  "audience": "начинающий vibe-coder без технического бэкграунда (но с бизнес-опытом)",
+  "teacher_role": "Claude Code в роли наставника. Следовать канону Алексея, адаптироваться под уровень ученика, использовать материалы библиотеки.",
+  "principles": [
+    {
+      "id": "portability",
+      "name": "Переносимость",
+      "summary": "Только официальные образы, никаких самописных костылей. Любой сервис поднимается одним docker-compose up -d на свежем VPS за минуты.",
+      "source_refs": [
+        "msg_11 (Настройка сервера и docker с 0)",
+        "msg_13 (n8n установка)",
+        "msg_15 (Supabase установка)",
+        "msg_55 (Baserow)",
+        "msg_136 (OpenClaw VPS)"
+      ]
+    },
+    {
+      "id": "minimal_integration",
+      "name": "Минимум интеграционного кода",
+      "summary": "Вместо кастомного кода — готовые ноды, скиллы, MCP серверы. Бизнес-логика живёт в конфигах, не в обвязке.",
+      "source_refs": [
+        "msg_71 (N8N MCP release)",
+        "msg_94 (n8n MCP мультиагентность)",
+        "msg_95 (Supabase MCP)",
+        "msg_97 (Подключение Supabase MCP)"
+      ]
+    },
+    {
+      "id": "simple_nodes",
+      "name": "Простые ноды",
+      "summary": "Каждая нода в workflow делает одну вещь. Сложное поведение = композиция нод, не один монстр.",
+      "source_refs": [
+        "msg_66 (2339 n8n workflows)",
+        "msg_76 (N8N MCP архитектура промптов)",
+        "msg_101 (Контент-завод)"
+      ]
+    },
+    {
+      "id": "max_in_skills",
+      "name": "Максимум в скиллах",
+      "summary": "Skill > Agent > Hardcoded prompt. Скиллы редактируются, версионируются, делятся между проектами. Агент без скиллов — болтун.",
+      "source_refs": [
+        "msg_172 (Skills + DevOps победил)",
+        "msg_174 (Гайд Skills от А до Я)",
+        "msg_178 (Telegram Skill)"
+      ]
+    },
+    {
+      "id": "minimal_agent_commands",
+      "name": "Минимальные чёткие команды агентам",
+      "summary": "Коридор без фантазий. Инструкции — короткие, императивные, с чёткими ветвлениями. Fail-loud на неожиданных данных. Без простора для галлюцинаций.",
+      "source_refs": [
+        "feedback_alexey_skills_philosophy.md",
+        "msg_178 (Telegram Skill INSTALL.md)",
+        "msg_76 (N8N MCP промпт-архитектура)"
+      ]
+    },
+    {
+      "id": "single_secret_vault",
+      "name": "Один секрет-vault",
+      "summary": "Все ключи/токены в одном .env файле. Никогда не дублировать, один ввод — одно место. Ротация не должна требовать поиска по десяти местам.",
+      "source_refs": [
+        "feedback_single_secret_vault.md"
+      ]
+    },
+    {
+      "id": "offline_first",
+      "name": "Offline-first где возможно",
+      "summary": "Работа через собственный сервер/локалку. Cloud только где действительно нужен. Self-host LightRAG, n8n, Supabase, Леший — всё своё.",
+      "source_refs": [
+        "msg_39 (Леший установка)",
+        "msg_48 (Леший в облаке для приватки)",
+        "msg_158 (LightRAG мозг для агентов)"
+      ]
+    },
+    {
+      "id": "validate_before_automate",
+      "name": "Подписка-триал перед автоматизацией",
+      "summary": "Месяц подписки → проверить ценность → решить продление. Не вкладываться в долгие автоматизации на непроверенных данных.",
+      "source_refs": [
+        "project_alexey_subscription_plan.md"
+      ]
+    },
+    {
+      "id": "human_pacing",
+      "name": "Человеческий ритм API",
+      "summary": "Не насилуй API. Случайные паузы 1-5 мин + длинные перерывы 30-90 мин. Не бёрстить даже если есть квота. Takeout где доступен.",
+      "source_refs": [
+        "наш опыт Grok/Telegram: download.mjs скрипт"
+      ]
+    },
+    {
+      "id": "content_factory_model",
+      "name": "Модель «контент-завод»",
+      "summary": "Парсинг чужого контента → фильтр по качеству → пересборка в свой стиль → автопубликация. Масштабируется через скиллы, не через увеличение кол-ва людей.",
+      "source_refs": [
+        "msg_101 (Контент-завод для Telegram)",
+        "msg_102 (Файлы по ТГ Контент-Заводу)",
+        "msg_103 (За кулисами контент-завода)"
+      ]
+    }
+  ],
+  "curriculum": [
+    {
+      "level": 0,
+      "id": "L0",
+      "title": "Философия vibe-кодинга (зачем и почему)",
+      "goal": "Понять что такое vibe-кодинг, чем отличается от классического, и почему подход Алексея работает для non-developer бизнес-владельцев.",
+      "lessons": [
+        {
+          "id": "L0.1",
+          "title": "Что такое vibe-кодинг",
+          "materials": {
+            "posts": [
+              68,
+              69,
+              57,
+              58,
+              172,
+              174
+            ],
+            "transcripts": [
+              170
+            ]
+          },
+          "exercise": "Найди в канале пост где Алексей описывает своё первое впечатление от AI-агентов. Что его зацепило?"
+        },
+        {
+          "id": "L0.2",
+          "title": "Канон: Skills > Agents > Prompts",
+          "materials": {
+            "posts": [
+              172,
+              174,
+              178
+            ],
+            "memory": [
+              "feedback_alexey_skills_philosophy.md"
+            ]
+          },
+          "exercise": "Выбери один свой проект. Опиши что в нём сейчас — хардкод-промпт, агент, или скилл? Как переделать в скилл?"
+        },
+        {
+          "id": "L0.3",
+          "title": "Портабельность и минимум интеграционного кода",
+          "materials": {
+            "posts": [
+              11,
+              13,
+              15,
+              55,
+              136
+            ],
+            "memory": [
+              "feedback_portable_stack.md"
+            ]
+          }
+        }
+      ]
+    },
+    {
+      "level": 1,
+      "id": "L1",
+      "title": "Инструменты vibe-кодера",
+      "goal": "Освоить 4 главных инструмента: Claude Code, Kilo Code, Cursor, Gemini CLI. Знать когда какой выбирать.",
+      "lessons": [
+        {
+          "id": "L1.1",
+          "title": "Claude Code: главный рабочий инструмент",
+          "materials": {
+            "posts": [
+              111,
+              58
+            ]
+          }
+        },
+        {
+          "id": "L1.2",
+          "title": "Kilo Code: альтернатива + подписная модель",
+          "materials": {
+            "posts": [
+              80,
+              82,
+              111
+            ]
+          }
+        },
+        {
+          "id": "L1.3",
+          "title": "Gemini CLI: бесплатная альтернатива",
+          "materials": {
+            "posts": [
+              56,
+              57,
+              58
+            ]
+          }
+        },
+        {
+          "id": "L1.4",
+          "title": "VS Code + AI-зоопарк за копейки",
+          "materials": {
+            "posts": [
+              68,
+              69
+            ]
+          }
+        }
+      ]
+    },
+    {
+      "level": 2,
+      "id": "L2",
+      "title": "Базовая инфраструктура (VPS + Docker + n8n + Supabase)",
+      "goal": "Поставить и настроить базовый стек на собственном VPS. Понимать как каждый компонент работает.",
+      "lessons": [
+        {
+          "id": "L2.1",
+          "title": "VPS с 0: выбор, регистрация, докер",
+          "materials": {
+            "posts": [
+              11,
+              12
+            ],
+            "files": [
+              "configs_instructions.zip"
+            ]
+          }
+        },
+        {
+          "id": "L2.2",
+          "title": "Установка n8n",
+          "materials": {
+            "posts": [
+              13
+            ],
+            "files": [
+              "n8n.zip"
+            ]
+          }
+        },
+        {
+          "id": "L2.3",
+          "title": "Установка Supabase",
+          "materials": {
+            "posts": [
+              15
+            ],
+            "files": [
+              "supabase.zip"
+            ]
+          }
+        },
+        {
+          "id": "L2.4",
+          "title": "Nginx Proxy Manager + Portainer",
+          "materials": {
+            "posts": [
+              14,
+              11
+            ]
+          }
+        },
+        {
+          "id": "L2.5",
+          "title": "Baserow (таблицы как сервис)",
+          "materials": {
+            "posts": [
+              55
+            ],
+            "files": [
+              "baserow.zip"
+            ]
+          }
+        }
+      ]
+    },
+    {
+      "level": 3,
+      "id": "L3",
+      "title": "MCP серверы — расширение агента",
+      "goal": "Понять MCP-протокол. Подключить n8n MCP, Supabase MCP, LightRAG MCP. Использовать как инструменты агента.",
+      "lessons": [
+        {
+          "id": "L3.1",
+          "title": "Что такое MCP и зачем",
+          "materials": {
+            "posts": [
+              166
+            ],
+            "files": [
+              "INSTRUCTION_CONNECT_MCP.md"
+            ]
+          }
+        },
+        {
+          "id": "L3.2",
+          "title": "N8N MCP Server: архитектура + release",
+          "materials": {
+            "posts": [
+              63,
+              64,
+              71,
+              72,
+              76,
+              77,
+              78,
+              94
+            ],
+            "files": [
+              "devops_team.zip",
+              "agent_template.zip"
+            ]
+          }
+        },
+        {
+          "id": "L3.3",
+          "title": "Supabase MCP Server",
+          "materials": {
+            "posts": [
+              95,
+              97
+            ],
+            "files": [
+              "sup_mcp_docs.zip"
+            ]
+          }
+        },
+        {
+          "id": "L3.4",
+          "title": "LightRAG — мозг агента",
+          "materials": {
+            "posts": [
+              156,
+              157,
+              158,
+              160
+            ],
+            "files": [
+              "lightrag.zip"
+            ]
+          }
+        }
+      ]
+    },
+    {
+      "level": 4,
+      "id": "L4",
+      "title": "Агентные системы",
+      "goal": "Построить многоагентную систему. Понять когда нужна и когда НЕ нужна.",
+      "lessons": [
+        {
+          "id": "L4.1",
+          "title": "Когда нужны multi-agent системы",
+          "materials": {
+            "posts": [
+              170
+            ],
+            "transcripts": [
+              165
+            ]
+          }
+        },
+        {
+          "id": "L4.2",
+          "title": "Леший — LibreChat fork",
+          "materials": {
+            "posts": [
+              37,
+              39,
+              42,
+              46,
+              47,
+              48,
+              53
+            ]
+          }
+        },
+        {
+          "id": "L4.3",
+          "title": "OpenClaw — ИИ-агент 24/7",
+          "materials": {
+            "posts": [
+              133,
+              134,
+              136,
+              137
+            ]
+          }
+        },
+        {
+          "id": "L4.4",
+          "title": "Paperclip — AI-компания без людей",
+          "materials": {
+            "posts": [
+              142,
+              143,
+              144,
+              146,
+              147,
+              148,
+              149
+            ],
+            "files": [
+              "Paperclip_install.zip"
+            ]
+          }
+        }
+      ]
+    },
+    {
+      "level": 5,
+      "id": "L5",
+      "title": "Skills — формат Алексея (canonical)",
+      "goal": "Научиться писать скиллы по канону Алексея: минимальные, чёткие, точные, fail-loud.",
+      "lessons": [
+        {
+          "id": "L5.1",
+          "title": "SKILL.md — структура",
+          "materials": {
+            "posts": [
+              172,
+              174,
+              178
+            ],
+            "files": [
+              "Skills от А до Я.pdf",
+              "telegram.zip",
+              "claude_prompt.md"
+            ]
+          }
+        },
+        {
+          "id": "L5.2",
+          "title": "INSTALL.md для агента — как Алексей делает",
+          "materials": {
+            "posts": [
+              178
+            ],
+            "files": [
+              "telegram.zip"
+            ]
+          }
+        },
+        {
+          "id": "L5.3",
+          "title": "Практика: напиши свой скилл",
+          "exercise": "Выбери простой use-case из твоего бизнеса. Напиши 1 SKILL.md + 1 INSTALL.md по канону."
+        }
+      ]
+    },
+    {
+      "level": 6,
+      "id": "L6",
+      "title": "Автоматизация контента (Content Factory)",
+      "goal": "Построить контент-завод: парсинг доноров → анализ → генерация → публикация.",
+      "lessons": [
+        {
+          "id": "L6.1",
+          "title": "Архитектура контент-завода",
+          "materials": {
+            "posts": [
+              101,
+              102,
+              103,
+              104
+            ]
+          }
+        },
+        {
+          "id": "L6.2",
+          "title": "TGStat парсер каналов-доноров",
+          "materials": {
+            "posts": [
+              102,
+              103
+            ],
+            "files": [
+              "content_zavod_tg.zip"
+            ]
+          }
+        },
+        {
+          "id": "L6.3",
+          "title": "Supabase как хранилище постов",
+          "materials": {
+            "posts": [
+              19,
+              20,
+              21,
+              22
+            ]
+          }
+        }
+      ]
+    },
+    {
+      "level": 7,
+      "id": "L7",
+      "title": "Продакшн и масштабирование",
+      "goal": "Деплой, безопасность, мониторинг. Как масштабировать команду AI-агентов вместо найма людей.",
+      "lessons": [
+        {
+          "id": "L7.1",
+          "title": "DevOps-команда из 8 агентов",
+          "materials": {
+            "posts": [
+              91,
+              93
+            ],
+            "files": [
+              "devops_team.zip"
+            ]
+          }
+        },
+        {
+          "id": "L7.2",
+          "title": "Закулисье: нюансы, грабли, безопасность",
+          "materials": {
+            "posts": [
+              137
+            ]
+          }
+        },
+        {
+          "id": "L7.3",
+          "title": "AI-продавец — реальный бизнес-кейс",
+          "materials": {
+            "posts": [
+              17,
+              19,
+              20,
+              21,
+              22
+            ],
+            "files": [
+              "ai_seller_rag.zip"
+            ]
+          }
+        }
+      ]
+    }
+  ],
+  "library_index": "library_index.json (same dir)",
+  "knowledge_paths": {
+    "posts_dump": "../alexey-reference/export-2026-04-20/result.json",
+    "transcripts": "../alexey-reference/export-2026-04-20/transcripts/",
+    "priority_catalog": "../alexey-reference/export-2026-04-20/p4_priority.json",
+    "downloaded_files": "../alexey-reference/export-2026-04-20/media/ (локально после rsync; сейчас на Aeza /opt/tg-export/media/)"
+  },
+  "protocol": {
+    "session_start": "Прочитать этот manifest + library_index.json. Спросить у ученика цель сессии (если ещё не знает): \"Хочешь пройти Module L0 философии? Или у тебя конкретная задача?\"",
+    "teaching_style": "Сократовский метод: задать вопрос → получить ответ → скорректировать. Не читать лекцию.",
+    "canon_enforcement": "Если ученик предлагает решение противоречащее принципам Алексея — остановить, показать принцип + msg_id где он описан, переубедить.",
+    "progress_tracking": "В конце каждого модуля — 3 вопроса проверки. Сохранять прогресс в docs/school/progress_<student>.md.",
+    "escalate_to_videos": "Если вопрос ученика лучше разбирается в одном из Alexey видео — дать ссылку и цитату из транскрипта."
+  }
+}

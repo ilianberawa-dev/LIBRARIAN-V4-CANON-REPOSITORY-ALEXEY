@@ -1,0 +1,67 @@
+# DRAFT — ADR-023 (not yet merged into decisions-log.md)
+
+**Status:** proposed, pending Ilia + Alexey review after Phase A baseline closes
+**Date drafted:** 2026-04-20
+**Will be inserted into:** `docs/decisions-log.md` after ADR-022 (Alexey canonical SKILL.md)
+**Depends on:** Q-OPEN-15 validated, detail-fetcher scraper extension implemented
+
+---
+
+## ADR-023: Multi-source location extraction with precision-aware fallback
+
+- **Date:** 2026-04-20
+- **Status:** Draft (not Accepted — validation blocked by detail-fetcher implementation)
+- **Phase:** A (scraper enhancement) + B (Normalizer integration)
+- **Context:** EVL-CLS-003 `classify_assumed_zoning` в текущем виде использует только `specific_area` extracted из текста + `_lookup_area_defaults`. Это создаёт реальные ошибки segmentation в heterogeneous зонах (Canggu/Kerobokan boundary, Tabanan coast-to-subak, Ubud/Penestanan), с impact на compound zone multiplier (15-25% price distortion). Probe 2026-04-20 подтвердил: Rumah123 detail-pages дают `latitude/longitude` через JSON-LD (без JS execution), но с **переменной precision** — от 1m (pin precise) до ~11km (area centroid, бесполезен).
+- **Decision:** Принять 3-source location extraction pipeline с precedence-ordering:
+  1. **`pin_precise`** — Rumah123 JSON-LD coordinates with ≥3 decimals on latitude (precision ≤100m). **Highest priority.** Usable для zone lookup, Phase 2 RTRW overlay, ST_DWithin comp search.
+  2. **`geocoded`** — text-based Google Places geocoding (Phase 2 only; requires API key + paid quota). Medium priority.
+  3. **`text_only`** — fallback: extract `specific_area` from text, lookup centroid from gazetteer. Current behavior.
+  - Skip `pin_centroid` (≤2 decimals on latitude) — treat as **equivalent to text_only** (no info gain over gazetteer, which has same resolution).
+- **Rationale:**
+  - Canon ADR-003 `zoning = soft-layer` уже допускает confidence downgrade при contradicting hints — координатный override это усиление этого механизма
+  - 30-50% листингов в пробе имеют pin_precise → значимый accuracy gain без полной depends Phase 2 RTRW
+  - Precision-awareness через `location_source` field = honest reporting: не говорим что есть координаты если это centroid
+- **Alternatives rejected:**
+  - Добавить detail-fetcher в scraper прямо сейчас — блокирует baseline A/B test, риск CF permanent ban без proxy rotation
+  - Использовать все координаты без precision-check — 50% записей были бы зашумлены area-centroid фейковым pin-сигналом
+  - Отложить до Phase 2 RTRW — потеря accuracy gain который достижим раньше
+- **Consequences:**
+  - **Schema migration `properties` +3 columns:**
+    - `listing_lat NUMERIC(9,6)` nullable
+    - `listing_lng NUMERIC(9,6)` nullable
+    - `location_source TEXT CHECK(IN ('pin_precise','text_only','geocoded','unknown'))`
+  - **Scraper enhancement:** two-phase execution
+    - Phase 1 (existing): list-page fetch → `raw_listings`
+    - Phase 2 (new): detail-fetcher с ≥20s rate-limit per URL, extract JSON-LD geo → write lat/lng + precision flag to raw_listings (new JSONB column? или отдельная table `raw_detail_geolocation`?)
+  - **EVL-CLS-003 prompt update:** если `location_source='pin_precise'`, использовать координаты для area lookup (reverse geocoding через внутренний spatial join с gazetteer polygons; Phase 2 заменяется на RTRW overlay). Сurrent text-based логика остаётся fallback.
+  - **Normalizer** читает `listing_lat/lng` и вызывает reverse lookup в `_lookup_area_polygons` (новый sources record с Bali 27-area boundaries as GeoJSON).
+- **Source docs:**
+  - `docs/open-questions.md` Q-OPEN-15 (validation method)
+  - `docs/tool-architecture.md` (будет update v1.2 → v1.3 после merge)
+  - `docs/sales-comparison-logic.md` §2.1 confidence levels (добавить `pin_precise` как новый high-confidence source pre-RTRW)
+- **Validation blocker (must complete before Accept):**
+  1. Detail-fetcher implemented с rate-limit + proxy rotation (чтобы не банить наш IP)
+  2. Collect coordinates для ≥50 листингов в разных субдолинах (тест на variance precision)
+  3. Labeled ground truth для ≥20 contested Grade-C cases → measure accuracy delta text-only vs pin_precise
+  4. Alexey review (если подписка активна) или self-validation через внутренний A/B
+- **Dependencies:**
+  - **ADR-003** (zoning soft-layer) — не отменяет, усиливает
+  - **ADR-009** (27-area gazetteer closed enum) — `pin_precise` всё ещё mapping-то к этой enum, через внутренние polygon lookup
+  - **ADR-015** (OLX dropped через Akamai) — RELEVANT risk: если Rumah123 усилит bot-protection для detail-pages, fallback text-only пока работает через list-pages
+  - **Q-OPEN-15** — открывает путь к accept
+
+---
+
+## Merge plan
+
+Когда validated (≥50 detail-extracted coordinates + ≥20 labeled Grade-C, accuracy delta measured):
+1. `docs/decisions-log.md` — добавить ADR-023 после ADR-022
+2. `docs/tool-architecture.md` v1.2 → v1.3 — обновить Normalizer inputs/outputs + new raw_listings JSONB field (or new table)
+3. `docs/sales-comparison-logic.md` v1.2 → v1.3 — §2.1 добавить `pin_precise` confidence source
+4. Migration SQL: `properties` + 3 columns, `raw_listings` + JSONB (or new table)
+5. Scraper: добавить `scrapers/rumah123/detail_fetcher.py` со своим `--rate-limit 20` и `--max-details-per-run 20`
+6. Q-OPEN-15: пометить `resolved in ADR-023`
+7. Delete этот draft-файл
+
+Delete этот draft если ChatGPT рекомендация отклонена после домашнего теста.

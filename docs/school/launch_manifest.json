@@ -1,0 +1,217 @@
+{
+  "manifest_version": "1.0",
+  "schema_purpose": "Single source-of-truth для bootstrap всех новых Claude Code sessions после mv операции. Каждая новая session читает свою секцию из roles.<role>-v<N> в первом turn'е.",
+  "created_at": "2026-04-21T23:40:00+08:00",
+  "created_by": "librarian-v2",
+  "approved_by": "school-v1 (consensus closed 22:45-23:20)",
+  "ilya_final_approve_status": "pending_(a)_or_(b)_NEW1_decision",
+  "canon_version_current": "0.3",
+  "canon_version_target": "0.4 (bump after MCP POC T1-T10 green)",
+
+  "mv_operation": {
+    "status": "pending_ilya_execution",
+    "from_path": "C:\\work",
+    "to_path": "C:\\work",
+    "windows_command_powershell": "Move-Item \"C:\\work\" \"C:\\work\"",
+    "windows_command_cmd": "move \"C:\\work\" \"C:\\work\"",
+    "rationale": "NEW-1 mitigation: ASCII path forever для MCP Agent Mail project_key compatibility. Устраняет risk unicode equality comparison failures в SQLite FTS.",
+    "prerequisites": [
+      "ВСЕ Claude Code sessions текущего проекта ЗАКРЫТЫ (иначе working directory locked)",
+      "Optional backup: Copy-Item \"C:\\work\" \"C:\\work.BAK\" -Recurse -Force",
+      "Target free: Test-Path C:\\work должен вернуть False"
+    ],
+    "post_mv_first_action": "Открыть 3 новых Claude Code sessions в C:\\work\\realty-portal\\ (или 2 критичных — school-v2 + librarian-v3)"
+  },
+
+  "project_root_new": "C:\\work\\realty-portal\\",
+  "mcp_project_key_after_mv": "C:\\work\\realty-portal\\docs\\school",
+  "mcp_project_key_before_mv_was": "C:\\work\\realty-portal\\docs\\school (NOT USED after mv — hash equality risk)",
+
+  "roles_to_launch": {
+    "school-v2": {
+      "ui_chat_name": "online-school-architecture-improving",
+      "business_unit": "BU1 Education + orchestrator role",
+      "launcher_file": "docs/school/launcher_prompt.md",
+      "handoff_file": "docs/school/handoff/school_v2.md",
+      "predecessor": "school-v1 (prepared handoff, consensus closed before close)",
+      "read_on_start_order": [
+        "docs/school/warmstart/school_v2_brief.md (НОВОЕ 23:55: 2-минутное TL;DR — читай первым, написано librarian-v2 под force-majeure когда school-v1 зависла перед самозаписью)",
+        "docs/school/launch_manifest.json (этот файл) — секция roles_to_launch.school-v2",
+        "docs/school/canon_training.yaml (version check: should be 0.3)",
+        "docs/school/handoff/school_v2.md (полный state, обновлён school-v1 в 23:39 до её зависания)",
+        "docs/school/mailbox/dispatch_queue.md (9 блоков, все sent)",
+        "docs/school/mailbox/consensus_workshop.md (6 turns workshop закрыт 23:20)",
+        "docs/school/mailbox/inbox_from_*.md (ответы ролей, ключевые блоки librarian 21:30/23:00/23:20/23:50)"
+      ],
+      "first_turn_action": "school_global_scan + validate consensus closure (22:45-23:20) + ACK состояния Илье + инициировать POC после Ilya 'старт' команды к librarian-v3",
+      "initial_priority_P0": "Дождаться от Ильи 'старт POC' → forward команду librarian-v3 через dispatch_queue",
+      "canon_obligations_after_launch": [
+        "school_global_scan перед каждым turn'ом к Илье",
+        "communication_delivery_closure (📬 блок в каждом ответе Илье)",
+        "operator-model consensus_workshop_protocol (9-шаговый цикл, школа = orchestrator)"
+      ]
+    },
+
+    "librarian-v3": {
+      "ui_chat_name": "setup-tg-parser (продолжение после mv + v2 закрыт)",
+      "business_unit": "IU1 Infrastructure/Librarian (knowledge asset)",
+      "launcher_file": "docs/school/launcher_prompt.md (generic)",
+      "handoff_file": "docs/school/handoff/librarian_v3.md",
+      "handoff_json_file": "docs/school/handoff/librarian_v3.json",
+      "predecessor": "librarian-v2 (closed after 23:40 manifest write, all artifacts transferred)",
+      "read_on_start_order": [
+        "docs/school/launch_manifest.json (этот файл) — секция roles.librarian-v3",
+        "docs/school/canon_training.yaml (version check: 0.3)",
+        "docs/school/handoff/librarian_v3.md + .json (13 разделов, полный state)",
+        "docs/school/mailbox/dispatch_queue.md (блоки 22:15, 22:45, 23:15)",
+        "docs/school/mailbox/consensus_workshop.md (блоки 22:30, 22:45, 23:00)",
+        "docs/school/mailbox/outbox_to_librarian.md (директивы 21:45 school)",
+        "docs/school/mailbox/inbox_from_librarian.md (последние 5 блоков 21:30-23:20)"
+      ],
+      "first_turn_action_checklist": [
+        "1. ssh aeza 'tail -20 /opt/tg-export/heartbeat.log' (ticks within 20 min?)",
+        "2. ssh aeza 'cat /opt/tg-export/_status.json | python3 -m json.tool' (freshness check)",
+        "3. head -3 docs/school/canon_training.yaml (version 0.3 confirm)",
+        "4. sed-replace: grep -rl 'Новая папка' docs/ realty-portal/ | xargs sed -i 's|C:\\\\Users\\\\97152\\\\Новая папка|C:\\\\work|g' (28 files, 5-10 min)",
+        "5. Update CLAUDE.md references (project root, paths)",
+        "6. Update realty-portal/scripts/claude-session.ps1 (single hardcoded path)",
+        "7. Update .claude/settings.local.json",
+        "8. Write ACK block в inbox_from_librarian.md: 'librarian-v3 started, canon 0.3 read, path migration complete, waiting Ilya старт POC'",
+        "9. Stay in waiting mode до Ilya explicit 'старт POC'"
+      ],
+      "initial_priority_P0_after_start_command": [
+        "MCP Agent Mail Phase 1 POC — 12 шагов SSH tunnel mode, ~65 мин",
+        "Step 0: Claude Code MCP client compatibility smoke test (NEW-9)",
+        "Step 0a: project_key unicode sanity test (NEW-1, теперь с ASCII path should pass trivially)",
+        "Step 1-11: полный POC install (uv, Python 3.14, FastMCP localhost, systemd, bearer, SSH tunnel client config)",
+        "Step 12: T1-T10 dry-run acceptance tests → docs/school/tests/mailbox_reliability_v1.md"
+      ],
+      "priority_P1_after_POC_green": [
+        "Canon v0.4 bump (14 секций)",
+        "migrate last 10 inbox-блоков в MCP threads",
+        "heartbeat-common.md skill (после parser сдаст heartbeat-parser.md)",
+        "LightRAG ingest 3-phase (smoke 3 файла → batch 11 → monitor)",
+        "Phase 0 finish: транскрипты 164/165 + skills-a-to-ya.md финал"
+      ],
+      "canon_obligations_after_launch": [
+        "mailbox_re_check_protocol (re-read outbox каждый turn)",
+        "split_addressing_in_inbox (TO_SUCCESSOR + TO_SCHOOL)",
+        "context_measurement_rule (НЕ self-estimate, только Ilya UI indicator)",
+        "communication_delivery_closure (role_inbox_exit_closure symmetric — в v0.4)"
+      ]
+    },
+
+    "parser-rumah123-v3": {
+      "ui_chat_name": "parser-rumah123 (new session или продолжение v2)",
+      "business_unit": "BU2 Content Factory (rumah123 scraper + LiteLLM gateway owner temporarily for IU3)",
+      "launcher_file": "docs/school/launcher_prompt.md (generic)",
+      "handoff_file": "docs/school/handoff/parser-rumah123_v3.md",
+      "predecessor": "parser-rumah123-v2 (handoff_v3 готов школой)",
+      "optional_defer": true,
+      "defer_reason": "parser может подождать handoff_v3 пока school-v2 + librarian-v3 делают MCP POC. Phase 2 rollout включает parser регистрацию в MCP.",
+      "read_on_start_order_if_launched": [
+        "docs/school/launch_manifest.json (этот файл) — секция roles.parser-rumah123-v3",
+        "docs/school/canon_training.yaml",
+        "docs/school/handoff/parser-rumah123_v3.md",
+        "docs/school/mailbox/outbox_to_parser.md (A1-A3 approvals + задачи 5-6)",
+        "docs/school/mailbox/inbox_from_parser.md (предыдущие ответы v2)"
+      ],
+      "first_turn_action_if_launched": [
+        "Прочитать handoff_v3 + outbox (A1 heartbeat redesign + A2 LiteLLM fallback + A3 Sonnet/Kimi setup)",
+        "Path migration: NO — parser работает на Aeza в /opt/realty-portal/, не в Windows path. Но handoff references могут иметь Windows path — sed-replace если есть",
+        "Stay в waiting для либо: (a) ACK свежего outbox school, (b) старт A1 heartbeat redesign после librarian heartbeat-common.md"
+      ],
+      "priority_after_mcp_POC": [
+        "Register parser-rumah123-v3 identity в MCP Agent Mail (Phase 2 rollout)",
+        "A3 LiteLLM endpoint deploy (Sonnet 4.5 + Kimi K2 + fallbacks) → opens IU3 multi-model gateway для all ролей",
+        "A1 heartbeat-parser.md draft (триггер для heartbeat-common.md у librarian)"
+      ]
+    }
+  },
+
+  "path_migration_sed_commands": {
+    "purpose": "После mv librarian-v3 обновляет все references старого path на новый. Выполняется в Step 4 first-turn checklist.",
+    "grep_scope_files_count": 28,
+    "powershell_command": "Get-ChildItem -Path C:\\work -Recurse -Include *.md,*.json,*.yaml,*.py,*.ps1,*.mjs -File | ForEach-Object { $c = Get-Content $_ -Raw -Encoding UTF8; if ($c -match 'Новая папка') { $n = $c -replace 'C:\\\\Users\\\\97152\\\\Новая папка', 'C:\\work' -replace 'C:/work', 'C:/work'; Set-Content -Path $_ -Value $n -Encoding UTF8 -NoNewline } }",
+    "bash_command_git_or_wsl": "grep -rlZ 'Новая папка' . | xargs -0 sed -i 's|C:\\\\Users\\\\97152\\\\Новая папка|C:\\\\work|g; s|C:/work|C:/work|g'",
+    "known_files_with_hardcoded_paths": [
+      "realty-portal/scripts/claude-session.ps1",
+      ".claude/settings.local.json",
+      "~/.claude/projects/<old-hash>/ (Claude Code session storage — может быть pre-broken, v3 checks)"
+    ]
+  },
+
+  "mcp_poc_readiness": {
+    "architecture": "localhost:8765 + SSH tunnel + bearer token (per consensus 22:15 Ilya + workshop closure 23:20)",
+    "steps_total": 12,
+    "eta_minutes": 65,
+    "triggered_by": "Ilya explicit 'старт POC' command to librarian-v3 after mv + first-turn checklist done",
+    "blocked_on": [
+      "mv operation completed (user action)",
+      "librarian-v3 first-turn checklist steps 1-9 done",
+      "Ilya 'старт POC' command"
+    ],
+    "step_0_compat_check": "NEW-9 Claude Code MCP client compatibility pre-test (15 min throw-away echo endpoint)",
+    "step_0a_unicode_check": "NEW-1 project_key sanity — теперь с ASCII path should pass trivially",
+    "acceptance": "T1-T10 test suite (mailbox reliability invariants I-1..I-10)"
+  },
+
+  "canon_v04_scope_final": {
+    "total_sections": 14,
+    "categories": {
+      "from_librarian_Q6": [
+        "mailbox_reliability_invariants (I-1..I-10 top-level)",
+        "role_invariants.canon_version_check_on_turn_start",
+        "role_invariants.role_inbox_exit_closure (symmetric to communication_delivery_closure)",
+        "role_invariants.handoff_amendments_protocol",
+        "anti_patterns_catalog.AP-5 self_estimation_without_ground_truth",
+        "mailbox_transport_model.agents_filesystem_access.librarian-v2+ update",
+        "memory_layers yaml format fix"
+      ],
+      "from_school_critique_22_45": [
+        "role_invariants.thread_id_naming_conventions",
+        "role_invariants.mcp_session_start_sequence (4-step documentation pattern)",
+        "role_invariants.ilya_alert_sla + role_internal_sla (разделённые SLA)",
+        "role_invariants.project_key_convention"
+      ],
+      "from_NEW_concerns": [
+        "role_invariants.offsite_backup_policy (NEW-8)",
+        "role_invariants.launcher_mcp_bootstrap (NEW-2)",
+        "role_invariants.ilya_overseer_bypass (NEW-7)"
+      ]
+    },
+    "bump_trigger": "MCP POC T1-T10 green (all tests pass)"
+  },
+
+  "operator_model_consensus_workshop_protocol": {
+    "applies_to": "всех active experts + school orchestrator + Ilya facilitator",
+    "9_steps": [
+      "1. TOPIC OPEN (Ilya)",
+      "2. FORMULATE (school)",
+      "3. EXPERT ANSWER (role)",
+      "4. SCHOOL CRITIQUE",
+      "5. EXPERT RESPOND",
+      "6. LOOP 4↔5 if unresolved",
+      "7. SCHOOL DECLARE CONSENSUS",
+      "8. ILYA FINAL APPROVE",
+      "9. IMPLEMENTATION"
+    ],
+    "current_workshop_state": "closed at step 7 (consensus declared 23:20), step 8 partially complete (Ilya approved architecture + SSH tunnel; awaits NEW-1 a/b decision + 'старт POC')",
+    "anti_patterns_school_catches": [
+      "School declares consensus without expert response to counter → premature closure",
+      "Expert repeats position ignoring counter → loop without progress",
+      "Ilya imposes decision mid-cycle → breaks expert autonomy (facilitator, not dictator)",
+      "Consensus closed but canon not bumped → drift",
+      "Consensus reached but NEW concerns at implementation → school re-opens (exactly what happened with NEW-9)"
+    ]
+  },
+
+  "what_breaks_if_this_manifest_is_ignored": [
+    "Новые sessions не узнают про NEW-1 ASCII path (POC falls при project_key comparison в SQLite)",
+    "Роли не читают handoff_v3 → холодный старт = ~30 мин потерь onboarding",
+    "School не инициирует POC автоматически → ждёт Ильи вручную forwarded команды",
+    "parser-v3 пропускает handoff updates → работает по устаревшему canon"
+  ],
+
+  "pointer_to_this_manifest_for_role_launchers": "При старте новой session — первая instruction агенту: 'Прочти docs/school/launch_manifest.json секцию roles.<your-role>-v<N>. Следуй read_on_start_order, потом first_turn_action.'"
+}

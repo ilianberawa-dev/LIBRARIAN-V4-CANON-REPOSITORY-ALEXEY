@@ -1,0 +1,238 @@
+{
+  "schema_version": "1.0",
+  "handoff_status": "FINALIZED",
+  "handoff_date_utc": "2026-04-21T15:55:00Z",
+  "handoff_date_wita": "2026-04-21T23:55:00+08:00",
+  "from_version": "parser-rumah123-v2",
+  "to_version": "parser-rumah123-v3",
+  "reason": "Ilya mv operation C:\\work → C:\\work; canon 0.3 era close",
+  "canon_version_last_read": "0.3",
+  "canon_changelog_last_seen": "0.3 bump 2026-04-21T20:30 (communication_delivery_closure added)",
+  "last_checked_outbox_mtime": "2026-04-21T17:00 (APPROVAL PACK block tail)",
+
+  "role": {
+    "ui_name": "parser-rumah123-v3",
+    "business_unit": "BU2_content_factory + IU3_temporary_owner",
+    "domain": "scrapers/ + scripts/ + supabase schema + litellm-config (temporary IU3 ownership)",
+    "edit_scope_allow": [
+      "scrapers/**",
+      "scripts/**",
+      "Supabase public.* schema via docker exec psql",
+      "docs/school/mailbox/inbox_from_parser.md (append only)",
+      "docs/school/handoff/parser-rumah123_v4.md (new, at handoff_needed)",
+      "docs/school/skills/heartbeat-parser.md (school разово permit)",
+      "realty-portal/snapshots/market_data/**",
+      "/opt/realty-portal/lightrag/litellm_config.yaml (until IU3 shared-access transition)"
+    ],
+    "edit_scope_deny": [
+      "docs/school/** except (mailbox/inbox_from_parser.md, handoff/parser-rumah123_v4.md, skills/heartbeat-parser.md)",
+      "/opt/tg-export/** (librarian domain)",
+      "canon_training.yaml, launch_manifest.json, outbox_to_parser.md",
+      "other roles' outboxes / inboxes",
+      ".env secret files beyond check-read"
+    ]
+  },
+
+  "read_on_start_order": [
+    "docs/school/launch_manifest.json (section roles.parser-rumah123-v3)",
+    "docs/school/canon_training.yaml (version check: 0.3 or newer)",
+    "docs/school/handoff/parser-rumah123_v3.md",
+    "docs/school/handoff/parser-rumah123_v3.json (this file)",
+    "docs/school/mailbox/outbox_to_parser.md",
+    "docs/school/mailbox/inbox_from_parser.md (close-ACK from v2 at 23:50)",
+    "docs/school/skills/heartbeat-parser.md (v2 draft, pending school review)",
+    "realty-portal/snapshots/market_data/farsight_canggu_2025/README.md (CRITICAL scope caveat)"
+  ],
+
+  "blocked_on": [
+    {"id": "B1", "what": "school ревизия heartbeat-parser.md 4 вопросов", "unblocks": "A1 implementation", "eta": "after MCP POC green + school-v2 active"},
+    {"id": "B2", "what": "librarian-v3 heartbeat-common.md skill", "unblocks": "unified heartbeat base for parser impl", "eta": "librarian-v3 P1 after POC green"},
+    {"id": "B3", "what": "MCP Agent Mail Phase 2 rollout signal", "unblocks": "parser-v3 MCP registration", "eta": "after POC Phase 1 T1-T10 green"},
+    {"id": "B4", "what": "A4 пример тормоза от Ильи", "unblocks": "heartbeat constants calibration", "eta": "Ilya"},
+    {"id": "B5", "what": "99.co extraction decision (Playwright vs API reverse)", "unblocks": "Phase 2 full sweep inclusion of 99.co (1557 villa Canggu)", "eta": "Ilya"},
+    {"id": "B6", "what": "canon_training.yaml update (MUST READ market_data)", "unblocks": "canonical path enforcement", "eta": "school-v2"},
+    {"id": "B7", "what": "approve секретов ротации format (Задача 7)", "unblocks": "rotate Postgres pwd + GITHUB_PAT + LITELLM master", "eta": "school-v2"}
+  ],
+
+  "closed_in_v2": [
+    {"id": "A2", "what": "LiteLLM fallback key + DSN removed (fail-loud)", "closed_at": "2026-04-21T17:10+08:00"},
+    {"id": "A3", "what": "Sonnet 4.5 + Kimi K2 + fallbacks added to LiteLLM config", "closed_at": "2026-04-21T17:15+08:00"},
+    {"id": "A1_design", "what": "heartbeat-parser.md design document", "closed_at": "2026-04-21T17:30+08:00", "status_note": "DESIGN only; implementation blocked on B1+B2"},
+    {"id": "P1_seller_type", "what": "seller_type UPSERT bug fixed + backfill 311 records", "closed_at": "2026-04-21T17:45+08:00"},
+    {"id": "P1_full_refresh", "what": "Full refresh 310 detail records, $2.27 spend", "closed_at": "2026-04-21T18:45+08:00"},
+    {"id": "P1_baseline_v4", "what": "snapshot v3 + v4 in realty-portal/snapshots/", "closed_at": "2026-04-21T19:15+08:00"},
+    {"id": "STR_LTR", "what": "rental_suitability ALTER + SQL heuristic + Haiku prompt + smart merge", "closed_at": "2026-04-21T20:00+08:00"},
+    {"id": "market_data_ingestion", "what": "FARSight PDF + market_benchmarks SQL + deep scrape", "closed_at": "2026-04-21T22:45+08:00"},
+    {"id": "pilot_lamudi", "what": "Lamudi scraper + orchestrator + 60 Lamudi records processed", "closed_at": "2026-04-21T23:55+08:00"},
+    {"id": "rumah123_DATABASE_URL_fix", "what": "rumah123/run.py DATABASE_URL → REALTY_DB_DSN fail-loud fallback", "closed_at": "2026-04-21T23:10+08:00"}
+  ],
+
+  "pilot_final_state": {
+    "total_properties": 482,
+    "by_source": {"rumah123_bali": 422, "lamudi_bali": 60},
+    "raw_listings": 482,
+    "pending_raw": 0,
+    "llm_spend_cumulative_usd": 5.44,
+    "llm_calls_cumulative": 900,
+    "lamudi_fetch_success_rate": "60/60 (100%, 0 CF-blocks)",
+    "rumah123_fetch_success_rate": "311/422 ok, 70 blocked, 41 not_found (v1-era, 17% CF block rate)",
+    "rental_suitability_dist": {
+      "short_term": 250,
+      "mixed": 110,
+      "long_term": 118,
+      "unknown": 4
+    },
+    "rental_suitability_shift_after_lamudi": "baseline 196/422 (46%) short_term → 250/482 (52%). Lamudi 2-kamar-tidur path = 54/60 (90%) classified short_term = high-signal source",
+    "two_br_in_berawa_zone": {
+      "pre_lamudi": 53,
+      "post_lamudi": "TBD — recount after v3 start; mostly kerobokan/canggu-1/pererenan because Lamudi slugs used",
+      "short_term_subset_pre": 28
+    },
+    "deliverables_to_ilya": [
+      "realty-portal/snapshots/2026-04-21-v4/2br_short_term_berawa.csv (28 records)"
+    ]
+  },
+
+  "alive_processes_aeza": [
+    {"name": "night_monitor.sh", "pid_was": 1305546, "role": "10-min heartbeat (v1-era, autonomous)", "survives_reboot": false, "note": "file-only log to /var/log/realty/heartbeat.log"},
+    {"name": "2h_reporter.sh", "pid_was": 1322063, "role": "2-hour SQL aggregate report (v1-era, autonomous)", "survives_reboot": false, "note": "file-only log to /var/log/realty/2h_reports.log"},
+    {"name": "realty_litellm (docker)", "status": "Up (27+ hours)", "role": "IU3 multi-model gateway, 10 models + fallbacks"}
+  ],
+
+  "technical_routes": {
+    "ssh": {
+      "host": "root@193.233.128.21",
+      "key_path_before_mv": "C:/Users/97152/.ssh/aeza_ed25519",
+      "key_path_after_mv": "C:/Users/97152/.ssh/aeza_ed25519 (UNCHANGED — SSH key outside project root per manifest)",
+      "method": "paramiko Ed25519"
+    },
+    "postgres": {
+      "host_from_aeza_host": "172.18.0.13",
+      "host_from_docker_net": "db",
+      "port": 5432,
+      "user": "postgres",
+      "db": "postgres",
+      "password_source": "/opt/realty-portal/.env POSTGRES_PASSWORD",
+      "dsn_env_var": "REALTY_DB_DSN (includes ${POSTGRES_PASSWORD} expansion, quoted)",
+      "container_exec_fallback": "docker exec supabase-db psql -U postgres -d postgres"
+    },
+    "litellm": {
+      "host_url": "http://172.18.0.6:4000",
+      "docker_url": "http://realty_litellm:4000",
+      "chat_endpoint": "/v1/chat/completions",
+      "models_endpoint": "/v1/models",
+      "admin_ui": "http://172.18.0.6:4000/ui (password unchecked, default admin/<master_key>)",
+      "auth": "Bearer $LITELLM_MASTER_KEY",
+      "master_key_source": "/opt/realty-portal/.env LITELLM_MASTER_KEY",
+      "config_file": "/opt/realty-portal/lightrag/litellm_config.yaml",
+      "models_live": [
+        "claude-haiku", "claude-sonnet-4.5", "gpt-4o-mini", "gemini-flash",
+        "deepseek-chat", "groq-llama", "qwen-turbo",
+        "grok-fast", "grok-max", "kimi-k2"
+      ],
+      "fallbacks_active": [
+        "groq-llama → deepseek-chat (on 429)",
+        "kimi-k2 → deepseek-chat, qwen-turbo (Groq rate-limited, validated live)"
+      ]
+    },
+    "project_root_aeza": "/opt/realty-portal/",
+    "project_root_local_before_mv": "C:/work/realty-portal/",
+    "project_root_local_after_mv": "C:/work/realty-portal/",
+    "recovery_playbook": "/opt/realty-portal/RECOVERY.md",
+    "logs": {
+      "aeza_persistent": ["/var/log/realty/heartbeat.log", "/var/log/realty/2h_reports.log"],
+      "aeza_session_tmp": ["/tmp/refresh_v4.log", "/tmp/lamudi_remainder.log", "/tmp/orchestrator_pilot.log", "/tmp/farsight_deep.log"]
+    }
+  },
+
+  "credentials_map": {
+    "in_env_file": [
+      "POSTGRES_PASSWORD", "POSTGRES_HOST", "POSTGRES_PORT", "POSTGRES_DB",
+      "REALTY_DB_DSN (composed via POSTGRES_PASSWORD expansion)",
+      "LITELLM_MASTER_KEY",
+      "ANTHROPIC_API_KEY", "OPENAI_API_KEY", "GEMINI_API_KEY",
+      "DEEPSEEK_API_KEY", "GROQ_API_KEY", "DASHSCOPE_API_KEY", "XAI_API_KEY",
+      "GITHUB_PAT"
+    ],
+    "known_leaked_plaintext_needs_rotation": [
+      "Postgres pwd J6iK0lEa7xBNedh1fPyGOasd_2yGieiW (was in normalize_listings.py + fetch_details.py before A2 patch; also in .env.bak.* backups)",
+      "GITHUB_PAT (visible in stdout tail during A2 grep command)",
+      "LITELLM_MASTER_KEY (not leaked, but rotated after experiment per Задача 7 plan)"
+    ],
+    "rotation_blocked_on": "Задача 7 approve + end of experiment phase"
+  },
+
+  "to_successor_queue": {
+    "P0_after_school_signal": [
+      "Process school revision of heartbeat-parser.md 4 questions",
+      "Read heartbeat-common.md from librarian-v3 (when delivered)"
+    ],
+    "P1_after_P0": [
+      "A1 heartbeat full implementation (~4-6h): 3 workers + Layer 1 watchdog + _status.json + pg-advisory lock",
+      "Retry 70 CF-blocked URLs in raw_listings (after heartbeat production-ready)"
+    ],
+    "P2_after_heartbeat_ready": [
+      "Задача 5 tenure_inference_skill design + impl (~4h, LightRAG-powered)",
+      "Phase 2 Lamudi full sweep (remaining ~408 2BR villa on validated slugs)",
+      "99.co integration (after Ilya decision: Playwright vs API reverse)"
+    ],
+    "P3_backlog": [
+      "Задача 6 FX rate skill (~2h)",
+      "Задача 7 secrets rotation (~1-2h after approve)",
+      "Singleton lock on fetch_details.py (~20min, canon P1 debt)",
+      "LiteLLM fallbacks expansion (10min)",
+      "Quarterly FARSight PDF refresh request to Ilya"
+    ]
+  },
+
+  "mcp_registration_plan": {
+    "phase": "Phase 2",
+    "triggered_by": "school signal after POC Phase 1 T1-T10 green",
+    "agent_id_proposed": "parser-rumah123-v3",
+    "mcp_endpoint_template": "localhost:8765 (per Ilya-approved architecture 2026-04-21T22:15)",
+    "parser_responsibilities_in_mcp": [
+      "Register identity + bearer token",
+      "Migrate outbox/inbox to MCP threads for cross-role communication",
+      "Expose IU3 multi-model gateway as MCP tool (after shared-access transition)",
+      "Keep file-mailbox as archive-only after migration"
+    ]
+  },
+
+  "iu3_gateway_temporary_ownership": {
+    "role": "parser-rumah123 as first consumer, not long-term owner",
+    "canon_ref": "canon_training.yaml 0.2+ infrastructure_units.IU3_multi_model_gateway",
+    "current_owner_status": "parser-v3 temporary hoster",
+    "transition_path": "After MCP Phase 2 + shared-access implementation, transfer to IU-team or librarian-v<N> ownership",
+    "parser_v3_duties_until_transition": [
+      "Maintain litellm_config.yaml in /opt/realty-portal/lightrag/",
+      "Monitor public.llm_usage_log for per-consumer tracking",
+      "Respond to triangulation requests from other roles (provide endpoint + shared bearer)",
+      "Coordinate model additions/removals with school consensus workshop"
+    ]
+  },
+
+  "path_migration_note": {
+    "parser_does_NOT_sed_replace": true,
+    "reason": "Parser runs on Aeza /opt/realty-portal/, not Windows paths",
+    "delegation": "librarian-v3 first-turn step 4 performs global sed-replace across 28 files — covers parser-v3 references too",
+    "ssh_key_path_unchanged": "C:\\Users\\97152\\.ssh\\aeza_ed25519 (outside project root per manifest)",
+    "after_mv_local_root": "C:\\work\\realty-portal\\"
+  },
+
+  "do_not_do": [
+    "Apply FARSight ADR/occupancy to full base (narrow_premium_str scope only)",
+    "Recompute implied_yield on 482 without subset filter",
+    "Run new mass Rumah123 scrape before heartbeat impl (CF risk)",
+    "Purchase AirDNA without Ilya approve (FARSight + own scrape + Inside Airbnb suffice for MVP)",
+    "Rotate LITELLM_MASTER_KEY or Postgres pwd before Задача 7 approve",
+    "Kill night_monitor.sh or 2h_reporter.sh on Aeza",
+    "Touch realty_litellm container without cross-role coordination (IU3 shared)",
+    "Register self in MCP before school Phase 2 signal",
+    "Implement A1 heartbeat before heartbeat-common.md from librarian"
+  ],
+
+  "handoff_needed_flag": true,
+  "session_close_reason": "Ilya mv operation pre-close to avoid path inconsistency during migration",
+  "v2_closes_at_context_pct_estimate": "~55%",
+  "v3_start_estimate_pct": "35-40% after full read-on-start sequence"
+}

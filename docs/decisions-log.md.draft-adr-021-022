@@ -1,0 +1,73 @@
+# DRAFT — ADR-021 + ADR-022 (not yet merged into decisions-log.md)
+
+**Status:** проект, ожидает approval Ильи после review корпуса Алексея и A/B-теста
+**Date drafted:** 2026-04-20
+**Will be inserted into:** `docs/decisions-log.md` после ADR-020 (markdown ADR log), перед next empty slot
+
+---
+
+## ADR-021: Skills can combine multiple actions (Alexey clarification)
+
+- **Date:** 2026-04-20
+- **Status:** Draft (pending approval + A/B validation)
+- **Phase:** A
+- **Context:** Ранняя интерпретация философии Алексея (из `feedback_alexey_skills_philosophy.md`) формулировалась как «один скилл = одна атомарная задача». На её основе были сгенерированы 16 EVL-* скиллов (2026-04-20). При консультации с Алексеем 2026-04-20 в Telegram он уточнил: *«Можно несколько скиллов объединять в один, т.е. в рамках скилла может быть не одно действие»*. Это же подтверждается в его гайде «Skills от А до Я» (апрель 2026), стр.7: «Скилл — это не одно действие. Один скилл может объединять десятки операций в один процесс».
+- **Decision:** Граница скилла определяется **единством ответственности**, а не количеством действий. Скилл может объединять несколько логически связанных операций (например: SQL-запрос + пост-обработка + запись в БД), если они решают одну бизнес-задачу.
+- **Consequences:**
+  - Частичная консолидация 16 → 14 активных скиллов:
+    - `EVL-STAT-010` absorbs `EVL-STAT-011` logic → `compute_statistical_summary` (interval + z-score в одном SQL-скрипте)
+    - `EVL-VAL-013` renamed to `EVL-QA-013` + absorbs `EVL-LEG-014` logic → `quality_and_legal_flags`
+  - Номера `EVL-STAT-011` и `EVL-LEG-014` **retired** (не переиспользуются); ADR ссылки на эти catalog_id остаются читаемыми в историческом контексте
+  - `sales-comparison-logic.md` bump v1.1 → v1.2 (14 rows в skill table)
+  - **НЕ** объединяем `EVL-CLS-002` + `EVL-CLS-003` (разные calibration policies: condition требует visual analysis, zoning требует area lookup — invariants разные)
+  - **НЕ** объединяем `EVL-COMP-005..009` (разная SQL-логика по subtype; merge дал бы огромный CASE WHEN)
+- **Alternatives rejected:**
+  - Wholesale renumbering 14 скиллов с сохранением sequential IDs — создаёт churn в 20+ существующих ADR ссылках; retired-slots подход чище
+  - Полный merge CLS-002+003 и COMP-005..009 — потеря domain precision
+- **Supersedes:** ранняя интерпретация скилл-дисциплины
+- **Implements:** `sales-comparison-logic.md v1.2` §5, retired catalog_ids policy
+- **Source docs:** Alexey Telegram 2026-04-20; «Skills от А до Я» стр.7; `reference_alexey_skills_guide.md`
+- **Validation blocker:** ADR становится Accepted только после A/B теста где v2 SKILL.md (consolidated) показывают agreement ≥ v1 baseline (`BASELINE-v1-2026-04-20.md`)
+
+---
+
+## ADR-022: Adopt Alexey canonical SKILL.md template (hybrid format)
+
+- **Date:** 2026-04-20
+- **Status:** Draft (pending approval + A/B validation)
+- **Phase:** A
+- **Context:** 16 EVL-* SKILL.md сгенерированы с нашей специфической структурой (Mission / Inputs / Outputs / Logic hint / Architectural lineage / Calibration history). Алексей 2026-04 опубликовал canonical template (гайд «Skills от А до Я» стр.47) с разделами: When activated / Instructions / Examples / Troubleshooting / Rules. Дополнительно гайд настаивает на bilingual triggers (RU+EN) в description (стр.28 — подтверждённая статистика: 40% activation при EN-only vs 95%+ при bilingual). Наш формат не противоречит его, но и не следует канону.
+- **Decision:** Принять **hybrid формат** SKILL.md — наши специфические секции (Mission, Architectural lineage, Calibration history) **сохраняем** как value-add над каноном Алексея, добавляем его canonical секции (When activated, Instructions step-by-step, Examples, Troubleshooting, Rules). Descriptions обязательно bilingual. YAML header extended: `complexity_level: 1|2|3` + `allowed_tools: [Bash, Read, Write]` для Level-3 скиллов.
+- **Rejected recommendations из ChatGPT integration JSON:**
+  - «Russian-first body then translate to English» — overengineering; наш body уже EN, домен-термины индонезийские; translation-step добавляет drift-риск. Правило «Отвечай на русском» достаточно там где output должен быть RU (narrative).
+  - `workflow_pattern: checklist|validation_loop|plan_confirm_execute` как YAML field — формализация без value; описание паттерна остаётся в прозе body.
+  - Cascade renumbering (LIQ-011, QA-012, NAR-013, ORC-014) — см. ADR-021 rationale.
+- **Consequences:**
+  - Все 14 SKILL.md bump revision v1 → v2
+  - `description`: `"<WHAT>. <WHEN>. EN triggers: ... . RU triggers: ..."`
+  - Новые секции: `## When activated`, `## Examples` (typical + edge), `## Troubleshooting` (2+ scenarios), `## Rules (ALWAYS follow)`
+  - Level-3 скиллы (NOR-004, COMP-005..009, STAT-010, ORC-016): добавить `allowed_tools: [Bash, Read, Write]`, создать `references/` + `scripts/` подпапки (Phase B работа)
+  - Level-2 скиллы (CLS-002, CLS-003, CTX-001, QA-013, NAR-015): добавить `references/` подпапки с wellsegregated контентом (C1-C5 matrix, zone hints, narrative templates)
+  - Level-1 скиллы (LIQ-012): остаются в одном SKILL.md
+- **Alternatives rejected:**
+  - Full canonical rewrite без сохранения наших секций — потеря ADR linkage (критично для traceability)
+  - Keep our v1 format without canonical additions — ниже activation rate, хуже совместимость со skill-creator / Claude Desktop auto-discovery
+- **Implements:** 14 SKILL.md × v2 revision; `skills-v1-snapshot/` сохранён для A/B compare
+- **Source docs:** Alexey guide «Skills от А до Я» стр.47 (template), стр.28 (bilingual); `reference_alexey_skills_guide.md`; `BASELINE-v1-2026-04-20.md`
+- **Validation blocker:** Accept только после A/B re-run CLS-002 + CLS-003 на тех же 21 records (или extended) с v2 SKILL.md → сравнение с `BASELINE-v1-2026-04-20.md`. Критерии accept:
+  - Grade A не падает (≥45% CLS-002, ≥50% CLS-003)
+  - Agreement ≥3/4 не падает (≥80% CLS-002, ≥85% CLS-003)
+  - Token cost не растёт >10% avg per call
+
+---
+
+## Merge plan into decisions-log.md
+
+Когда обе ADR подтверждены:
+1. `docs/decisions-log.md` — добавить оба блока после ADR-020
+2. Bump header: «20 ADR» → «22 ADR»
+3. Обновить `ADR→Skill mapping` таблицу (retired STAT-011 / LEG-014, добавлены ссылки на ADR-021 в NOR-004, COMP-*, STAT-010, QA-013)
+4. `sales-comparison-logic.md` v1.1 → v1.2 отдельным commit
+5. `reference_alexey_skills_guide.md` memory обновить со статусом «applied»
+
+Delete этот draft-файл после merge.

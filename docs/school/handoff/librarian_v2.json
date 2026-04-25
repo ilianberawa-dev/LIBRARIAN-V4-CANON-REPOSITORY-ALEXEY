@@ -1,0 +1,114 @@
+{
+  "role": "librarian",
+  "version": "v2",
+  "from_version": "v1",
+  "created_by": "school-v1 (emergency draft)",
+  "created_at": "2026-04-21T15:00:00+08:00",
+  "trigger": "v1 reached critical context zone, school wrote draft handoff for continuity",
+  "ui_chat_name": "setup-tg-parser",
+  "business_unit": "IU1 — Librarian (knowledge asset, not sold, reduces cost of all BUs)",
+
+  "read_on_start": [
+    "docs/school/canon_training.yaml",
+    "docs/school/handoff/librarian_v2.md (this pair)",
+    "docs/school/mailbox/outbox_to_librarian.md",
+    "docs/school/mailbox/inbox_from_librarian.md"
+  ],
+
+  "edit_scope_allowed": [
+    "/opt/tg-export/** (Aeza)",
+    "docs/school/mailbox/inbox_from_librarian.md",
+    "docs/school/handoff/librarian_v<N>.md (own)",
+    "docs/school/library_by_module.md (one-time permit from school)"
+  ],
+
+  "edit_scope_denied": [
+    "docs/school/** (domain school-v1)",
+    "scrapers/**, scripts/normalize_listings.py (domain parser-rumah123-v2)",
+    "other roles' keys and secrets"
+  ],
+
+  "state": {
+    "heartbeat": {
+      "status": "operational",
+      "file": "/opt/tg-export/heartbeat.sh",
+      "cron": {
+        "heartbeat": "*/10 * * * * /opt/tg-export/heartbeat.sh",
+        "notify": "0 */2 * * * /opt/tg-export/notify.sh",
+        "sync_channel": "15 */6 * * * /opt/tg-export/sync_channel.mjs",
+        "verify": "30 2 * * * /opt/tg-export/verify.sh"
+      },
+      "transport": "Telegram via @PROPERTYEVALUATOR_bot (token in /opt/realty-portal/.env)",
+      "anti_false_positive": ["expected-duration logging", "manifest.finished flag", "_status.json atomic snapshot"],
+      "note": "Canonical Layer 1 reference. Parser-rumah123-v2 should emulate these 3 patterns."
+    },
+
+    "download_p4_whitelist": {
+      "total": 16,
+      "completed_transcripts": 12,
+      "remaining": ["msg_72 N8N MCP recommendations", "msg_82 Kilo Code part 1", "msg_97 Supabase MCP", "msg_103 Content Factory backstage"],
+      "skipped": "msg_39 (Леший install 3.5GB — out of budget)",
+      "grok_stt_budget": {"spent_usd": 0.46, "remaining_usd": 4.54, "forecast_total_usd": 3.94}
+    },
+
+    "phase0_for_school": {
+      "completed": ["#1 skills-a-to-ya.md partial (first third)", "#4 transcript 170", "#6 166 MCP instruction"],
+      "remaining": ["#5 168 Multi-agent PDF (NEXT, relevant for secretary)", "#2 transcript 164", "#3 transcript 165", "#1 finish remaining 2/3"],
+      "recommended_order_from_school": ["#5 first", "#2", "#3", "#1 finish last"]
+    },
+
+    "permits_granted": {
+      "library_by_module_md_one_write": true,
+      "lightrag_ingest_pre_approved": true
+    },
+
+    "paperclip_research": {
+      "unpacked_at": "/opt/tg-export/_paperclip_unpacked/",
+      "key_post": "msg_147 — heartbeat as agent tick (not cron)",
+      "unverified_claim": "heartbeatInterval field in config.json (not inspected in code yet)",
+      "known_issues": ["agents lose settings", "OpenClaw self-kill", "CEO rights conflicts"]
+    }
+  },
+
+  "queue": {
+    "P0": [
+      {"id": "lib-p0-1", "task": "Write library_by_module.md (one-time permit)", "eta_min": 5},
+      {"id": "lib-p0-2", "task": "Phase 0 material #5: 168_Мультиагентные AI-системы.pdf digest", "eta_min": 30}
+    ],
+    "P1": [
+      {"id": "lib-p1-1", "task": "LightRAG ingest script (transcripts → LightRAG)", "eta_min": 60},
+      {"id": "lib-p1-2", "task": "Phase 0 material #2: transcript 164 digest", "eta_min": 45},
+      {"id": "lib-p1-3", "task": "Phase 0 material #3: transcript 165 digest", "eta_min": 45},
+      {"id": "lib-p1-4", "task": "Phase 0 material #1 finish: skills-a-to-ya remaining 2/3", "eta_min": 60}
+    ],
+    "P2": [
+      {"id": "lib-p2-1", "task": "After download+transcribe complete: short digests for msg_72/82/97/103", "eta_min_per_item": 10}
+    ],
+    "P3_deferred": [
+      {"id": "lib-p3-1", "task": "Broadcast candidate: Telegram+OpenClaw linkage (awaits secretary-v1 transport decision)"}
+    ]
+  },
+
+  "routes": {
+    "ssh": "root@193.233.128.21 via ~/.ssh/aeza_ed25519",
+    "project_root": "/opt/tg-export/",
+    "library_index": "/opt/tg-export/library_index.json",
+    "transcripts_dir": "/opt/tg-export/transcripts/",
+    "heartbeat_scripts": ["/opt/tg-export/heartbeat.sh", "/opt/tg-export/notify.sh", "/opt/tg-export/verify.sh", "/opt/tg-export/sync_channel.mjs"],
+    "paperclip_unpacked": "/opt/tg-export/_paperclip_unpacked/",
+    "telegram_bot": "@PROPERTYEVALUATOR_bot",
+    "env_files": ["/opt/tg-export/.env (Grok STT, chmod 600)", "/opt/realty-portal/.env (TG bot token, shared)"]
+  },
+
+  "do_not": [
+    "Trogat docs/school/** kroge mailbox+handoff+permitted library_by_module",
+    "Trogat scrapers/ or normalize_listings.py",
+    "Kill cron jobs on Aeza",
+    "Commit Alexey's materials to git (.gitignore protects)",
+    "Publish transcripts/posts publicly"
+  ],
+
+  "canon_applied": ["#1_portability (Docker)", "#3_simple_nodes", "#5_minimal_clear_commands", "#6_single_secret_vault", "#7_offline_first", "#9_human_rhythm (tg_download_aeza.mjs)", "msg_178 (throwaway TG account)"],
+
+  "handoff_trigger_for_v3": "context > 70%"
+}

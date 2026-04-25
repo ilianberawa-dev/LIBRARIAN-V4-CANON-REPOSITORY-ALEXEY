@@ -1,0 +1,28 @@
+.env
+.env.local
+.env.production
+*.session
+node_modules/
+__pycache__/
+*.pyc
+.venv/
+venv/
+.DS_Store
+
+# Supabase data + dumps
+supabase/volumes/db/data/
+supabase/storage/
+*.dump
+*.sql.gz
+
+# LightRAG vectors
+lightrag/data/
+lightrag/storage/
+
+# Logs
+*.log
+logs/
+
+# Любые backup-файлы конфигов
+*.bak
+*.bak.*

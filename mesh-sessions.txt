@@ -1,0 +1,7 @@
+## Mesh Session UUIDs — 2026-04-22
+
+librarian-v3    : 6865a62f-a051-4b63-938e-3c753efb96fc
+school-v3       : 2a112b93-7547-4c9f-8588-463e7f4e5c5c
+parser-v3       : 655e4058-...
+ai-helper-v2    : 85ad618b-...
+(school-v2 DEPRECATED: 8469df9d-...)

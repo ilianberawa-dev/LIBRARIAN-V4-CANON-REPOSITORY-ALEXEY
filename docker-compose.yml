@@ -1,0 +1,32 @@
+name: realty
+
+# ─────────────────────────────────────────────────────────────
+# Realty Portal — главный docker-compose (только сеть realty_net).
+# Реальные сервисы живут в 4 отдельных compose-проектах:
+#   ./supabase/upstream/docker/  → project: realty_supabase
+#   ./lightrag/                  → project: realty_lightrag
+#   ./openclaw/                  → project: realty_openclaw
+# Все они присоединяются к сети `realty_net: external: true`.
+#
+# Тома объявляются в соответствующих compose-файлах с `name: realty_*`
+# (единое имя на host через docker volume ls) — здесь не дублируем.
+#
+# Порядок up/down между проектами: см. scripts/stack-lib.sh
+# ─────────────────────────────────────────────────────────────
+
+networks:
+  realty_net:
+    name: realty_net
+    driver: bridge
+
+services:
+  # Placeholder: compose требует хотя бы один сервис.
+  # Запускается только с `--profile info` (обычный `up` его не трогает).
+  _stack_info:
+    image: alpine:3.20
+    container_name: realty_stack_info
+    command: >
+      sh -c "echo 'Realty Portal skeleton — реальные сервисы в openclaw/, lightrag/, supabase/upstream/docker/' && sleep 3"
+    networks: [realty_net]
+    restart: "no"
+    profiles: [info]

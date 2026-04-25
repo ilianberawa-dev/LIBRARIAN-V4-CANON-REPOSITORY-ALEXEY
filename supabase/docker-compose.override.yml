@@ -1,0 +1,29 @@
+name: realty_supabase
+
+# Наш override для upstream Supabase docker-compose.
+# migrate.sh копирует этот файл в supabase/upstream/docker/docker-compose.override.yml
+# после git sparse-clone (upstream/ в .gitignore — не хранится в нашем repo).
+#
+# Изменения от upstream:
+#  1. Сеть → realty_net (external, объявлена в main docker-compose.yml)
+#  2. Порты публикуются только на 127.0.0.1 (доступ через SSH-tunnel с ноута)
+#  3. Имя compose-проекта → realty_supabase (префикс канона)
+
+networks:
+  default:
+    name: realty_net
+    external: true
+
+volumes:
+  db-config:
+    name: realty_supabase_db_config
+
+services:
+  kong:
+    ports: !override
+      - "127.0.0.1:${KONG_HTTP_PORT:-8000}:8000/tcp"
+      - "127.0.0.1:${KONG_HTTPS_PORT:-8443}:8443/tcp"
+  supavisor:
+    ports: !override
+      - "127.0.0.1:${POSTGRES_PORT:-5432}:5432"
+      - "127.0.0.1:${POOLER_PROXY_PORT_TRANSACTION:-6543}:6543"

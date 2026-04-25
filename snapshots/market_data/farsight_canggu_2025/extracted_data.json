@@ -1,0 +1,88 @@
+{
+  "source": "FARSight24 Villas & Hotels Management",
+  "source_url": "https://farsight24.com/",
+  "document_title": "Statistics of Canggu",
+  "document_format": "PDF, 2 pages, internal market dashboard",
+  "scope_caveat": "narrow_premium_str — applies only to upper-mid short-term-rental villa segment managed by PMCs. NOT applicable to full property base.",
+  "received_date": "2026-04-21",
+  "received_from": "Ilya (Telegram)",
+  "received_by": "parser-rumah123-v2",
+  "snapshot_period": "2025 last 12 months (Jan-Dec 2025, or trailing-12 as of Apr 2026)",
+  "market_area": "Canggu, Bali, Indonesia",
+  "segment": "short_term_villa_upper_mid",
+
+  "page1_12month_averages_by_bedrooms": {
+    "headers": ["1br", "2br", "3br", "4br", "5br"],
+    "number_of_listings": [591, 890, 963, 336, 128],
+    "revenue_per_month_usd": [2013, 2670, 3837, 5597, 8533],
+    "adr_usd": [103, 135, 197, 306, 517],
+    "occupancy_pct": [65, 66, 65, 61, 55],
+    "revpar_usd": [67, 89, 128, 187, 284],
+    "length_of_stay_days": [4, 5, 5, 5, 5],
+    "total_listings": 2908
+  },
+
+  "page1_charts": [
+    {"title": "Revenue per month", "type": "horizontal_bar", "dimension": "bedrooms"},
+    {"title": "Shares by listing category", "type": "pie", "dimension": "bedrooms"},
+    {"title": "Average monthly revenue — time series", "type": "multi_line_5x3_grid", "rows": ["1br","2br","3br","4br","5br"], "cols": ["revenue","adr","occupancy"], "time_range": "2023-2026", "series_colors": ["red=2023","cyan=2024","yellow=2025","blue=2026"]}
+  ],
+
+  "page2_yoy_2024_vs_2025": {
+    "bedrooms_1br": {
+      "revenue_2024_annual_usd": 30006, "revenue_2025_annual_usd": 24845, "revenue_yoy_pct": -17,
+      "adr_2024_usd": 120, "adr_2025_usd": 103, "adr_yoy_pct": -14,
+      "occupancy_2024_pct": 70, "occupancy_2025_pct": 65, "occupancy_yoy_pct": -7,
+      "revpar_2024_usd": 85, "revpar_2025_usd": 67, "revpar_yoy_pct": -21,
+      "listings_2024": 591, "listings_2025": 591, "listings_yoy_pct": 0
+    },
+    "bedrooms_2br": {
+      "revenue_2024_annual_usd": 40162, "revenue_2025_annual_usd": 30684, "revenue_yoy_pct": -24,
+      "adr_2024_usd": 167, "adr_2025_usd": 135, "adr_yoy_pct": -19,
+      "occupancy_2024_pct": 72, "occupancy_2025_pct": 66, "occupancy_yoy_pct": -9,
+      "revpar_2024_usd": 123, "revpar_2025_usd": 89, "revpar_yoy_pct": -28,
+      "listings_2024": 835, "listings_2025": 890, "listings_yoy_pct": 7,
+      "flag": "worst YoY RevPAR contraction + expanding supply = oversupply + demand-drop pattern"
+    },
+    "bedrooms_3br": {
+      "revenue_2024_annual_usd": 50000, "revenue_2025_annual_usd": 42600, "revenue_yoy_pct": -15,
+      "adr_2024_usd": 218, "adr_2025_usd": 197, "adr_yoy_pct": -10,
+      "occupancy_2024_pct": 70, "occupancy_2025_pct": 65, "occupancy_yoy_pct": -8,
+      "revpar_2024_usd": 155, "revpar_2025_usd": 128, "revpar_yoy_pct": -17,
+      "listings_2024": 939, "listings_2025": 963, "listings_yoy_pct": 3
+    },
+    "bedrooms_4br": {
+      "revenue_2024_annual_usd": 73104, "revenue_2025_annual_usd": 59799, "revenue_yoy_pct": -18,
+      "adr_2024_usd": 360, "adr_2025_usd": 306, "adr_yoy_pct": -15,
+      "occupancy_2024_pct": 66, "occupancy_2025_pct": 61, "occupancy_yoy_pct": -7,
+      "revpar_2024_usd": 240, "revpar_2025_usd": 187, "revpar_yoy_pct": -22,
+      "listings_2024": 303, "listings_2025": 336, "listings_yoy_pct": 11
+    },
+    "bedrooms_5br": {
+      "revenue_2024_annual_usd": 107208, "revenue_2025_annual_usd": 86410, "revenue_yoy_pct": -19,
+      "adr_2024_usd": 607, "adr_2025_usd": 517, "adr_yoy_pct": -15,
+      "occupancy_2024_pct": 61, "occupancy_2025_pct": 55, "occupancy_yoy_pct": -10,
+      "revpar_2024_usd": 376, "revpar_2025_usd": 284, "revpar_yoy_pct": -24,
+      "listings_2024": 147, "listings_2025": 128, "listings_yoy_pct": -13,
+      "flag": "only segment with listings contraction — owners exiting or downgrading to long-term"
+    }
+  },
+
+  "aggregate_insights": [
+    "Все BR-сегменты падают 2025 vs 2024 (revenue -15 to -24%)",
+    "2BR — worst performer (RevPAR -28%, listings +7%)",
+    "5BR — единственный сегмент с сокращением предложения (listings -13%)",
+    "Market-wide rental yield для premium STR сегмента снижается значительно быстрее чем sale prices (наш scrape не показал -20% на продажных)",
+    "Implication: покупать 2026 Q2 — risk дальнейшего -10-15% yield erosion"
+  ],
+
+  "source_provenance_unknown": {
+    "question": "Откуда FARSight берёт данные о всём рынке (не только их portfolio 300 villa)?",
+    "hypotheses": [
+      "AirDNA/AirROI subscription (aggregate market data из 2908 listings)",
+      "Собственный scrape Airbnb/Vrbo/Booking",
+      "Комбинация: своя portfolio + scrape других PMC"
+    ],
+    "verification_cost": "можно спросить у FARSight partnership lead или узнать через LinkedIn-parser-v1"
+  }
+}

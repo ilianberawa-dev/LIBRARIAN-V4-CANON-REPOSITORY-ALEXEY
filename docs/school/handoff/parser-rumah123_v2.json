@@ -1,0 +1,358 @@
+{
+  "schema_version": "1.0",
+  "handoff_date_utc": "2026-04-21T07:00:00Z",
+  "handoff_date_wita": "2026-04-21T14:00:00+07:00",
+  "from_version": "parser-rumah123-v1",
+  "to_version": "parser-rumah123-v2",
+  "reason": "experiment closed, library canon read, outbox answered, user-initiated",
+
+  "role": {
+    "ui_name": "parser-rumah123-v2",
+    "business_unit": "BU2_content_factory",
+    "domain": "scrapers/ + scripts/ + supabase schema",
+    "edit_scope_allow": [
+      "scrapers/**",
+      "scripts/**",
+      "Supabase public.* schema via docker exec psql",
+      "docs/school/mailbox/inbox_from_parser.md (append only)",
+      "docs/school/handoff/parser-rumah123_v3.md (new, at >70% ctx)"
+    ],
+    "edit_scope_deny": [
+      "docs/school/** except mailbox/inbox_from_parser.md and handoff/parser-rumah123_v3.md",
+      "/opt/tg-export/** (librarian domain)",
+      "canon_training.yaml, library_index.json, outbox_to_parser.md"
+    ]
+  },
+
+  "read_on_start_order": [
+    "docs/school/canon_training.yaml",
+    "docs/school/mailbox/outbox_to_parser.md",
+    "docs/school/handoff/parser-rumah123_v2.md",
+    "docs/school/handoff/parser-rumah123_v2.json",
+    "docs/school/mailbox/inbox_from_parser.md"
+  ],
+
+  "experiment_state": {
+    "status": "CLOSED",
+    "phase": "baseline_ready_awaiting_approvals",
+    "started": "2026-04-19",
+    "closed_date_wita": "2026-04-21T01:20+07:00",
+    "duration_hours": 54,
+    "db_final": {
+      "total_properties": 422,
+      "normalization_status_complete": 422,
+      "normalization_failures": 0,
+      "raw_listings_total": 422,
+      "detail_status": {
+        "ok": 311,
+        "blocked": 70,
+        "not_found": 41,
+        "pending": 0
+      },
+      "canonical_fill": {
+        "district_pct": 100,
+        "price_idr_pct": 99.8,
+        "specific_area_pct": 97,
+        "tenure_type_known_pct": 61,
+        "image_urls_pct": 44,
+        "contact_phone_pct": 37,
+        "seller_type_pct": 0,
+        "_seller_type_comment": "bug: Haiku extracts but UPSERT doesn't write. P1 fix."
+      },
+      "canggu_area_coverage": {
+        "records": 350,
+        "pct_of_base": 83,
+        "multiplier_vs_yesterday": 32,
+        "top_subareas": {
+          "Canggu_villa": 78,
+          "Kerobokan_villa": 39,
+          "Canggu_land": 39,
+          "Canggu_apartment": 38,
+          "Pererenan_rumah": 36,
+          "Pererenan_villa": 28,
+          "Seminyak_rumah": 21,
+          "Seminyak_villa": 19,
+          "Berawa_exact": 10
+        }
+      }
+    },
+    "llm_spend": {
+      "model": "claude-haiku",
+      "total_calls": 525,
+      "input_tokens": 1938475,
+      "output_tokens": 177033,
+      "cost_usd_total": 2.82,
+      "cost_per_record_usd": 0.0067,
+      "avg_latency_ms": 3700,
+      "errors": 0
+    },
+    "snapshots_on_disk": {
+      "base_dir": "realty-portal/snapshots/2026-04-21/",
+      "files": [
+        "properties_snapshot.csv",
+        "broker_inventory.csv",
+        "raw_listings_index.csv",
+        "llm_usage_full.csv"
+      ],
+      "next_snapshot_dir_after_refresh": "realty-portal/snapshots/2026-04-21-v3/"
+    }
+  },
+
+  "alive_processes_aeza": [
+    {
+      "pid": 1305546,
+      "cmd": "/bin/bash /opt/realty-portal/scripts/night_monitor.sh",
+      "role": "10-min heartbeat, writes /var/log/realty/heartbeat.log",
+      "ppid": 1,
+      "survives_ssh_disconnect": true,
+      "survives_reboot": false,
+      "started_wita": "2026-04-21T00:16+07:00"
+    },
+    {
+      "pid": 1322063,
+      "cmd": "/bin/bash /opt/realty-portal/scripts/2h_reporter.sh",
+      "role": "2-hour report, writes /var/log/realty/2h_reports.log",
+      "ppid": 1,
+      "survives_ssh_disconnect": true,
+      "survives_reboot": false,
+      "started_wita": "2026-04-21T00:36+07:00"
+    }
+  ],
+
+  "technical_routes": {
+    "ssh": {
+      "host": "root@193.233.128.21",
+      "key": "C:/Users/97152/.ssh/aeza_ed25519",
+      "method": "paramiko Ed25519",
+      "fallback_pass_file": "C:/Users/97152/.aeza_pass"
+    },
+    "postgres": {
+      "host": "172.18.0.13",
+      "port": 5432,
+      "user": "postgres",
+      "db": "postgres",
+      "password_source": "/opt/realty-portal/.env POSTGRES_PASSWORD",
+      "container_exec_fallback": "docker exec supabase-db psql -U postgres -d postgres"
+    },
+    "litellm": {
+      "host_url": "http://172.18.0.6:4000",
+      "docker_url": "http://realty_litellm:4000",
+      "chat_endpoint": "/v1/chat/completions",
+      "models_endpoint": "/v1/models",
+      "auth": "Bearer $LITELLM_MASTER_KEY",
+      "master_key_source": "/opt/realty-portal/.env LITELLM_MASTER_KEY",
+      "models_live": [
+        "claude-haiku",
+        "gpt-4o-mini",
+        "gemini-flash",
+        "deepseek-chat",
+        "groq-llama",
+        "qwen-turbo",
+        "grok-fast",
+        "grok-max"
+      ],
+      "models_rate_limited": {
+        "groq-llama": "100k TPD free tier exceeded 2026-04-20 16:30 WITA"
+      }
+    },
+    "project_root_aeza": "/opt/realty-portal/",
+    "project_root_local": "C:/work/realty-portal/",
+    "scraper_files": [
+      "/opt/realty-portal/scrapers/rumah123/run.py",
+      "/opt/realty-portal/scrapers/rumah123/fetch_details.py"
+    ],
+    "normalizer_file": "/opt/realty-portal/scripts/normalize_listings.py",
+    "heartbeat_scripts": [
+      "/opt/realty-portal/scripts/night_monitor.sh",
+      "/opt/realty-portal/scripts/2h_reporter.sh",
+      "/opt/realty-portal/scripts/morning_report.sh"
+    ],
+    "logs": {
+      "aeza": [
+        "/var/log/realty/heartbeat.log",
+        "/var/log/realty/2h_reports.log",
+        "/tmp/night_v4.log",
+        "/tmp/fetch_all.log",
+        "/tmp/fetch_remaining.log"
+      ]
+    },
+    "recovery_playbook": "/opt/realty-portal/RECOVERY.md",
+    "library_cache_local": {
+      "path": "C:/work/.library_cache/",
+      "read_only": true,
+      "contents": [
+        "library_index.json (151 posts)",
+        "16_ai_seller_rag_unpacked/ (Q4 main canon)",
+        "14_supabase_unpacked/ (Q4 supabase compose)",
+        "17_sql_query.txt (Q4 SQL schema)",
+        "30_supabase_add_docs_to_db.json",
+        "31_supabase_ai_consultant_with_memory.json",
+        "32_supabase_update_stocks.json",
+        "177_telegram_unpacked/ (Q3 canon)"
+      ]
+    }
+  },
+
+  "approvals_pending_from_school": [
+    {
+      "id": "A1",
+      "name": "heartbeat_redesign_event_driven",
+      "what": "перепроектировать heartbeat/pipeline на event-driven model вместо фиксированных sleep",
+      "estimate_min": 90,
+      "canon_ref": "9_human_rhythm_api CRITICAL",
+      "deliverable": "docs/school/mailbox/inbox_from_parser.md → plan only, no code until v2 confirms"
+    },
+    {
+      "id": "A2",
+      "name": "litellm_key_fallback_remove",
+      "what": "убрать fallback в normalize_listings.py:40-42 + добавить source .env wrapper в запуски",
+      "estimate_min": 15,
+      "canon_ref": "6_single_secret_vault + 5_minimal_clear_commands fail-loud",
+      "files_affected": [
+        "scripts/normalize_listings.py",
+        "scrapers/rumah123/fetch_details.py",
+        "optional: new wrapper script"
+      ]
+    },
+    {
+      "id": "A3",
+      "name": "add_sonnet_kimi_to_litellm",
+      "what": "подключить claude-sonnet-4.5 и kimi-k2 в LiteLLM config",
+      "estimate_min": 20,
+      "canon_ref": "2_minimal_integration_code (LiteLLM centralizes)",
+      "config_file": "/opt/realty-portal/litellm-config.yaml"
+    },
+    {
+      "id": "A4_info",
+      "name": "example_of_parser_slowdown_from_ilya",
+      "what": "конкретный пример 'тормоза парсера' от Ильи чтобы не угадывать",
+      "estimate_min": 0,
+      "blocker_for": ["A1"]
+    }
+  ],
+
+  "tech_debt_backlog": [
+    {
+      "priority": "P1",
+      "id": "seller_type_upsert_bug",
+      "what": "UPSERT в normalize_listings.py не пишет seller_type колонку",
+      "fix": "Add `seller_type = EXCLUDED.seller_type` в UPSERT_SQL + rerun --refresh --all",
+      "effort_min": 10
+    },
+    {
+      "priority": "P1",
+      "id": "final_refresh_normalize",
+      "what": "127 новых detail HTML не прогоняны через --refresh",
+      "fix": "python3 scripts/normalize_listings.py --refresh --all",
+      "effort_min": 10
+    },
+    {
+      "priority": "P1",
+      "id": "baseline_v3_snapshot",
+      "what": "После refresh — снимок в realty-portal/snapshots/2026-04-21-v3/",
+      "fix": "Rerun .export_snapshots.py с новым OUT_DIR",
+      "effort_min": 5
+    },
+    {
+      "priority": "P2",
+      "id": "litellm_fallbacks_config",
+      "what": "Автофоллбэк Groq 429 → deepseek-chat в LiteLLM YAML",
+      "canon_ref": "n8n-style config over custom code",
+      "effort_min": 10
+    },
+    {
+      "priority": "P2",
+      "id": "tenure_inference_skill",
+      "what": "LightRAG-powered inference для 39% tenure=unknown",
+      "canon_ref": "4_skills_over_agents + msg_17 pattern",
+      "effort_hours": 4
+    },
+    {
+      "priority": "P3",
+      "id": "scraper_v3_playwright",
+      "what": "Playwright для JS-reveal phones (или смена на Lamudi)",
+      "effort_hours": 6
+    },
+    {
+      "priority": "P3",
+      "id": "fx_rate_skill",
+      "what": "IDR_PER_USD=16000 hardcode → daily-refreshed table exchange_rates",
+      "canon_ref": "5_minimal_clear_commands fail-loud",
+      "effort_hours": 2
+    },
+    {
+      "priority": "P3",
+      "id": "singleton_lock_on_fetch",
+      "what": "flock или pg advisory lock на fetch_details.py чтобы не было 3 параллельных копий",
+      "effort_min": 20
+    }
+  ],
+
+  "known_bugs_workarounds": [
+    {
+      "id": "phone_extraction_broken_rumah123",
+      "symptom": "154 properties с contact_phone = single Rumah123 office +62 21 30496123 in format variations",
+      "root_cause": "Rumah123 JS click-to-reveal на detail page, curl_cffi не выполняет JS",
+      "workarounds": [
+        "Playwright headless с 'Show Number' click",
+        "Альтернативный источник Lamudi/Fazwaz/99co (открытые phones)",
+        "Outreach через имя агентства + TG username lookup"
+      ]
+    },
+    {
+      "id": "cf_stable_17pct_block",
+      "symptom": "70/422 detail pages stable HTTP 403",
+      "root_cause": "CloudFlare detected automation signature (regular timers)",
+      "workarounds": [
+        "Residential proxy pool ($30-100/mo)",
+        "Event-driven human-rhythm heartbeat (approval A1)",
+        "Смена источника"
+      ]
+    },
+    {
+      "id": "agent_name_false_positives",
+      "symptom": "'Cozy Stay', 'The Komu' = apartment complex names, не агентства",
+      "fix_applied": "Haiku prompt уточнён (agent_name только при explicit 'Dipasarkan oleh X')",
+      "status": "fixed, но reprocess всех 422 с новым prompt пока не запущен"
+    }
+  ],
+
+  "alexey_canon_cross_reference": {
+    "applied_in_v1": ["3_simple_nodes", "6_single_secret_vault", "7_offline_first", "10_content_factory_model"],
+    "violated_fix_planned_in_v2": ["9_human_rhythm_api", "2_minimal_integration_code", "4_skills_over_agents"],
+    "library_cache_usable": true,
+    "key_patterns_for_v2": {
+      "conversation_state_machine": "16_ai_seller_rag_unpacked/ai_seller_rag/шаблоны/supabase/supabase_ai_consultant_with_memory.json",
+      "canonical_supabase_schema": "17_sql_query.txt",
+      "telegram_outreach_safety": "177_telegram_unpacked/telegram/INSTALL.md"
+    }
+  },
+
+  "context_budget": {
+    "v1_finished_at_pct": 60,
+    "v2_start_at_pct_estimate": 28,
+    "v2_headroom_before_v3_handoff_pct": 42,
+    "handoff_trigger_at_pct": 70
+  },
+
+  "commands_cheatsheet": {
+    "check_alive": "ssh root@193.233.128.21 'pgrep -af \"night_monitor|2h_reporter\"'",
+    "morning_report": "ssh root@193.233.128.21 'bash /opt/realty-portal/scripts/morning_report.sh'",
+    "final_refresh_after_A2_approval": "ssh root@193.233.128.21 'cd /opt/realty-portal && set -a; source .env; set +a; python3 scripts/normalize_listings.py --refresh --all --rate-limit 1 2>&1 | tail -50'",
+    "db_counters": "ssh root@193.233.128.21 'docker exec supabase-db psql -U postgres -d postgres -c \"SELECT detail_status, COUNT(*) FROM public.raw_listings GROUP BY 1 ORDER BY 1\"'",
+    "tg_reply_to_ilya_via_mcp": "mcp__plugin_telegram_telegram__reply chat_id=5642329195"
+  },
+
+  "do_not_do": [
+    "Не править код без approval школы",
+    "Не трогать docs/school/** за пределами mailbox/inbox_from_parser.md",
+    "Не править /opt/tg-export/** (librarian)",
+    "Не ротировать LITELLM_MASTER_KEY до завершения следующей фазы",
+    "Не запускать массовый scrape без human-rhythm redesign (A1)",
+    "Не убивать night_monitor.sh / 2h_reporter.sh (живут автономно)",
+    "Не делегировать LLM-вызовы школе через меня — школа ходит в LiteLLM напрямую"
+  ],
+
+  "handoff_needed_flag": true,
+  "awaiting_ilya_confirmation_to_close_v1": true
+}

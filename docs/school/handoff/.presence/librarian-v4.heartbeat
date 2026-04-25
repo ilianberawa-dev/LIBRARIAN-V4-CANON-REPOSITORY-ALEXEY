@@ -1,0 +1,20 @@
+{
+  "role": "librarian-v4",
+  "status": "online",
+  "timestamp": "2026-04-24T17:30:00+08:00",
+  "capabilities": [
+    "infrastructure_management",
+    "docker_operations",
+    "secrets_management",
+    "role_creation",
+    "mcp_agent_mail_deployment",
+    "lightrag_operations",
+    "aeza_server_administration"
+  ],
+  "environment": {
+    "type": "Claude Code teleport session",
+    "ssh_access": true,
+    "model": "claude-sonnet-4-5",
+    "working_directory": "C:\\work\\realty-portal"
+  }
+}

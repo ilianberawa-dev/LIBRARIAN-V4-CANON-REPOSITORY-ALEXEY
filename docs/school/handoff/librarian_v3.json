@@ -1,0 +1,230 @@
+{
+  "role": "librarian",
+  "version": "v3",
+  "from_version": "v2",
+  "created_by": "librarian-v2 (organized handoff, not emergency draft)",
+  "created_at": "2026-04-21T22:00:00+08:00",
+  "trigger": "school application handoff_promptting_quality (50% UI-context threshold) + organized prep + consensus workshop complete",
+  "ui_chat_name": "setup-tg-parser",
+  "business_unit": "IU1 — Librarian (knowledge asset, not sold, reduces cost of all BUs)",
+
+  "last_read_canon_version": "0.3",
+  "canon_last_updated_when_read": "2026-04-21T20:30+08:00",
+
+  "context_snapshot": {
+    "spawned_at_ui_context": "UNKNOWN",
+    "ilya_last_reported": "25% at 21:00",
+    "librarian_self_estimate": "NEVER (canon v0.3 context_measurement_rule forbids)",
+    "handoff_trigger_observed_at": "after 21:30 consultation turn"
+  },
+
+  "read_on_start_order": [
+    "docs/school/canon_training.yaml (check version vs last_read_canon_version)",
+    "docs/school/mailbox/dispatch_queue.md (swежие блоки)",
+    "docs/school/mailbox/consensus_workshop.md (все turns, особенно 21:45)",
+    "docs/school/mailbox/outbox_to_librarian.md",
+    "docs/school/handoff/librarian_v3.md (это handoff)",
+    "docs/school/mailbox/inbox_from_librarian.md (последние 5 блоков)",
+    "docs/school/warmstart/librarian_v3_brief.md (if exists, school-auto-generated)"
+  ],
+
+  "edit_scope_allowed": [
+    "/opt/tg-export/** (Aeza via SSH)",
+    "docs/school/mailbox/inbox_from_librarian.md",
+    "docs/school/handoff/librarian_v<N>.md (own)",
+    "docs/school/skills/heartbeat-librarian-reference.sh (write-permit school 21:45)",
+    "docs/school/skills/heartbeat-common.md (after parser sдаст heartbeat-parser.md draft)",
+    "docs/school/tests/mailbox_reliability_v1.md (write-permit school 21:45)",
+    "docs/school/warmstart/librarian_v<N>_brief.md (READ only — school writes)"
+  ],
+
+  "edit_scope_denied": [
+    "docs/school/canon_training.yaml (school domain)",
+    "docs/school/mailbox/outbox_to_* (school writes)",
+    "docs/school/mailbox/dispatch_queue.md (school writes)",
+    "docs/school/mailbox/consensus_workshop.md (school/parser могут writ новые turns, librarian читает)",
+    "scrapers/**, scripts/normalize_listings.py (parser domain)",
+    "other roles' keys and secrets"
+  ],
+
+  "research_task_3A_3F_state": {
+    "status": "completed_and_approved",
+    "approved_in": "consensus_workshop.md 2026-04-21 21:45",
+    "verdict_path_A": "MCP Agent Mail primary + TG push layer",
+    "tasks": {
+      "3A_paperclip": {"verdict": "not_replace_mailbox", "complexity": "4-5/10", "artifact": "/opt/tg-export/_paperclip_unpacked/ on Aeza"},
+      "3B_mcp_agent_mail": {"verdict": "primary_mailbox", "complexity": "3/10", "artifact": "/opt/tg-export/_mcp_mail_eval/ on Aeza"},
+      "3C_a2a_google": {"verdict": "defer_to_phase_2_saas"},
+      "3D_frameworks": {"verdict": "reject (python dev required, regression canon #2)"},
+      "3E_multi_model_prompt": {"status": "draft_ready", "blocked_on": "parser-v2 A3 LiteLLM endpoint"},
+      "3F_tg_chat": {"verdict": "notify_layer_only_not_primary"}
+    }
+  },
+
+  "workshop_decisions_v0_3": {
+    "idea_1_canon_versioning": {"approved": true, "location": "canon_training.yaml versioning + changelog sections"},
+    "idea_2_memory_layers": {"approved": true, "location": "role_invariants.memory_layers (ops/knowledge/code_and_secrets)"},
+    "idea_3_heartbeat_skill": {"approved": true, "sequence": "parser-v2 → librarian common.md → secretary agent-tick.md"},
+    "idea_4_IU3_multi_model_gateway": {"approved": true, "location": "infrastructure_units.IU3_multi_model_gateway"},
+    "idea_5_anti_patterns_catalog": {"approved": true, "entries": ["AP-1", "AP-2", "AP-3", "AP-4"], "AP-5_queued_for_v0_4": true},
+    "idea_6_dispatch_v2": {"approved": false, "reason": "MCP Agent Mail solves natively", "fallback_if_no_mcp": "implement_as_bridge"},
+    "principle_11_architectural_privilege_isolation": {"approved": true, "location": "principles_alexey[11]"}
+  },
+
+  "mission_brief_approvals_pending_v0_4": {
+    "mailbox_reliability_invariants_I1_I10": "approved_for_v0_4",
+    "acceptance_test_suite_T1_T10": "approved_for_v0_4",
+    "gap_I8_canon_version_check_on_turn_start": "approved_for_v0_4",
+    "warm_start_brief_owner_school": {
+      "approved": true,
+      "size": "300-500 words",
+      "location": "docs/school/warmstart/<role>_v<N>_brief.md",
+      "auto_hook": "school writes at v<N> launch permit"
+    }
+  },
+
+  "ideas_preserved_approvals_pending_v0_4": {
+    "obs_1_context_template_handoff": "applied in section 4a",
+    "obs_2_role_inbox_exit_closure": "canon_v0_4_new_rule",
+    "obs_3_librarian_uses_IU3_validation": "approved, awaits parser LiteLLM endpoint",
+    "obs_4_mailbox_transport_librarian_v2plus": "canon_v0_4_fix",
+    "obs_5_AP5_self_estimation_without_ground_truth": "canon_v0_4_add_to_catalog",
+    "obs_6_parser_ping_librarian_on_heartbeat_draft": "school_will_add_to_outbox_to_parser_next_turn",
+    "obs_9_yaml_format_memory_layers": "canon_v0_4_fix",
+    "obs_10_handoff_amendments_protocol": "canon_v0_4_new_rule"
+  },
+
+  "mcp_agent_mail_poc_plan": {
+    "status": "blocked_on",
+    "architecture_decision_2026_04_21_22_15": "aeza_protected_folder_mode: localhost bind + SSH tunnel + bearer token. NO Caddy, NO domain, NO public endpoints.",
+    "blockers": ["ilya_explicit_start_command"],
+    "removed_blockers": ["domain_name (canceled 22:15)", "Caddy install (canceled 22:15)", "DNS A-record (canceled 22:15)"],
+    "access_mode": {
+      "server_bind": "127.0.0.1:8765 (localhost only)",
+      "client_access": "ssh -L 8765:127.0.0.1:8765 root@193.233.128.21 → http://localhost:8765 на ноуте",
+      "auth": "Bearer token in /opt/mcp_agent_mail/.env (chmod 600)",
+      "canon_support": ["#7 offline-first", "#11 architectural_privilege_isolation (no network attack surface)"]
+    },
+    "eta_after_unblock": "35-40 min (conservative +buffer)",
+    "steps": [
+      {"n": 1, "eta_min": 2, "action": "uv install: curl -LsSf https://astral.sh/uv/install.sh | sh && source ~/.bashrc", "actor": "librarian-v3"},
+      {"n": 2, "eta_min": 5, "action": "uv python install 3.14", "actor": "librarian-v3"},
+      {"n": 3, "eta_min": 2, "action": "mkdir /opt/mcp_agent_mail && chmod 700 /opt/mcp_agent_mail (protected folder)", "actor": "librarian-v3"},
+      {"n": 4, "eta_min": 10, "action": "MCP Agent Mail installer with --bind 127.0.0.1 --port 8765 --no-start --dir /opt/mcp_agent_mail", "actor": "librarian-v3"},
+      {"n": 5, "eta_min": 2, "action": "openssl rand -hex 32 → HTTP_BEARER_TOKEN в /opt/mcp_agent_mail/.env chmod 600", "actor": "librarian-v3"},
+      {"n": 6, "eta_min": 3, "action": "systemd unit /etc/systemd/system/mcp-agent-mail.service (localhost bind, EnvironmentFile)", "actor": "librarian-v3"},
+      {"n": 7, "eta_min": 2, "action": "systemctl enable --now + verify ss -tlnp grep 8765 shows 127.0.0.1:8765 LISTEN", "actor": "librarian-v3"},
+      {"n": 8, "eta_min": 5, "action": "Local smoke test: curl -H 'Authorization: Bearer $TOKEN' http://127.0.0.1:8765/mail/health", "actor": "librarian-v3"},
+      {"n": 9, "eta_min": 5, "action": "macro_start_session register librarian-v3 identity + migrate 3 inbox blocks (21:30, 21:05, 19:30) to MCP threads", "actor": "librarian-v3"},
+      {"n": 10, "eta_min": 3, "action": "docs/school/mcp-client/librarian.mcp.json template (points to http://localhost:8765 through SSH tunnel)", "actor": "librarian-v3"}
+    ],
+    "ssh_tunnel_from_windows_laptop": "ssh -L 8765:127.0.0.1:8765 root@193.233.128.21",
+    "autossh_recommended": true,
+    "human_overseer_ui_access": "после tunnel открыть http://localhost:8765/mail в браузере Windows-ноута"
+  },
+
+  "acceptance_tests_T1_T10_after_poc": [
+    {"id": "T1", "name": "baseline_delivery", "sla": "school→librarian ack < 5min"},
+    {"id": "T2", "name": "fan_out_broadcast", "sla": "all N roles ack < 10min"},
+    {"id": "T3", "name": "offline_delivery", "sla": "parser-chat closed → opens later → reads missed"},
+    {"id": "T4", "name": "concurrent_writes", "sla": "both visible, FTS rank order"},
+    {"id": "T5", "name": "canon_drift_detection", "sla": "v0.3→v0.4 bump detected on turn-start"},
+    {"id": "T6", "name": "corruption_recovery", "sla": "Doctor cli repair succeeds"},
+    {"id": "T7", "name": "handoff_safety", "sla": "v3→v4 reads last_ack_v3 + new only"},
+    {"id": "T8", "name": "cold_restart", "sla": "Aeza reboot → systemd auto-start → data persists"},
+    {"id": "T9", "name": "token_rotation", "sla": "bearer token change → zero downtime"},
+    {"id": "T10", "name": "role_guard_duplicate", "sla": "2 simultaneous chats → second refuses"}
+  ],
+
+  "aeza_infra_state_2026_04_21_21_30_wita": {
+    "ssh": "root@193.233.128.21 via ~/.ssh/aeza_ed25519",
+    "os": "Ubuntu 24.04.4 LTS Noble",
+    "python_default": "3.12.3 (/usr/bin/python3)",
+    "uv_installed": false,
+    "caddy_installed": false,
+    "ram_total_available_gb": [7.8, 4.4],
+    "disk_opt_free_total_gb": [22, 59],
+    "heartbeat_sh_sha256": "38c1b30a3a78292ab953d13604723aa68c10328d1dd9d8424a7b23279a9b90bb",
+    "heartbeat_sh_bytes": 4969,
+    "cron_active": ["*/10 heartbeat.sh", "0 */2 notify.sh", "15 */6 sync_channel.mjs", "30 2 verify.sh"],
+    "ports_listening": ["127.0.0.1:8000 docker-proxy"],
+    "ports_free_for_mcp": ["80", "443", "8765", "4000", "3100", "54329"],
+    "artifacts_from_research": [
+      "/opt/tg-export/_paperclip_unpacked/ (3.A)",
+      "/opt/tg-export/_mcp_mail_eval/ (3.B git shallow)"
+    ]
+  },
+
+  "routes_and_credentials_map_no_values": {
+    "ssh_aeza": {"where": "C:\\Users\\97152\\.ssh\\aeza_ed25519 (local)"},
+    "tg_bot_token": {"key": "TELEGRAM_BOT_TOKEN", "location": "/opt/realty-portal/.env (Aeza, chmod 600)"},
+    "tg_admin_chat": {"key": "TELEGRAM_ADMIN_CHAT_ID", "location": "/opt/realty-portal/.env"},
+    "grok_stt_key": {"key": "XAI_API_KEY", "location": "/opt/tg-export/.env (Aeza, chmod 600)"},
+    "lightrag": {"url": "http://realty_lightrag:9621 (container)", "location": "docker compose"},
+    "mcp_agent_mail_bearer": {"key": "MCP_AGENT_MAIL_BEARER_TOKEN", "location": "/opt/realty-portal/.env (generated at POC STEP 5)"},
+    "litellm_gateway": {"url": ":4000 parser-side", "status": "A3 pending parser-v2"},
+    "paperclip_embedded_pg": {"port": 54329, "status": "not_installed_yet"}
+  },
+
+  "known_gotchas": [
+    "jq merge fails on transcripts >1h — fix: Python merge_transcripts.py (transcribe.sh auto-calls when duration > chunk)",
+    "download.mjs zombie-alive (Sl state, takeout session expired) — heartbeat catches via max_idle = expected_break*60 + 300s",
+    "msg_178 canon: throwaway TG account (Gede @RoyalPalaceAddress) + takeout session = zero bans",
+    "Paperclip Vite dev blocks external hosts → PAPERCLIP_UI_DEV_MIDDLEWARE=false in systemd",
+    "claude CLI not in systemd PATH → symlink /usr/local/bin/claude",
+    "~/.claude/settings.json permissions NOT working for Paperclip agents (spawn bypasses)",
+    "Embedded postgres 54329 can hang → kill $(ss -tlnp | grep :54329 | grep -oP 'pid=\\K[0-9]+')",
+    "OpenClaw pairing required → manual approve",
+    "Caddy NOT installed on Aeza (discovered 2026-04-21) — install in POC STEP 2",
+    "Python 3.14 missing — via uv managed, not apt (do not touch system 3.12)"
+  ],
+
+  "to_successor_queue": {
+    "P0": [
+      {"id": "lib3-p0-1", "task": "Read all read_on_start files + ack in inbox"},
+      {"id": "lib3-p0-2", "task": "Check if school generated warm_start_brief; if missing → ping in inbox (canon violation)"},
+      {"id": "lib3-p0-3", "task": "MCP Agent Mail POC Phase 1 (10 steps)", "blocked_on": ["ilya_permit", "ilya_domain"]},
+      {"id": "lib3-p0-4", "task": "Run T1-T10 test suite after POC, write docs/school/tests/mailbox_reliability_v1.md"}
+    ],
+    "P1": [
+      {"id": "lib3-p1-1", "task": "Canon update mailbox_comms → MCP primary (after POC)"},
+      {"id": "lib3-p1-2", "task": "Write heartbeat-common.md L1 skill", "blocked_on": "parser heartbeat-parser.md draft"},
+      {"id": "lib3-p1-3", "task": "LightRAG ingest Phase 1 smoke (3 files: 170+55+147)"},
+      {"id": "lib3-p1-4", "task": "LightRAG Phase 2 batch (11 transcripts)"},
+      {"id": "lib3-p1-5", "task": "Phase 0 finish: transcripts 164/165 + skills-a-to-ya.md 2/3 remaining"}
+    ],
+    "P2": [
+      {"id": "lib3-p2-1", "task": "msg_72/82/97/103 digests after P4 download+transcribe complete"},
+      {"id": "lib3-p2-2", "task": "Multi-model triangulation via parser LiteLLM for MCP Agent Mail decision validation"}
+    ],
+    "P3": [
+      {"id": "lib3-p3-1", "task": "Paperclip heartbeatInterval config.json check if Ilya decides to install"},
+      {"id": "lib3-p3-2", "task": "Broadcast 'production API only not subscription' — awaits Ilya final approval"},
+      {"id": "lib3-p3-3", "task": "A2A agent.json for secretary — Phase 3 SaaS trigger: first paying client"}
+    ]
+  },
+
+  "blocked_on": [
+    "ilya_explicit_start_command (он координирует sudo с librarian напрямую, сказал 'спрошу пока так')",
+    "parser_v2_heartbeat_parser_md_draft_delivery",
+    "canon_v0_4_bump_after_POC_T1_T10_green"
+  ],
+  "removed_blockers_2026_04_21_22_15": [
+    "domain_name (localhost architecture, no domain needed)",
+    "caddy_install (SSH tunnel replaces reverse proxy)",
+    "DNS_A_record"
+  ],
+
+  "first_turn_checklist": [
+    "1. ssh aeza tail -20 /opt/tg-export/heartbeat.log (ticks within 20min?)",
+    "2. ssh aeza cat /opt/tg-export/_status.json | python3 -m json.tool (updated within 15min?)",
+    "3. head -3 docs/school/canon_training.yaml (version still 0.3 or bumped?)",
+    "4. ls -lat docs/school/mailbox/dispatch_queue.md docs/school/mailbox/consensus_workshop.md docs/school/mailbox/outbox_to_librarian.md (any changes after 21:45?)",
+    "5. cat docs/school/warmstart/librarian_v3_brief.md (exists? if no → ping school)",
+    "6. ssh aeza systemctl status mcp-agent-mail (installed? if yes → macro_start_session)",
+    "7. ssh aeza command -v uv (uv installed?)",
+    "8. Write first inbox block with librarian-v3 start ACK: canon_version + warm_start_read_status + mcp_poc_status + blockers"
+  ],
+
+  "v2_amendments_placeholder": ""
+}

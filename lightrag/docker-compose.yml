@@ -1,0 +1,78 @@
+name: realty_lightrag
+
+# LightRAG self-hosted (HKUDS/LightRAG) + LiteLLM OpenAI→Anthropic bridge
+# + Ollama (ТОЛЬКО для embedding all-minilm 384-dim — НЕ LLM).
+#
+# Единый .env в /opt/realty-portal/.env (канон — single secret vault).
+# Сеть realty_net — объявлена в ../docker-compose.yml, используется как external.
+
+networks:
+  default:
+    name: realty_net
+    external: true
+
+volumes:
+  realty_lightrag_data:
+    name: realty_lightrag_data
+  realty_lightrag_inputs:
+    name: realty_lightrag_inputs
+  realty_ollama_models:
+    name: realty_ollama_models
+
+services:
+  litellm:
+    image: ghcr.io/berriai/litellm:main-latest
+    container_name: realty_litellm
+    restart: unless-stopped
+    env_file:
+      - /opt/realty-portal/.env
+    command:
+      - "--model"
+      - "anthropic/claude-haiku-4-5-20251001"
+      - "--port"
+      - "4000"
+      - "--host"
+      - "0.0.0.0"
+      - "--drop_params"
+    expose:
+      - "4000"
+
+  ollama:
+    image: ollama/ollama:latest
+    container_name: realty_ollama
+    restart: unless-stopped
+    volumes:
+      - realty_ollama_models:/root/.ollama
+    expose:
+      - "11434"
+
+  lightrag:
+    image: ghcr.io/hkuds/lightrag:latest
+    container_name: realty_lightrag
+    restart: unless-stopped
+    depends_on:
+      - litellm
+      - ollama
+    ports:
+      - "127.0.0.1:9621:9621"
+    volumes:
+      - realty_lightrag_data:/app/data/rag_storage
+      - realty_lightrag_inputs:/app/data/inputs
+    env_file:
+      - /opt/realty-portal/.env
+    environment:
+      HOST: 0.0.0.0
+      PORT: 9621
+      WORKING_DIR: /app/data/rag_storage
+      INPUT_DIR: /app/data/inputs
+      LLM_BINDING: openai
+      LLM_MODEL: claude-haiku
+      LLM_BINDING_HOST: http://realty_litellm:4000
+      # LiteLLM proxy работает на внутренней сети без auth — любой непустой
+      # bearer принимается. "dummy" — намеренно, секрет не нужен.
+      LLM_BINDING_API_KEY: sk-proxy-dummy
+      EMBEDDING_BINDING: ollama
+      EMBEDDING_MODEL: all-minilm
+      EMBEDDING_BINDING_HOST: http://realty_ollama:11434
+      EMBEDDING_DIM: 384
+      MAX_ASYNC: 2

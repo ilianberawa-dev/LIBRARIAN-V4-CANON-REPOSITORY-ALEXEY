@@ -1,0 +1,68 @@
+version: 1.0
+last_updated: 2026-04-24T15:00+08:00
+
+agents:
+  librarian-v4:
+    role: librarian
+    version: v4
+    launcher_file: docs/school/handoff/librarian_v3.md
+    window_title: "📘 librarian-v4 (infra)"
+    color: "#4A90E2"
+    max_context_pct: 50
+    startup_order: 10
+    model: claude-opus-4-7
+    working_directory: C:\work\realty-portal
+    lifecycle: long-lived
+    responsibilities:
+      - Infrastructure decisions (docker, deployment, servers)
+      - MCP Agent Mail management
+      - Creating new roles and spawning agents
+      - Canon technical implementation
+
+  school-v4:
+    role: school
+    version: v4
+    launcher_file: docs/school/handoff/school_v3.md
+    window_title: "🎓 school-v4 (orchestrator)"
+    color: "#E24A90"
+    max_context_pct: 50
+    startup_order: 20
+    model: claude-opus-4-7
+    working_directory: C:\work\realty-portal
+    lifecycle: long-lived
+    responsibilities:
+      - Canon updates and protocol decisions
+      - Agent approval and coordination
+      - Role orchestration via MCP threads
+
+  parser-rumah123-v4:
+    role: parser
+    version: v4
+    launcher_file: docs/school/handoff/parser-rumah123_v3.md
+    window_title: "🔍 parser-rumah123-v4"
+    color: "#50C878"
+    max_context_pct: 50
+    startup_order: 30
+    model: claude-sonnet-4-6
+    working_directory: C:\work\realty-portal\scrapers
+    lifecycle: long-lived
+    responsibilities:
+      - Rumah123 scraping and data extraction
+      - Parser debugging and maintenance
+      - Data pipeline to Supabase
+
+  ai-helper-v3:
+    role: ai-helper
+    version: v3
+    launcher_file: docs/school/handoff/ai-helper_v2.md
+    window_title: "🤖 ai-helper-v3 (generic)"
+    color: "#FFB347"
+    max_context_pct: 50
+    startup_order: 40
+    model: claude-sonnet-4-6
+    working_directory: C:\work\realty-portal
+    lifecycle: long-lived
+    responsibilities:
+      - Generic tasks and ad-hoc queries
+      - Telegram bot responses
+      - Support for other roles
