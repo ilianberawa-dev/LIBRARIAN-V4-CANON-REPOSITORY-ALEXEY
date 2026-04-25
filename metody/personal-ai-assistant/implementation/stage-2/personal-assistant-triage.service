@@ -1,8 +1,7 @@
 [Unit]
-Description=Personal AI Assistant — Stage 2 Triage Worker
+Description=Personal AI Assistant — Triage classifier
 After=network-online.target personal-assistant-listener.service
 Wants=network-online.target
-Requires=personal-assistant-listener.service
 
 [Service]
 Type=simple
@@ -13,29 +12,28 @@ EnvironmentFile=/opt/personal-assistant/.env
 ExecStart=/usr/bin/node /opt/personal-assistant/triage.mjs
 Restart=always
 RestartSec=5
+StartLimitIntervalSec=300
+StartLimitBurst=10
+
 StandardOutput=journal
 StandardError=journal
-SyslogIdentifier=pa-triage
+SyslogIdentifier=personal-assistant-triage
 
-# Hardening
 NoNewPrivileges=true
 ProtectSystem=strict
 ProtectHome=true
+ReadWritePaths=/opt/personal-assistant /var/log/personal-assistant
 PrivateTmp=true
 PrivateDevices=true
 ProtectKernelTunables=true
 ProtectKernelModules=true
 ProtectControlGroups=true
 RestrictAddressFamilies=AF_UNIX AF_INET AF_INET6
-RestrictNamespaces=true
 LockPersonality=true
-MemoryDenyWriteExecute=true
 RestrictRealtime=true
 RestrictSUIDSGID=true
-RemoveIPC=true
-ReadWritePaths=/opt/personal-assistant
-MemoryMax=400M
-TasksMax=50
+MemoryMax=300M
+TasksMax=64
 
 [Install]
 WantedBy=multi-user.target

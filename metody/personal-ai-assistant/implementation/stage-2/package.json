@@ -1,0 +1,22 @@
+{
+  "name": "personal-assistant",
+  "version": "1.2.0",
+  "description": "Personal AI Assistant — Telegram MTProto listener + drafts + bot",
+  "type": "module",
+  "private": true,
+  "engines": {
+    "node": ">=18"
+  },
+  "scripts": {
+    "auth": "node auth.mjs",
+    "listener": "node listener.mjs",
+    "triage": "node triage.mjs"
+  },
+  "dependencies": {
+    "@anthropic-ai/sdk": "^0.32.0",
+    "better-sqlite3": "^11.3.0",
+    "dotenv": "^16.4.5",
+    "input": "^1.0.1",
+    "telegram": "^2.26.22"
+  }
+}

@@ -1,348 +1,280 @@
-#!/usr/bin/env node
-/**
- * Personal AI Assistant — Stage 2: Triage Worker
- *
- * Polls SQLite for unhandled messages, classifies via Anthropic Sonnet 4.6
- * with prompt caching, updates messages.category + contacts.priority,
- * forwards tagged version to AI Assistant channel.
- *
- * Canon: #0 (rules first, LLM last), #3 (single task), #5 (fail loud),
- *        #6 (single .env), #11 (no bot api access)
- */
+// triage.mjs — Stage 2: classifier worker for Personal AI Assistant.
+// Polls SQLite for unhandled messages, applies deterministic rules + Sonnet 4.6
+// classification, updates messages.category/urgent/handled, forwards a tagged
+// summary into the AI Assistant channel via Bot API.
+//
+// Canon: #0 (rules first, LLM last), #3 (single-purpose node),
+//        #5 (deterministic skill, fail loud), #11 (no bot write privilege
+//        beyond channel forward).
 
 import 'dotenv/config';
+import fs from 'node:fs';
 import Database from 'better-sqlite3';
 import Anthropic from '@anthropic-ai/sdk';
-import { readFileSync } from 'node:fs';
-import { dirname, join } from 'node:path';
-import { fileURLToPath } from 'node:url';
 
-const __dirname = dirname(fileURLToPath(import.meta.url));
-
-// ─── ENV VALIDATION (fail loud) ────────────────────────────────────
-const REQUIRED_ENV = [
-  'ANTHROPIC_API_KEY',
-  'BOT_TOKEN',
-  'CHANNEL_CHAT_ID',
-];
+const REQUIRED_ENV = ['ANTHROPIC_API_KEY', 'BOT_TOKEN', 'CHANNEL_CHAT_ID'];
 for (const key of REQUIRED_ENV) {
   if (!process.env[key]) {
-    console.error(JSON.stringify({
-      level: 'fatal',
-      msg: `missing env: ${key}`,
-      ts: new Date().toISOString(),
-    }));
+    console.error(JSON.stringify({ level: 'fatal', msg: 'missing_env', key }));
     process.exit(1);
   }
 }
 
-const DB_PATH = process.env.DB_PATH || '/opt/personal-assistant/assistant.db';
-const SKILL_PATH = join(__dirname, 'skills', 'triage.md');
-const POLL_INTERVAL_MS = 2000;
-const MODEL = 'claude-sonnet-4-6';
+const APP_DIR = '/opt/personal-assistant';
+const DB_PATH = process.env.DB_PATH || `${APP_DIR}/assistant.db`;
+const SKILL_PATH = process.env.SKILL_PATH || `${APP_DIR}/skills/triage.md`;
+const POLL_INTERVAL_MS = parseInt(process.env.TRIAGE_POLL_MS || '2000', 10);
+const MODEL = process.env.TRIAGE_MODEL || 'claude-sonnet-4-6';
 const MAX_TOKENS = 200;
-const BUDGET_CAP_USD = parseFloat(process.env.BUDGET_CAP_USD || '22');
+const BUDGET_CAP_USD = parseFloat(process.env.MONTHLY_BUDGET_USD || '22');
 
-// ─── INIT ──────────────────────────────────────────────────────────
+const log = (level, msg, extra = {}) =>
+  console.log(JSON.stringify({ ts: new Date().toISOString(), level, msg, ...extra }));
+
+if (!fs.existsSync(SKILL_PATH)) {
+  console.error(JSON.stringify({ level: 'fatal', msg: 'skill_missing', path: SKILL_PATH }));
+  process.exit(1);
+}
+const skillSystemPrompt = fs.readFileSync(SKILL_PATH, 'utf8');
+
+const anthropic = new Anthropic({ apiKey: process.env.ANTHROPIC_API_KEY });
+
 const db = new Database(DB_PATH);
 db.pragma('journal_mode = WAL');
 db.pragma('foreign_keys = ON');
 
-const anthropic = new Anthropic({ apiKey: process.env.ANTHROPIC_API_KEY });
-
-const skillSystem = readFileSync(SKILL_PATH, 'utf-8');
-
-// ─── LOGGING (structured JSON) ─────────────────────────────────────
-const log = (level, msg, extra = {}) => {
-  console.log(JSON.stringify({
-    level, msg, ts: new Date().toISOString(), ...extra,
-  }));
-};
-
-// ─── BUDGET GUARD ──────────────────────────────────────────────────
-const checkBudget = () => {
-  const row = db.prepare(`
-    SELECT COALESCE(SUM(cost_usd), 0) AS spent
-    FROM budget_log
-    WHERE date >= date('now', 'start of month')
-  `).get();
-  return { spent: row.spent, capReached: row.spent >= BUDGET_CAP_USD };
-};
-
-const logBudget = db.prepare(`
-  INSERT INTO budget_log (date, input_tokens, output_tokens, cost_usd, operation)
-  VALUES (date('now'), ?, ?, ?, ?)
-`);
-
-// Sonnet 4.6 pricing: $3/MTok input, $15/MTok output (cached input -90%)
-const calcCost = (inputTokens, cachedTokens, outputTokens) => {
-  const fresh = inputTokens - cachedTokens;
-  return (fresh * 3 / 1e6) + (cachedTokens * 0.3 / 1e6) + (outputTokens * 15 / 1e6);
-};
-
-// ─── PRE-FILTER (no LLM) ───────────────────────────────────────────
-const preFilter = (msg, contact) => {
-  // bot/channel detection — should be filtered upstream but double-check
-  if (contact?.priority === 'noise') return { category: 'noise', urgent: 0, skipLLM: true };
-
-  // very short text without question
-  if (msg.text && msg.text.length < 5 && !msg.text.includes('?')) {
-    return { category: 'social', urgent: 0, skipLLM: true, confidence: 0.6 };
-  }
-
-  return null; // proceed to LLM
-};
-
-// ─── PRIORITY COMPUTATION ──────────────────────────────────────────
-const computePriority = (contact) => {
-  if (contact.is_vip) return 'hot';
-  if (contact.msg_count_30d > 10) return 'hot';
-  if (contact.msg_count_30d > 3) return 'regular';
-  return 'new';
-};
-
-// ─── URGENT DETECTION ──────────────────────────────────────────────
-const URGENT_REGEX = /срочно|urgent|asap|help|важно|сейчас/i;
-const detectUrgent = (text, contact) => {
-  if (!contact.is_vip) return 0;
-  return URGENT_REGEX.test(text) || text.includes('?') ? 1 : 0;
-};
-
-// ─── LLM CLASSIFY ──────────────────────────────────────────────────
-const classify = async (text, contact, prevMessages) => {
-  const userMsg = `Sender: ${contact.name || 'Unknown'} (@${contact.username || 'no_username'})
-Priority hint: ${contact.priority || 'unknown'}
-Previous 3 messages from this contact:
-${prevMessages.map(m => `- ${m.text}`).join('\n') || '(none)'}
-
-Current message:
-${text}`;
-
-  const resp = await anthropic.messages.create({
-    model: MODEL,
-    max_tokens: MAX_TOKENS,
-    temperature: 0.0,
-    system: [{
-      type: 'text',
-      text: skillSystem,
-      cache_control: { type: 'ephemeral' },
-    }],
-    messages: [{ role: 'user', content: userMsg }],
-  });
-
-  const usage = resp.usage;
-  const cost = calcCost(
-    usage.input_tokens,
-    usage.cache_read_input_tokens || 0,
-    usage.output_tokens,
-  );
-
-  logBudget.run(usage.input_tokens, usage.output_tokens, cost, 'triage');
-
-  const raw = resp.content[0].text.trim();
-  // strip markdown fences if model added them despite instructions
-  const json = raw.replace(/^```json\n?/i, '').replace(/\n?```$/, '').trim();
-
-  try {
-    const parsed = JSON.parse(json);
-    return {
-      category: parsed.category,
-      confidence: parsed.confidence ?? 0.5,
-      reasoning: parsed.reasoning || '',
-      cost,
-      tokens: usage,
-    };
-  } catch (e) {
-    log('error', 'failed to parse LLM JSON', { raw, error: e.message });
-    return { category: 'social', confidence: 0.3, reasoning: 'parse_failed', cost, tokens: usage };
-  }
-};
-
-// ─── DB QUERIES ────────────────────────────────────────────────────
-const getUnhandled = db.prepare(`
-  SELECT m.id, m.tg_msg_id, m.chat_id, m.from_id, m.text, m.received_at,
-         c.name, c.username, c.priority, c.is_vip, c.msg_count_30d
-  FROM messages m
-  LEFT JOIN contacts c ON c.tg_id = m.from_id
-  WHERE m.handled = 0
-  ORDER BY m.received_at ASC
+const selectPending = db.prepare(`
+  SELECT id, tg_msg_id, chat_id, from_id, text, received_at
+  FROM messages
+  WHERE handled = 0
+  ORDER BY received_at ASC
   LIMIT 1
 `);
 
-const getPrevMessages = db.prepare(`
-  SELECT text FROM messages
-  WHERE from_id = ? AND id != ?
-  ORDER BY received_at DESC
+const selectContact = db.prepare(`
+  SELECT tg_id, name, username, msg_count_30d, is_vip
+  FROM contacts
+  WHERE tg_id = ?
+`);
+
+const selectRecentForContact = db.prepare(`
+  SELECT text
+  FROM messages
+  WHERE from_id = ? AND id < ? AND handled = 1
+  ORDER BY id DESC
   LIMIT 3
 `);
 
 const updateMessage = db.prepare(`
-  UPDATE messages SET category = ?, urgent = ?, handled = 1
+  UPDATE messages
+  SET category = ?, urgent = ?, handled = 1
   WHERE id = ?
 `);
 
-const updateContact = db.prepare(`
-  UPDATE contacts SET priority = ?, last_msg_at = CURRENT_TIMESTAMP
+const updateContactPriority = db.prepare(`
+  UPDATE contacts
+  SET priority = ?
   WHERE tg_id = ?
 `);
 
-// ─── FORWARD TO CHANNEL ────────────────────────────────────────────
-const PRIORITY_EMOJI = {
-  hot: '🔥', regular: '👥', new: '🆕', noise: '🗑️',
+const insertBudget = db.prepare(`
+  INSERT INTO budget_log (date, input_tokens, output_tokens, cost_usd, operation)
+  VALUES (date('now'), ?, ?, ?, 'triage')
+`);
+
+const monthlySpend = db.prepare(`
+  SELECT COALESCE(SUM(cost_usd), 0) AS total
+  FROM budget_log
+  WHERE date >= date('now', 'start of month')
+`);
+
+const URGENT_RX = /срочно|help|asap|urgent|\?/i;
+const VALID_CATEGORIES = new Set(['question', 'fyi', 'promo', 'social', 'spam']);
+
+const PRIORITY_TAGS = {
+  hot: '🔥 HOT',
+  regular: '👥 REGULAR',
+  new: '🆕 NEW',
+  noise: '🗑 NOISE'
 };
 
-const CATEGORY_EMOJI = {
-  question: '❓', fyi: 'ℹ️', promo: '📣', social: '💬', spam: '🚫', noise: '🗑️',
-};
+function computePriority(msgCount30d) {
+  if (msgCount30d > 10) return 'hot';
+  if (msgCount30d > 3) return 'regular';
+  return 'new';
+}
 
-const forwardTagged = async (msg, contact, classification) => {
-  const priorityEmoji = PRIORITY_EMOJI[contact.priority] || '❔';
-  const categoryEmoji = CATEGORY_EMOJI[classification.category] || '❔';
-  const urgentEmoji = msg.urgent ? '🚨 URGENT ' : '';
-  const time = new Date(msg.received_at).toISOString().slice(11, 16);
-  const sender = contact.username
-    ? `${contact.name} (@${contact.username})`
-    : contact.name || 'Unknown';
+function isLikelyBotOrChannel(contact) {
+  if (!contact) return false;
+  return /bot$/i.test(contact.username || '');
+}
 
-  const text = `${urgentEmoji}${priorityEmoji} ${categoryEmoji} ${time} от ${sender}\n\n${msg.text}\n\n_${contact.priority || '?'}/${classification.category} (${(classification.confidence * 100).toFixed(0)}%)_`;
+function priceUsd(inputTokens, cacheReadTokens, cacheCreationTokens, outputTokens) {
+  // Anthropic Sonnet 4.6 approximate pricing per 1M tokens:
+  //   uncached input  $3.00, cache create $3.75 (1.25x), cache read $0.30 (0.1x),
+  //   output         $15.00.
+  const inCost = (inputTokens / 1e6) * 3.0;
+  const cacheCreateCost = (cacheCreationTokens / 1e6) * 3.75;
+  const cacheReadCost = (cacheReadTokens / 1e6) * 0.3;
+  const outCost = (outputTokens / 1e6) * 15.0;
+  return inCost + cacheCreateCost + cacheReadCost + outCost;
+}
 
+function formatTimeIso(rawTs) {
+  // received_at stored as 'YYYY-MM-DD HH:MM:SS' in UTC by SQLite default.
+  const isoLike = String(rawTs).replace(' ', 'T') + 'Z';
+  const d = new Date(isoLike);
+  if (Number.isNaN(d.getTime())) return '--:--';
+  return d.toISOString().substring(11, 16);
+}
+
+async function forwardTagged(message, contact, priority, urgent, category) {
+  const tag = PRIORITY_TAGS[priority] || '';
+  const urgentTag = urgent ? '🚨 URGENT ' : '';
+  const catTag = category ? `[${category}] ` : '';
+  const time = formatTimeIso(message.received_at);
+  const name = contact?.name || `id:${message.from_id}`;
+  const text = (message.text || '').replace(/\n/g, ' ').slice(0, 400);
+  const body = `📩 ${time} ${urgentTag}${tag} ${catTag}from ${name}: ${text}`;
   const url = `https://api.telegram.org/bot${process.env.BOT_TOKEN}/sendMessage`;
   const resp = await fetch(url, {
     method: 'POST',
     headers: { 'Content-Type': 'application/json' },
     body: JSON.stringify({
       chat_id: process.env.CHANNEL_CHAT_ID,
-      text,
-      parse_mode: 'Markdown',
-      disable_notification: !msg.urgent,
-    }),
+      text: body,
+      disable_web_page_preview: true
+    })
+  });
+  if (!resp.ok) {
+    const t = await resp.text();
+    throw new Error(`bot_api_error status=${resp.status} body=${t}`);
+  }
+}
+
+async function classifyWithSonnet(message, contact) {
+  const recent = selectRecentForContact.all(message.from_id, message.id);
+  const userText = JSON.stringify({
+    text: message.text || '',
+    sender: contact?.name || `id:${message.from_id}`,
+    is_vip: !!contact?.is_vip,
+    msg_count_30d: contact?.msg_count_30d || 0,
+    recent_history: recent.map((r) => r.text).slice(0, 3)
   });
 
-  if (!resp.ok) {
-    const err = await resp.text();
-    log('error', 'forward failed', { status: resp.status, err });
+  const resp = await anthropic.messages.create({
+    model: MODEL,
+    max_tokens: MAX_TOKENS,
+    temperature: 0.0,
+    system: [
+      {
+        type: 'text',
+        text: skillSystemPrompt,
+        cache_control: { type: 'ephemeral' }
+      }
+    ],
+    messages: [{ role: 'user', content: userText }]
+  });
+
+  const inputTokens = resp.usage?.input_tokens || 0;
+  const outputTokens = resp.usage?.output_tokens || 0;
+  const cacheReadTokens = resp.usage?.cache_read_input_tokens || 0;
+  const cacheCreationTokens = resp.usage?.cache_creation_input_tokens || 0;
+  const cost = priceUsd(inputTokens, cacheReadTokens, cacheCreationTokens, outputTokens);
+
+  const textBlock = resp.content?.find((c) => c.type === 'text')?.text || '{}';
+  let parsed = { category: 'fyi', confidence: 0.0 };
+  try {
+    const jsonMatch = textBlock.match(/\{[\s\S]*\}/);
+    parsed = JSON.parse(jsonMatch ? jsonMatch[0] : textBlock);
+  } catch {
+    log('warn', 'json_parse_failed', { raw: textBlock.slice(0, 200) });
+  }
+  if (!VALID_CATEGORIES.has(parsed.category)) {
+    log('warn', 'invalid_category', { got: parsed.category });
+    parsed.category = 'fyi';
+  }
+  return {
+    category: parsed.category,
+    cost,
+    inputTokens: inputTokens + cacheReadTokens + cacheCreationTokens,
+    outputTokens
+  };
+}
+
+async function processOne() {
+  const msg = selectPending.get();
+  if (!msg) return false;
+
+  const spent = monthlySpend.get().total;
+  if (spent >= BUDGET_CAP_USD) {
+    log('error', 'budget_cap_exceeded', { spent, cap: BUDGET_CAP_USD });
     return false;
   }
-  return true;
-};
 
-// ─── PROCESS ONE MESSAGE ───────────────────────────────────────────
-const processOne = async () => {
-  const row = getUnhandled.get();
-  if (!row) return false;
+  const contact = selectContact.get(msg.from_id);
+  const priority = computePriority(contact?.msg_count_30d || 0);
+  const isVipUrgent = !!contact?.is_vip && URGENT_RX.test(msg.text || '');
 
-  const contact = {
-    tg_id: row.from_id,
-    name: row.name,
-    username: row.username,
-    priority: row.priority,
-    is_vip: row.is_vip || 0,
-    msg_count_30d: row.msg_count_30d || 0,
-  };
+  let category = 'fyi';
+  let urgent = isVipUrgent ? 1 : 0;
+  let llmCost = 0;
 
-  const msg = {
-    id: row.id,
-    tg_msg_id: row.tg_msg_id,
-    chat_id: row.chat_id,
-    text: row.text || '',
-    received_at: row.received_at,
-  };
-
-  // budget check
-  const budget = checkBudget();
-  if (budget.capReached) {
-    log('warn', 'budget cap reached, skip LLM', { spent: budget.spent });
-    db.transaction(() => {
-      updateMessage.run('social', 0, msg.id);
-      updateContact.run(computePriority(contact), contact.tg_id);
-    })();
-    return true;
-  }
-
-  // pre-filter
-  const filtered = preFilter(msg, contact);
-  let classification;
-  if (filtered) {
-    classification = filtered;
-    log('info', 'pre-filter hit', { msg_id: msg.id, category: filtered.category });
+  if (isLikelyBotOrChannel(contact)) {
+    category = 'spam';
   } else {
-    const prev = getPrevMessages.all(contact.tg_id, msg.id);
-    try {
-      classification = await classify(msg.text, contact, prev);
-    } catch (e) {
-      log('error', 'classify failed', { msg_id: msg.id, error: e.message });
-      classification = { category: 'social', confidence: 0.3, reasoning: 'llm_error' };
-    }
+    const result = await classifyWithSonnet(msg, contact);
+    category = result.category;
+    llmCost = result.cost;
+    insertBudget.run(result.inputTokens, result.outputTokens, result.cost);
   }
 
-  // priority + urgent
-  const newPriority = contact.priority === 'noise' ? 'noise' : computePriority(contact);
-  const urgent = detectUrgent(msg.text, { ...contact, priority: newPriority });
-  msg.urgent = urgent;
+  const finalPriority = category === 'spam' ? 'noise' : priority;
 
-  // transactional update
-  db.transaction(() => {
-    updateMessage.run(classification.category, urgent, msg.id);
-    updateContact.run(newPriority, contact.tg_id);
-  })();
+  updateMessage.run(category, urgent, msg.id);
+  updateContactPriority.run(finalPriority, msg.from_id);
 
-  log('info', 'classified', {
+  await forwardTagged(msg, contact, finalPriority, urgent, category);
+
+  log('info', 'message_classified', {
     msg_id: msg.id,
-    category: classification.category,
-    confidence: classification.confidence,
-    priority: newPriority,
+    category,
+    priority: finalPriority,
     urgent,
-    cost: classification.cost?.toFixed(5),
+    cost_usd: Number(llmCost.toFixed(6))
   });
-
-  // forward to channel
-  contact.priority = newPriority;
-  await forwardTagged(msg, contact, classification);
-
   return true;
-};
+}
 
-// ─── MAIN LOOP ─────────────────────────────────────────────────────
-let running = true;
-let processed = 0;
-
-const loop = async () => {
-  while (running) {
+let stopping = false;
+async function loop() {
+  while (!stopping) {
     try {
       const did = await processOne();
       if (!did) {
-        await new Promise(r => setTimeout(r, POLL_INTERVAL_MS));
-      } else {
-        processed++;
+        await new Promise((r) => setTimeout(r, POLL_INTERVAL_MS));
       }
-    } catch (e) {
-      log('error', 'loop error', { error: e.message, stack: e.stack });
-      await new Promise(r => setTimeout(r, POLL_INTERVAL_MS * 5));
+    } catch (err) {
+      log('error', 'process_failed', {
+        error: String(err?.message || err),
+        stack: err?.stack
+      });
+      await new Promise((r) => setTimeout(r, POLL_INTERVAL_MS));
     }
   }
-};
+}
 
-// ─── GRACEFUL SHUTDOWN ─────────────────────────────────────────────
-const shutdown = (signal) => {
-  log('info', `shutdown signal: ${signal}`, { processed });
-  running = false;
-  setTimeout(() => {
-    db.close();
-    process.exit(0);
-  }, 3000);
-};
-
-process.on('SIGTERM', () => shutdown('SIGTERM'));
-process.on('SIGINT', () => shutdown('SIGINT'));
-
-// ─── START ─────────────────────────────────────────────────────────
-log('info', 'triage worker started', {
-  db: DB_PATH,
-  model: MODEL,
-  budget_cap: BUDGET_CAP_USD,
+process.on('SIGTERM', () => {
+  stopping = true;
+  log('info', 'shutdown', { signal: 'SIGTERM' });
+});
+process.on('SIGINT', () => {
+  stopping = true;
+  log('info', 'shutdown', { signal: 'SIGINT' });
 });
 
-loop().catch(e => {
-  log('fatal', 'loop crashed', { error: e.message });
+log('info', 'triage_starting', { db: DB_PATH, model: MODEL, poll_ms: POLL_INTERVAL_MS });
+loop().catch((err) => {
+  log('fatal', 'loop_crashed', { error: String(err?.message || err) });
   process.exit(1);
 });
