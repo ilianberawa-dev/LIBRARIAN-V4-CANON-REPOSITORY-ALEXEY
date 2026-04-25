@@ -41,6 +41,17 @@ const STATE_TTL_MS = 5 * 60 * 1000; // 5 minutes
 const OWNER_TG_ID = parseInt(process.env.OWNER_TG_ID, 10);
 const CHANNEL_CHAT_ID = process.env.CHANNEL_CHAT_ID;
 
+// Fail loud on invalid OWNER_TG_ID (Bug #1 fix)
+if (Number.isNaN(OWNER_TG_ID) || OWNER_TG_ID <= 0) {
+  console.error(JSON.stringify({
+    level: 'fatal',
+    msg: 'OWNER_TG_ID must be valid positive integer in .env',
+    got: process.env.OWNER_TG_ID,
+    ts: new Date().toISOString(),
+  }));
+  process.exit(1);
+}
+
 // ─── INIT ──────────────────────────────────────────────────────────
 const db = new Database(DB_PATH);
 db.pragma('journal_mode = WAL');
@@ -128,6 +139,26 @@ const insertRule = db.prepare(`
   VALUES (?, ?, ?, ?)
 `);
 
+// Bug #2 fix: poll for sent drafts to finalize channel status
+const selectFinalizableSent = db.prepare(`
+  SELECT d.id, d.draft_text, d.final_text, d.verdict, d.channel_message_id,
+         d.feedback_note,
+         m.received_at, m.from_id,
+         c.name AS sender_name, c.username AS sender_username
+  FROM drafts d
+  JOIN messages m ON d.msg_id = m.id
+  LEFT JOIN contacts c ON c.tg_id = m.from_id
+  WHERE d.verdict IN ('sent_text', 'sent_voice', 'send_failed')
+    AND d.channel_message_id IS NOT NULL
+    AND COALESCE(d.status_finalized, 0) = 0
+  ORDER BY d.id ASC
+  LIMIT 5
+`);
+
+const markStatusFinalized = db.prepare(`
+  UPDATE drafts SET status_finalized = 1 WHERE id = ?
+`);
+
 // ─── INLINE KEYBOARD ───────────────────────────────────────────────
 const buildKeyboard = (draftId) => ({
   inline_keyboard: [
@@ -162,6 +193,48 @@ const formatDraftPost = (row) => {
     : `💡 Draft:\n${row.draft_text}`;
 
   return `${urgent}${pEmoji} ${cEmoji} ${time} от ${sender}\n\n${row.incoming_text}\n\n${draftBlock}\n\n_draft_id=${row.id}_`;
+};
+
+// ─── POLL: finalize status after sender completes (Bug #2 fix) ─────
+const VERDICT_FINAL_LABEL = {
+  sent_text: { emoji: '✅', label: 'SENT (text)' },
+  sent_voice: { emoji: '🎙', label: 'SENT (voice)' },
+  send_failed: { emoji: '❌', label: 'SEND FAILED' },
+};
+
+const pollAndFinalizeStatus = async () => {
+  const rows = selectFinalizableSent.all();
+  for (const r of rows) {
+    try {
+      const final = VERDICT_FINAL_LABEL[r.verdict] || { emoji: '❔', label: r.verdict };
+      const time = new Date(r.received_at || Date.now()).toISOString().slice(11, 16);
+      const sender = r.sender_username
+        ? `${r.sender_name} (@${r.sender_username})`
+        : r.sender_name || `id:${r.from_id}`;
+      const finalBlock = r.final_text
+        ? `\n\nFinal: ${r.final_text}`
+        : '';
+      const errBlock = r.verdict === 'send_failed' && r.feedback_note
+        ? `\n\nError: ${r.feedback_note.slice(0, 200)}`
+        : '';
+      const text = `${final.emoji} ${final.label} | ${time} от ${sender}\n\n${r.draft_text || ''}${finalBlock}${errBlock}\n\n_draft_id=${r.id}_`;
+
+      await bot.editMessageText(text, {
+        chat_id: CHANNEL_CHAT_ID,
+        message_id: r.channel_message_id,
+        reply_markup: { inline_keyboard: [] },
+      });
+      markStatusFinalized.run(r.id);
+      log('info', 'status finalized', { draft_id: r.id, verdict: r.verdict });
+    } catch (e) {
+      // если editMessageText failed (e.g. message не изменился) — все равно mark finalized
+      // чтобы не полить бесконечно
+      log('warn', 'finalize edit failed, marking anyway', {
+        draft_id: r.id, error: e.message,
+      });
+      markStatusFinalized.run(r.id);
+    }
+  }
 };
 
 // ─── POLL: post pending drafts with buttons ────────────────────────
@@ -377,6 +450,7 @@ const mainLoop = async () => {
   while (running) {
     try {
       await pollAndPostDrafts();
+      await pollAndFinalizeStatus(); // Bug #2 fix
     } catch (e) {
       log('error', 'poll loop error', { error: e.message });
     }

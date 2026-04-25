@@ -15,13 +15,27 @@ systemctl is-active --quiet personal-assistant-draft-gen || { echo "ERROR: Stage
 [[ -f "$SOURCE_DIR/bot.mjs" ]] || { echo "ERROR: $SOURCE_DIR/bot.mjs not found" >&2; exit 1; }
 [[ -f "$SOURCE_DIR/sender.mjs" ]] || { echo "ERROR: $SOURCE_DIR/sender.mjs not found" >&2; exit 1; }
 
-# Schema migration (idempotent)
+# Schema migration (idempotent) — 3 columns for Stage 4
 echo "[stage-4] Schema migration: drafts.voice_file_id..."
 sudo -u "$PA_USER" sqlite3 "$PA_DIR/assistant.db" \
   "SELECT name FROM pragma_table_info('drafts') WHERE name='voice_file_id';" \
   | grep -q voice_file_id || \
   sudo -u "$PA_USER" sqlite3 "$PA_DIR/assistant.db" \
     "ALTER TABLE drafts ADD COLUMN voice_file_id TEXT;"
+
+echo "[stage-4] Schema migration: drafts.channel_message_id..."
+sudo -u "$PA_USER" sqlite3 "$PA_DIR/assistant.db" \
+  "SELECT name FROM pragma_table_info('drafts') WHERE name='channel_message_id';" \
+  | grep -q channel_message_id || \
+  sudo -u "$PA_USER" sqlite3 "$PA_DIR/assistant.db" \
+    "ALTER TABLE drafts ADD COLUMN channel_message_id INTEGER;"
+
+echo "[stage-4] Schema migration: drafts.status_finalized (Bug #2 fix)..."
+sudo -u "$PA_USER" sqlite3 "$PA_DIR/assistant.db" \
+  "SELECT name FROM pragma_table_info('drafts') WHERE name='status_finalized';" \
+  | grep -q status_finalized || \
+  sudo -u "$PA_USER" sqlite3 "$PA_DIR/assistant.db" \
+    "ALTER TABLE drafts ADD COLUMN status_finalized INTEGER DEFAULT 0;"
 
 # Voice files directory
 install -d -o "$PA_USER" -g "$PA_USER" -m 755 "$PA_DIR/voice_inbox"
