@@ -260,3 +260,50 @@ Mapping report = отдельный turn от любых тестов или log
 Архитектор может вернуть с пометкой "shorten please".
 ```
 
+
+---
+
+## ИНВАРИАНТ #7 (добавлен 2026-04-25 после teleport discovery)
+
+```
+TELEPORT WORKFLOW МЕЖДУ УРОВНЯМИ ORCHESTRATION
+
+Команда (PowerShell/bash):
+  cd <project-root>
+  claude --teleport <session_id>
+
+Применение:
+- L0 (архитектор) → L-1 (прораб): передача архитектурного контекста
+- L-1 (прораб) → L-2 (работяга): передача mission + готовых файлов
+- L-2 → L-1: передача mapping report для acceptance review
+- Любой уровень → tools/recovery agent: передача узкой задачи
+
+Преимущества vs новый чат:
+- Сохраняется полная история контекста (token waste = 0)
+- Не нужен повторный onboarding (canon, файлы, инварианты)
+- Быстрее (5 сек vs 5 минут на чтение mandatory_reading)
+
+Требования (Windows):
+- Claude Code установлен в user-space (npm i -g без admin) ИЛИ
+- PowerShell запущен как Administrator (UAC prompt разовый — OK подтвердить)
+
+Требования (Linux/macOS):
+- Любой shell, без admin
+
+Когда НЕ teleport (использовать новый чат):
+- Контекст текущей сессии испорчен (>80% токенов, ошибки)
+- Нужен чистый старт без legacy решений
+- Работяга закончил миссию — закрываем чат, не сохраняем
+
+Альтернатива (если teleport недоступен):
+- Новый Claude Code чат
+- git clone -b claude/setup-library-access-FrRfh репо
+- Прочитать mandatory_reading из FOREMAN-PROMPT.md или INSTALLER-TEMPLATE.md
+- Получить mission/spec через JSON или git path
+
+ВКЛЮЧИТЬ В ОБУЧЕНИЕ:
+- FOREMAN-PROMPT.md — раздел "Teleport workflow"
+- INSTALLER-TEMPLATE.md — раздел "Receiving teleport from foreman"
+- Архитектор использует при передаче L-1 (если прораб тормозит, telepport state)
+```
+
