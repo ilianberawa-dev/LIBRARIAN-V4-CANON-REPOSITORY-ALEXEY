@@ -11,6 +11,8 @@ set -eu
 BASE=/opt/tg-export
 LOG="$BASE/heartbeat.log"
 STATUS="$BASE/_status.json"
+MIN_PRIO="${MIN_PRIO:-1}"
+MAX_PRIO="${MAX_PRIO:-4}"
 
 log() {
   echo "[$(date -u +%Y-%m-%dT%H:%M:%SZ)] $*" >> "$LOG"
@@ -47,7 +49,7 @@ check_download() {
         kill "$dl_pid" 2>/dev/null
         sleep 3
         cd "$BASE"
-        nohup node download.mjs 0 1 3 >> download.log 2>&1 &
+        nohup node download.mjs 0 $MIN_PRIO $MAX_PRIO >> download.log 2>&1 &
         local new_pid=$!
         log "[restarted] download new PID=$new_pid"
         dl_action="restarted_stuck"
@@ -63,7 +65,7 @@ check_download() {
     else
       log "[dead] download not running and not finished — restarting"
       cd "$BASE"
-      nohup node download.mjs 0 1 3 >> download.log 2>&1 &
+      nohup node download.mjs 0 $MIN_PRIO $MAX_PRIO >> download.log 2>&1 &
       dl_pid=$!
       log "[restarted] download PID=$dl_pid (was dead)"
       dl_action="restarted_dead"

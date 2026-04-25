@@ -158,13 +158,15 @@ async function main() {
     const cls = classify(text);
 
     let filename = '', ext = '', size_mb = 0, prio = null;
-    if (msg.document) {
-      const attr = (msg.document.attributes || []).find((a) => a.fileName);
+    const doc = msg.document || msg.media?.document;
+    const photo = msg.photo || msg.media?.photo;
+    if (doc) {
+      const attr = (doc.attributes || []).find((a) => a.fileName);
       filename = attr?.fileName || `media_${msg.id}`;
       ext = path.extname(filename).toLowerCase();
-      size_mb = Math.round(Number(msg.document.size || 0) / 1048576 * 10) / 10;
-      prio = getPriority(ext, !!msg.document, !!msg.photo);
-    } else if (msg.photo) {
+      size_mb = Math.round(Number(doc.size || 0) / 1048576 * 10) / 10;
+      prio = getPriority(ext, !!doc, !!photo);
+    } else if (photo) {
       filename = `photo_${msg.id}.jpg`;
       ext = '.jpg';
       prio = 3;
