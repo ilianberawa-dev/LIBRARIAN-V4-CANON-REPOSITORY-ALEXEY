@@ -1,0 +1,159 @@
+{
+  "mission_id": "PA-STAGE-1-LISTENER-LIVE",
+  "executor": "Claude Opus 4.7 (stage-1 executor session)",
+  "architect_session_ref": "current-chat (Opus 4.7)",
+  "handoff_date": "2026-04-24",
+  "branch": "claude/setup-event-listener-k3Q9O",
+  "status": "implementation_ready_NOT_deployed",
+
+  "executive_summary": "All Stage 1 artifacts are written to metody/personal-ai-assistant/implementation/stage-1/ and validated locally (node --check + sqlite3 schema apply + FTS5 Russian query). Deployment on Aeza was NOT performed by this executor because the sandboxed environment has no SSH to 193.233.128.21, no Telegram credentials, and no way to run the interactive SMS auth flow. A human operator must run install.sh + auth.mjs + fill .env on Aeza. Everything needed for that is in the directory, and install.sh is idempotent.",
+
+  "done_list": [
+    "schema.sql - SQLite v1 with contacts, messages, messages_fts (active in Stage 1) + drafts, rules, voice_samples, budget_log (scaffolds for Stage 2-6). Validated: idempotent on re-apply, FTS5 unicode61+remove_diacritics matches Russian text correctly.",
+    "listener.mjs - gramjs MTProto client with NewMessage handler (incoming private DMs only), upserts contacts, inserts messages, forwards one-liner to AI Assistant channel via Bot API. Structured JSON logging to stdout (journald).",
+    "auth.mjs - one-time interactive helper that prints TG_SESSION_STRING via SMS/2FA login.",
+    "package.json - exactly three runtime deps: telegram ^2.26.22 (matches proven /opt/tg-export version), better-sqlite3 ^11.3.0, dotenv ^16.4.5. type=module, node>=20.",
+    "personal-assistant-listener.service - systemd unit with Restart=always, StartLimitBurst=10/300s, ProtectSystem=strict, ReadWritePaths=/opt/personal-assistant, MemoryMax=300M, stdout to journald.",
+    "install.sh - idempotent installer for Ubuntu 22.04/Debian 12: creates personal-assistant system user (nologin), copies sources, installs build-essential+python3 (needed by better-sqlite3), runs npm install, seeds .env if absent (chmod 600), installs+enables the unit. Never overwrites an existing .env.",
+    "README.md - deployment + acceptance-test + rollback + isolation boundaries, including explicit list of paths/containers this stage must never touch.",
+    "Local validation: node --check passes on listener.mjs and auth.mjs. Schema applied twice through python sqlite3 (idempotent). FTS5 MATCH on Russian 'привет' returns the expected row."
+  ],
+
+  "not_done_with_reasons": [
+    {
+      "item": "Deploy to /opt/personal-assistant on Aeza",
+      "reason": "Executor environment has no SSH access to 193.233.128.21. Blocker for the executor; trivial for the human operator. Run: `sudo bash install.sh` from a clone of this repo on Aeza."
+    },
+    {
+      "item": "One-time MTProto SMS auth (produces TG_SESSION_STRING)",
+      "reason": "Interactive; needs the owner's phone to receive the Telegram code. Must be done once as the personal-assistant user. See README deployment step 4."
+    },
+    {
+      "item": "Fill .env with TG_API_ID / TG_API_HASH / TG_SESSION_STRING / BOT_TOKEN / CHANNEL_CHAT_ID",
+      "reason": "Secrets; live outside of git per Canon #6. install.sh creates an empty .env with chmod 600 for the operator to fill."
+    },
+    {
+      "item": "End-to-end acceptance test (DM -> channel in <=3s, reboot survival)",
+      "reason": "Can only run after the three items above. README has the exact steps."
+    }
+  ],
+
+  "key_decisions_with_canon_justification": [
+    {
+      "decision": "Logging via stdout + journald only; no file log rotation, no separate logger library",
+      "canon": "#0 Simplicity-First",
+      "rationale": "journalctl -u personal-assistant-listener handles storage, rotation, and persistence across reboots. A second log path adds complexity for zero Stage 1 benefit."
+    },
+    {
+      "decision": "Schema applied by the listener on every startup (CREATE IF NOT EXISTS everywhere) rather than a separate migration step",
+      "canon": "#0 Simplicity-First, #1 Portability",
+      "rationale": "Removes the sqlite3 CLI host dependency and eliminates a drift path between schema file and actual DB. Idempotency verified locally."
+    },
+    {
+      "decision": "Single NewMessage filter { incoming: true } + runtime event.isPrivate check; no group/channel handling in Stage 1",
+      "canon": "#0 Simplicity-First",
+      "rationale": "Acceptance criteria are about DMs to the owner's personal account. Groups and channels are out of scope and would add state and deduplication concerns."
+    },
+    {
+      "decision": "Bot API forward is fire-and-forget. Failure is logged but not retried, and the DM is still persisted to SQLite",
+      "canon": "#0 Simplicity-First, #2 Minimal Integration",
+      "rationale": "Stage 1 exists to prove the capture path. A failed forward does not lose data. Stage 4 introduces the real bot interaction surface and can add a retry queue if needed."
+    },
+    {
+      "decision": "Schema v1 includes Stage 2-6 tables as empty scaffolds (drafts, rules, voice_samples, budget_log) rather than Stage 1 only",
+      "canon": "#1 Portability",
+      "rationale": "The mission JSON enumerates all seven tables under 'schema v1 из v1.1'. Creating them up front means later stages do not migrate an already-populated DB. Columns are deliberately minimal; additions in later stages must still escalate per canon."
+    },
+    {
+      "decision": "better-sqlite3 rather than node:sqlite or a remote DB",
+      "canon": "#0 Simplicity-First, #7 Offline First",
+      "rationale": "Synchronous API simpler to reason about for a single-writer process. One file on disk, owned by personal-assistant, touched by nothing else. node:sqlite is newer but still unstable across Node LTS."
+    },
+    {
+      "decision": "Dedicated personal-assistant system user with nologin shell, systemd ProtectSystem=strict + ReadWritePaths=/opt/personal-assistant",
+      "canon": "#11 Architectural Privilege Isolation",
+      "rationale": "The listener physically cannot write outside its own directory or DB. A prompt-injection in an incoming DM has no tool surface to reach /opt/tg-export, supabase volumes, or the root FS."
+    },
+    {
+      "decision": "Three npm deps only (telegram, better-sqlite3, dotenv). No Docker, no Redis, no logger, no queue",
+      "canon": "#0 Simplicity-First, #2 Minimal Integration",
+      "rationale": "Mission explicit. gramjs is the only non-trivial dep. Bot API is plain fetch. Config is .env."
+    },
+    {
+      "decision": "Branch is claude/setup-event-listener-k3Q9O (from the session's Git Development Branch Requirements), not claude/pa-stage-1-listener-live (from the mission JSON)",
+      "canon": "follow harness directive",
+      "rationale": "The session system prompt designates an explicit branch. Architect should note the naming divergence and rename on merge if preferred."
+    }
+  ],
+
+  "known_warnings": [
+    "v1.1-mvp-simplified.md referenced as required reading in the mission JSON does NOT exist in this repo. Only v1.0-mvp-to-sales.md (marked 'do_not_read') is present. Schema decisions were made from the table list in the mission JSON itself, the 12 principles, and the proven /opt/tg-export gramjs patterns. If v1.1 exists elsewhere and disagrees, the schema must be reconciled before Stage 2 is built on top of it.",
+    "Aeza node version is unknown from the executor environment. install.sh hard-fails if node <20. If Aeza has an older Node, the operator must upgrade (NodeSource repo); see README prerequisites. Escalation path #2 from the mission applies here.",
+    "CHANNEL_CHAT_ID format: the Bot API accepts negative integer chat ids for channels (e.g. -1001234567890). @channelusername also works if the bot is a member/admin. README does not pin one style.",
+    "Clock source: forwarded HH:MM is UTC (ISOString slice). If the operator wants local Jerusalem/Moscow time in the channel, set TZ in the systemd unit (Environment=TZ=Asia/Jerusalem). Not done by default to keep the unit free of locale choices.",
+    "msg.out and event.isPrivate rely on gramjs ^2.26.22 semantics matching the /opt/tg-export deployment's proven behaviour. If gramjs is updated, re-verify these accessors."
+  ],
+
+  "sqlite_state_preview_for_stage_2": {
+    "active_in_stage_1": {
+      "contacts": {
+        "populated_on": "every incoming DM (upsert on tg_user_id)",
+        "stage_2_use": "add vip flag + notes; query by last_msg_at for proactive triage"
+      },
+      "messages": {
+        "populated_on": "every incoming DM (INSERT OR IGNORE on (tg_chat_id, tg_message_id))",
+        "stage_2_use": "fill category + priority columns via classifier; JOIN with drafts for the reply queue"
+      },
+      "messages_fts": {
+        "populated_on": "AFTER INSERT/UPDATE/DELETE triggers on messages",
+        "stage_2_use": "context retrieval for the LLM when drafting replies; already Russian-aware via unicode61+remove_diacritics"
+      }
+    },
+    "empty_scaffolds": ["drafts", "rules", "voice_samples", "budget_log"],
+    "stage_2_can_assume": [
+      "schema is frozen at v1; any column change requires architect approval (mission escalation rule)",
+      "contacts.tg_user_id is stable TEXT (string of TG user id) and is the FK everywhere",
+      "messages.id is autoincrement; messages_fts.rowid == messages.id",
+      "direction='out' rows do not exist yet (Stage 4 will write them when the bot replies)"
+    ]
+  },
+
+  "aeza_runtime_spec_to_be_verified_on_deploy": {
+    "install_dir": "/opt/personal-assistant/",
+    "owner": "personal-assistant:personal-assistant (system user, nologin)",
+    "mode": "750 on dir, 640 on sources, 600 on .env",
+    "db_path": "/opt/personal-assistant/assistant.db",
+    "service_name": "personal-assistant-listener.service",
+    "unit_path": "/etc/systemd/system/personal-assistant-listener.service",
+    "logs": "journalctl -u personal-assistant-listener -f",
+    "expected_memory_rss_mb": "<150 steady, MemoryMax=300M enforced",
+    "expected_cpu_idle_pct": "<1 on 1 vCPU",
+    "isolation_verified_by": "ProtectSystem=strict + ReadWritePaths=/opt/personal-assistant; cannot touch /opt/tg-export, realty_* containers, supabase volumes."
+  },
+
+  "acceptance_criteria_status": [
+    { "criterion": "DM -> channel in <=3s formatted '📩 HH:MM от <Name>: <text>'", "status": "implemented, not yet observed live" },
+    { "criterion": "Row in messages + row in contacts (first_seen, last_msg_at updated)", "status": "implemented and schema-validated locally" },
+    { "criterion": "systemctl status = active(running)", "status": "unit written, not yet installed" },
+    { "criterion": "Reboot survival (auto-start without manual action)", "status": "enabled in [Install] WantedBy=multi-user.target + After=network-online.target" },
+    { "criterion": "FLOOD_WAIT handled without crash", "status": "delegated to gramjs autoReconnect + handler-level try/catch" },
+    { "criterion": "RAM <150MB, CPU idle <1%", "status": "unit caps at 300M; actual measurement on deploy" }
+  ],
+
+  "next_setup_items_needed_for_stage_2": [
+    { "id": 2, "item": "Anthropic API key (for classification + draft LLM calls)" },
+    { "id": 8, "item": "VIP contact list (3-5 tg_user_ids or usernames to mark contacts.vip=1)" },
+    { "id": 9, "item": "Budget cap confirmation (~$22/month) to enforce in budget_log reads" }
+  ],
+
+  "escalations_to_architect": [
+    {
+      "type": "missing_input",
+      "detail": "metody/personal-ai-assistant/v1.1-mvp-simplified.md is not in the repo. Please either commit it or confirm the mission JSON's table list is authoritative."
+    },
+    {
+      "type": "branch_naming",
+      "detail": "Session harness pins branch claude/setup-event-listener-k3Q9O; mission JSON expects claude/pa-stage-1-listener-live. Pick one and align PR accordingly."
+    }
+  ]
+}
