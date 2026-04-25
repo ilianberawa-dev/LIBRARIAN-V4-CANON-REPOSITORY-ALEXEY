@@ -1,0 +1,17 @@
+// Telegram API credentials
+// Get from: https://my.telegram.org/apps
+//
+// Steps:
+// 1. Go to https://my.telegram.org/auth
+// 2. Login with your phone number
+// 3. Go to "API development tools"
+// 4. Create app (any name/description)
+// 5. Copy api_id and api_hash here
+// 6. For sessionString: run sync_channel.mjs once, it will prompt for phone/code
+//    and save session to session.txt - copy content to sessionString below
+
+{
+  apiId: YOUR_API_ID,  // number, e.g. 12345678
+  apiHash: 'YOUR_API_HASH',  // string, e.g. 'a1b2c3d4e5f6...'
+  sessionString: 'YOUR_SESSION_STRING'  // string from session.txt after first run
+}
