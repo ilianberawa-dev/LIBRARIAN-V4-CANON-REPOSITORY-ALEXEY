@@ -1,0 +1,40 @@
+[Unit]
+Description=Personal AI Assistant — Stage 4 Bot (callbacks + voice receiver)
+After=network-online.target personal-assistant-listener.service personal-assistant-triage.service personal-assistant-draft-gen.service
+Wants=network-online.target
+Requires=personal-assistant-listener.service personal-assistant-triage.service personal-assistant-draft-gen.service
+
+[Service]
+Type=simple
+User=personal-assistant
+Group=personal-assistant
+WorkingDirectory=/opt/personal-assistant
+EnvironmentFile=/opt/personal-assistant/.env
+ExecStart=/usr/bin/node /opt/personal-assistant/bot.mjs
+Restart=always
+RestartSec=5
+StandardOutput=journal
+StandardError=journal
+SyslogIdentifier=pa-bot
+
+NoNewPrivileges=true
+ProtectSystem=strict
+ProtectHome=true
+PrivateTmp=true
+PrivateDevices=true
+ProtectKernelTunables=true
+ProtectKernelModules=true
+ProtectControlGroups=true
+RestrictAddressFamilies=AF_UNIX AF_INET AF_INET6
+RestrictNamespaces=true
+LockPersonality=true
+RestrictRealtime=true
+RestrictSUIDSGID=true
+RemoveIPC=true
+ReadWritePaths=/opt/personal-assistant
+MemoryMax=300M
+TasksMax=50
+# MemoryDenyWriteExecute=true  # DISABLED - V8 JIT incompatible (see Stage 1+2+3)
+
+[Install]
+WantedBy=multi-user.target

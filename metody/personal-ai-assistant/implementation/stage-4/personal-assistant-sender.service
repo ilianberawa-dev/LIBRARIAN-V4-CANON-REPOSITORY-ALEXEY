@@ -1,0 +1,40 @@
+[Unit]
+Description=Personal AI Assistant — Stage 4 Sender (MTProto outbound)
+After=network-online.target personal-assistant-listener.service personal-assistant-bot.service
+Wants=network-online.target
+Requires=personal-assistant-listener.service personal-assistant-bot.service
+
+[Service]
+Type=simple
+User=personal-assistant
+Group=personal-assistant
+WorkingDirectory=/opt/personal-assistant
+EnvironmentFile=/opt/personal-assistant/.env
+ExecStart=/usr/bin/node /opt/personal-assistant/sender.mjs
+Restart=always
+RestartSec=5
+StandardOutput=journal
+StandardError=journal
+SyslogIdentifier=pa-sender
+
+NoNewPrivileges=true
+ProtectSystem=strict
+ProtectHome=true
+PrivateTmp=true
+PrivateDevices=true
+ProtectKernelTunables=true
+ProtectKernelModules=true
+ProtectControlGroups=true
+RestrictAddressFamilies=AF_UNIX AF_INET AF_INET6
+RestrictNamespaces=true
+LockPersonality=true
+RestrictRealtime=true
+RestrictSUIDSGID=true
+RemoveIPC=true
+ReadWritePaths=/opt/personal-assistant
+MemoryMax=300M
+TasksMax=50
+# MemoryDenyWriteExecute=true  # DISABLED - V8 JIT incompatible
+
+[Install]
+WantedBy=multi-user.target
