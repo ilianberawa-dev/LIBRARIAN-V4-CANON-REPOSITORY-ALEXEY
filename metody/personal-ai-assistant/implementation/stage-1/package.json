@@ -1,6 +1,6 @@
 {
   "name": "personal-assistant",
-  "version": "1.2.0",
+  "version": "1.2.1",
   "description": "Personal AI Assistant — Telegram MTProto listener + drafts + bot",
   "type": "module",
   "private": true,
@@ -9,6 +9,7 @@
   },
   "scripts": {
     "auth": "node auth.mjs",
+    "auth-qr": "node auth-qr.mjs",
     "listener": "node listener.mjs"
   },
   "dependencies": {
@@ -16,6 +17,7 @@
     "better-sqlite3": "^11.3.0",
     "dotenv": "^16.4.5",
     "input": "^1.0.1",
+    "qrcode-terminal": "^0.12.0",
     "telegram": "^2.26.22"
   }
 }
