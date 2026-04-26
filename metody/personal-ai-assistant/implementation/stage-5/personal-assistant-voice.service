@@ -1,0 +1,39 @@
+[Unit]
+Description=Personal AI Assistant — Voice Command Worker
+After=network-online.target personal-assistant-listener.service
+Wants=network-online.target
+
+[Service]
+Type=simple
+User=personal-assistant
+Group=personal-assistant
+WorkingDirectory=/opt/personal-assistant
+EnvironmentFile=/opt/personal-assistant/.env
+ExecStart=/usr/bin/node /opt/personal-assistant/voice.mjs
+Restart=always
+RestartSec=5
+StartLimitIntervalSec=300
+StartLimitBurst=10
+
+StandardOutput=journal
+StandardError=journal
+SyslogIdentifier=personal-assistant-voice
+
+NoNewPrivileges=true
+ProtectSystem=strict
+ProtectHome=true
+ReadWritePaths=/opt/personal-assistant /var/log/personal-assistant /tmp/pa-voice
+PrivateTmp=true
+PrivateDevices=true
+ProtectKernelTunables=true
+ProtectKernelModules=true
+ProtectControlGroups=true
+RestrictAddressFamilies=AF_UNIX AF_INET AF_INET6
+LockPersonality=true
+RestrictRealtime=true
+RestrictSUIDSGID=true
+MemoryMax=300M
+TasksMax=64
+
+[Install]
+WantedBy=multi-user.target
