@@ -4,16 +4,17 @@
 // Canon: #0 (rules-first dispatch), #3 (single-purpose), #5 (deterministic
 //        skill, fail loud), #11 (no MTProto write here — only DB + channel).
 
-import 'dotenv/config';
 import fs from 'node:fs';
 import { execFile } from 'node:child_process';
 import { promisify } from 'node:util';
 import Database from 'better-sqlite3';
 import Anthropic from '@anthropic-ai/sdk';
+import { getSecret } from '../stage-0.5/lib/vault.mjs';
 
 const execFileP = promisify(execFile);
 
-const REQUIRED_ENV = ['ANTHROPIC_API_KEY', 'BOT_TOKEN', 'CHANNEL_CHAT_ID', 'GROK_API_KEY'];
+// Check non-secret env vars (secrets loaded via vault.mjs)
+const REQUIRED_ENV = ['BOT_TOKEN', 'CHANNEL_CHAT_ID'];
 for (const key of REQUIRED_ENV) {
   if (!process.env[key]) {
     console.error(JSON.stringify({ level: 'fatal', msg: 'missing_env', key }));
@@ -44,8 +45,12 @@ if (!fs.existsSync(TRANSCRIBE_SCRIPT)) {
 }
 fs.mkdirSync(VOICE_TMP_DIR, { recursive: true });
 
+// Load secrets from systemd credentials (Canon #6)
+const ANTHROPIC_API_KEY = await getSecret('anthropic-api-key');
+const GROK_API_KEY = await getSecret('xai-api-key');
+
 const skillSystemPrompt = fs.readFileSync(SKILL_PATH, 'utf8');
-const anthropic = new Anthropic({ apiKey: process.env.ANTHROPIC_API_KEY });
+const anthropic = new Anthropic({ apiKey: ANTHROPIC_API_KEY });
 
 const db = new Database(DB_PATH);
 db.pragma('journal_mode = WAL');
@@ -120,7 +125,7 @@ function priceUsd(inTok, cacheRead, cacheCreate, outTok) {
 async function transcribe(filePath) {
   const { stdout } = await execFileP('bash', [TRANSCRIBE_SCRIPT, filePath, 'ru'], {
     timeout: 60000,
-    env: { ...process.env, GROK_API_KEY: process.env.GROK_API_KEY }
+    env: { ...process.env, GROK_API_KEY }
   });
   return stdout.trim();
 }

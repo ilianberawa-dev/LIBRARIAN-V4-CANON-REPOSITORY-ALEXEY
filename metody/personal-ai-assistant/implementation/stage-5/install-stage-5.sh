@@ -23,17 +23,15 @@ install -d -o "${USER_NAME}" -g "${GROUP_NAME}" -m 0750 "${APP_DIR}/skills"
 install -o "${USER_NAME}" -g "${GROUP_NAME}" -m 0640 \
   "${SRC_DIR}/skills/voice_intent.md" "${APP_DIR}/skills/voice_intent.md"
 
-echo '[install-5] verifying transcribe.sh'
-if [[ ! -f "${APP_DIR}/transcribe.sh" ]]; then
-  if [[ -f /opt/tg-export/transcribe.sh ]]; then
-    install -o "${USER_NAME}" -g "${GROUP_NAME}" -m 0750 \
-      /opt/tg-export/transcribe.sh "${APP_DIR}/transcribe.sh"
-    echo '[install-5] reused /opt/tg-export/transcribe.sh'
-  else
-    echo 'WARN: transcribe.sh not found in /opt/personal-assistant/ or /opt/tg-export/.'
-    echo 'Voice service will fail at startup until transcribe.sh exists.'
-    echo 'Worker: copy a Grok STT shell wrapper that takes (file_path, language) args and prints transcript to stdout.'
-  fi
+echo '[install-5] installing transcribe.sh'
+if [[ -f "${SRC_DIR}/transcribe.sh" ]]; then
+  install -o "${USER_NAME}" -g "${GROUP_NAME}" -m 0750 \
+    "${SRC_DIR}/transcribe.sh" "${APP_DIR}/transcribe.sh"
+  echo '[install-5] transcribe.sh installed from repository'
+else
+  echo 'ERROR: transcribe.sh not found at ${SRC_DIR}/transcribe.sh'
+  echo 'Voice service deployment BLOCKED. Ensure transcribe.sh exists in stage-5/ directory.'
+  exit 1
 fi
 
 echo '[install-5] ensuring /tmp/pa-voice writable by personal-assistant'
@@ -46,6 +44,8 @@ install -o root -g root -m 0644 \
 
 systemctl daemon-reload
 systemctl enable personal-assistant-voice
-echo '[install-5] enabled (NOT started). Verify GROK_API_KEY in .env, then:'
+echo '[install-5] enabled (NOT started). Verify systemd credentials exist:'
+echo '  ls -la /etc/credstore.encrypted/{xai-api-key,anthropic-api-key}.cred'
+echo 'Then start:'
 echo '  sudo systemctl start personal-assistant-voice'
 echo '  sudo journalctl -u personal-assistant-voice -f'

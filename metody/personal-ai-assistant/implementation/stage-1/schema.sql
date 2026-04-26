@@ -1,5 +1,6 @@
--- Personal AI Assistant — SQLite schema v1.2
+-- Personal AI Assistant — SQLite schema v1.3
 -- All tables created idempotently.
+-- v1.3 changes: Added voice_jobs table, extended drafts columns for Stage 5
 
 PRAGMA journal_mode = WAL;
 PRAGMA foreign_keys = ON;
@@ -39,13 +40,16 @@ CREATE VIRTUAL TABLE IF NOT EXISTS messages_fts USING fts5(
 );
 
 CREATE TABLE IF NOT EXISTS drafts (
-  id            INTEGER PRIMARY KEY AUTOINCREMENT,
-  msg_id        INTEGER REFERENCES messages(id),
-  draft_text    TEXT,
-  generated_at  TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
-  verdict       TEXT,
-  final_text    TEXT,
-  feedback_note TEXT
+  id                INTEGER PRIMARY KEY AUTOINCREMENT,
+  msg_id            INTEGER REFERENCES messages(id),
+  draft_text        TEXT,
+  generated_at      TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+  verdict           TEXT,
+  final_text        TEXT,
+  feedback_note     TEXT,
+  voice_file_id     TEXT,
+  channel_message_id INTEGER,
+  status_finalized  INTEGER DEFAULT 0
 );
 
 CREATE TABLE IF NOT EXISTS rules (
@@ -80,3 +84,25 @@ CREATE TABLE IF NOT EXISTS briefs (
   content       TEXT,
   msg_count     INTEGER
 );
+
+-- Stage 5: Voice intent parsing support
+CREATE TABLE IF NOT EXISTS voice_jobs (
+  id             INTEGER PRIMARY KEY AUTOINCREMENT,
+  file_id        TEXT NOT NULL,
+  status         TEXT DEFAULT 'pending',
+  transcription  TEXT,
+  intent_result  TEXT,
+  created_at     TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+  processed_at   TIMESTAMP
+);
+
+CREATE INDEX IF NOT EXISTS idx_voice_jobs_status ON voice_jobs(status);
+
+-- Schema version tracking
+CREATE TABLE IF NOT EXISTS schema_version (
+  version      TEXT PRIMARY KEY,
+  applied_at   TIMESTAMP DEFAULT CURRENT_TIMESTAMP
+);
+
+INSERT OR REPLACE INTO schema_version (version, applied_at)
+VALUES ('1.3', datetime('now'));

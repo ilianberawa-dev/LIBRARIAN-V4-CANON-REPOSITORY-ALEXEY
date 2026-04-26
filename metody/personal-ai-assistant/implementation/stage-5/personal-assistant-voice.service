@@ -8,7 +8,11 @@ Type=simple
 User=personal-assistant
 Group=personal-assistant
 WorkingDirectory=/opt/personal-assistant
-EnvironmentFile=/opt/personal-assistant/.env
+
+# Load secrets from systemd credentials (Canon #6, #11)
+LoadCredentialEncrypted=xai-api-key:/etc/credstore.encrypted/xai-api-key.cred
+LoadCredentialEncrypted=anthropic-api-key:/etc/credstore.encrypted/anthropic-api-key.cred
+
 ExecStart=/usr/bin/node /opt/personal-assistant/voice.mjs
 Restart=always
 RestartSec=5
