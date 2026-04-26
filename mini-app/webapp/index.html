@@ -1,0 +1,304 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+<title>Personal Assistant Feed</title>
+<script src="https://telegram.org/js/telegram-web-app.js"></script>
+<style>
+/* ============================================================
+   FEED VARIANT 2 — TG-style bubbles, top-right sharp corner
+   Адаптировано под Telegram Mini App: цвета берутся из tg-theme,
+   с фолбэком на собственную палитру если открыто вне Telegram.
+   ============================================================ */
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+:root {
+  /* Фолбэки если открыто вне Telegram */
+  --bg:        var(--tg-theme-secondary-bg-color, #F0F2F5);
+  --card:      var(--tg-theme-bg-color,           #FFFFFF);
+  --text-1:    var(--tg-theme-text-color,         #0D0D0D);
+  --text-2:    var(--tg-theme-subtitle-text-color,#555);
+  --text-3:    var(--tg-theme-hint-color,         #999);
+  --link:      var(--tg-theme-link-color,         #1565C0);
+  --accent:    var(--tg-theme-button-color,       #7C4DFF);
+  --on-accent: var(--tg-theme-button-text-color,  #FFFFFF);
+
+  --border:    rgba(0,0,0,.10);
+  --border-md: rgba(0,0,0,.18);
+  --surface:   rgba(0,0,0,.04);
+
+  --radius-bubble: 16px 3px 16px 16px;
+  --radius-btn:    50px 8px 50px 50px;
+}
+body.tg-dark {
+  --border:    rgba(255,255,255,.10);
+  --border-md: rgba(255,255,255,.20);
+  --surface:   rgba(255,255,255,.06);
+}
+
+body {
+  background: var(--bg);
+  color: var(--text-1);
+  font-family: -apple-system, 'Helvetica Neue', Roboto, Arial, sans-serif;
+  min-height: 100vh;
+  padding-bottom: env(safe-area-inset-bottom);
+}
+
+.feed { padding: 10px 10px 80px; display: flex; flex-direction: column; gap: 5px; }
+
+.section-pill { text-align: center; margin: 6px 0 2px; }
+.section-pill span {
+  display: inline-block;
+  background: var(--surface);
+  border: .5px solid var(--border);
+  border-radius: 50px;
+  font-size: 11px;
+  color: var(--text-3);
+  padding: 3px 14px;
+}
+
+.bubble {
+  background: var(--card);
+  border-radius: var(--radius-bubble);
+  border: .5px solid var(--border);
+  overflow: hidden;
+  transition: opacity .2s, box-shadow .15s;
+}
+.bubble:active { box-shadow: 0 0 0 2px rgba(124,77,255,.25); }
+
+.bubble.new-tg { border-top: 2px solid #1565C0; }
+.bubble.new-wa { border-top: 2px solid #2E7D32; }
+.bubble.new-em { border-top: 2px solid #E65100; }
+.bubble.new-ch { border-top: 2px solid #6A1B9A; }
+.bubble.faded  { opacity: .35; pointer-events: none; }
+
+.card-head {
+  display: flex; align-items: center; gap: 7px;
+  padding: 9px 10px 7px;
+  cursor: pointer; user-select: none;
+  -webkit-tap-highlight-color: transparent;
+}
+
+.src-badge {
+  font-size: 10px; font-weight: 700;
+  padding: 2px 8px;
+  border-radius: 50px;
+  white-space: nowrap; flex-shrink: 0;
+}
+.b-tg { background: #DCEEFB; color: #0D47A1; }
+.b-wa { background: #DCEFDC; color: #1B5E20; }
+.b-em { background: #FBE9E7; color: #BF360C; }
+.b-ch { background: #EDE7F6; color: #4527A0; }
+.b-sy { background: var(--surface); color: var(--text-2); }
+
+.sender {
+  flex: 1; font-size: 13px; font-weight: 600; color: var(--text-1);
+  overflow: hidden; text-overflow: ellipsis; white-space: nowrap;
+  display: flex; align-items: center; gap: 5px;
+}
+.ndot { width: 6px; height: 6px; border-radius: 50%; flex-shrink: 0; display: inline-block; }
+.nd-tg { background: #1565C0; }
+.nd-wa { background: #2E7D32; }
+.nd-em { background: #E65100; }
+
+.meta { font-size: 10px; color: var(--text-3); white-space: nowrap; flex-shrink: 0; }
+.thumb {
+  width: 34px; height: 34px;
+  border-radius: 9px;
+  background: var(--surface);
+  border: .5px solid var(--border);
+  display: flex; align-items: center; justify-content: center;
+  font-size: 15px; flex-shrink: 0;
+}
+.chev {
+  font-size: 11px; color: var(--border-md); flex-shrink: 0;
+  margin-left: 2px; transition: transform .18s ease; display: inline-block;
+}
+.chev.o { transform: rotate(180deg); }
+
+.prev {
+  padding: 0 10px 9px;
+  font-size: 12px; color: var(--text-2); line-height: 1.45;
+  overflow: hidden;
+  display: -webkit-box; -webkit-line-clamp: 1; -webkit-box-orient: vertical;
+}
+.prev b { color: var(--text-1); font-weight: 600; }
+
+.body {
+  padding: 8px 10px 7px;
+  font-size: 12.5px; color: var(--text-2); line-height: 1.6;
+  display: none;
+  border-top: .5px solid var(--border);
+}
+.body.o { display: block; }
+.body b { color: var(--text-1); font-weight: 600; }
+
+.draft {
+  margin: 8px 0 3px;
+  padding: 6px 10px;
+  background: var(--surface);
+  border-left: 2.5px solid var(--accent);
+  border-radius: 0 8px 8px 0;
+  font-size: 12px; color: var(--text-2);
+}
+.draft em { color: var(--accent); font-style: normal; font-weight: 600; }
+
+.btns { display: flex; gap: 4px; padding: 0 8px 9px; flex-wrap: wrap; }
+.btn {
+  flex: 1; min-width: 52px;
+  padding: 7px 5px;
+  font-size: 11px; font-weight: 600;
+  text-align: center; cursor: pointer;
+  border: none; border-radius: var(--radius-btn);
+  white-space: nowrap;
+  transition: filter .12s, transform .08s;
+  line-height: 1;
+  font-family: inherit;
+}
+.btn:active { filter: brightness(.9); transform: scale(.97); }
+.b-x  { background: transparent; color: var(--text-3); border: .5px solid var(--border); }
+.b-ok { background: #DCEEFB; color: #0D47A1; }
+.b-ed { background: var(--surface); color: var(--text-2); border: .5px solid var(--border); }
+.b-op { background: #EDE7F6; color: #4527A0; }
+.b-py { background: #DCEFDC; color: #1B5E20; }
+.b-al { background: #FBE9E7; color: #BF360C; }
+body.tg-dark .b-ok { background: #0D47A1; color: #DCEEFB; }
+body.tg-dark .b-op { background: #4527A0; color: #EDE7F6; }
+body.tg-dark .b-py { background: #1B5E20; color: #DCEFDC; }
+body.tg-dark .b-al { background: #BF360C; color: #FBE9E7; }
+</style>
+</head>
+<body>
+
+<div class="feed" id="feed">
+  <div class="section-pill"><span>Инбокс · загрузка...</span></div>
+</div>
+
+<script>
+/* ============================================================
+   Telegram WebApp wiring
+   ============================================================ */
+const tg = window.Telegram?.WebApp;
+if (tg) {
+  tg.ready();
+  tg.expand();
+  if (tg.colorScheme === 'dark') document.body.classList.add('tg-dark');
+  tg.onEvent('themeChanged', () => {
+    document.body.classList.toggle('tg-dark', tg.colorScheme === 'dark');
+  });
+}
+
+/** Отправка действия боту через WebApp.sendData. Закрывает Mini App. */
+function sendToBot(payload) {
+  if (!tg) { console.log('sendData (no tg):', payload); return; }
+  tg.HapticFeedback?.impactOccurred('light');
+  tg.sendData(JSON.stringify(payload));
+  tg.close();
+}
+
+function tog(head) {
+  const bubble = head.closest('.bubble');
+  bubble.querySelector('.body')?.classList.toggle('o');
+  head.querySelector('.chev')?.classList.toggle('o');
+  tg?.HapticFeedback?.selectionChanged();
+}
+
+/* ============================================================
+   Demo data — в проде заменить на fetch('/api/feed', { headers: {
+     'X-Telegram-Init-Data': tg.initData
+   }})
+   ============================================================ */
+const DEMO = [
+  {
+    id: 'tg-igor-001',
+    cls: 'new-tg', badge: 'b-tg', badgeText: 'TG · Работа',
+    sender: 'Игорь Сидоров', dot: 'nd-tg',
+    time: '09:42', thumb: '👤',
+    prev: '<b>+2 ранее:</b> «Скинь реквизиты до конца дня...»',
+    body: 'Игорь: Привет<br>Игорь: Скинь реквизиты, клиент просит счёт.<br>Игорь: <b>До конца дня если можно.</b>',
+    draft: '«Скину сейчас — р/с ****1247, АО Дельта Про, БИК 044525225»',
+    deepLink: 'tg://openmessage?user_id=1111&message_id=2222',
+    actions: ['close', 'send', 'edit', 'voice', 'open']
+  },
+  {
+    id: 'wa-maria-002',
+    cls: 'new-wa', badge: 'b-wa', badgeText: 'WA · Лич',
+    sender: 'Мария К.', dot: 'nd-wa',
+    time: '10:05', thumb: '🎤',
+    prev: '🎤 голосовое · 0:47 — нажми чтобы расшифровать',
+    body: '«Илиан, привет! Слушай, ты говорил про встречу в четверг — всё ещё актуально? Напиши пожалуйста.»',
+    draft: '«Да, четверг актуален. В котором часу удобно?»',
+    deepLink: 'https://wa.me/628123456789',
+    actions: ['close', 'send', 'edit', 'open']
+  },
+  {
+    id: 'em-upcloud-003',
+    cls: 'new-em', badge: 'b-em', badgeText: 'Email',
+    sender: 'UpCloud · счёт ⚠️', dot: 'nd-em',
+    time: '09:55', thumb: '💳',
+    prev: '$22.40 · срок до 30 апр · server-bali-01',
+    body: '<b>Invoice #UCL-2024-04291</b><br>Сервер: server-bali-01<br>Сумма: <b>$22.40</b> · Срок: <b>30 апреля</b>',
+    deepLink: 'https://mail.google.com/mail/u/0/#inbox/THREAD_ID',
+    actions: ['close', 'pay', 'remind', 'open']
+  }
+];
+
+const ACTION_TPL = {
+  close:  { cls: 'b-x',  label: '✕',           action: 'close' },
+  send:   { cls: 'b-ok', label: '✓ отправить', action: 'send' },
+  edit:   { cls: 'b-ed', label: '✏️ редакт.',  action: 'edit' },
+  voice:  { cls: 'b-ed', label: '🎤 голос',    action: 'voice' },
+  open:   { cls: 'b-op', label: '↗ открыть',   action: 'open_external' },
+  pay:    { cls: 'b-py', label: '💳 оплатить', action: 'pay' },
+  remind: { cls: 'b-ed', label: '⏰ напомн.',  action: 'remind' },
+};
+
+function renderCard(c) {
+  const dot = c.dot ? `<span class="ndot ${c.dot}"></span>` : '';
+  const draft = c.draft ? `<div class="draft"><em>AI:</em> ${c.draft}</div>` : '';
+  const btns = c.actions.map(a => {
+    const t = ACTION_TPL[a];
+    return `<button class="btn ${t.cls}" data-act="${t.action}">${t.label}</button>`;
+  }).join('');
+
+  return `
+    <div class="bubble ${c.cls}" data-id="${c.id}" data-deeplink="${c.deepLink || ''}" data-draft="${(c.draft || '').replace(/"/g, '&quot;')}">
+      <div class="card-head" onclick="tog(this)">
+        <span class="src-badge ${c.badge}">${c.badgeText}</span>
+        <span class="sender">${c.sender} ${dot}</span>
+        <span class="meta">${c.time}</span>
+        <div class="thumb">${c.thumb}</div>
+        <span class="chev">▾</span>
+      </div>
+      <div class="prev">${c.prev}</div>
+      <div class="body">${c.body}${draft}</div>
+      <div class="btns">${btns}</div>
+    </div>`;
+}
+
+function mount(cards) {
+  const feed = document.getElementById('feed');
+  feed.innerHTML = `<div class="section-pill"><span>Инбокс · ${cards.length} ждут ответа</span></div>`
+    + cards.map(renderCard).join('');
+
+  feed.querySelectorAll('.btn').forEach(btn => {
+    btn.addEventListener('click', e => {
+      e.stopPropagation();
+      const bubble = btn.closest('.bubble');
+      const act = btn.dataset.act;
+      const payload = {
+        action: act,
+        card_id: bubble.dataset.id,
+      };
+      if (act === 'send')          payload.text = bubble.dataset.draft;
+      if (act === 'open_external') payload.url  = bubble.dataset.deeplink;
+      sendToBot(payload);
+    });
+  });
+}
+
+mount(DEMO);
+</script>
+</body>
+</html>
