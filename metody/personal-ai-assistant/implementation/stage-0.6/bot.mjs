@@ -161,6 +161,11 @@ const markStatusFinalized = db.prepare(`
   UPDATE drafts SET status_finalized = 1 WHERE id = ?
 `);
 
+const insertVoiceJob = db.prepare(`
+  INSERT INTO voice_jobs (file_id, status, created_at)
+  VALUES (?, 'pending', datetime('now'))
+`);
+
 // ─── INLINE KEYBOARD ───────────────────────────────────────────────
 const buildKeyboard = (draftId) => ({
   inline_keyboard: [
@@ -366,33 +371,48 @@ bot.on('voice', async (msg) => {
   if (msg.chat.id !== userId) return;
 
   const state = getState(userId);
-  if (!state || state.action !== 'await_voice') {
-    await bot.sendMessage(userId, '🎙 Voice получен, но нет активного draft в режиме voice. Нажми [🎙 Голосом] под draft в канале сначала.');
-    return;
-  }
-
   const fileId = msg.voice.file_id;
-  const draft = selectDraftById.get(state.draft_id);
-  if (!draft) {
-    await bot.sendMessage(userId, `Draft #${state.draft_id} не найден.`);
+
+  // Branch 1: await_voice state — attach voice to draft (existing logic)
+  if (state && state.action === 'await_voice') {
+    const draft = selectDraftById.get(state.draft_id);
+    if (!draft) {
+      await bot.sendMessage(userId, `Draft #${state.draft_id} не найден.`);
+      clearState(userId);
+      return;
+    }
+
+    updateDraftVoiceFileId.run(fileId, 'awaiting_voice_send', state.draft_id);
     clearState(userId);
+
+    log('info', 'voice received for draft', {
+      draft_id: state.draft_id, file_id: fileId,
+      duration: msg.voice.duration,
+    });
+
+    await bot.sendMessage(userId,
+      `✅ Voice сохранён для draft #${state.draft_id}.\n` +
+      `Длительность: ${msg.voice.duration}с\n` +
+      `Sender отправит через MTProto в течение 5 сек.`);
+
+    await updateChannelMessageStatus(draft, '🎙', 'VOICE QUEUED');
     return;
   }
 
-  updateDraftVoiceFileId.run(fileId, 'awaiting_voice_send', state.draft_id);
-  clearState(userId);
-
-  log('info', 'voice received', {
-    draft_id: state.draft_id, file_id: fileId,
-    duration: msg.voice.duration,
-  });
-
-  await bot.sendMessage(userId,
-    `✅ Voice сохранён для draft #${state.draft_id}.\n` +
-    `Длительность: ${msg.voice.duration}с\n` +
-    `Sender отправит через MTProto в течение 5 сек.`);
-
-  await updateChannelMessageStatus(draft, '🎙', 'VOICE QUEUED');
+  // Branch 2: no active state — route to Stage 5 voice intent parser (NEW)
+  try {
+    insertVoiceJob.run(fileId);
+    log('info', 'voice command queued', {
+      file_id: fileId,
+      duration: msg.voice.duration,
+    });
+    await bot.sendMessage(userId,
+      `🎙 Voice команда принята, обрабатывается...\n` +
+      `Длительность: ${msg.voice.duration}с`);
+  } catch (err) {
+    log('error', 'voice_jobs insert failed', { error: err.message });
+    await bot.sendMessage(userId, '❌ Ошибка сохранения voice job');
+  }
 });
 
 // ─── TEXT MESSAGE HANDLER (for edit) ───────────────────────────────

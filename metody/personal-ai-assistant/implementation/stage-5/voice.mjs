@@ -14,7 +14,7 @@ import { getSecret } from '../stage-0.5/lib/vault.mjs';
 const execFileP = promisify(execFile);
 
 // Check non-secret env vars (secrets loaded via vault.mjs)
-const REQUIRED_ENV = ['BOT_TOKEN', 'CHANNEL_CHAT_ID'];
+const REQUIRED_ENV = ['CHANNEL_CHAT_ID'];
 for (const key of REQUIRED_ENV) {
   if (!process.env[key]) {
     console.error(JSON.stringify({ level: 'fatal', msg: 'missing_env', key }));
@@ -48,6 +48,7 @@ fs.mkdirSync(VOICE_TMP_DIR, { recursive: true });
 // Load secrets from systemd credentials (Canon #6)
 const ANTHROPIC_API_KEY = await getSecret('anthropic-api-key');
 const GROK_API_KEY = await getSecret('xai-api-key');
+const BOT_TOKEN = await getSecret('bot-token');
 
 const skillSystemPrompt = fs.readFileSync(SKILL_PATH, 'utf8');
 const anthropic = new Anthropic({ apiKey: ANTHROPIC_API_KEY });
@@ -162,7 +163,7 @@ async function parseIntent(transcript) {
 }
 
 async function postToChannel(text) {
-  const url = `https://api.telegram.org/bot${process.env.BOT_TOKEN}/sendMessage`;
+  const url = `https://api.telegram.org/bot${BOT_TOKEN}/sendMessage`;
   const resp = await fetch(url, {
     method: 'POST',
     headers: { 'Content-Type': 'application/json' },
