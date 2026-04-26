@@ -9,7 +9,7 @@ import { execFile } from 'node:child_process';
 import { promisify } from 'node:util';
 import Database from 'better-sqlite3';
 import Anthropic from '@anthropic-ai/sdk';
-import { getSecret } from '../stage-0.5/lib/vault.mjs';
+import { getSecret } from './lib/vault.mjs';
 
 const execFileP = promisify(execFile);
 
