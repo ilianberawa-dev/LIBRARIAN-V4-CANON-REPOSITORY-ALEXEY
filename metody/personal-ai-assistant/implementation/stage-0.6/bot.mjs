@@ -162,8 +162,8 @@ const markStatusFinalized = db.prepare(`
 `);
 
 const insertVoiceJob = db.prepare(`
-  INSERT INTO voice_jobs (file_id, status, created_at)
-  VALUES (?, 'pending', datetime('now'))
+  INSERT INTO voice_jobs (file_id, status)
+  VALUES (?, 'pending')
 `);
 
 // ─── INLINE KEYBOARD ───────────────────────────────────────────────
