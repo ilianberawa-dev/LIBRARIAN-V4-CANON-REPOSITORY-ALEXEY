@@ -70,3 +70,114 @@ rotated `API_ID`/`API_HASH` on my.telegram.org.
   process lifetime, in tmpfs, readable only by service user.
 - A backup of `/etc/credstore.encrypted/` to a different host is useless
   without the source host key.
+
+### Before Stage 0.5 (old .env approach):
+- ❌ Secrets in `/opt/personal-assistant/.env` (640 personal-assistant:personal-assistant)
+- ❌ Any process as `personal-assistant` user can read ALL secrets
+- ❌ Accidental `git add .env` risk
+- ❌ Logs may leak secrets (no redaction)
+
+### After Stage 0.5 (vault approach):
+- ✅ Secrets in `/etc/credstore.encrypted/` (600 root:root, host-key encrypted)
+- ✅ Each service sees ONLY its own credentials via `$CREDENTIALS_DIRECTORY`
+- ✅ Rotation via PowerShell (key never touches Windows disk or SSH logs)
+- ✅ `vault.redact()` strips secrets from logs
+- ✅ Privilege isolation (Canon #11): listener can't see bot-token, bot can't see tg-session-string
+
+---
+
+## Troubleshooting
+
+### `vault_not_initialized` fatal error
+
+**Symptom:** Service fails with JSON log `{"level":"fatal","msg":"vault_not_initialized"}`
+
+**Cause:** Service started without `LoadCredentialEncrypted` in unit file.
+
+**Fix:**
+```bash
+# Add to service unit (example):
+[Service]
+LoadCredentialEncrypted=anthropic-api-key:/etc/credstore.encrypted/anthropic-api-key.cred
+
+# Reload and restart
+sudo systemctl daemon-reload
+sudo systemctl restart personal-assistant-triage
+```
+
+### `credential_missing` error
+
+**Symptom:** Service fails with JSON log `{"level":"fatal","msg":"credential_missing","name":"..."}`
+
+**Cause:** Service expects a credential that doesn't exist in vault.
+
+**Fix:**
+```powershell
+# Deposit the missing credential
+.\vault-deposit.ps1 -KeyName <missing-key-name> -RestartService <service-name>
+```
+
+### Encrypted file corrupt / wrong format
+
+**Symptom:** systemd logs `Failed to decrypt credential` or service can't read `$CREDENTIALS_DIRECTORY/<name>`
+
+**Cause:** Manual editing of `.cred` files or systemd version mismatch.
+
+**Fix:**
+```powershell
+# Re-deposit the credential (overwrites corrupted file)
+.\vault-deposit.ps1 -KeyName <key-name>
+```
+
+---
+
+## Migration Checklist (Stage 0.6)
+
+**DO NOT do this in Stage 0.5** — infrastructure only.
+
+Stage 0.6 will migrate existing services from `.env` to vault:
+
+- [ ] Add `LoadCredentialEncrypted` directives to each `.service` file (per table above)
+- [ ] Add `EnvironmentFile=/etc/personal-assistant/config.env` to units
+- [ ] Rewrite `listener.mjs`, `triage.mjs`, etc. to use `import { getSecret } from './lib/vault.mjs'`
+- [ ] Remove `EnvironmentFile=/opt/personal-assistant/.env` from units
+- [ ] Backup `/opt/personal-assistant/.env` to `/root/.env.backup.stage0.6`
+- [ ] Delete `/opt/personal-assistant/.env` (secrets now in vault)
+- [ ] Deposit all 5 credentials using `vault-deposit.ps1`
+- [ ] Test each service restarts cleanly
+- [ ] Verify no secrets in logs via `journalctl | grep -E 'sk-ant-|xai-|[0-9]{10}:[a-zA-Z]'`
+- [ ] Commit migration
+
+---
+
+## Operational Examples
+
+### Audit vault + verify service access
+
+```powershell
+# List vault contents (metadata only)
+.\vault-list.ps1
+
+# On server, test if triage can decrypt its key
+ssh upcloud "sudo systemd-run --unit=test-vault \
+  --property=LoadCredentialEncrypted=anthropic-api-key:/etc/credstore.encrypted/anthropic-api-key.cred \
+  --property=User=personal-assistant \
+  --wait \
+  bash -c 'cat \$CREDENTIALS_DIRECTORY/anthropic-api-key | head -c 20 && echo ...'"
+# Should print first 20 chars of key + "..." (proving decryption works)
+```
+
+### Emergency key rotation (leaked key)
+
+```powershell
+# 1. Revoke old key at provider (anthropic.com/account)
+# 2. Generate new key
+# 3. Rotate vault + restart affected services
+.\vault-deposit.ps1 -KeyName anthropic-api-key -RestartService personal-assistant-triage
+.\vault-deposit.ps1 -KeyName anthropic-api-key -RestartService personal-assistant-draft-gen
+.\vault-deposit.ps1 -KeyName anthropic-api-key -RestartService personal-assistant-brief
+.\vault-deposit.ps1 -KeyName anthropic-api-key -RestartService personal-assistant-bot
+
+# 4. Verify services started successfully
+ssh upcloud "systemctl status personal-assistant-{triage,draft-gen,brief,bot} --no-pager"
+```
