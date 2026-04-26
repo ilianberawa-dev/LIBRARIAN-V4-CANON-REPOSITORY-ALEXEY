@@ -145,11 +145,13 @@ L-3   Работяга                     — пишет код по ТЗ
 
 ## Канон-источники (must-read перед стартом)
 
-1. `kanon/alexey-consultation-2026-04-24-agent-canon.md` — 12 принципов
-2. `metody/personal-ai-assistant/ORCHESTRATION-LESSONS-2026-04-25.md` — 7 инвариантов
-3. `metody/personal-ai-assistant/v1.1-mvp-simplified.md` — спека MVP
-4. `metody/personal-ai-assistant/AUDIT-2026-04-24.md` — прежние аудит-находки
-5. `metody/personal-ai-assistant/implementation/stage-0.5/KEYS-MAP.md` — карта ключей
+1. **`kanon/alexey-11-principles.md`** — полный список 12 принципов (#0…#11). Имя файла исторически неточное (12, не 11). Это primary source.
+2. `kanon/alexey-consultation-2026-04-24-agent-canon.md` — запись консультации, ссылается на номера принципов в кейсах (контекст, не определения)
+3. `kanon/simplicity-first-principle.md` — глубокий разбор #0 Simplicity First
+4. `metody/personal-ai-assistant/ORCHESTRATION-LESSONS-2026-04-25.md` — 7 инвариантов
+5. `metody/personal-ai-assistant/v1.1-mvp-simplified.md` — спека MVP
+6. `metody/personal-ai-assistant/AUDIT-2026-04-24.md` — прежние аудит-находки
+7. `metody/personal-ai-assistant/implementation/stage-0.5/KEYS-MAP.md` — карта ключей
 
 ## Тон
 
