@@ -1,0 +1,80 @@
+name: realty_lightrag
+
+# LightRAG self-hosted (HKUDS/LightRAG) + LiteLLM gateway.
+# Ollama УДАЛЕНА (ADR-001 от 2026-04-26): embeddings через LiteLLM → OpenAI
+# text-embedding-3-small. Экономия: -10GB образ, -1.5GB RAM, -6$ /мес VPS.
+#
+# Единый .env в /opt/realty-portal/.env (канон #6 — single secret vault).
+# Сеть realty_net — объявлена в ../docker-compose.yml, используется как external.
+
+networks:
+  default:
+    name: realty_net
+    external: true
+
+volumes:
+  realty_lightrag_data:
+    name: realty_lightrag_data
+  realty_lightrag_inputs:
+    name: realty_lightrag_inputs
+
+services:
+  litellm:
+    image: ghcr.io/berriai/litellm:main-latest
+    container_name: realty_litellm
+    restart: unless-stopped
+    env_file:
+      - /opt/realty-portal/.env
+    volumes:
+      - ./litellm_config.yaml:/app/config.yaml:ro
+    command:
+      - "--config"
+      - "/app/config.yaml"
+      - "--port"
+      - "4000"
+      - "--host"
+      - "0.0.0.0"
+      - "--drop_params"
+    expose:
+      - "4000"
+    healthcheck:
+      test: ["CMD-SHELL", "wget -qO- http://localhost:4000/health/liveliness || exit 1"]
+      interval: 30s
+      timeout: 5s
+      retries: 5
+      start_period: 30s
+
+  lightrag:
+    image: ghcr.io/hkuds/lightrag:latest
+    container_name: realty_lightrag
+    restart: unless-stopped
+    depends_on:
+      - litellm
+    ports:
+      - "127.0.0.1:9621:9621"
+    volumes:
+      - realty_lightrag_data:/app/data/rag_storage
+      - realty_lightrag_inputs:/app/data/inputs
+    env_file:
+      - /opt/realty-portal/.env
+    environment:
+      HOST: 0.0.0.0
+      PORT: 9621
+      WORKING_DIR: /app/data/rag_storage
+      INPUT_DIR: /app/data/inputs
+      LLM_BINDING: openai
+      LLM_MODEL: claude-haiku
+      LLM_BINDING_HOST: http://realty_litellm:4000
+      LLM_BINDING_API_KEY: sk-proxy-dummy
+      EMBEDDING_BINDING: openai
+      EMBEDDING_MODEL: text-embedding-3-small
+      EMBEDDING_BINDING_HOST: http://realty_litellm:4000
+      EMBEDDING_BINDING_API_KEY: sk-proxy-dummy
+      EMBEDDING_DIM: 1536
+      MAX_ASYNC: 2
+    healthcheck:
+      test: ["CMD-SHELL", "curl -sf http://localhost:9621/health || exit 1"]
+      interval: 30s
+      timeout: 5s
+      retries: 5
+      start_period: 60s
