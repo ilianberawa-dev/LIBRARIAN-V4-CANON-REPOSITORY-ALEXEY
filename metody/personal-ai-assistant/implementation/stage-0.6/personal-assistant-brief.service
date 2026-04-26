@@ -1,0 +1,35 @@
+[Unit]
+Description=Personal AI Assistant — Brief Compiler (Stage 3.5 Timer-triggered)
+
+[Service]
+Type=oneshot
+User=personal-assistant
+Group=personal-assistant
+WorkingDirectory=/opt/personal-assistant
+
+EnvironmentFile=/etc/personal-assistant/config.env
+
+LoadCredentialEncrypted=anthropic-api-key:/etc/credstore.encrypted/anthropic-api-key.cred
+LoadCredentialEncrypted=bot-token:/etc/credstore.encrypted/bot-token.cred
+
+ExecStart=/usr/bin/node /opt/personal-assistant/brief_compiler.mjs
+
+StandardOutput=journal
+StandardError=journal
+SyslogIdentifier=personal-assistant-brief
+
+NoNewPrivileges=true
+ProtectSystem=strict
+ProtectHome=true
+ReadWritePaths=/opt/personal-assistant /var/log/personal-assistant
+PrivateTmp=true
+PrivateDevices=true
+ProtectKernelTunables=true
+ProtectKernelModules=true
+ProtectControlGroups=true
+RestrictAddressFamilies=AF_UNIX AF_INET AF_INET6
+LockPersonality=true
+RestrictRealtime=true
+RestrictSUIDSGID=true
+MemoryMax=400M
+TasksMax=64

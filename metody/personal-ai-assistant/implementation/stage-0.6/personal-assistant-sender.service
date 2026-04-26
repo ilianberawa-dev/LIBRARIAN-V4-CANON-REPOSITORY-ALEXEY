@@ -1,0 +1,34 @@
+[Unit]
+Description=Personal AI Assistant — Stage 4 Sender (MTProto outbound)
+After=network-online.target
+Wants=network-online.target
+
+[Service]
+Type=simple
+User=personal-assistant
+Group=personal-assistant
+WorkingDirectory=/opt/personal-assistant
+
+EnvironmentFile=/etc/personal-assistant/config.env
+
+LoadCredentialEncrypted=bot-token:/etc/credstore.encrypted/bot-token.cred
+LoadCredentialEncrypted=tg-api-hash:/etc/credstore.encrypted/tg-api-hash.cred
+LoadCredentialEncrypted=tg-session-string:/etc/credstore.encrypted/tg-session-string.cred
+
+ExecStart=/usr/bin/node /opt/personal-assistant/sender.mjs
+
+Restart=always
+RestartSec=5
+StandardOutput=journal
+StandardError=journal
+SyslogIdentifier=personal-assistant-sender
+
+NoNewPrivileges=true
+ProtectSystem=strict
+ProtectHome=true
+ReadWritePaths=/opt/personal-assistant /var/log/personal-assistant
+PrivateTmp=true
+MemoryMax=300M
+
+[Install]
+WantedBy=multi-user.target
