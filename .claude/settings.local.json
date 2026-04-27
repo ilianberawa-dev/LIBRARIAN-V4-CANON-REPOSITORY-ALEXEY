@@ -8,7 +8,10 @@
       "Bash(git pull *)",
       "Bash(git add *)",
       "Bash(cat)",
-      "Read(//root/**)"
+      "Read(//root/**)",
+      "Bash(echo \"\")",
+      "Bash(echo \"# Librarian repo alias\")",
+      "Bash(echo \"alias sync='git pull && ls inbox/ 2>/dev/null | grep -v \\\\\".gitkeep\\\\\\\\|README.md\\\\\" || echo \\\\\"inbox пуст\\\\\"'\")"
     ]
   }
 }
