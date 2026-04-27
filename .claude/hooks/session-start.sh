@@ -40,5 +40,6 @@ fi
 # === SINGLE POINTER (no rules duplication) ===
 echo ""
 echo "▶ Перед первым ответом: прочитай CLAUDE.md и .claude/skills/onboarding.md."
-echo "▶ Архитектурный/широкий вопрос → Слой 0 (мульти-агент) в library-search.md."
+echo "▶ Лимит ответа: ≤ 10 000 знаков. Длиннее — разбивай на части."
+echo "▶ Первый заход в репо? Прочитай kanon/alexey-11-principles.md (12 принципов)."
 echo "═══════════════════════════════════════════════"
