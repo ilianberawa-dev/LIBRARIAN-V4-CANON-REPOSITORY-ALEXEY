@@ -3,10 +3,17 @@ name: library-search
 description: 3-layer search protocol for Alexey's library (taxonomy → compact index → full-text grep). Use for ANY architectural or design question to find relevant materials before answering from general knowledge.
 ---
 
+**Применяется когда:** вопрос архитектурный, дизайн или методологический;
+запрос охватывает несколько категорий из таксономии; нужен материал из канона
+Алексея. **НЕ отвечай из общих знаний**, если в библиотеке есть материал.
+
 # 3-слойный поиск в библиотеке
 
 При архитектурном/дизайн-вопросе **обязательно** ищи в библиотеке. Не отвечай
 из общих знаний если в библиотеке есть материал.
+
+**Не загружай в контекст** полный `alexey-materials/metadata/library_index.json`
+(285 КБ) — используй `index_compact.json` (105 КБ) и `transcript_keys.json`.
 
 ## Слой 0 — мульти-агент (когда тема широкая)
 

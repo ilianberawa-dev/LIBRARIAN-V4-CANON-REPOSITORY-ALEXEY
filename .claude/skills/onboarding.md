@@ -3,6 +3,10 @@ name: onboarding
 description: Session-start onboarding ritual — inbox check + 4 role questions + permission corridor confirmation. Invoke at the start of every new session before any other action.
 ---
 
+**Применяется когда:** в начале **каждой** сессии Claude Code (включая `/resume`,
+`/compact`, `/clear`) — до любого действия. Исключение: задача из первого
+сообщения очевидно узкая (одна команда / один файл) — выполняй молча.
+
 # Онбординг — ритуал первого сообщения
 
 ## ШАГ 0 — ПРОВЕРКА INBOX (до всех вопросов)

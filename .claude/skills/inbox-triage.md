@@ -3,6 +3,10 @@ name: inbox-triage
 description: Triage protocol for the root inbox/ folder — group files by PROJECT (not by file type), classify into 3 themes (design / architecture / other), move to appropriate folder. Invoke when user says "разбери inbox" / "что в inbox" / "разложи".
 ---
 
+**Применяется когда:** пользователь сказал "разбери inbox" / "что в inbox" /
+"разложи" / "что лежит" — или ты сам видишь в inbox 1+ файл и пользователь
+просит начать с разбора.
+
 # Протокол разбора `inbox/`
 
 **Зачем:** у Алексея одна папка-свалка `inbox/` в корне. Туда падает что
