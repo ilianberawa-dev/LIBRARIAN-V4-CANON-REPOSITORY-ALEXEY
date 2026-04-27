@@ -3,6 +3,10 @@ name: session-memory
 description: Session memory protocol — read previous sessions at start, write current session at end. Stored in docs/session-memory/. Apply at session end OR when user says "сохрани контекст" / "закрываемся".
 ---
 
+**Применяется когда:** в конце сессии, при компактификации (`/compact`), или
+по команде "сохрани контекст" / "закрываемся" / "запиши память". На старте —
+наоборот, **читай** последние 3 файла, не пиши.
+
 # Сессионная память
 
 **Боль:** каждый чат сохраняет рабочие заметки на свою полку. Чат умирает —

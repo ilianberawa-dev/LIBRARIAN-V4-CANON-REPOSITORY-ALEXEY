@@ -3,6 +3,10 @@ name: onboarding
 description: Session-start onboarding ritual — inbox check + 4 role questions + permission corridor confirmation. Invoke at the start of every new session before any other action.
 ---
 
+**Применяется когда:** в начале **каждой** сессии Claude Code (включая `/resume`,
+`/compact`, `/clear`) — до любого действия. Исключение: задача из первого
+сообщения очевидно узкая (одна команда / один файл) — выполняй молча.
+
 # Онбординг — ритуал первого сообщения
 
 ## ШАГ 0 — ПРОВЕРКА INBOX (до всех вопросов)
@@ -62,3 +66,26 @@ ls inbox/ 2>/dev/null | grep -v '^.gitkeep$\|^README.md$'
 - Поведение архитектора + читает раздел `dizain/`
 - Особое внимание Принципу #0 (Простота) и пирамиде памяти
 - Проверяет: загружено ли что-то в `inbox/` для разбора
+
+## Web-Claude handoff (передача файлов через JSON)
+
+**Триггер:** в первом сообщении сессии есть JSON-блок с полями
+`from: "web-claude"`, `branch`, `files[]`, `verify_command`.
+
+Это передача артефактов из claude.ai web (где нет git/MCP/реального sha256) в
+этот репо. Web-Claude **не умеет** считать криптографические хеши — в
+манифесте надёжны только `bytes`, `lines`, `first_100`, `last_100`. **Sha256
+не сверяй** — оно галлюцинируется.
+
+**Протокол приёма:**
+1. `git fetch && git diff main..origin/<branch> --name-only` — список файлов
+   совпадает с `files[]` манифеста?
+2. Для каждого файла: `wc -c`, `wc -l`, `head -1`, `tail -1` — сверь с
+   `bytes/lines/first_100/last_100`. **Вывод bash в чате обязателен.**
+3. Выполни `verify_command` (обычно grep по заглушкам), вывод stdout в чат.
+4. Финальный отчёт: фактические цифры из bash + явный дисклеймер:
+   **«Статика чиста, реальный прогон/sandbox НЕ делался — интеграционный тест
+   отдельно».**
+5. **НЕ мержи в main без явного "го".** Принцип #5 Алексея — Fail Loud.
+
+Подробности про антигаллюцинации — `.claude/skills/state-check.md`.
