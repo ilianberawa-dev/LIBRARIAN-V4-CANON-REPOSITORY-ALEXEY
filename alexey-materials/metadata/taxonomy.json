@@ -1,0 +1,62 @@
+{
+  "version": "1.0",
+  "updated": "2026-04-27",
+  "description": "10 категорий для маршрутизации поиска в библиотеке. Каждый материал относится к одной категории. Сначала чат выбирает категорию, потом ищет внутри.",
+  "categories": {
+    "AI_AGENTS": {
+      "name_ru": "ИИ-агенты и фреймворки",
+      "description": "Агенты, IDE-расширения, оркестрация",
+      "tags": ["OpenClaw", "Claude Code", "Cursor", "Kilo Code", "Gemini CLI", "Codex", "Multi-agent"]
+    },
+    "SKILLS_MCP": {
+      "name_ru": "Скиллы и MCP-серверы",
+      "description": "Готовые скиллы, MCP-протокол, инструменты-кубики",
+      "tags": ["Skills", "MCP", "N8N MCP", "Supabase MCP"]
+    },
+    "WORKFLOW": {
+      "name_ru": "Воркфлоу и оркестрация",
+      "description": "n8n, цепочки, контент-конвейеры",
+      "tags": ["n8n", "Контент-завод"]
+    },
+    "DATA_STORAGE": {
+      "name_ru": "Базы данных и хранилища",
+      "description": "Supabase, Baserow, реляционные/NoSQL",
+      "tags": ["Supabase", "Baserow"]
+    },
+    "MEMORY_RAG": {
+      "name_ru": "Память агентов (RAG)",
+      "description": "RAG, LightRAG, эмбеддинги, knowledge bases",
+      "tags": ["RAG", "LightRAG", "memory"]
+    },
+    "INFRA": {
+      "name_ru": "Инфраструктура и DevOps",
+      "description": "Docker, Nginx, серверы, Portainer",
+      "tags": ["Docker", "Nginx", "Portainer", "DevOps", "VPS"]
+    },
+    "COMMUNICATION": {
+      "name_ru": "Каналы коммуникации",
+      "description": "Telegram, голосовые, чаты",
+      "tags": ["Telegram", "Voice"]
+    },
+    "PARSING": {
+      "name_ru": "Парсинг и скрейпинг",
+      "description": "Антибот-обход, browser-ak, residential",
+      "tags": ["scraping", "anti-bot", "browser-ak", "Camoufox"]
+    },
+    "PRODUCTS_AK": {
+      "name_ru": "Продукты Алексея",
+      "description": "Готовые продукты-платформы Алексея Колесова",
+      "tags": ["Леший", "Paperclip", "browser-ak"],
+      "items": {
+        "Леший": "Личный ИИ-ассистент Алексея на форке LibreChat. Аналог ChatGPT/Claude/Perplexity, но приватный. Регистрация через @check_licences_bot. Включает n8n + MCP под капотом.",
+        "Paperclip": "Open-source платформа для AI-компании без людей: CEO-агент, оргструктура, бюджеты, kanban.",
+        "browser-ak": "Стелс-браузер для агента на Camoufox (форк Firefox). Обходит Cloudflare/DataDome/DDoS-Guard."
+      }
+    },
+    "PRINCIPLES_BIZ": {
+      "name_ru": "Принципы и монетизация",
+      "description": "Канон Алексея, бизнес-вопросы, продажи, размышления",
+      "tags": ["принципы", "монетизация", "продажи", "канон"]
+    }
+  }
+}

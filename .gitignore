@@ -9,6 +9,7 @@ credentials.json
 *.tmp
 *.log
 *.pid
+_progress.log
 .DS_Store
 
 # macOS мусор
