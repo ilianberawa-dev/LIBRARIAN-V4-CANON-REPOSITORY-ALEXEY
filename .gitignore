@@ -22,3 +22,20 @@ __MACOSX/
 
 # Embedded git repositories
 _mcp_mail_eval/
+
+# Бэкапы
+*.bak
+*.backup
+
+# IDE
+.vscode/
+.idea/
+
+# Node.js
+node_modules/
+
+# Python
+__pycache__/
+*.pyc
+.venv/
+venv/
