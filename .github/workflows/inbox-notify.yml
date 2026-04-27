@@ -1,0 +1,65 @@
+name: Inbox Notification
+
+# Триггер 3 — пинг в Telegram когда в inbox/ что-то прилетает
+# Требуются GitHub Secrets: TG_BOT_TOKEN, TG_CHAT_ID
+# (см. .github/workflows/SETUP-TG-NOTIFY.md)
+
+on:
+  push:
+    branches: [main]
+    paths:
+      - 'inbox/**'
+  pull_request:
+    types: [closed]
+    paths:
+      - 'inbox/**'
+
+jobs:
+  notify:
+    if: github.event_name == 'push' || github.event.pull_request.merged == true
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Count inbox files
+        id: count
+        run: |
+          count=$(find inbox/ -maxdepth 1 -type f \
+            ! -name '.gitkeep' ! -name 'README.md' | wc -l)
+          files=$(find inbox/ -maxdepth 1 -type f \
+            ! -name '.gitkeep' ! -name 'README.md' \
+            -printf '• %f\n' 2>/dev/null | head -10)
+          echo "count=$count" >> "$GITHUB_OUTPUT"
+          {
+            echo "files<<EOF"
+            echo "$files"
+            echo "EOF"
+          } >> "$GITHUB_OUTPUT"
+
+      - name: Send Telegram notification
+        if: steps.count.outputs.count != '0'
+        env:
+          BOT_TOKEN: ${{ secrets.TG_BOT_TOKEN }}
+          CHAT_ID: ${{ secrets.TG_CHAT_ID }}
+          COUNT: ${{ steps.count.outputs.count }}
+          FILES: ${{ steps.count.outputs.files }}
+        run: |
+          if [ -z "$BOT_TOKEN" ] || [ -z "$CHAT_ID" ]; then
+            echo "TG_BOT_TOKEN or TG_CHAT_ID not set — skipping notification"
+            exit 0
+          fi
+          message=$(cat <<EOF
+          📥 *Inbox обновлён*
+
+          Файлов на разбор: *$COUNT*
+
+          $FILES
+
+          Открой Claude Code и скажи: \`разбери inbox\`
+          EOF
+          )
+          curl -sS -X POST "https://api.telegram.org/bot${BOT_TOKEN}/sendMessage" \
+            --data-urlencode "chat_id=${CHAT_ID}" \
+            --data-urlencode "text=${message}" \
+            --data-urlencode "parse_mode=Markdown" \
+            -o /dev/null -w "HTTP %{http_code}\n"
