@@ -133,6 +133,7 @@ docs/
 | Файл | Тема |
 |---|---|
 | `stale-snapshot.md` | **Чат работает на устаревшем снимке репо** (важно!) |
+| `tg-parser-state.md` | **Архитектура TG-парсера** — цепочка, номенклатура, известные проблемы, статус |
 | `aeza-server-tree-map.md` | Карта Aeza VPS (193.233.128.21) |
 | `claude-code-vscode-install.md` | Установка Claude Code в VS Code |
 | `telegram-parser-recreation.md` | Воссоздание Telegram-парсера |
