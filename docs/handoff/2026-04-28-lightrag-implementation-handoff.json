@@ -1,0 +1,194 @@
+{
+  "$schema": "handoff-v1",
+  "type": "architect-to-implementer-handoff",
+  "version": "2026-04-28-lightrag-v1",
+  "task_name": "Установка LightRAG как Слой 1.5 поиска в Claude Code",
+  "from": {
+    "session": "architect-2026-04-28-opus-4.7",
+    "model": "claude-opus-4-7[1m]",
+    "role": "Архитектор (почётный, остаётся для других задач)",
+    "status": "alive_for_other_tasks",
+    "note": "Этот чат-Архитектор НЕ занимается реализацией LightRAG. Он остаётся доступен для других задач (TG-парсер, Этап 2 рефактора). Задача LightRAG целиком передана наследнику в новый чат."
+  },
+  "to": {
+    "expected_role": "Установщик LightRAG (Архитектор + DevOps) — отдельный чат",
+    "purpose": "Поднять LightRAG на VPS, залить alexey-materials/, подключить как MCP к Claude Code, добавить как Слой 1.5 в skill-архитектуру"
+  },
+  "user": {
+    "name": "Илья",
+    "type": "не-программист",
+    "input_method": "голосовой ввод (формулировки могут быть размыты — переспрашивай при двусмысленности)",
+    "language": "ru",
+    "warning": "НЕ путать с Алексеем Колесовым (тот — автор канона, коуч Ильи, НЕ пользователь чата)"
+  },
+  "context_dump_memory_file": {
+    "path": "docs/session-memory/2026-04-28-architect-lightrag-decision.md",
+    "url": "https://github.com/ilianberawa-dev/librarian-v4-canon-repository-alexey/blob/main/docs/session-memory/2026-04-28-architect-lightrag-decision.md",
+    "what_inside": "Полный анализ дилеммы LightRAG vs file-based: мульти-агентный поиск (3 агента), главная находка из канона (msg_id 158), решение «И/И не вместо», 12 принципов — кто за что, триггеры, защита от забывчивости, что НЕ принято, план 4 этапов",
+    "must_read_first": true
+  },
+  "alexey_lightrag_training_materials": {
+    "important_note": "ОБЯЗАТЕЛЬНО прочитай эти материалы Алексея перед установкой. Нормальный чат должен сам найти их через 3-слойный поиск (taxonomy MEMORY_RAG → index_compact.json → grep). Я дублирую ниже на всякий случай — но ты ВСЁ РАВНО проверь актуальность через Read и поищи дополнительные посты которых я мог не заметить.",
+    "core_transcripts": [
+      {
+        "msg_id": 158,
+        "telegram_url": "https://t.me/c/2653037830/158",
+        "topic": "Я подключил своим агентам МОЗГ — обзор всех альтернатив",
+        "what_to_extract": "Почему встроенная память не работает, почему Mem0 — визитка, почему GraphRAG тяжёлый (600-10K токенов), почему LightRAG выбран (1500 токенов)",
+        "transcript_path": "alexey-materials/transcripts/158_*.transcript.txt"
+      },
+      {
+        "msg_id": 151,
+        "telegram_url": "https://t.me/c/2653037830/151",
+        "topic": "Видеодемо работы LightRAG",
+        "what_to_extract": "Архитектура: граф + векторная база. Стоимость 10-15 руб/день. Подключение из любого агента через MCP",
+        "transcript_path": "alexey-materials/transcripts/151_*.transcript.txt"
+      },
+      {
+        "msg_id": 154,
+        "telegram_url": "https://t.me/c/2653037830/154",
+        "topic": "Модель библиотекарь в LightRAG + MCP-сервер",
+        "what_to_extract": "Ключевая цитата: «когда мы подцепили MCP сервер lightrag и агенту сказали сходите посмотреть кто мы такие, он отправил запрос в LightRAG, модель библиотекаря собрала всю информацию из нужных файлов». Имя инструмента — light_rag_query, mode=hybrid",
+        "transcript_path": "alexey-materials/transcripts/154_*.transcript.txt"
+      },
+      {
+        "msg_id": 160,
+        "telegram_url": "https://t.me/c/2653037830/160",
+        "topic": "Финальный пакет LightRAG — установка",
+        "what_to_extract": "ПУТЬ УСТАНОВКИ. Рекомендация Алексея: ставить на сервер (VPS), а не локально. Один мозг на всех агентов. Возможно есть архив с инструкцией — проверь",
+        "transcript_path": "alexey-materials/transcripts/160_*.transcript.txt"
+      },
+      {
+        "msg_id": 167,
+        "telegram_url": "https://t.me/c/2653037830/167",
+        "topic": "Вытягивание чатов в LightRAG",
+        "what_to_extract": "Практический сценарий ingestion. За 20 минут собрать базу знаний из чатов. Может быть полезно для нашего ingestion alexey-materials/",
+        "transcript_path": "alexey-materials/transcripts/167_*.transcript.txt"
+      },
+      {
+        "msg_id": 169,
+        "telegram_url": "https://t.me/c/2653037830/169",
+        "topic": "Мультиагенты + LightRAG",
+        "what_to_extract": "Кейс — гайд создан агентом через LightRAG. Подтверждение что подход работает на больших задачах",
+        "transcript_path": "alexey-materials/transcripts/169_*.transcript.txt"
+      }
+    ],
+    "search_validation": "После прочтения 6 транскриптов выше — сделай grep по index_compact.json на 'lightrag' и проверь что нет ДРУГИХ постов которые я пропустил. Если есть — прочитай их тоже.",
+    "media_check": "Проверь alexey-materials/media/ — возможно там PDF или архив с инструкцией Алексея по установке"
+  },
+  "task_full_story": {
+    "background": "Илья сутки настраивал file-based память Claude Code (CLAUDE.md, 5 skills, session-memory, handoff, _INDEX.md, hook, kanon, alexey-materials/). Появилось ощущение: 'не лучше ли LightRAG'. Я (предыдущий Архитектор) ошибочно сказал 'оверкилл' без поиска. После мульти-агентного анализа выяснилось: Алексей сам в каноне выбрал LightRAG как оптимум.",
+    "decision": "И/И, не вместо. File-based остаётся (онбординг + skills + session-memory). LightRAG добавляется как СЛОЙ 1.5 поиска поверх alexey-materials/ — для семантической глубины при узких профильных запросах ('как Алексей делал X').",
+    "user_pain": "Цитата Ильи: 'наша проблема в том что в принципе они все чего то читают но не сильно они потом пользуются этой библиотекой возможно плохо помнят что там есть'. Цель — чтобы чат после онбординга знал ДЕРЕВО (file-based закрывает) и при узкой задаче САМ шёл в LightRAG (новый слой), без команды Ильи.",
+    "ux_constraint": "МИНИМУМ КЛИКОВ для Ильи — 0. Чат сам автодетект по фразе вопроса. Никаких /ask-rag команд как обязательного пути."
+  },
+  "implementation_plan": {
+    "stage_1_infrastructure": {
+      "duration": "1-2 дня",
+      "server": "193.233.128.21 (там уже tg-парсер, есть Docker)",
+      "stack": "Docker Compose: LightRAG (порт 9621) + Ollama для embeddings (mxbai-embed-large) + storage /opt/realty-portal/lightrag/",
+      "deliverables": [
+        "docker-compose.yml с LightRAG + Ollama",
+        ".env с LIGHTRAG_API_KEY (НЕ коммитить)",
+        "Healthcheck endpoint: curl http://193.233.128.21:9621/health → 200",
+        "Документация в troubleshoot/lightrag-install.md"
+      ],
+      "warning": "Алексей рекомендует ставить на сервер (msg_id 160), не локально"
+    },
+    "stage_2_ingestion": {
+      "duration": "1 день",
+      "blocker": "ЖДЁТ завершения TG-парсера (батчи 10 видео >2GB). Иначе ingest на 44 транскриптах, через неделю reingest на 55 — двойная работа.",
+      "script_path": "scripts/lightrag-ingest.py",
+      "logic": [
+        "Прочитать alexey-materials/Алексей Колесов - Private.md (154 поста)",
+        "Прочитать все alexey-materials/transcripts/*.transcript.txt (44+ транскриптов)",
+        "Дробить на chunks (500 токенов, overlap 100)",
+        "POST /insert с metadata: {msg_id, telegram_url, source_filename, category}",
+        "Логировать в scripts/lightrag-ingest.log"
+      ],
+      "validation": "После ingest: light_rag_query('что Алексей думает про LightRAG') → ответ должен ссылаться на msg_id 158, 151, 160"
+    },
+    "stage_3_skill_integration": {
+      "duration": "0.5 дня",
+      "files_to_edit": [
+        {
+          "file": ".claude/skills/lightrag-search.md",
+          "action": "СОЗДАТЬ (новый lazy skill с триггерами в description)",
+          "triggers_in_description": ["как (Алексей|ты) делал/делаешь", "архитектур(а|ный)", "паттерн", "почему (выбран|используется)"]
+        },
+        {
+          "file": ".claude/skills/library-search.md",
+          "action": "ПРАВКА — добавить Слой 1.5 между Слой 1 (taxonomy) и Слой 2 (compact index). С fallback на Слой 2 если MCP OFFLINE."
+        },
+        {
+          "file": ".claude/hooks/session-start.sh",
+          "action": "ПРАВКА — добавить 1 строку: '🧠 LightRAG: ONLINE/OFFLINE' (через curl -s healthcheck с таймаутом 1с)"
+        },
+        {
+          "file": "CLAUDE.md",
+          "action": "ПРАВКА — короткое упоминание LightRAG в карте папок (без раздувания)"
+        },
+        {
+          "file": ".claude/settings.json",
+          "action": "ПРАВКА — добавить mcpServers.lightrag блок"
+        },
+        {
+          "file": "_INDEX.md",
+          "action": "ПРАВКА — обновить дату «Последнее обновление» + добавить упоминание lightrag-search skill"
+        }
+      ]
+    },
+    "stage_4_validation": {
+      "duration": "0.5 дня",
+      "principle": "#8 Validate Before Automate (не автоматизировать без проверки)",
+      "test": "10 архитектурных вопросов задаём в обе системы (file-based grep vs LightRAG), сравниваем точность, скорость, качество ответа",
+      "acceptance_criteria": [
+        "LightRAG отвечает с msg_id и telegram_url источника",
+        "Ответы не хуже file-based по 8/10 вопросов",
+        "MCP timeout < 5 сек",
+        "Fallback на file-based при OFFLINE работает (тестировать через docker stop)"
+      ],
+      "if_fail": "Откат — Слой 1.5 убираем из library-search.md, LightRAG остаётся для ручных запросов через MCP, но не автоматический",
+      "if_ok": "Запекаем как Слой 1.5, обновляем все session-memory + CLAUDE.md"
+    }
+  },
+  "what_NOT_to_do": [
+    "НЕ заменять file-based систему — она остаётся как онбординг + сессионная память",
+    "НЕ добавлять 5-е YOU MUST правило в CLAUDE.md ДО завершения Этапа 4",
+    "НЕ добавлять PreToolUse hook на 'ответ без Search' — слишком навязчиво, ложные срабатывания",
+    "НЕ делать /ask-rag обязательным путём — цель 0 кликов Ильи",
+    "НЕ ingest до завершения TG-парсера (44→55 транскриптов идёт)",
+    "НЕ хранить API_KEY в git (.claude/settings.local.json, в .gitignore)",
+    "НЕ хардкодить IP сервера — использовать env var или Docker network discovery"
+  ],
+  "must_read_first_for_successor": [
+    {"file": "CLAUDE.md", "why": "главный диспетчер, 4 правила YOU MUST"},
+    {"file": "_INDEX.md", "why": "полное дерево репо"},
+    {"file": ".claude/skills/onboarding.md", "why": "ритуал старта, 3 вопроса"},
+    {"file": ".claude/skills/library-search.md", "why": "куда встанет Слой 1.5"},
+    {"file": "kanon/alexey-11-principles.md", "why": "12 принципов, особенно #0, #3, #5, #8"},
+    {"file": "kanon/memory-pyramid-principle.md", "why": "иерархия памяти агента"},
+    {"file": "docs/session-memory/2026-04-28-architect-lightrag-decision.md", "why": "ПОЛНЫЙ контекст этой задачи — мульти-агент анализ + решение"},
+    {"file": "docs/handoff/2026-04-28-architect-handoff.json", "why": "общий handoff Архитектора (TG-парсер + Stage 2)"},
+    {"file": "troubleshoot/tg-parser-state.md", "why": "связанная задача — пока TG-парсер не закроется, не запускать Stage 2 ingestion"}
+  ],
+  "alexey_principles_relevant": {
+    "principle_0_simplicity": "Бабушка-тест, счёт шагов, таймер. LightRAG = 6-8 шагов, 1-2 дня настройки. Файл kanon/alexey-11-principles.md + kanon/simplicity-first-principle.md",
+    "principle_3_simple_nodes": "Каждый файл независим. LightRAG не должен ломать file-based — только дополнять",
+    "principle_5_fail_loud": "Если LightRAG OFFLINE — явный fallback. Не молчать, не имитировать ответ без поиска",
+    "principle_8_validate_before_automate": "Stage 4 контрольный тест ОБЯЗАТЕЛЕН. Не автозапекать Слой 1.5 без 10/10 проверки"
+  },
+  "honor_architect_availability": {
+    "rule": "Текущий чат-Архитектор остаётся доступен для других задач (TG-парсер мониторинг, Stage 2 рефактора, контрольные тесты, разбор inbox).",
+    "do_not_call_for_lightrag": "По LightRAG — отвечает наследник в новом чате. Не отвлекай почётного Архитектора.",
+    "communication_between_chats": "Через docs/session-memory/ broadcast и через GitHub Issues с label 'handoff'. Срочно — Илья называет номер PR или issue голосом."
+  },
+  "links": {
+    "repo": "https://github.com/ilianberawa-dev/librarian-v4-canon-repository-alexey",
+    "this_handoff": "docs/handoff/2026-04-28-lightrag-implementation-handoff.json",
+    "memory_dump": "docs/session-memory/2026-04-28-architect-lightrag-decision.md",
+    "general_handoff": "docs/handoff/2026-04-28-architect-handoff.json",
+    "tg_parser_state": "troubleshoot/tg-parser-state.md"
+  },
+  "first_message_to_successor": "Привет. Ты — установщик LightRAG (новый чат). Прочитай по порядку: must_read_first_for_successor (9 файлов). ОСОБЕННО docs/session-memory/2026-04-28-architect-lightrag-decision.md — там полный контекст. После — найди и прочитай alexey_lightrag_training_materials (6 транскриптов msg_id 151,154,158,160,167,169). Я их продублировал ниже, но ТЫ ВСЁ РАВНО сделай 3-слойный поиск по taxonomy MEMORY_RAG — может найдёшь дополнительные посты. После — представься Илье, скажи что прочитал handoff #2026-04-28-lightrag-v1 и материалы Алексея по 6 msg_id. Спроси: TG-парсер ещё идёт (батчи 10 видео >2GB) — ждём его перед Stage 2 ingestion, или начинаем со Stage 1 (Docker LightRAG на VPS)?"
+}
