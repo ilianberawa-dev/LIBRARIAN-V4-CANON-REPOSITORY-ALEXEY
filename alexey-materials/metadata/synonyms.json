@@ -1,56 +1,215 @@
 {
   "version": "1.0",
-  "updated": "2026-04-27",
+  "updated": "2026-04-29",
   "description": "Маппинг русских терминов и синонимов на канонические теги. Используется чатом перед поиском в index_compact.json. Пополняется по мере появления промахов.",
   "synonyms": {
-    "капча": ["anti-bot", "scraping"],
-    "обход": ["anti-bot", "bypass"],
-    "стелс": ["browser-ak", "anti-bot", "Camoufox"],
-    "парсер": ["scraping", "browser-ak"],
-    "парсинг": ["scraping"],
-    "скрейпинг": ["scraping"],
-    "продажи": ["монетизация", "PRINCIPLES_BIZ"],
-    "монетизация": ["монетизация", "PRINCIPLES_BIZ"],
-    "память": ["RAG", "LightRAG", "MEMORY_RAG"],
-    "знания": ["RAG", "MEMORY_RAG"],
-    "база знаний": ["RAG", "LightRAG"],
-    "цепочки": ["n8n", "WORKFLOW"],
-    "автоматизация": ["n8n", "WORKFLOW"],
-    "воркфлоу": ["n8n", "WORKFLOW"],
-    "контент-завод": ["Контент-завод", "WORKFLOW"],
-    "сервер": ["Docker", "VPS", "INFRA"],
-    "хостинг": ["VPS", "INFRA"],
-    "развертывание": ["Docker", "DevOps"],
-    "деплой": ["Docker", "DevOps"],
-    "канал": ["Telegram", "COMMUNICATION"],
-    "голос": ["Voice", "COMMUNICATION"],
-    "озвучка": ["Voice"],
-    "база данных": ["Supabase", "DATA_STORAGE"],
-    "бд": ["Supabase", "DATA_STORAGE"],
-    "ассистент": ["Леший", "PRODUCTS_AK"],
-    "леший": ["Леший", "PRODUCTS_AK"],
-    "librechat": ["Леший", "PRODUCTS_AK"],
-    "paperclip": ["Paperclip", "PRODUCTS_AK"],
-    "браузер": ["browser-ak", "PARSING"],
-    "скилл": ["Skills", "SKILLS_MCP"],
-    "скиллы": ["Skills", "SKILLS_MCP"],
-    "мцп": ["MCP", "SKILLS_MCP"],
-    "мсп": ["MCP", "SKILLS_MCP"],
-    "агент": ["AI_AGENTS"],
-    "агенты": ["AI_AGENTS", "Multi-agent"],
-    "клод": ["Claude Code", "AI_AGENTS"],
-    "клод код": ["Claude Code"],
-    "курсор": ["Cursor", "AI_AGENTS"],
-    "опенкло": ["OpenClaw", "AI_AGENTS"],
-    "опенклоу": ["OpenClaw"],
-    "цемини": ["Gemini CLI"],
-    "докер": ["Docker", "INFRA"],
-    "нгинкс": ["Nginx", "INFRA"],
-    "портейнер": ["Portainer", "INFRA"],
-    "n8n_mcp": ["MCP", "n8n"],
-    "supabase_mcp": ["MCP", "Supabase"],
-    "канон": ["принципы", "PRINCIPLES_BIZ"],
-    "принципы": ["принципы", "PRINCIPLES_BIZ"],
-    "простота": ["принципы", "simplicity"]
+    "капча": [
+      "anti-bot",
+      "scraping"
+    ],
+    "обход": [
+      "anti-bot",
+      "bypass"
+    ],
+    "стелс": [
+      "browser-ak",
+      "anti-bot",
+      "Camoufox"
+    ],
+    "парсер": [
+      "scraping",
+      "browser-ak"
+    ],
+    "парсинг": [
+      "scraping"
+    ],
+    "скрейпинг": [
+      "scraping"
+    ],
+    "продажи": [
+      "монетизация",
+      "PRINCIPLES_BIZ"
+    ],
+    "монетизация": [
+      "монетизация",
+      "PRINCIPLES_BIZ"
+    ],
+    "память": [
+      "RAG",
+      "LightRAG",
+      "MEMORY_RAG"
+    ],
+    "знания": [
+      "RAG",
+      "MEMORY_RAG"
+    ],
+    "база знаний": [
+      "RAG",
+      "LightRAG"
+    ],
+    "цепочки": [
+      "n8n",
+      "WORKFLOW"
+    ],
+    "автоматизация": [
+      "n8n",
+      "WORKFLOW"
+    ],
+    "воркфлоу": [
+      "n8n",
+      "WORKFLOW"
+    ],
+    "контент-завод": [
+      "Контент-завод",
+      "WORKFLOW"
+    ],
+    "сервер": [
+      "Docker",
+      "VPS",
+      "INFRA"
+    ],
+    "хостинг": [
+      "VPS",
+      "INFRA"
+    ],
+    "развертывание": [
+      "Docker",
+      "DevOps"
+    ],
+    "деплой": [
+      "Docker",
+      "DevOps"
+    ],
+    "канал": [
+      "Telegram",
+      "COMMUNICATION"
+    ],
+    "голос": [
+      "Voice",
+      "COMMUNICATION"
+    ],
+    "озвучка": [
+      "Voice"
+    ],
+    "база данных": [
+      "Supabase",
+      "DATA_STORAGE"
+    ],
+    "бд": [
+      "Supabase",
+      "DATA_STORAGE"
+    ],
+    "ассистент": [
+      "Леший",
+      "PRODUCTS_AK"
+    ],
+    "леший": [
+      "Леший",
+      "PRODUCTS_AK"
+    ],
+    "librechat": [
+      "Леший",
+      "PRODUCTS_AK"
+    ],
+    "paperclip": [
+      "Paperclip",
+      "PRODUCTS_AK"
+    ],
+    "браузер": [
+      "browser-ak",
+      "PARSING"
+    ],
+    "скилл": [
+      "Skills",
+      "SKILLS_MCP"
+    ],
+    "скиллы": [
+      "Skills",
+      "SKILLS_MCP"
+    ],
+    "мцп": [
+      "MCP",
+      "SKILLS_MCP"
+    ],
+    "мсп": [
+      "MCP",
+      "SKILLS_MCP"
+    ],
+    "агент": [
+      "AI_AGENTS"
+    ],
+    "агенты": [
+      "AI_AGENTS",
+      "Multi-agent"
+    ],
+    "клод": [
+      "Claude Code",
+      "AI_AGENTS"
+    ],
+    "клод код": [
+      "Claude Code"
+    ],
+    "курсор": [
+      "Cursor",
+      "AI_AGENTS"
+    ],
+    "опенкло": [
+      "OpenClaw",
+      "AI_AGENTS"
+    ],
+    "опенклоу": [
+      "OpenClaw"
+    ],
+    "цемини": [
+      "Gemini CLI"
+    ],
+    "докер": [
+      "Docker",
+      "INFRA"
+    ],
+    "нгинкс": [
+      "Nginx",
+      "INFRA"
+    ],
+    "портейнер": [
+      "Portainer",
+      "INFRA"
+    ],
+    "n8n_mcp": [
+      "MCP",
+      "n8n"
+    ],
+    "supabase_mcp": [
+      "MCP",
+      "Supabase"
+    ],
+    "канон": [
+      "принципы",
+      "PRINCIPLES_BIZ"
+    ],
+    "принципы": [
+      "принципы",
+      "PRINCIPLES_BIZ"
+    ],
+    "простота": [
+      "принципы",
+      "simplicity"
+    ],
+    "роутинг": [
+      "LightRAG",
+      "LLM",
+      "MEMORY_RAG"
+    ],
+    "модели": [
+      "LLM",
+      "AI_AGENTS",
+      "claude",
+      "openai"
+    ],
+    "провайдер": [
+      "LLM",
+      "openai",
+      "LiteLLM"
+    ]
   }
 }

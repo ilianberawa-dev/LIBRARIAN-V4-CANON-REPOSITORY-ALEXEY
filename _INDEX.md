@@ -163,6 +163,13 @@ Read C:\Users\97152\Documents\claude-library\kanon\alexey-11-principles.md
 
 ---
 
+## 🔍 Как искать по теме
+
+`synonyms.json` → теги → `index_compact.json` → транскрипт или preview  
+Полная инструкция: `navyki/library-search.md`
+
+---
+
 ## 🚀 Быстрый старт
 
 ### Новому Claude чату:
@@ -330,9 +337,29 @@ Read C:\Users\97152\Documents\claude-library\metody\personal-ai-assistant\v1.0-m
 
 ---
 
-**Последнее обновление:** 2026-04-24 (полная синхронизация)  
-**Источники:** Локальная машина + Aeza server  
+**Последнее обновление:** 2026-04-29  
+**Источники:** Локальная машина + Aeza server + GitHub  
 **Backup:** Полный offline доступ к материалам
+
+---
+
+## 🔴 ТЕКУЩИЙ СТАТУС ЗАДАЧ (2026-04-29)
+
+| Задача | Статус | Где |
+|--------|--------|-----|
+| 56 транскриптов в claude-library | ✅ ГОТОВО | Windows локально |
+| Aeza LightRAG работает | ✅ Up 28h | 193.233.128.21:9621 |
+| Aeza LightRAG ingestion | ⚠️ 15/56 (27%) | нет cron, ручной |
+| UpCloud LightRAG deploy | ✅ Stage 1 готов | 213.163.207.84 |
+| UpCloud LightRAG ingestion | ❌ Stage 2 не начат | ждёт запуска |
+| ingest cron / webhook | ❌ не настроен | нужен на Aeza |
+
+## ⚠️ ИЗВЕСТНЫЕ КОСЯКИ (зафиксированы в memory)
+
+1. **_INDEX.md врёт** — всегда проверяй локально: `ls alexey-materials/transcripts/*.json | wc -l`
+2. **cosine_threshold 0.2** на Aeza — слишком низкий, поднять до 0.4 при миграции
+3. **Нет алерта** при провале ingestion (нарушение Принципа #5 Fail Loud)
+4. **GitHub ≠ локальная папка** — после push парсера нужен git pull на Windows
 
 ---
 
