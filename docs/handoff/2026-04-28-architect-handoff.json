@@ -1,15 +1,17 @@
 {
   "$schema": "handoff-v1",
   "type": "architect-to-architect-handoff",
+  "version": "2026-04-28-evening",
   "from": {
     "session": "architect-2026-04-28-opus-4.7",
     "model": "claude-opus-4-7[1m]",
     "role": "Архитектор",
-    "status": "alive_continuing"
+    "status": "alive_continuing",
+    "context_compacted_once": true
   },
   "to": {
     "expected_role": "Архитектор-наследник",
-    "purpose": "Продолжить работу над стартовым продуктом + контрольная #2 + Этап 2 (если решит Илья)"
+    "purpose": "Дождаться Step D TG-парсера + добить остаточные техдолги парсера + Этап 2 рефактора (если решит Илья)"
   },
   "user": {
     "name": "Илья",
@@ -25,80 +27,114 @@
     "rule": "Канон = только эти две папки. Слова Ильи в чате — НЕ канон."
   },
   "branch": {
-    "main_at": "712eda8",
+    "main_at": "55c4c9d",
     "claude_md_version": "3.0 (slim+canon-vs-chat+inter-chat)",
-    "stage": "Этап 1 рефактора закрыт. Ожидает контрольной #2 и решения по Этапу 2."
+    "stage": "Этап 1 рефактора закрыт. 5 контрольных пройдены. TG-парсер шаги A-C сделаны, D в процессе."
   },
   "must_read_first": [
     {"file": "CLAUDE.md", "why": "главный диспетчер, 4 правила YOU MUST"},
     {"file": "_INDEX.md", "why": "полное дерево репо, инвентарь skills (5), 10 категорий taxonomy"},
-    {"file": ".claude/skills/onboarding.md", "why": "ритуал старта, по ролям что читать"},
+    {"file": ".claude/skills/onboarding.md", "why": "ритуал старта, 3 вопроса (а не 4), по ролям что читать"},
     {"file": ".claude/skills/state-check.md", "why": "проверки до уточняющего вопроса (антигаллюцинации)"},
     {"file": ".claude/skills/library-search.md", "why": "3-слойный поиск + Слой 0 мульти-агент"},
-    {"file": "kanon/alexey-11-principles.md", "why": "12 принципов канона (#0 Простота → #11)"},
+    {"file": "kanon/alexey-11-principles.md", "why": "12 принципов канона + 3 правила Простоты (бабушка-тест/счёт шагов/таймер)"},
     {"file": "kanon/memory-pyramid-principle.md", "why": "иерархия памяти агента"},
-    {"file": "troubleshoot/stale-snapshot.md", "why": "почему чат может работать на устаревшем снимке репо"}
+    {"file": "troubleshoot/stale-snapshot.md", "why": "почему чат может работать на устаревшем снимке репо"},
+    {"file": "troubleshoot/tg-parser-state.md", "why": "архитектура TG-парсера, номенклатура, 9 известных проблем"}
   ],
   "session_memory_chronological": [
     "docs/session-memory/2026-04-27-architect-library-foundation.md",
     "docs/session-memory/2026-04-27-architect-canon-vs-chat-rule.md",
-    "docs/session-memory/2026-04-27-architect-startup-validation-test.md"
+    "docs/session-memory/2026-04-27-architect-startup-validation-test.md",
+    "docs/session-memory/2026-04-28-architect-control-tests-2-3.md",
+    "docs/session-memory/2026-04-28-architect-control-tests-4-5.md",
+    "docs/session-memory/2026-04-28-architect-tg-parser-and-stage2.md"
   ],
   "predecessor_handoff": "docs/handoff/2026-04-27-architect-enforcement-handoff.md",
   "this_handoff_file": "docs/handoff/2026-04-28-architect-handoff.json",
   "what_done_this_session": [
     {"pr": 14, "topic": "Этап 1 рефактора смержен (slim CLAUDE.md 3.0, 4 правила Ильи, межчат)"},
-    {"pr": 16, "topic": "_INDEX.md актуализирован (Windows-пути убраны, +arhitektura/+prochee-idei/+_INDEX в onboarding для Архитектора/Дизайнера)"},
+    {"pr": 16, "topic": "_INDEX.md актуализирован (Windows-пути убраны, +arhitektura/+prochee-idei/+_INDEX в онбординге)"},
     {"pr": 17, "topic": "Фикс «3 session-memory ровно из hook» + .claude/settings.local.json в .gitignore"},
     {"pr": 19, "topic": "Сверять техдолги из session-memory с актуальным состоянием репо (zombie-techdebts)"},
-    {"pr": 20, "topic": "Этот handoff JSON создан в main"},
-    {"pr": 15, "topic": "Закрыт без мержа — settings.local.json теперь в .gitignore, его правки не нужны"},
-    {"validation": "Контрольная #1 пройдена тестовым чатом (4/3/5). Авто-обучение нового чата проверено — все 4 маркера сработали. Наследник принял handoff #2026-04-28 идеально."}
+    {"pr": 20, "topic": "Handoff JSON в main"},
+    {"pr": 22, "topic": "Бабушка-тест + счёт шагов + таймер в Принцип #0 (закрыл пробел контрольной #3)"},
+    {"pr": 23, "topic": "onboarding: «3 файла session-memory — точка входа, не ограничение» (закрыл пробел контрольной #5)"},
+    {"pr": 24, "topic": "Удалены 5 устаревших корневых файлов (CHECK-ACCESS, CHECK-LIBRARY-PROMPT, DESKTOP-TEST, QUICK-CHECK, START-NEW-CHAT-AI-ASSISTANT)"},
+    {"pr": 25, "topic": "onboarding: убран вопрос #4 про коридор разрешений (4→3 вопроса)"},
+    {"pr": 26, "topic": "troubleshoot/tg-parser-state.md создан (архитектура TG-парсера + 9 проблем)"},
+    {"pr": 27, "topic": "_INDEX.md счётчики после ретро-обогащения транскриптов"},
+    {"pr": 15, "topic": "Закрыт без мержа — settings.local.json в .gitignore, правки не нужны"},
+    {"control_tests": "Все 5 контрольных пройдены (4/3/5 → 7/0/0 → 6/7 → 5/1/0 → 4/0/1). 4 пробела закрыты PR #16/#22/#23 + структурно."},
+    {"tg_parser": "Шаги A-C: ретро-обогащение 44 транскриптов (msg_id+telegram_url+source_filename), pipeline для новых, документация. Шаг D запущен (msg_id 72, 2161MB, PID 2844604)."}
   ],
-  "open_questions": [
+  "open_tasks": [
     {
-      "id": "control-test-2",
-      "topic": "Контрольная #2 — ПРОЙДЕНА (7/0/0)",
-      "result": "7 уверенно / 0 частично / 0 НЕ ЗНАЮ. Lazy loading по роли работает: Архитектор знает дерево благодаря _INDEX.md в онбординге.",
-      "closed": "2026-04-28"
+      "id": "step-d-monitoring",
+      "topic": "Step D — stream-download видео 2161MB",
+      "priority": "🔴 высокий",
+      "details": "На сервере 193.233.128.21 PID 2844604 в фоне. Ожидаемое время ~25-40 мин. Проверить файл скачался, передать в transcribe_all_clean.mjs.",
+      "next_step_if_ok": "Батч из 10 оставшихся видео >2GB по 3 штуки одновременно (диск 60GB позволяет)",
+      "next_step_if_fail": "Логи ffmpeg + альтернатива через ffmpeg -f segment для разбивки на чанки"
     },
     {
-      "id": "control-test-3",
-      "topic": "Контрольная #3 — ПРОЙДЕНА (6/7), пробел закрыт PR #22",
-      "result": "6 уверенно / 7 частично. Пробел: «бабушка-тест» из simplicity-first-principle.md (605 строк, нигде не читалась при старте).",
-      "fix": "PR #22 СМЕРЖЕН — добавлены 3 правила (бабушка-тест + счёт шагов + таймер) прямо в Принцип #0 в alexey-11-principles.md."
+      "id": "notify-real-sh",
+      "topic": "Переписать notify_real.sh с runtime подсчётом",
+      "priority": "🟡 средний",
+      "details": "Текущий notify_v2.sh захардкожен (строки 18-26). Надо runtime подсчёт + удалить v1/v3/v4 версии.",
+      "files": ["/opt/tg-export/notify_v2.sh", "/opt/tg-export/notify_v1.sh", "/opt/tg-export/notify_v3.sh", "/opt/tg-export/notify_v4.sh"]
     },
     {
-      "id": "control-test-4",
-      "topic": "Контрольная #4 — ПРОЙДЕНА (5/1/0)",
-      "result": "5 уверенно / 1 частично (state-check 3 шага — lazy-loaded, не критично) / 0 НЕ ЗНАЮ. Fail Loud, Web-Claude handoff, sha256, stale snapshot — уверенно.",
-      "closed": "2026-04-28"
+      "id": "db-ip-discovery",
+      "topic": "Dynamic DB IP discovery в transcribe_all_clean.mjs",
+      "priority": "🟡 средний",
+      "details": "Сейчас хардкод 172.18.0.17. Применить тот же паттерн что в realty-scraper (docker network inspect).",
+      "file": "/opt/tg-export/transcribe_all_clean.mjs"
     },
     {
-      "id": "control-test-5",
-      "topic": "Контрольная #5 — ПРОЙДЕНА (4/0/1)",
-      "result": "4 уверенно / 0 частично / 1 НЕ ЗНАЮ (файл за пределами 3 latest — протокол не задокументирован). Пробел закрыт в onboarding.md.",
-      "fix": "PR #23 — onboarding.md: «Эти 3 — точка входа, не ограничение»",
-      "closed": "2026-04-28"
+      "id": "filename-collision",
+      "topic": "Filename collision fix в sync_channel.mjs",
+      "priority": "🟢 низкий",
+      "details": "20+ файлов с именем video.mp4. В sync_channel.mjs префиксовать msg_id ДО записи в library_index.json.",
+      "file": "/opt/tg-export/sync_channel.mjs"
+    },
+    {
+      "id": "filename-null",
+      "topic": "Filename null fix для 7 файлов",
+      "priority": "🟢 низкий",
+      "details": "GramJS не определил расширение. Определять MIME из mime_type поля Telegram media object.",
+      "file": "/opt/tg-export/sync_channel.mjs"
     },
     {
       "id": "stage-2-refactor",
-      "topic": "Этап 2 рефактора (отложен по Принципу #8 Validate Before Automate)",
+      "topic": "Этап 2 рефактора (отложен — Илья не решил)",
+      "priority": "⚪ ждёт решения Ильи",
       "candidates": [
-        "Убрать 4 вопроса онбординга? (предложение UX-агента)",
         "Слить onboarding+state-check skills?",
         "Слить session-memory+handoff папки?",
-        "Удалить неактуальные корневые файлы (CHECK-ACCESS.json, CHECK-LIBRARY-PROMPT.md, DESKTOP-TEST.md, START-NEW-CHAT-AI-ASSISTANT.md, QUICK-CHECK.md)?"
+        "Дополнительная компактификация CLAUDE.md?",
+        "Объединить metody/rukovodstva/navyki/spravochniki в одну папку?"
       ],
-      "blocker": "Ждёт завершения всех контрольных"
+      "blocker": "Ждёт прямой команды Ильи. По Принципу #8 (Validate Before Automate) — не делать без явного решения."
     }
+  ],
+  "closed_open_questions": [
+    {"id": "control-test-1", "result": "4/3/5", "fix": "PR #16"},
+    {"id": "control-test-2", "result": "7/0/0", "fix": "не требовался"},
+    {"id": "control-test-3", "result": "6/7 (пробел: бабушка-тест)", "fix": "PR #22"},
+    {"id": "control-test-4", "result": "5/1/0", "fix": "не требовался (lazy-ok)"},
+    {"id": "control-test-5", "result": "4/0/1 (пробел: файл старше 3 latest)", "fix": "PR #23"},
+    {"id": "tg-parser-step-A-retrofit", "result": "44 транскрипта обогащены msg_id+telegram_url+source_filename"},
+    {"id": "tg-parser-step-B-pipeline", "result": "transcribe_all_clean.mjs строка 189 фикс для всех новых транскриптов"},
+    {"id": "tg-parser-step-C-docs", "result": "PR #26 — troubleshoot/tg-parser-state.md"}
   ],
   "rules_for_user_ilya": [
     "Имя пользователя — Илья (не Алексей)",
     "Лимит ответа Claude — ≤10000 знаков. Длиннее — разбивать и спросить «продолжать?»",
     "Илья голосом — переспрашивай при двусмысленности",
     "Только факты + альтернативы, не pitch одну линию",
-    "Длинные файлы кода — Edit/Write, в чат summary"
+    "Длинные файлы кода — Edit/Write, в чат summary",
+    "На команды «доделывай» — продолжай ту же цепочку без переспроса"
   ],
   "permissions_corridor": {
     "deny": ["Bash(rm *)", "Bash(sudo *)", "Bash(git push --force *)", "Bash(git push -f *)", "Bash(git reset --hard *)", "Bash(git clean -fd *)", "Bash(chmod *)", "Bash(chown *)", "Edit(.git/**)", "Write(.git/**)"],
@@ -112,17 +148,42 @@
     "НЕ писать «прочитал», «OK», «соответствует», «всё корректно» без вывода Bash/Read tool в ЭТОМ ЖЕ сообщении",
     "НЕ цитировать фразы Ильи как «принцип Алексея» — это разные люди",
     "НЕ коммитить .claude/settings.local.json (теперь в .gitignore)",
-    "НЕ rebase ветку с накопленными старыми коммитами на main где squash-мерж — будет конфликт. Используй cherry-pick от свежего main.",
-    "НЕ цитировать техдолги из session-memory как «открытые» без сверки с CLAUDE.md / .claude/settings.json"
+    "НЕ rebase ветку с накопленными старыми коммитами на main где squash-мерж — будет конфликт. Используй cherry-pick от свежего main или merge -X theirs.",
+    "НЕ цитировать техдолги из session-memory как «открытые» без сверки с CLAUDE.md / .claude/settings.json",
+    "НЕ amend существующие коммиты — создавать новые (если pre-commit hook падает — фикс, restage, новый коммит)",
+    "НЕ хранить видео (mp4/wav/m4a) в GitHub репо — только транскрипты+метадата+PDF",
+    "НЕ сохранять транскрипт без telegram_url — STOP, логировать, не записывать"
   ],
+  "tg_parser_state": {
+    "server": "193.233.128.21",
+    "telegram_channel_id": "2653037830",
+    "telegram_url_format": "https://t.me/c/2653037830/{msg_id}",
+    "pipeline": "Telegram → sync_channel.mjs → library_index.json → download.mjs → media/ → transcribe_all_clean.mjs → transcripts/ → github-sync.sh → GitHub репо",
+    "rule_no_video_in_repo": true,
+    "rule_telegram_url_required": true,
+    "diagnosis_doc": "troubleshoot/tg-parser-state.md",
+    "step_d_in_progress": {
+      "test_file": "msg_id 72, 2161MB",
+      "method": "stream-download через createWriteStream без Buffer.alloc",
+      "pid": 2844604,
+      "expected_duration": "~25-40 минут",
+      "next_steps_if_ok": "Батч 10 видео >2GB по 3 штуки"
+    }
+  },
   "links": {
     "repo": "https://github.com/ilianberawa-dev/LIBRARIAN-V4-CANON-REPOSITORY-ALEXEY",
-    "merged_prs": [
+    "merged_prs_today": [
       "https://github.com/ilianberawa-dev/LIBRARIAN-V4-CANON-REPOSITORY-ALEXEY/pull/14",
       "https://github.com/ilianberawa-dev/LIBRARIAN-V4-CANON-REPOSITORY-ALEXEY/pull/16",
       "https://github.com/ilianberawa-dev/LIBRARIAN-V4-CANON-REPOSITORY-ALEXEY/pull/17",
       "https://github.com/ilianberawa-dev/LIBRARIAN-V4-CANON-REPOSITORY-ALEXEY/pull/19",
-      "https://github.com/ilianberawa-dev/LIBRARIAN-V4-CANON-REPOSITORY-ALEXEY/pull/20"
+      "https://github.com/ilianberawa-dev/LIBRARIAN-V4-CANON-REPOSITORY-ALEXEY/pull/20",
+      "https://github.com/ilianberawa-dev/LIBRARIAN-V4-CANON-REPOSITORY-ALEXEY/pull/22",
+      "https://github.com/ilianberawa-dev/LIBRARIAN-V4-CANON-REPOSITORY-ALEXEY/pull/23",
+      "https://github.com/ilianberawa-dev/LIBRARIAN-V4-CANON-REPOSITORY-ALEXEY/pull/24",
+      "https://github.com/ilianberawa-dev/LIBRARIAN-V4-CANON-REPOSITORY-ALEXEY/pull/25",
+      "https://github.com/ilianberawa-dev/LIBRARIAN-V4-CANON-REPOSITORY-ALEXEY/pull/26",
+      "https://github.com/ilianberawa-dev/LIBRARIAN-V4-CANON-REPOSITORY-ALEXEY/pull/27"
     ],
     "closed_prs": [
       "https://github.com/ilianberawa-dev/LIBRARIAN-V4-CANON-REPOSITORY-ALEXEY/pull/15"
@@ -134,5 +195,5 @@
     "owner_until_handoff_completed": "architect-2026-04-28-opus-4.7",
     "successor_reads": "Последнюю версию из main"
   },
-  "first_message_to_successor": "Прочитай must_read_first по порядку, потом session_memory_chronological, потом этот handoff. После — представься Илье, упомяни что прочитал handoff #2026-04-28, спроси: продолжаем с контрольной #2 или другая задача?"
+  "first_message_to_successor": "Прочитай must_read_first по порядку, потом session_memory_chronological (6 файлов), потом этот handoff. После — представься Илье, упомяни что прочитал handoff #2026-04-28-evening, проверь статус Step D на сервере (PID 2844604) и спроси: продолжаем с TG-парсером или другая задача?"
 }
