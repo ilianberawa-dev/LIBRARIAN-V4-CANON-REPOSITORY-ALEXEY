@@ -18,7 +18,7 @@
 |---|---|---|
 | `inbox/` | Свалка для новых файлов от Ильи | По команде «разбери inbox» |
 | `kanon/` | 12 принципов Алексея + Memory Pyramid + Simplicity First | **Архитектор: всегда фон** |
-| `alexey-materials/` | 154 поста + 88 транскриптов (с `telegram_url`) + media (17MB) | **Через `metadata/index_compact.json`** |
+| `alexey-materials/` | 154 поста + 44 транскрипта (с `telegram_url`, каждый = .json + .txt) + media (17MB) | **Через `metadata/index_compact.json`** |
 | `dizain/` | Тема «Дизайн / UI» | При разборе inbox по теме |
 | `arhitektura/` | Тема «Архитектура» | При разборе inbox по теме |
 | `prochee-idei/` | Тема «Прочее / идеи» | При разборе inbox по теме |

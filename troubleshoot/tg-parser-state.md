@@ -61,9 +61,14 @@ GitHub репо  ← ФИНАЛЬНОЕ место хранения
 2. Обновить `library_index.json` (добавить запись с `telegram_url`)
 3. Регенерировать `index_compact.json` из `library_index.json`
 4. Обновить `transcript_keys.json`
-5. Обновить строку `alexey-materials/` в `_INDEX.md` — актуальные числа (`ls | wc -l`, `du -sh`)
+5. Обновить строку `alexey-materials/` в `_INDEX.md` — актуальные числа:
+   - **транскриптов** = `ls *.transcript.json | wc -l` (не `ls | wc -l` — это даст ×2)
+   - **media** = `du -sh alexey-materials/media/`
+   - **дату «Последнее обновление»** в шапке `_INDEX.md`
 
 Затем `github-sync.sh` пушит всё в репо.
+
+**Проверка после push:** `git log origin/main --oneline -1` должен показать новый sync-коммит. Если нет — `github-sync.sh` упал, смотри логи cron.
 
 ---
 
