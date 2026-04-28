@@ -1,8 +1,20 @@
 {
   "$schema": "handoff-v1",
   "type": "architect-to-implementer-handoff",
-  "version": "2026-04-28-lightrag-v1",
+  "version": "2026-04-28-lightrag-v2-errata",
   "task_name": "Установка LightRAG как Слой 1.5 поиска в Claude Code",
+  "ERRATA_v1_to_v2": {
+    "reason": "Первая версия handoff (v1) не содержала state-check открытых PR. После вопросов наследника обнаружено: PR #1 уже фиксирует LightRAG в каноне Алексея, PR #7 — иерархия L-1/L-1.5/L-2/L-3, PR #8 — готовый docker-compose + ADR-001 (Ollama→OpenAI embeddings через LiteLLM). НЕЛЬЗЯ создавать инфру с нуля — review+merge PR #8.",
+    "must_read_branch_pr_8": [
+      "rukovodstva/self-learning-memory/v1.0-lightrag.md (руководство Алексея по RAG Memory)",
+      "docs/architecture/ADR-001-remove-ollama.md (ACCEPTED решение про embeddings)",
+      "lightrag/docker-compose.yml (готовый compose)",
+      "lightrag/litellm_config.yaml (gateway конфиг)"
+    ],
+    "deployment_target_confirmed": "Aeza 193.233.128.21 — там уже realty_lightrag/ollama/litellm контейнеры по PR #4 (НЕ ПРОВЕРЕНО через SSH, проверь сам docker ps)",
+    "embeddings_provider_confirmed": "OpenAI text-embedding-3-small через LiteLLM (ADR-001 ACCEPTED)",
+    "open_prs_to_consider": [1, 7, 8]
+  },
   "from": {
     "session": "architect-2026-04-28-opus-4.7",
     "model": "claude-opus-4-7[1m]",
