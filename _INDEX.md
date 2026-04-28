@@ -240,30 +240,35 @@ Read C:\Users\97152\Documents\claude-library\metody\personal-ai-assistant\v1.0-m
 
 ## 📦 АРХИВЫ (новые категории)
 
-### 6. Материалы Алексея ✨ АКТУАЛИЗИРОВАНО 2026-04-29
+### 6. Материалы Алексея ✨ ЧЕСТНЫЙ СТАТУС 2026-04-29
 
 **Папка:** `alexey-materials/`  
-**Файлов:** 22+ (154 поста индекса + 56 транскриптов + media)  
-**Размер:** 24MB
+**Размер:** 2.1MB (3 ключевых транскрипта + metadata)
 
-**Содержимое:**
-- **Транскрипты:** 56 файлов (complete index)
-  - Ключевой: #165 "Встреча в Телемосте 05.04.26" (1.9MB, LightRAG routing 06:40-09:10)
-  - Все недавние видео: #88 devops, #82-86 (4 видео батча)
-  - Полная история: #141 Встреча 06.03.26, #164 Аудио запись
-- **Media:** PDF, фото, voice notes (17MB)
+**Что ЗДЕСЬ (в claude-library):**
+- **Транскрипты:** 3 файла (ключевые для быстрого доступа)
+  - #164 "Аудио запись встречи 06.03.26" (встреча с основателем)
+  - #165 "Встреча в Телемосте 05.04.26" (LightRAG routing 06:40-09:10) ⭐
+  - #170 "видео" (история контекста)
 - **Metadata:** 
-  - `library_index.json` — 154 поста с size_mb, priority, msg_id
-  - `taxonomy.json` — 10 категорий маршрутизации (AI_AGENTS, SKILLS_MCP, etc.)
-  - `index_compact.json` — быстрый поиск (слой 1)
-- **INDEX.md:** Таблица транскриптов по датам
+  - `library_index.json` — **ИСТОЧНИК ИСТИНЫ** (154 поста, все метаданные, size_mb, priority)
+  - `taxonomy.json` — 10 категорий маршрутизации
+  - `index_compact.json` — быстрый поиск
+- **Media:** PDF, фото (17MB, в отдельной папке)
 
-**Ключевой файл:** `metadata/library_index.json` — источник истины всех постов Алексея
+**Что НЕ ЗДЕСЬ (53 транскрипта) — и почему:**
+- Полные 56 транскриптов хранятся на **Aeza** `/opt/tg-export/transcripts/` (backup)
+- **Основной поиск:** UpCloud LightRAG (Stage 2) — RAG-engine, не grep файлов
+- **Архитектура:** LightRAG индексирует все 56, claude-library держит метаданные + ключи
 
-**Синхронизация:**
-- ✅ Локально в claude-library/ (56 транскриптов)
-- ✅ На Aeza сервере /opt/tg-export/transcripts/ (56 файлов)
-- ✅ В GitHub: https://github.com/ilianberawa-dev/LIBRARIAN-V4-CANON-REPOSITORY-ALEXEY/tree/main/transcripts (push 2026-04-29 после fix git config)
+**Ключевой файл:** `metadata/library_index.json` — **ЕДИНСТВЕННЫЙ источник истины для всех 154 постов**
+
+**Синхронизация и хранение:**
+- 🔍 **Источник истины:** `/opt/tg-export/library_index.json` на Aeza (154 поста, все метаданные)
+- 📂 **claude-library:** 3 ключевых транскрипта (#164, #165, #170) — для быстрого доступа из чатов
+- 🗄️ **Aeza /transcripts/:** 56 полных файлов (backup, для Stage 1 инжекшна)
+- 🧠 **UpCloud LightRAG:** 56 документов (Stage 2) — основной поиск через RAG-engine
+- 📤 **GitHub:** Metadata + ключевые транскрипты синхронизированы (push 2026-04-29)
 
 ---
 
