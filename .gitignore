@@ -32,6 +32,9 @@ _mcp_mail_eval/
 .vscode/
 .idea/
 
+# Claude Code local permissions (персональные, не общие)
+.claude/settings.local.json
+
 # Node.js
 node_modules/
 
