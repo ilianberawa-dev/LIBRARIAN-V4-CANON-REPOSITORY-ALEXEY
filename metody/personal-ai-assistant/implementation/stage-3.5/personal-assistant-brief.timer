@@ -1,0 +1,16 @@
+[Unit]
+Description=Personal AI Assistant — Brief Compiler timer (3×/day)
+
+[Timer]
+# Three runs per day in server local time. Adjust OnCalendar lines
+# to owner's working timezone (server defaults to UTC unless changed).
+# Default schedule below is UTC: 02:00 / 06:00 / 11:00 — covers
+# Asia/Singapore 10:00 / 14:00 / 19:00 (UTC+8).
+OnCalendar=*-*-* 02:00:00
+OnCalendar=*-*-* 06:00:00
+OnCalendar=*-*-* 11:00:00
+Persistent=true
+Unit=personal-assistant-brief.service
+
+[Install]
+WantedBy=timers.target

@@ -1,0 +1,40 @@
+[Unit]
+Description=Personal AI Assistant — WhatsApp Listener (GOWA → Telegram)
+After=network-online.target personal-assistant-gowa.service
+Wants=network-online.target
+Requires=personal-assistant-gowa.service
+
+[Service]
+Type=simple
+User=personal-assistant
+Group=personal-assistant
+WorkingDirectory=/opt/personal-assistant
+EnvironmentFile=/opt/personal-assistant/config.env
+ExecStart=/usr/bin/node /opt/personal-assistant/wa-listener.mjs
+Restart=always
+RestartSec=5
+StartLimitIntervalSec=300
+StartLimitBurst=10
+
+StandardOutput=journal
+StandardError=journal
+SyslogIdentifier=personal-assistant-wa-listener
+
+NoNewPrivileges=true
+ProtectSystem=strict
+ProtectHome=true
+ReadWritePaths=/opt/personal-assistant
+PrivateTmp=true
+PrivateDevices=true
+ProtectKernelTunables=true
+ProtectKernelModules=true
+ProtectControlGroups=true
+RestrictAddressFamilies=AF_UNIX AF_INET AF_INET6
+LockPersonality=true
+RestrictRealtime=true
+RestrictSUIDSGID=true
+MemoryMax=100M
+TasksMax=32
+
+[Install]
+WantedBy=multi-user.target

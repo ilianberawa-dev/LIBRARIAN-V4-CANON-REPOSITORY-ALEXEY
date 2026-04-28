@@ -1,0 +1,47 @@
+[Unit]
+Description=Personal AI Assistant — Voice Command Worker
+After=network-online.target personal-assistant-listener.service
+Wants=network-online.target
+
+[Service]
+Type=simple
+User=personal-assistant
+Group=personal-assistant
+WorkingDirectory=/opt/personal-assistant
+
+# Load non-secret config (CHANNEL_CHAT_ID, etc.)
+EnvironmentFile=/etc/personal-assistant/config.env
+
+# Load secrets from systemd credentials (Canon #6, #11)
+LoadCredentialEncrypted=xai-api-key:/etc/credstore.encrypted/xai-api-key.cred
+LoadCredentialEncrypted=anthropic-api-key:/etc/credstore.encrypted/anthropic-api-key.cred
+LoadCredentialEncrypted=bot-token:/etc/credstore.encrypted/bot-token.cred
+
+ExecStart=/usr/bin/node /opt/personal-assistant/voice.mjs
+Restart=always
+RestartSec=5
+StartLimitIntervalSec=300
+StartLimitBurst=10
+
+StandardOutput=journal
+StandardError=journal
+SyslogIdentifier=personal-assistant-voice
+
+NoNewPrivileges=true
+ProtectSystem=strict
+ProtectHome=true
+ReadWritePaths=/opt/personal-assistant /var/log/personal-assistant
+PrivateTmp=true
+PrivateDevices=true
+ProtectKernelTunables=true
+ProtectKernelModules=true
+ProtectControlGroups=true
+RestrictAddressFamilies=AF_UNIX AF_INET AF_INET6
+LockPersonality=true
+RestrictRealtime=true
+RestrictSUIDSGID=true
+MemoryMax=300M
+TasksMax=64
+
+[Install]
+WantedBy=multi-user.target

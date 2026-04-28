@@ -1,0 +1,49 @@
+[Unit]
+Description=Personal AI Assistant — Triage Worker (Stage 2)
+Documentation=metody/personal-ai-assistant/v1.1-mvp-simplified.md
+After=network-online.target
+Wants=network-online.target
+
+[Service]
+Type=simple
+User=personal-assistant
+Group=personal-assistant
+WorkingDirectory=/opt/personal-assistant
+
+EnvironmentFile=/etc/personal-assistant/config.env
+
+LoadCredentialEncrypted=anthropic-api-key:/etc/credstore.encrypted/anthropic-api-key.cred
+
+ExecStart=/usr/bin/node /opt/personal-assistant/triage.mjs
+
+Restart=on-failure
+RestartSec=30s
+StartLimitInterval=200
+StartLimitBurst=5
+
+StandardOutput=journal
+StandardError=journal
+SyslogIdentifier=personal-assistant-triage
+
+MemoryMax=400M
+CPUQuota=50%
+
+NoNewPrivileges=true
+PrivateTmp=true
+ProtectSystem=strict
+ProtectHome=true
+ReadWritePaths=/opt/personal-assistant
+ReadOnlyPaths=/opt/personal-assistant/skills
+
+# Node.js V8 JIT requires executable memory
+# MemoryDenyWriteExecute=true is INCOMPATIBLE (see ORCHESTRATION-LESSONS-2026-04-25.md Invariant 3)
+# MemoryDenyWriteExecute=true  # DISABLED for Node.js compatibility
+
+ProtectKernelTunables=true
+ProtectKernelModules=true
+ProtectControlGroups=true
+RestrictRealtime=true
+RestrictNamespaces=true
+
+[Install]
+WantedBy=multi-user.target

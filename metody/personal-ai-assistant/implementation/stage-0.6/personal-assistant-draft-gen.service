@@ -1,0 +1,33 @@
+[Unit]
+Description=Personal AI Assistant — Stage 3 Draft Generator Worker
+After=network-online.target
+Wants=network-online.target
+
+[Service]
+Type=simple
+User=personal-assistant
+Group=personal-assistant
+WorkingDirectory=/opt/personal-assistant
+
+EnvironmentFile=/etc/personal-assistant/config.env
+
+LoadCredentialEncrypted=anthropic-api-key:/etc/credstore.encrypted/anthropic-api-key.cred
+LoadCredentialEncrypted=bot-token:/etc/credstore.encrypted/bot-token.cred
+
+ExecStart=/usr/bin/node /opt/personal-assistant/draft_gen.mjs
+
+Restart=always
+RestartSec=5
+StandardOutput=journal
+StandardError=journal
+SyslogIdentifier=personal-assistant-draft-gen
+
+NoNewPrivileges=true
+ProtectSystem=strict
+ProtectHome=true
+ReadWritePaths=/opt/personal-assistant /var/log/personal-assistant
+PrivateTmp=true
+MemoryMax=400M
+
+[Install]
+WantedBy=multi-user.target

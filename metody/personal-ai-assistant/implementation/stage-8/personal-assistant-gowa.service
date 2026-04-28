@@ -1,0 +1,16 @@
+[Unit]
+Description=Personal AI Assistant — GOWA WhatsApp Bridge
+After=network-online.target docker.service
+Wants=network-online.target docker.service
+Requires=docker.service
+
+[Service]
+Type=oneshot
+RemainAfterExit=yes
+User=root
+ExecStart=/usr/bin/docker start gowa
+ExecStop=/usr/bin/docker stop gowa
+Restart=no
+
+[Install]
+WantedBy=multi-user.target

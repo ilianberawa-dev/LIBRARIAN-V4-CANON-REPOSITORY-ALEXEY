@@ -1,0 +1,32 @@
+[Unit]
+Description=Personal AI Assistant — Brief Compiler (oneshot)
+After=network-online.target personal-assistant-listener.service personal-assistant-triage.service
+Wants=network-online.target
+
+[Service]
+Type=oneshot
+User=personal-assistant
+Group=personal-assistant
+WorkingDirectory=/opt/personal-assistant
+EnvironmentFile=/opt/personal-assistant/.env
+ExecStart=/usr/bin/node /opt/personal-assistant/brief_compiler.mjs
+
+StandardOutput=journal
+StandardError=journal
+SyslogIdentifier=personal-assistant-brief
+
+NoNewPrivileges=true
+ProtectSystem=strict
+ProtectHome=true
+ReadWritePaths=/opt/personal-assistant /var/log/personal-assistant
+PrivateTmp=true
+PrivateDevices=true
+ProtectKernelTunables=true
+ProtectKernelModules=true
+ProtectControlGroups=true
+RestrictAddressFamilies=AF_UNIX AF_INET AF_INET6
+LockPersonality=true
+RestrictRealtime=true
+RestrictSUIDSGID=true
+MemoryMax=300M
+TasksMax=64
