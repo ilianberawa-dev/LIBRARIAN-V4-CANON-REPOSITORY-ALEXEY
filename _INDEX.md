@@ -240,19 +240,30 @@ Read C:\Users\97152\Documents\claude-library\metody\personal-ai-assistant\v1.0-m
 
 ## 📦 АРХИВЫ (новые категории)
 
-### 6. Материалы Алексея
+### 6. Материалы Алексея ✨ АКТУАЛИЗИРОВАНО 2026-04-29
 
 **Папка:** `alexey-materials/`  
-**Файлов:** 21+  
-**Размер:** 16MB
+**Файлов:** 22+ (154 поста индекса + 56 транскриптов + media)  
+**Размер:** 24MB
 
 **Содержимое:**
-- Транскрипты (8 файлов): 164, 165, 170, и др.
-- Media (PDF, фото, видео)
-- Metadata (library_index.json - 142 поста)
-- Guides (Skills от А до Я PDF)
+- **Транскрипты:** 56 файлов (complete index)
+  - Ключевой: #165 "Встреча в Телемосте 05.04.26" (1.9MB, LightRAG routing 06:40-09:10)
+  - Все недавние видео: #88 devops, #82-86 (4 видео батча)
+  - Полная история: #141 Встреча 06.03.26, #164 Аудио запись
+- **Media:** PDF, фото, voice notes (17MB)
+- **Metadata:** 
+  - `library_index.json` — 154 поста с size_mb, priority, msg_id
+  - `taxonomy.json` — 10 категорий маршрутизации (AI_AGENTS, SKILLS_MCP, etc.)
+  - `index_compact.json` — быстрый поиск (слой 1)
+- **INDEX.md:** Таблица транскриптов по датам
 
-**Ключевой файл:** `metadata/library_index.json` - индекс всех постов Алексея
+**Ключевой файл:** `metadata/library_index.json` — источник истины всех постов Алексея
+
+**Синхронизация:**
+- ✅ Локально в claude-library/ (56 транскриптов)
+- ✅ На Aeza сервере /opt/tg-export/transcripts/ (56 файлов)
+- ✅ В GitHub: https://github.com/ilianberawa-dev/LIBRARIAN-V4-CANON-REPOSITORY-ALEXEY/tree/main/transcripts (push 2026-04-29 после fix git config)
 
 ---
 
