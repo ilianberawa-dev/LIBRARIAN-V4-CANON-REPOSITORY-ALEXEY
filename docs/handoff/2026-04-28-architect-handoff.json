@@ -58,9 +58,22 @@
   "open_questions": [
     {
       "id": "control-test-2",
-      "topic": "Контрольная #2 (про дерево библиотеки) — НЕ запущена",
-      "prompt_location": "docs/session-memory/2026-04-27-architect-startup-validation-test.md, секция «Готовый промпт контрольной #2»",
-      "next_step": "Илья откроет новый чат → отправить промпт → проанализировать ответы"
+      "topic": "Контрольная #2 — ПРОЙДЕНА (7/0/0)",
+      "result": "7 уверенно / 0 частично / 0 НЕ ЗНАЮ. Lazy loading по роли работает: Архитектор знает дерево благодаря _INDEX.md в онбординге.",
+      "closed": "2026-04-28"
+    },
+    {
+      "id": "control-test-3",
+      "topic": "Контрольная #3 — ПРОЙДЕНА (6/7), пробел закрыт PR #22",
+      "result": "6 уверенно / 7 частично. Пробел: «бабушка-тест» из simplicity-first-principle.md (605 строк, нигде не читалась при старте).",
+      "fix": "PR #22 — добавлены 3 правила (бабушка-тест + счёт шагов + таймер) прямо в Принцип #0 в alexey-11-principles.md. Ждёт мержа.",
+      "next_step": "Мерж PR #22 → контрольная #4 (антигаллюцинации: state-check, Fail Loud, Web-Claude handoff)"
+    },
+    {
+      "id": "control-test-4",
+      "topic": "Контрольная #4 (антигаллюцинации) — НЕ запущена",
+      "themes": ["state-check 3 шага", "Fail Loud (Принцип #5)", "Web-Claude handoff протокол", "sha256 — галлюцинируется (не сверять)"],
+      "blocker": "Ждёт мержа PR #22"
     },
     {
       "id": "stage-2-refactor",
@@ -71,7 +84,7 @@
         "Слить session-memory+handoff папки?",
         "Удалить неактуальные корневые файлы (CHECK-ACCESS.json, CHECK-LIBRARY-PROMPT.md, DESKTOP-TEST.md, START-NEW-CHAT-AI-ASSISTANT.md, QUICK-CHECK.md)?"
       ],
-      "blocker": "Ждёт результатов контрольной #2"
+      "blocker": "Ждёт завершения всех контрольных"
     }
   ],
   "rules_for_user_ilya": [
