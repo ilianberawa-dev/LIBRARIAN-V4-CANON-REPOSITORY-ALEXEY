@@ -25,7 +25,7 @@
     "rule": "Канон = только эти две папки. Слова Ильи в чате — НЕ канон."
   },
   "branch": {
-    "main_at": "252a81a",
+    "main_at": "712eda8",
     "claude_md_version": "3.0 (slim+canon-vs-chat+inter-chat)",
     "stage": "Этап 1 рефактора закрыт. Ожидает контрольной #2 и решения по Этапу 2."
   },
@@ -51,7 +51,9 @@
     {"pr": 16, "topic": "_INDEX.md актуализирован (Windows-пути убраны, +arhitektura/+prochee-idei/+_INDEX в onboarding для Архитектора/Дизайнера)"},
     {"pr": 17, "topic": "Фикс «3 session-memory ровно из hook» + .claude/settings.local.json в .gitignore"},
     {"pr": 19, "topic": "Сверять техдолги из session-memory с актуальным состоянием репо (zombie-techdebts)"},
-    {"validation": "Контрольная #1 пройдена тестовым чатом (4/3/5). Авто-обучение нового чата проверено — все 4 маркера сработали."}
+    {"pr": 20, "topic": "Этот handoff JSON создан в main"},
+    {"pr": 15, "topic": "Закрыт без мержа — settings.local.json теперь в .gitignore, его правки не нужны"},
+    {"validation": "Контрольная #1 пройдена тестовым чатом (4/3/5). Авто-обучение нового чата проверено — все 4 маркера сработали. Наследник принял handoff #2026-04-28 идеально."}
   ],
   "open_questions": [
     {
@@ -70,11 +72,6 @@
         "Удалить неактуальные корневые файлы (CHECK-ACCESS.json, CHECK-LIBRARY-PROMPT.md, DESKTOP-TEST.md, START-NEW-CHAT-AI-ASSISTANT.md, QUICK-CHECK.md)?"
       ],
       "blocker": "Ждёт результатов контрольной #2"
-    },
-    {
-      "id": "pr-15-stale",
-      "topic": "PR #15 (от тестового чата с .claude/settings.local.json) — висит открытый",
-      "recommendation": "Закрыть без мержа — теперь settings.local.json в .gitignore"
     }
   ],
   "rules_for_user_ilya": [
@@ -105,11 +102,13 @@
       "https://github.com/ilianberawa-dev/LIBRARIAN-V4-CANON-REPOSITORY-ALEXEY/pull/14",
       "https://github.com/ilianberawa-dev/LIBRARIAN-V4-CANON-REPOSITORY-ALEXEY/pull/16",
       "https://github.com/ilianberawa-dev/LIBRARIAN-V4-CANON-REPOSITORY-ALEXEY/pull/17",
-      "https://github.com/ilianberawa-dev/LIBRARIAN-V4-CANON-REPOSITORY-ALEXEY/pull/19"
+      "https://github.com/ilianberawa-dev/LIBRARIAN-V4-CANON-REPOSITORY-ALEXEY/pull/19",
+      "https://github.com/ilianberawa-dev/LIBRARIAN-V4-CANON-REPOSITORY-ALEXEY/pull/20"
     ],
-    "open_prs": [
+    "closed_prs": [
       "https://github.com/ilianberawa-dev/LIBRARIAN-V4-CANON-REPOSITORY-ALEXEY/pull/15"
-    ]
+    ],
+    "open_prs": []
   },
   "update_protocol": {
     "rule": "Этот файл — ЖИВОЙ. Текущий чат-Архитектор обновляет его при значимых изменениях и пушит в main.",
