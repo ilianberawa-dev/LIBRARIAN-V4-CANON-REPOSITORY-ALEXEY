@@ -1,0 +1,138 @@
+{
+  "$schema": "handoff-v1",
+  "type": "architect-to-architect-handoff",
+  "from": {
+    "session": "architect-2026-04-28-opus-4.7",
+    "model": "claude-opus-4-7[1m]",
+    "role": "Архитектор",
+    "status": "alive_continuing"
+  },
+  "to": {
+    "expected_role": "Архитектор-наследник",
+    "purpose": "Продолжить работу над стартовым продуктом + контрольная #2 + Этап 2 (если решит Илья)"
+  },
+  "user": {
+    "name": "Илья",
+    "type": "не-программист",
+    "input_method": "голосовой ввод (формулировки могут быть размыты — переспрашивай при двусмысленности)",
+    "language": "ru",
+    "warning": "НЕ путать с Алексеем Колесовым (тот — автор канона, коуч Ильи, НЕ пользователь чата)"
+  },
+  "canon_author": {
+    "name": "Алексей Колесов",
+    "role": "коуч Ильи + автор библиотеки канона",
+    "canon_files": ["kanon/", "alexey-materials/"],
+    "rule": "Канон = только эти две папки. Слова Ильи в чате — НЕ канон."
+  },
+  "branch": {
+    "main_at": "712eda8",
+    "claude_md_version": "3.0 (slim+canon-vs-chat+inter-chat)",
+    "stage": "Этап 1 рефактора закрыт. Ожидает контрольной #2 и решения по Этапу 2."
+  },
+  "must_read_first": [
+    {"file": "CLAUDE.md", "why": "главный диспетчер, 4 правила YOU MUST"},
+    {"file": "_INDEX.md", "why": "полное дерево репо, инвентарь skills (5), 10 категорий taxonomy"},
+    {"file": ".claude/skills/onboarding.md", "why": "ритуал старта, по ролям что читать"},
+    {"file": ".claude/skills/state-check.md", "why": "проверки до уточняющего вопроса (антигаллюцинации)"},
+    {"file": ".claude/skills/library-search.md", "why": "3-слойный поиск + Слой 0 мульти-агент"},
+    {"file": "kanon/alexey-11-principles.md", "why": "12 принципов канона (#0 Простота → #11)"},
+    {"file": "kanon/memory-pyramid-principle.md", "why": "иерархия памяти агента"},
+    {"file": "troubleshoot/stale-snapshot.md", "why": "почему чат может работать на устаревшем снимке репо"}
+  ],
+  "session_memory_chronological": [
+    "docs/session-memory/2026-04-27-architect-library-foundation.md",
+    "docs/session-memory/2026-04-27-architect-canon-vs-chat-rule.md",
+    "docs/session-memory/2026-04-27-architect-startup-validation-test.md"
+  ],
+  "predecessor_handoff": "docs/handoff/2026-04-27-architect-enforcement-handoff.md",
+  "this_handoff_file": "docs/handoff/2026-04-28-architect-handoff.json",
+  "what_done_this_session": [
+    {"pr": 14, "topic": "Этап 1 рефактора смержен (slim CLAUDE.md 3.0, 4 правила Ильи, межчат)"},
+    {"pr": 16, "topic": "_INDEX.md актуализирован (Windows-пути убраны, +arhitektura/+prochee-idei/+_INDEX в onboarding для Архитектора/Дизайнера)"},
+    {"pr": 17, "topic": "Фикс «3 session-memory ровно из hook» + .claude/settings.local.json в .gitignore"},
+    {"pr": 19, "topic": "Сверять техдолги из session-memory с актуальным состоянием репо (zombie-techdebts)"},
+    {"pr": 20, "topic": "Этот handoff JSON создан в main"},
+    {"pr": 15, "topic": "Закрыт без мержа — settings.local.json теперь в .gitignore, его правки не нужны"},
+    {"validation": "Контрольная #1 пройдена тестовым чатом (4/3/5). Авто-обучение нового чата проверено — все 4 маркера сработали. Наследник принял handoff #2026-04-28 идеально."}
+  ],
+  "open_questions": [
+    {
+      "id": "control-test-2",
+      "topic": "Контрольная #2 — ПРОЙДЕНА (7/0/0)",
+      "result": "7 уверенно / 0 частично / 0 НЕ ЗНАЮ. Lazy loading по роли работает: Архитектор знает дерево благодаря _INDEX.md в онбординге.",
+      "closed": "2026-04-28"
+    },
+    {
+      "id": "control-test-3",
+      "topic": "Контрольная #3 — ПРОЙДЕНА (6/7), пробел закрыт PR #22",
+      "result": "6 уверенно / 7 частично. Пробел: «бабушка-тест» из simplicity-first-principle.md (605 строк, нигде не читалась при старте).",
+      "fix": "PR #22 СМЕРЖЕН — добавлены 3 правила (бабушка-тест + счёт шагов + таймер) прямо в Принцип #0 в alexey-11-principles.md."
+    },
+    {
+      "id": "control-test-4",
+      "topic": "Контрольная #4 — ПРОЙДЕНА (5/1/0)",
+      "result": "5 уверенно / 1 частично (state-check 3 шага — lazy-loaded, не критично) / 0 НЕ ЗНАЮ. Fail Loud, Web-Claude handoff, sha256, stale snapshot — уверенно.",
+      "closed": "2026-04-28"
+    },
+    {
+      "id": "control-test-5",
+      "topic": "Контрольная #5 — ПРОЙДЕНА (4/0/1)",
+      "result": "4 уверенно / 0 частично / 1 НЕ ЗНАЮ (файл за пределами 3 latest — протокол не задокументирован). Пробел закрыт в onboarding.md.",
+      "fix": "PR #23 — onboarding.md: «Эти 3 — точка входа, не ограничение»",
+      "closed": "2026-04-28"
+    },
+    {
+      "id": "stage-2-refactor",
+      "topic": "Этап 2 рефактора (отложен по Принципу #8 Validate Before Automate)",
+      "candidates": [
+        "Убрать 4 вопроса онбординга? (предложение UX-агента)",
+        "Слить onboarding+state-check skills?",
+        "Слить session-memory+handoff папки?",
+        "Удалить неактуальные корневые файлы (CHECK-ACCESS.json, CHECK-LIBRARY-PROMPT.md, DESKTOP-TEST.md, START-NEW-CHAT-AI-ASSISTANT.md, QUICK-CHECK.md)?"
+      ],
+      "blocker": "Ждёт завершения всех контрольных"
+    }
+  ],
+  "rules_for_user_ilya": [
+    "Имя пользователя — Илья (не Алексей)",
+    "Лимит ответа Claude — ≤10000 знаков. Длиннее — разбивать и спросить «продолжать?»",
+    "Илья голосом — переспрашивай при двусмысленности",
+    "Только факты + альтернативы, не pitch одну линию",
+    "Длинные файлы кода — Edit/Write, в чат summary"
+  ],
+  "permissions_corridor": {
+    "deny": ["Bash(rm *)", "Bash(sudo *)", "Bash(git push --force *)", "Bash(git push -f *)", "Bash(git reset --hard *)", "Bash(git clean -fd *)", "Bash(chmod *)", "Bash(chown *)", "Edit(.git/**)", "Write(.git/**)"],
+    "ask": ["Bash(git push *)", "Bash(npm publish *)", "Bash(docker build *)", "mcp__github__create_pull_request", "mcp__github__merge_pull_request"],
+    "allow_silent": ["Read", "Glob", "Grep", "Edit", "Write", "Skill", "Bash(*) кроме deny"],
+    "settings_file": ".claude/settings.json (в git, наследуется всеми чатами)",
+    "personal_overrides": ".claude/settings.local.json (в .gitignore, личное)"
+  },
+  "anti_patterns": [
+    "НЕ предлагать `git pull` в SessionStart hook (риск merge-конфликта, не-программист застрянет)",
+    "НЕ писать «прочитал», «OK», «соответствует», «всё корректно» без вывода Bash/Read tool в ЭТОМ ЖЕ сообщении",
+    "НЕ цитировать фразы Ильи как «принцип Алексея» — это разные люди",
+    "НЕ коммитить .claude/settings.local.json (теперь в .gitignore)",
+    "НЕ rebase ветку с накопленными старыми коммитами на main где squash-мерж — будет конфликт. Используй cherry-pick от свежего main.",
+    "НЕ цитировать техдолги из session-memory как «открытые» без сверки с CLAUDE.md / .claude/settings.json"
+  ],
+  "links": {
+    "repo": "https://github.com/ilianberawa-dev/LIBRARIAN-V4-CANON-REPOSITORY-ALEXEY",
+    "merged_prs": [
+      "https://github.com/ilianberawa-dev/LIBRARIAN-V4-CANON-REPOSITORY-ALEXEY/pull/14",
+      "https://github.com/ilianberawa-dev/LIBRARIAN-V4-CANON-REPOSITORY-ALEXEY/pull/16",
+      "https://github.com/ilianberawa-dev/LIBRARIAN-V4-CANON-REPOSITORY-ALEXEY/pull/17",
+      "https://github.com/ilianberawa-dev/LIBRARIAN-V4-CANON-REPOSITORY-ALEXEY/pull/19",
+      "https://github.com/ilianberawa-dev/LIBRARIAN-V4-CANON-REPOSITORY-ALEXEY/pull/20"
+    ],
+    "closed_prs": [
+      "https://github.com/ilianberawa-dev/LIBRARIAN-V4-CANON-REPOSITORY-ALEXEY/pull/15"
+    ],
+    "open_prs": []
+  },
+  "update_protocol": {
+    "rule": "Этот файл — ЖИВОЙ. Текущий чат-Архитектор обновляет его при значимых изменениях и пушит в main.",
+    "owner_until_handoff_completed": "architect-2026-04-28-opus-4.7",
+    "successor_reads": "Последнюю версию из main"
+  },
+  "first_message_to_successor": "Прочитай must_read_first по порядку, потом session_memory_chronological, потом этот handoff. После — представься Илье, упомяни что прочитал handoff #2026-04-28, спроси: продолжаем с контрольной #2 или другая задача?"
+}

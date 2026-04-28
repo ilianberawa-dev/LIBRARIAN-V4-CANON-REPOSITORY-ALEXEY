@@ -8,7 +8,7 @@
 с ней**. Если меняешь структуру (добавил папку / переименовал / удалил) —
 обнови соответствующий блок ниже в том же коммите.
 
-**Последнее обновление:** 2026-04-27 (Этап 1 рефактора + slim CLAUDE.md 3.0)
+**Последнее обновление:** 2026-04-28 (ретро-обогащение 44 транскриптов: +msg_id +telegram_url +source_filename)
 
 ---
 
@@ -18,7 +18,7 @@
 |---|---|---|
 | `inbox/` | Свалка для новых файлов от Ильи | По команде «разбери inbox» |
 | `kanon/` | 12 принципов Алексея + Memory Pyramid + Simplicity First | **Архитектор: всегда фон** |
-| `alexey-materials/` | 154 поста + 88 транскриптов + media (15MB) | **Через `metadata/index_compact.json`** |
+| `alexey-materials/` | 154 поста + 88 транскриптов (с `telegram_url`) + media (17MB) | **Через `metadata/index_compact.json`** |
 | `dizain/` | Тема «Дизайн / UI» | При разборе inbox по теме |
 | `arhitektura/` | Тема «Архитектура» | При разборе inbox по теме |
 | `prochee-idei/` | Тема «Прочее / идеи» | При разборе inbox по теме |
@@ -133,6 +133,7 @@ docs/
 | Файл | Тема |
 |---|---|
 | `stale-snapshot.md` | **Чат работает на устаревшем снимке репо** (важно!) |
+| `tg-parser-state.md` | **Архитектура TG-парсера** — цепочка, номенклатура, известные проблемы, статус |
 | `aeza-server-tree-map.md` | Карта Aeza VPS (193.233.128.21) |
 | `claude-code-vscode-install.md` | Установка Claude Code в VS Code |
 | `telegram-parser-recreation.md` | Воссоздание Telegram-парсера |
@@ -146,9 +147,6 @@ docs/
 |---|---|
 | `CLAUDE.md` | **Главный диспетчер для AI** (4 правила YOU MUST + карта папок + правила поведения) |
 | `_INDEX.md` | Этот файл (полное дерево, актуальное) |
-| `CHECK-ACCESS.json`, `CHECK-LIBRARY-PROMPT.md`, `DESKTOP-TEST.md` | Тестовые/диагностические артефакты |
-| `START-NEW-CHAT-AI-ASSISTANT.md` | Старый стартовый промпт (до slim CLAUDE.md 3.0) |
-| `QUICK-CHECK.md` | Быстрая проверка состояния |
 | `PARSER-RESTORATION-MISSION.json`, `HANDOFF-TELEPORT-SESSION.json`, `PARSER-GITHUB-SYNC-ALGORITHM.md` | Артефакты предыдущих миссий |
 
 ---
