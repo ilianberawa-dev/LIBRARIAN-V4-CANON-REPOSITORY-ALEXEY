@@ -24,7 +24,7 @@
 | `prochee-idei/` | Тема «Прочее / идеи» | При разборе inbox по теме |
 | `metody/` | МЕТОДЫ разработки (1 тема: personal-ai-assistant) | По запросу |
 | `rukovodstva/` | РУКОВОДСТВА (1 тема: self-learning-memory) | По запросу |
-| `navyki/` | НАВЫКИ-паттерны (heartbeat-telegram, parser-control) | По запросу |
+| `navyki/` | НАВЫКИ-паттерны (heartbeat-telegram, parser-control, **отчёт-парсера-тг**) | По запросу |
 | `spravochniki/` | СПРАВОЧНИКИ (skills-a-to-ya 108KB) | По запросу |
 | `troubleshoot/` | Решения известных проблем | По запросу |
 | `scripts/` | Утилиты (inbox-tools, helpers) | По запросу |
