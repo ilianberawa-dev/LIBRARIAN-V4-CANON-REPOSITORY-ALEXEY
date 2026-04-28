@@ -1,4 +1,7 @@
 {
+  "msg_id": 118,
+  "telegram_url": "https://t.me/c/2653037830/118",
+  "source_filename": "video.mp4",
   "text": "что у нас тут за компашка подобралась ну в первую очередь у нас есть архитектор то есть который является архитектором решений и 12 вспомогательных агентов то есть у нас есть отдельный эксперт по проектированию api эксперт по ревью кода эксперт по базе данных DevOps, individual agent for documentation, this is also very important, about this we will talk later, individual agent for testing directly in the browser, individual agent for programming the front end Эксперт по NVMN, специалист по безопасности, эксперт по Supabase, эксперт по тестированию, UX-дизайнер, последний агент. Соответственно, вот эта команда, ну, у каждого из них есть достаточно подробный промпт, то есть, например, UX-дизайнеров",
   "language": "English",
   "duration": 51.77,
